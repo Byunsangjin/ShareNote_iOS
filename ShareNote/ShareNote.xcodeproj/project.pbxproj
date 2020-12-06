@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		306AAD33E666D3449669E416 /* Pods_ShareNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */; };
 		601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */; };
+		601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDCEF257CEBEF00DCB968 /* AppKey.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 		38727C1481A398597264B0FC /* Pods-ShareNote-ShareNoteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote-ShareNoteUITests.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote-ShareNoteUITests/Pods-ShareNote-ShareNoteUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		601DDC87257C9E2C00DCB968 /* KakaoSDKCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KakaoSDKCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
+		601DDCEF257CEBEF00DCB968 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		60ADF4E425792D37001A77C2 = {
 			isa = PBXGroup;
 			children = (
+				601DDCEF257CEBEF00DCB968 /* AppKey.swift */,
 				60ADF4EF25792D37001A77C2 /* ShareNote */,
 				60ADF50625792D39001A77C2 /* ShareNoteTests */,
 				60ADF51125792D39001A77C2 /* ShareNoteUITests */,
@@ -447,6 +450,7 @@
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
 				601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
+				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
