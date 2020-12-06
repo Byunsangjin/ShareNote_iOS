@@ -7,6 +7,7 @@ PODS:
   - KakaoSDKUser (2.0.4):
     - KakaoSDKAuth (= 2.0.4)
     - KakaoSDKCommon (= 2.0.4)
+  - naveridlogin-sdk-ios (4.1.3)
   - RxAlamofire (5.6.2):
     - RxAlamofire/Core (= 5.6.2)
   - RxAlamofire/Core (5.6.2):
@@ -33,6 +34,7 @@ PODS:
   - SwiftLint (0.40.3)
 
 DEPENDENCIES:
+  - naveridlogin-sdk-ios
   - RxKakaoSDKAuth
   - RxKakaoSDKCommon
   - RxKakaoSDKUser
@@ -44,6 +46,7 @@ SPEC REPOS:
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
+    - naveridlogin-sdk-ios
     - RxAlamofire
     - RxCocoa
     - RxKakaoSDKAuth
@@ -58,6 +61,7 @@ SPEC CHECKSUMS:
   KakaoSDKAuth: 3a88e4a110243f8c6b9948c5ec85670c7acaebf6
   KakaoSDKCommon: 070472d0638ea6b28684a23c195e47015349e51b
   KakaoSDKUser: 7951e09f9e6de3908ae2d7f8486290c8607c217a
+  naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
   RxAlamofire: aa949d345b1689eae02b7c7a217518878144f6df
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxKakaoSDKAuth: ea014a608fb7ba41a9c0d7c685bf587599f582e7
@@ -67,6 +71,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
 
-PODFILE CHECKSUM: 8f6c867be08c2a9d50995821b5c477c26c833658
+PODFILE CHECKSUM: 5f2a39055af04b4fb8131f5d2db13e30eda89594
 
 COCOAPODS: 1.8.4

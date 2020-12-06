@@ -13,6 +13,9 @@ target 'ShareNote' do
   pod 'RxKakaoSDKAuth'  # 카카오 로그인
   pod 'RxKakaoSDKUser'  # 사용자 관리
 
+  # Naver
+  pod 'naveridlogin-sdk-ios'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing
