@@ -17,13 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBO-yg-32q">
-                                <rect key="frame" x="154" y="144" width="106" height="30"/>
-                                <state key="normal" title="KakaoTalkLoing"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBO-yg-32q">
+                                <rect key="frame" x="115.5" y="144" width="183" height="45"/>
+                                <state key="normal" image="kakao_login_medium_narrow"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59N-ry-Mwy">
-                                <rect key="frame" x="167" y="224" width="80" height="30"/>
-                                <state key="normal" title="KakaoLogin"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59N-ry-Mwy">
+                                <rect key="frame" x="115.5" y="239" width="183" height="45"/>
+                                <state key="normal" image="kakao_login_medium_narrow_account"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -83,6 +83,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="kakao_login_medium_narrow" width="183" height="45"/>
+        <image name="kakao_login_medium_narrow_account" width="183" height="45"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
