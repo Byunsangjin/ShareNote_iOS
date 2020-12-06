@@ -1,16 +1,72 @@
 PODS:
+  - Alamofire (5.2.2)
+  - KakaoSDKAuth (2.0.4):
+    - KakaoSDKCommon (= 2.0.4)
+  - KakaoSDKCommon (2.0.4):
+    - Alamofire (~> 5.1)
+  - KakaoSDKUser (2.0.4):
+    - KakaoSDKAuth (= 2.0.4)
+    - KakaoSDKCommon (= 2.0.4)
+  - RxAlamofire (5.6.2):
+    - RxAlamofire/Core (= 5.6.2)
+  - RxAlamofire/Core (5.6.2):
+    - Alamofire (~> 5.2)
+    - RxSwift (~> 5.1)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxKakaoSDKAuth (2.0.4):
+    - KakaoSDKAuth (= 2.0.4)
+    - RxKakaoSDKCommon (= 2.0.4)
+  - RxKakaoSDKCommon (2.0.4):
+    - KakaoSDKCommon (= 2.0.4)
+    - RxAlamofire (~> 5.2)
+    - RxCocoa
+    - RxSwift
+  - RxKakaoSDKUser (2.0.4):
+    - KakaoSDKUser (= 2.0.4)
+    - RxKakaoSDKAuth (= 2.0.4)
+    - RxKakaoSDKCommon (= 2.0.4)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SwiftLint (0.40.3)
 
 DEPENDENCIES:
+  - RxKakaoSDKAuth
+  - RxKakaoSDKCommon
+  - RxKakaoSDKUser
   - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
+    - RxAlamofire
+    - RxCocoa
+    - RxKakaoSDKAuth
+    - RxKakaoSDKCommon
+    - RxKakaoSDKUser
+    - RxRelay
+    - RxSwift
     - SwiftLint
 
 SPEC CHECKSUMS:
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  KakaoSDKAuth: 3a88e4a110243f8c6b9948c5ec85670c7acaebf6
+  KakaoSDKCommon: 070472d0638ea6b28684a23c195e47015349e51b
+  KakaoSDKUser: 7951e09f9e6de3908ae2d7f8486290c8607c217a
+  RxAlamofire: aa949d345b1689eae02b7c7a217518878144f6df
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxKakaoSDKAuth: ea014a608fb7ba41a9c0d7c685bf587599f582e7
+  RxKakaoSDKCommon: 141b04fb5d08538cf5a91ffd5d7821f7f40ee38c
+  RxKakaoSDKUser: d935fbf6aa6691a2741943b1740dffe8a13f100d
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
 
-PODFILE CHECKSUM: d634edd9bb776e23ba67cd214f9e451561edaa7c
+PODFILE CHECKSUM: 8f6c867be08c2a9d50995821b5c477c26c833658
 
 COCOAPODS: 1.8.4

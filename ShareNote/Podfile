@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '12.0'
 
 target 'ShareNote' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,6 +7,11 @@ target 'ShareNote' do
 
   # Pods for ShareNote
   pod 'SwiftLint'
+  
+  # Kakao
+  pod 'RxKakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
+  pod 'RxKakaoSDKAuth'  # 카카오 로그인
+  pod 'RxKakaoSDKUser'  # 사용자 관리
 
   target 'ShareNoteTests' do
     inherit! :search_paths
