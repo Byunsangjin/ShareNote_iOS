@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ShareNote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBO-yg-32q">
+                                <rect key="frame" x="154" y="144" width="106" height="30"/>
+                                <state key="normal" title="KakaoTalkLoing"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59N-ry-Mwy">
+                                <rect key="frame" x="167" y="224" width="80" height="30"/>
+                                <state key="normal" title="KakaoLogin"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="59N-ry-Mwy" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="RBT-Z5-Tg0"/>
+                            <constraint firstItem="qBO-yg-32q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="c2y-Be-fsJ"/>
+                            <constraint firstItem="qBO-yg-32q" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hK0-6P-1mS"/>
+                            <constraint firstItem="59N-ry-Mwy" firstAttribute="top" secondItem="qBO-yg-32q" secondAttribute="bottom" constant="50" id="jwt-PE-X2C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="kakaoLoginButton" destination="59N-ry-Mwy" id="vJx-HX-squ"/>
+                        <outlet property="kakaoTalkLoginButton" destination="qBO-yg-32q" id="M9g-pZ-8Wp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-68" y="142"/>
+        </scene>
+        <!--User Page View Controller-->
+        <scene sceneID="rry-yq-byI">
+            <objects>
+                <viewController storyboardIdentifier="UserPageViewController" id="rIH-zC-DL7" customClass="UserPageViewController" customModule="ShareNote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i7h-Ha-Arr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u3-O2-J8B">
+                                <rect key="frame" x="186" y="442.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-1p-C5W">
+                                <rect key="frame" x="183" y="533.5" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dsl-D9-28m"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JdY-1p-C5W" firstAttribute="centerX" secondItem="5u3-O2-J8B" secondAttribute="centerX" id="0XF-y9-PKj"/>
+                            <constraint firstItem="JdY-1p-C5W" firstAttribute="top" secondItem="5u3-O2-J8B" secondAttribute="bottom" constant="70" id="1Tc-OQ-Oyp"/>
+                            <constraint firstItem="5u3-O2-J8B" firstAttribute="centerX" secondItem="Dsl-D9-28m" secondAttribute="centerX" id="Bns-ZO-n7m"/>
+                            <constraint firstItem="5u3-O2-J8B" firstAttribute="centerY" secondItem="Dsl-D9-28m" secondAttribute="centerY" id="Wza-Sk-HyE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="JdY-1p-C5W" id="Thj-2c-XTe"/>
+                        <outlet property="titleLabel" destination="5u3-O2-J8B" id="Iex-nd-mOM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FMF-aR-BUW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="697" y="142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		306AAD33E666D3449669E416 /* Pods_ShareNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */; };
+		601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -42,6 +43,8 @@
 		237C287BBC831C6DB806993C /* Pods-ShareNoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNoteTests.release.xcconfig"; path = "Target Support Files/Pods-ShareNoteTests/Pods-ShareNoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		31653BC4C65497367731A980 /* Pods-ShareNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNoteTests.debug.xcconfig"; path = "Target Support Files/Pods-ShareNoteTests/Pods-ShareNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		38727C1481A398597264B0FC /* Pods-ShareNote-ShareNoteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote-ShareNoteUITests.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote-ShareNoteUITests/Pods-ShareNote-ShareNoteUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		601DDC87257C9E2C00DCB968 /* KakaoSDKCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KakaoSDKCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,11 +97,48 @@
 		0546ADD8A817E032EECF46EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				601DDC87257C9E2C00DCB968 /* KakaoSDKCommon.framework */,
 				F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */,
 				EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */,
 				6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		601DDCD5257CE78E00DCB968 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				60ADF4F925792D39001A77C2 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		601DDCD6257CE79000DCB968 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				60ADF4F425792D37001A77C2 /* ViewController.swift */,
+				601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		601DDCE1257CE7F000DCB968 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				60ADF4FB25792D39001A77C2 /* LaunchScreen.storyboard */,
+				60ADF4F025792D37001A77C2 /* AppDelegate.swift */,
+				60ADF4F225792D37001A77C2 /* SceneDelegate.swift */,
+				60ADF4FE25792D39001A77C2 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		601DDCE2257CE8D900DCB968 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				60ADF4F625792D37001A77C2 /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		60ADF4E425792D37001A77C2 = {
@@ -126,13 +166,10 @@
 		60ADF4EF25792D37001A77C2 /* ShareNote */ = {
 			isa = PBXGroup;
 			children = (
-				60ADF4F025792D37001A77C2 /* AppDelegate.swift */,
-				60ADF4F225792D37001A77C2 /* SceneDelegate.swift */,
-				60ADF4F425792D37001A77C2 /* ViewController.swift */,
-				60ADF4F625792D37001A77C2 /* Main.storyboard */,
-				60ADF4F925792D39001A77C2 /* Assets.xcassets */,
-				60ADF4FB25792D39001A77C2 /* LaunchScreen.storyboard */,
-				60ADF4FE25792D39001A77C2 /* Info.plist */,
+				601DDCE1257CE7F000DCB968 /* App */,
+				601DDCD6257CE79000DCB968 /* ViewControllers */,
+				601DDCD5257CE78E00DCB968 /* Resources */,
+				601DDCE2257CE8D900DCB968 /* Storyboards */,
 			);
 			path = ShareNote;
 			sourceTree = "<group>";
@@ -408,6 +445,7 @@
 			files = (
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
+				601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,7 +625,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3PLAKW34;
-				INFOPLIST_FILE = ShareNote/Info.plist;
+				INFOPLIST_FILE = ShareNote/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +645,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3PLAKW34;
-				INFOPLIST_FILE = ShareNote/Info.plist;
+				INFOPLIST_FILE = ShareNote/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
