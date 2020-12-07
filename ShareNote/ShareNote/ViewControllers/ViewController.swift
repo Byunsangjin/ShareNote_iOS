@@ -16,6 +16,7 @@ import RxKakaoSDKCommon
 import NaverThirdPartyLogin
 
 enum LoginType: String {
+    case none = "None"
     case kakao = "Kakao"
     case naver = "Naver"
     case google = "Google"
@@ -37,14 +38,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        kakaoTalkLoginBtnInit()
         kakaoLoginBtnInit()
         naverLoginBtnInit()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let tokenManager = TokenManager()
-        if (tokenManager.getToken() != nil) {
-            presentUserPage(loginType: LoginType.kakao)
+        guard let loginType = UserDefaults.standard.value(forKey: "loginType") as? String else {
+            return
+        }
+        
+        if loginType.elementsEqual(LoginType.kakao.rawValue) {
+            if TokenManager().getToken() != nil {
+                presentUserPage(loginType: LoginType.kakao)
+            }
+        } else if loginType.elementsEqual(LoginType.naver.rawValue) {
+            if naverLoginInstance!.isValidAccessTokenExpireTimeNow() {
+                presentUserPage(loginType: LoginType.naver)
+            }
         }
     }
 
@@ -55,7 +66,7 @@ class ViewController: UIViewController {
         present(userPageVC, animated: true, completion: nil)
     }
     
-    func kakaoLoginBtnInit() {
+    func kakaoTalkLoginBtnInit() {
         kakaoTalkLoginButton.rx.tap.subscribe { _ in
             if (AuthApi.isKakaoTalkLoginAvailable()) {
                 AuthApi.shared.rx.loginWithKakaoTalk()
@@ -76,7 +87,7 @@ class ViewController: UIViewController {
         }.disposed(by: self.disposeBag)
     }
     
-    func naverLoginBtnInit() {
+    func kakaoLoginBtnInit() {
         kakaoLoginButton.rx.tap.subscribe { _ in
             AuthApi.shared.rx.loginWithKakaoAccount()
                 .subscribe(onNext:{ (oauthToken) in
@@ -85,7 +96,7 @@ class ViewController: UIViewController {
                     //do something
                     _ = oauthToken
                     
-                    self.presentUserPage(loginType: LoginType.naver)
+                    self.presentUserPage(loginType: LoginType.kakao)
                 }, onError: {error in
                     print(error)
                 })
@@ -93,7 +104,9 @@ class ViewController: UIViewController {
         } onError: { (error) in
             print(error)
         }.disposed(by: self.disposeBag)
-        
+    }
+    
+    func naverLoginBtnInit() {
         naverLoginButton.rx.tap.subscribe { _ in
             self.naverLoginInstance?.delegate = self
             self.naverLoginInstance?.requestThirdPartyLogin()
