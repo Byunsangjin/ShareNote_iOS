@@ -25,19 +25,30 @@
                                 <rect key="frame" x="115.5" y="239" width="183" height="45"/>
                                 <state key="normal" image="kakao_login_medium_narrow_account"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5a-tE-cau">
+                                <rect key="frame" x="115.5" y="334" width="183" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="183" id="m8D-iR-HI2"/>
+                                    <constraint firstAttribute="height" constant="45" id="ssY-wR-f2O"/>
+                                </constraints>
+                                <state key="normal" image="naver_login"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="59N-ry-Mwy" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="RBT-Z5-Tg0"/>
+                            <constraint firstItem="u5a-tE-cau" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="UkO-ZC-RDK"/>
                             <constraint firstItem="qBO-yg-32q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="c2y-Be-fsJ"/>
                             <constraint firstItem="qBO-yg-32q" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hK0-6P-1mS"/>
                             <constraint firstItem="59N-ry-Mwy" firstAttribute="top" secondItem="qBO-yg-32q" secondAttribute="bottom" constant="50" id="jwt-PE-X2C"/>
+                            <constraint firstItem="u5a-tE-cau" firstAttribute="top" secondItem="59N-ry-Mwy" secondAttribute="bottom" constant="50" id="kYX-Si-3HT"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="kakaoLoginButton" destination="59N-ry-Mwy" id="vJx-HX-squ"/>
                         <outlet property="kakaoTalkLoginButton" destination="qBO-yg-32q" id="M9g-pZ-8Wp"/>
+                        <outlet property="naverLoginButton" destination="u5a-tE-cau" id="c1C-9S-czA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,6 +96,7 @@
     <resources>
         <image name="kakao_login_medium_narrow" width="183" height="45"/>
         <image name="kakao_login_medium_narrow_account" width="183" height="45"/>
+        <image name="naver_login" width="385.5" height="83.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
