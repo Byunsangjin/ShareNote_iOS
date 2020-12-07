@@ -31,12 +31,18 @@ class UserPageViewController: UIViewController {
         }
     }
     
+    func logout() {
+        dismiss(animated: true) {
+            UserDefaults.standard.removeObject(forKey: "loginType")
+        }
+    }
+    
     func kakaoLogoutBtnInit() {
         logoutButton.rx.tap.subscribe { _ in
             UserApi.shared.rx.logout()
                 .subscribe(onCompleted:{
                     print("logout() success.")
-                    self.dismiss(animated: true, completion: nil)
+                    self.logout()
                 }, onError: {error in
                     print(error)
                 })
@@ -49,7 +55,7 @@ class UserPageViewController: UIViewController {
     func naverLogoutBtnInit() {
         logoutButton.rx.tap.subscribe { _ in
             NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
-            self.dismiss(animated: true, completion: nil)
+            self.logout()
         } onError: { error in
             print(error)
         }.disposed(by: self.disposeBag)
