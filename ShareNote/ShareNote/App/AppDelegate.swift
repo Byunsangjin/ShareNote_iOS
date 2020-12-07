@@ -8,11 +8,24 @@
 import UIKit
 import RxKakaoSDKCommon
 import KakaoSDKAuth
+import NaverThirdPartyLogin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // KaKao
         RxKakaoSDKCommon.initSDK(appKey: KAKAO_NATIVE_KEY)
+        
+        // Naver
+        let naverInstance = NaverThirdPartyLoginConnection.getSharedInstance()
+        
+        naverInstance?.isNaverAppOauthEnable = true
+        naverInstance?.isInAppOauthEnable = true
+        naverInstance?.isOnlyPortraitSupportedInIphone()
+        naverInstance?.serviceUrlScheme = NAVER_SERVICE_URL_SCHEME
+        naverInstance?.consumerKey = NAVER_CONSUMER_KEY
+        naverInstance?.consumerSecret = NAVER_CONSUMER_SECRET_KEY
+        naverInstance?.appName = NAVER_APP_NAME
         
         return true
     }
