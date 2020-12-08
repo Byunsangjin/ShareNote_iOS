@@ -114,3 +114,4 @@ iOSInjectionProject/
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,cocoapods
 
 **/ShareNote/AppKey.swift
+**/ShareNote/App/GoogleService-info.plist
