@@ -10,6 +10,7 @@
 		306AAD33E666D3449669E416 /* Pods_ShareNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */; };
 		601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */; };
 		601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDCEF257CEBEF00DCB968 /* AppKey.swift */; };
+		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		601DDC87257C9E2C00DCB968 /* KakaoSDKCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KakaoSDKCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		601DDCEF257CEBEF00DCB968 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
+		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		601DDCE1257CE7F000DCB968 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */,
 				60ADF4FB25792D39001A77C2 /* LaunchScreen.storyboard */,
 				60ADF4F025792D37001A77C2 /* AppDelegate.swift */,
 				60ADF4F225792D37001A77C2 /* SceneDelegate.swift */,
@@ -220,6 +223,7 @@
 				60ADF4EA25792D37001A77C2 /* Frameworks */,
 				60ADF4EB25792D37001A77C2 /* Resources */,
 				143346A64F3927E04AC531B0 /* [CP] Embed Pods Frameworks */,
+				D787A6755EA60307703DAE52 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -258,6 +262,7 @@
 				60ADF50B25792D39001A77C2 /* Frameworks */,
 				60ADF50C25792D39001A77C2 /* Resources */,
 				C3588955831B56834D736A6F /* [CP] Embed Pods Frameworks */,
+				AAE4F3A1AE49757FB4148354 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -317,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60ADF4FD25792D39001A77C2 /* LaunchScreen.storyboard in Resources */,
+				6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */,
 				60ADF4FA25792D39001A77C2 /* Assets.xcassets in Resources */,
 				60ADF4F825792D37001A77C2 /* Main.storyboard in Resources */,
 			);
@@ -400,6 +406,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AAE4F3A1AE49757FB4148354 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShareNote-ShareNoteUITests/Pods-ShareNote-ShareNoteUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShareNote-ShareNoteUITests/Pods-ShareNote-ShareNoteUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShareNote-ShareNoteUITests/Pods-ShareNote-ShareNoteUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C3588955831B56834D736A6F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,6 +438,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShareNote-ShareNoteUITests/Pods-ShareNote-ShareNoteUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D787A6755EA60307703DAE52 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShareNote/Pods-ShareNote-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShareNote/Pods-ShareNote-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShareNote/Pods-ShareNote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F51D567B48D2E996177B65A0 /* [CP] Check Pods Manifest.lock */ = {

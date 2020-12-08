@@ -14,6 +14,8 @@ import RxKakaoSDKAuth
 import RxKakaoSDKUser
 import RxKakaoSDKCommon
 import NaverThirdPartyLogin
+import Firebase
+import GoogleSignIn
 
 enum LoginType: String {
     case none = "None"
@@ -41,6 +43,7 @@ class ViewController: UIViewController {
         kakaoTalkLoginBtnInit()
         kakaoLoginBtnInit()
         naverLoginBtnInit()
+        googleLoginBtnInit()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +115,12 @@ class ViewController: UIViewController {
             self.naverLoginInstance?.requestThirdPartyLogin()
         }.disposed(by: self.disposeBag)
     }
+    
+    func googleLoginBtnInit() {
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+    }
 }
 
 extension ViewController : NaverThirdPartyLoginConnectionDelegate {
@@ -133,5 +142,25 @@ extension ViewController : NaverThirdPartyLoginConnectionDelegate {
     // 모든 Error
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
         
+    }
+}
+
+extension ViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+      // ...
+      if let error = error {
+        // ...
+        return
+      }
+
+      guard let authentication = user.authentication else { return }
+      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                        accessToken: authentication.accessToken)
+      // ...
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
     }
 }

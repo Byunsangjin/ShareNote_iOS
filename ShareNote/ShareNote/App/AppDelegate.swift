@@ -9,6 +9,8 @@ import UIKit
 import RxKakaoSDKCommon
 import KakaoSDKAuth
 import NaverThirdPartyLogin
+import Firebase
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,12 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         naverInstance?.consumerSecret = NAVER_CONSUMER_SECRET_KEY
         naverInstance?.appName = NAVER_APP_NAME
         
+        // Google
+        FirebaseApp.configure()
+        
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if (AuthApi.isKakaoTalkLoginUrl(url)) {
             return AuthController.handleOpenUrl(url: url)
+        } else {
+            return GIDSignIn.sharedInstance().handle(url)
         }
         
         return false
@@ -54,4 +61,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 }
-

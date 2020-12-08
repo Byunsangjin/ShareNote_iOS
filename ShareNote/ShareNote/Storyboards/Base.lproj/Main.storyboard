@@ -33,10 +33,20 @@
                                 </constraints>
                                 <state key="normal" image="naver_login"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fa-V4-BBg" customClass="GIDSignInButton">
+                                <rect key="frame" x="115.5" y="429" width="183" height="45"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="CO8-QS-Ohp"/>
+                                    <constraint firstAttribute="width" constant="183" id="ZaI-O2-2r2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7fa-V4-BBg" firstAttribute="centerX" secondItem="u5a-tE-cau" secondAttribute="centerX" id="A0I-Eb-FNH"/>
+                            <constraint firstItem="7fa-V4-BBg" firstAttribute="top" secondItem="u5a-tE-cau" secondAttribute="bottom" constant="50" id="DIa-eP-f3D"/>
                             <constraint firstItem="59N-ry-Mwy" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="RBT-Z5-Tg0"/>
                             <constraint firstItem="u5a-tE-cau" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="UkO-ZC-RDK"/>
                             <constraint firstItem="qBO-yg-32q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="c2y-Be-fsJ"/>
