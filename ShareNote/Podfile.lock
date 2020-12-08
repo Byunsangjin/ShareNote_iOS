@@ -1,5 +1,87 @@
 PODS:
   - Alamofire (5.2.2)
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
+  - Firebase/Analytics (7.2.0):
+    - Firebase/Core
+  - Firebase/Auth (7.2.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 7.2.0)
+  - Firebase/Core (7.2.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 7.2.0)
+  - Firebase/CoreOnly (7.2.0):
+    - FirebaseCore (= 7.2.0)
+  - FirebaseAnalytics (7.2.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleAppMeasurement (= 7.2.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30906.0)
+  - FirebaseAuth (7.2.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
+  - FirebaseCore (7.2.0):
+    - FirebaseCoreDiagnostics (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+  - FirebaseCoreDiagnostics (7.2.0):
+    - GoogleDataTransport (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+    - nanopb (~> 2.30906.0)
+  - FirebaseInstallations (7.2.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+    - PromisesObjC (~> 1.2)
+  - GoogleAppMeasurement (7.2.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30906.0)
+  - GoogleDataTransport (8.0.1):
+    - nanopb (~> 2.30906.0)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleUtilities/AppDelegateSwizzler (7.1.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.1.1):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (7.1.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.1.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.1.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.1.1)"
+  - GoogleUtilities/Reachability (7.1.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.1.1):
+    - GoogleUtilities/Logger
+  - GTMAppAuth (1.1.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.5.0):
+    - GTMSessionFetcher/Full (= 1.5.0)
+  - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Full (1.5.0):
+    - GTMSessionFetcher/Core (= 1.5.0)
   - KakaoSDKAuth (2.0.4):
     - KakaoSDKCommon (= 2.0.4)
   - KakaoSDKCommon (2.0.4):
@@ -7,7 +89,13 @@ PODS:
   - KakaoSDKUser (2.0.4):
     - KakaoSDKAuth (= 2.0.4)
     - KakaoSDKCommon (= 2.0.4)
+  - nanopb (2.30906.0):
+    - nanopb/decode (= 2.30906.0)
+    - nanopb/encode (= 2.30906.0)
+  - nanopb/decode (2.30906.0)
+  - nanopb/encode (2.30906.0)
   - naveridlogin-sdk-ios (4.1.3)
+  - PromisesObjC (1.2.11)
   - RxAlamofire (5.6.2):
     - RxAlamofire/Core (= 5.6.2)
   - RxAlamofire/Core (5.6.2):
@@ -34,6 +122,9 @@ PODS:
   - SwiftLint (0.40.3)
 
 DEPENDENCIES:
+  - Firebase/Analytics
+  - Firebase/Auth
+  - GoogleSignIn
   - naveridlogin-sdk-ios
   - RxKakaoSDKAuth
   - RxKakaoSDKCommon
@@ -43,10 +134,25 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AppAuth
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseInstallations
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleSignIn
+    - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
+    - nanopb
     - naveridlogin-sdk-ios
+    - PromisesObjC
     - RxAlamofire
     - RxCocoa
     - RxKakaoSDKAuth
@@ -58,10 +164,25 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  Firebase: 456eeacc158d8c58586b7871619a81bb9f27d4ae
+  FirebaseAnalytics: 2673264e482b428df13786b59165ebf420881d7a
+  FirebaseAuth: e6a214cc897d2eab7635b1e5dd6b4298fd1e776b
+  FirebaseCore: c959e8a598f83125c01c1700d9161b236ab3833c
+  FirebaseCoreDiagnostics: 2d508e12e77e9691ca67d1669b91ee80f0985b29
+  FirebaseInstallations: 9ab3a9a6522e687f59ff9bcfd92949ac85073f3c
+  GoogleAppMeasurement: 57a0df93dc2feb5176b1bac06012dbd725191ba5
+  GoogleDataTransport: e4085e6762f36a6141738f46b0153473ce57fb18
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
+  GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   KakaoSDKAuth: 3a88e4a110243f8c6b9948c5ec85670c7acaebf6
   KakaoSDKCommon: 070472d0638ea6b28684a23c195e47015349e51b
   KakaoSDKUser: 7951e09f9e6de3908ae2d7f8486290c8607c217a
+  nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
+  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   RxAlamofire: aa949d345b1689eae02b7c7a217518878144f6df
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxKakaoSDKAuth: ea014a608fb7ba41a9c0d7c685bf587599f582e7
@@ -71,6 +192,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
 
-PODFILE CHECKSUM: 5f2a39055af04b4fb8131f5d2db13e30eda89594
+PODFILE CHECKSUM: 98e273d505737075e1e4444bccb419e3ec59829a
 
 COCOAPODS: 1.8.4
