@@ -24,6 +24,12 @@ target 'ShareNote' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
 
+  #Snapkit
+  pod 'SnapKit', '~> 5.0.0'
+
+  #Alamofire
+  pod 'Alamofire', '~> 5.2'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing
