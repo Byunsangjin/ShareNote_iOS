@@ -19,6 +19,8 @@
 		60ADF4FD25792D39001A77C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60ADF4FB25792D39001A77C2 /* LaunchScreen.storyboard */; };
 		60ADF50825792D39001A77C2 /* ShareNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF50725792D39001A77C2 /* ShareNoteTests.swift */; };
 		60ADF51325792D39001A77C2 /* ShareNoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF51225792D39001A77C2 /* ShareNoteUITests.swift */; };
+		60C0CCB825866A6A006FF0F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C0CCB725866A6A006FF0F9 /* User.swift */; };
+		60C0CD492587B6EB006FF0F9 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C0CD482587B6EB006FF0F9 /* NetworkHelper.swift */; };
 		AF09F919E17FE9DCDBB2FA53 /* Pods_ShareNote_ShareNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */; };
 		F57A80599348E5AF8A58EF5F /* Pods_ShareNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +65,8 @@
 		60ADF50E25792D39001A77C2 /* ShareNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF51225792D39001A77C2 /* ShareNoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNoteUITests.swift; sourceTree = "<group>"; };
 		60ADF51425792D39001A77C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60C0CCB725866A6A006FF0F9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		60C0CD482587B6EB006FF0F9 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9696D885676D7977D9388A74 /* Pods-ShareNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.release.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 			children = (
 				601DDCE1257CE7F000DCB968 /* App */,
 				601DDCD6257CE79000DCB968 /* ViewControllers */,
+				60C0CC8A25865B1D006FF0F9 /* Network */,
+				60C0CCB625866807006FF0F9 /* Model */,
 				601DDCD5257CE78E00DCB968 /* Resources */,
 				601DDCE2257CE8D900DCB968 /* Storyboards */,
 			);
@@ -196,6 +202,22 @@
 				60ADF51425792D39001A77C2 /* Info.plist */,
 			);
 			path = ShareNoteUITests;
+			sourceTree = "<group>";
+		};
+		60C0CC8A25865B1D006FF0F9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				60C0CD482587B6EB006FF0F9 /* NetworkHelper.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		60C0CCB625866807006FF0F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60C0CCB725866A6A006FF0F9 /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9072CAB2B8291737F02B9C57 /* Pods */ = {
@@ -488,9 +510,11 @@
 			files = (
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
+				60C0CD492587B6EB006FF0F9 /* NetworkHelper.swift in Sources */,
 				601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
 				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
+				60C0CCB825866A6A006FF0F9 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
