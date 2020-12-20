@@ -67,6 +67,7 @@
 		60ADF51425792D39001A77C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60C0CCB725866A6A006FF0F9 /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
 		60C0CD482587B6EB006FF0F9 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		60C0D064258F7F98006FF0F9 /* ShareNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareNote.entitlements; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9696D885676D7977D9388A74 /* Pods-ShareNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.release.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		60ADF4EF25792D37001A77C2 /* ShareNote */ = {
 			isa = PBXGroup;
 			children = (
+				60C0D064258F7F98006FF0F9 /* ShareNote.entitlements */,
 				601DDCE1257CE7F000DCB968 /* App */,
 				601DDCD6257CE79000DCB968 /* ViewControllers */,
 				60C0CC8A25865B1D006FF0F9 /* Network */,
@@ -691,6 +693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShareNote/ShareNote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3PLAKW34;
 				INFOPLIST_FILE = ShareNote/App/Info.plist;
@@ -711,6 +714,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShareNote/ShareNote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3PLAKW34;
 				INFOPLIST_FILE = ShareNote/App/Info.plist;

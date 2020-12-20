@@ -16,6 +16,7 @@ import RxKakaoSDKCommon
 import NaverThirdPartyLogin
 import Firebase
 import GoogleSignIn
+import AuthenticationServices
 
 enum LoginType: String {
     case none = "None"
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet var kakaoLoginButton: UIButton!
     @IBOutlet var naverLoginButton: UIButton!
     
+    @IBOutlet var appleLoginBtnView: UIView!
+    
     // MARK: Constants
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
@@ -44,6 +47,9 @@ class ViewController: UIViewController {
         kakaoLoginBtnInit()
         naverLoginBtnInit()
         googleLoginBtnInit()
+        if #available(iOS 13.0, *) {
+            appleLoginBtnInit()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,6 +127,27 @@ class ViewController: UIViewController {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
     }
+    
+    @available(iOS 13.0, *)
+    func appleLoginBtnInit() {
+        let authorizationButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .whiteOutline)
+        authorizationButton.addTarget(self, action: #selector(appleSignBtnTouched), for: .touchUpInside)
+        authorizationButton.frame = appleLoginBtnView.bounds
+        appleLoginBtnView.addSubview(authorizationButton)
+    }
+    
+    @available(iOS 13.0, *)
+    @objc
+    func appleSignBtnTouched() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
 }
 
 extension ViewController : NaverThirdPartyLoginConnectionDelegate {
@@ -162,5 +189,37 @@ extension ViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+    }
+}
+
+@available(iOS 13.0, *)
+extension ViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    // Apple ID 연동 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        // Apple ID
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            // 계정 정보 가져오기
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            print("User ID : \(userIdentifier)")
+            print("User Email : \(email ?? "")")
+            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+            
+        default:
+            break
+        }
+    }
+        
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
     }
 }
