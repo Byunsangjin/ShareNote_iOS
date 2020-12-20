@@ -182,4 +182,17 @@ class NetworkHelper {
                 }
             }
     }
+    
+    func getTop10Category(completion: @escaping ([CategoryList]) -> Void) {
+        let url = "http://52.79.246.196:8083/api/rest/category/top10"
+        let header = HTTPHeader(name: "Authorization",
+                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+        
+        AF.request(url, headers: [header])
+            .responseDecodable(of: JsonData.self) { response in
+                if let json = try! response.result.get() as? JsonData {
+                    print(json.embedded.categoryList)
+                }
+            }
+    }
 }
