@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,13 +41,23 @@
                                     <constraint firstAttribute="width" constant="183" id="ZaI-O2-2r2"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNt-gU-zDH">
+                                <rect key="frame" x="115.5" y="534" width="183" height="45"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="X9U-rd-DVC"/>
+                                    <constraint firstAttribute="width" constant="183" id="yfq-NW-z6K"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7fa-V4-BBg" firstAttribute="centerX" secondItem="u5a-tE-cau" secondAttribute="centerX" id="A0I-Eb-FNH"/>
                             <constraint firstItem="7fa-V4-BBg" firstAttribute="top" secondItem="u5a-tE-cau" secondAttribute="bottom" constant="50" id="DIa-eP-f3D"/>
+                            <constraint firstItem="wNt-gU-zDH" firstAttribute="centerX" secondItem="7fa-V4-BBg" secondAttribute="centerX" id="GDO-LR-f24"/>
                             <constraint firstItem="59N-ry-Mwy" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="RBT-Z5-Tg0"/>
+                            <constraint firstItem="wNt-gU-zDH" firstAttribute="top" secondItem="7fa-V4-BBg" secondAttribute="bottom" constant="60" id="RHO-Hb-CP2"/>
                             <constraint firstItem="u5a-tE-cau" firstAttribute="centerX" secondItem="qBO-yg-32q" secondAttribute="centerX" id="UkO-ZC-RDK"/>
                             <constraint firstItem="qBO-yg-32q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="c2y-Be-fsJ"/>
                             <constraint firstItem="qBO-yg-32q" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hK0-6P-1mS"/>
@@ -56,6 +66,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="appleLoginBtnView" destination="wNt-gU-zDH" id="gsu-5K-Scc"/>
                         <outlet property="kakaoLoginButton" destination="59N-ry-Mwy" id="vJx-HX-squ"/>
                         <outlet property="kakaoTalkLoginButton" destination="qBO-yg-32q" id="M9g-pZ-8Wp"/>
                         <outlet property="naverLoginButton" destination="u5a-tE-cau" id="c1C-9S-czA"/>
