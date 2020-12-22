@@ -23,6 +23,7 @@ struct Embedded: Codable {
     let categoryList: [CategoryList]?
     let categoryDetailList: [CategoryDetailList]?
     let categoryDTOList: [CategoryDTOList]?
+    let tag: [Tag]?
 }
 
 // MARK: - Links

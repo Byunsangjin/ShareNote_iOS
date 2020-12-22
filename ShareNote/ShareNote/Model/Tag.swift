@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+// MARK: - Tag
+struct Tag: Codable {
+    let tagSeq: Int?
+    let tagName: String
+    let tagUseYn: Bool?
+    let tagUdtDate: String?
+    let tagRegDate: String?
+}
