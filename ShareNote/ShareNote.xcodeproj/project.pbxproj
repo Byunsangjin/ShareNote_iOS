@@ -19,6 +19,7 @@
 		60ADF4FD25792D39001A77C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60ADF4FB25792D39001A77C2 /* LaunchScreen.storyboard */; };
 		60ADF50825792D39001A77C2 /* ShareNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF50725792D39001A77C2 /* ShareNoteTests.swift */; };
 		60ADF51325792D39001A77C2 /* ShareNoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF51225792D39001A77C2 /* ShareNoteUITests.swift */; };
+		60BCD5192591805B0025D3F5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BCD5182591805B0025D3F5 /* Tag.swift */; };
 		60C0CCB825866A6A006FF0F9 /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C0CCB725866A6A006FF0F9 /* JsonData.swift */; };
 		60C0CD492587B6EB006FF0F9 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C0CD482587B6EB006FF0F9 /* NetworkHelper.swift */; };
 		60C0D0A2258F937B006FF0F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C0D0A1258F937B006FF0F9 /* User.swift */; };
@@ -67,6 +68,7 @@
 		60ADF50E25792D39001A77C2 /* ShareNoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareNoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF51225792D39001A77C2 /* ShareNoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNoteUITests.swift; sourceTree = "<group>"; };
 		60ADF51425792D39001A77C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60BCD5182591805B0025D3F5 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		60C0CCB725866A6A006FF0F9 /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
 		60C0CD482587B6EB006FF0F9 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		60C0D064258F7F98006FF0F9 /* ShareNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareNote.entitlements; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				60C0CCB725866A6A006FF0F9 /* JsonData.swift */,
 				60C0D0A1258F937B006FF0F9 /* User.swift */,
 				60C0D0A6258F93BC006FF0F9 /* Category.swift */,
+				60BCD5182591805B0025D3F5 /* Tag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 			files = (
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
+				60BCD5192591805B0025D3F5 /* Tag.swift in Sources */,
 				60C0CD492587B6EB006FF0F9 /* NetworkHelper.swift in Sources */,
 				601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */,
 				60C0D0A2258F937B006FF0F9 /* User.swift in Sources */,
