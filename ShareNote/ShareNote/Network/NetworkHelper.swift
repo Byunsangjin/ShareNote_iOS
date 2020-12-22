@@ -195,4 +195,39 @@ class NetworkHelper {
                 }
             }
     }
+    
+    // MARK: Tag
+    func getTag(completion: @escaping ([Tag]) -> Void) {
+        let url = "http://52.79.246.196:8083/api/rest/tag"
+        let header = HTTPHeader(name: "Authorization",
+                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+        
+        AF.request(url, headers: [header])
+            .responseDecodable(of: JsonData.self) { response in
+                if let json = try! response.result.get() as? JsonData {
+                    print(json)
+                }
+            }
+    }
+    
+    func addTag(tag: Tag, completion: @escaping ([Bool]) -> Void) {
+        let url = "http://52.79.246.196:8083/api/rest/tag"
+        
+        let authorization = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w"
+        let header = HTTPHeader(name: "Authorization", value: authorization)
+        
+        AF.request(url, method: .post, parameters: tag, encoder: JSONParameterEncoder.default, headers: [header])
+            .responseJSON { response in
+                print(response)
+            }
+    }
+    
+    func deleteTag(completion: @escaping ([Bool]) -> Void) {
+        let url = "http://52.79.246.196:8083/api/rest/tag/19"
+        let header = HTTPHeader(name: "Authorization", value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+        AF.request(url, method: .delete, headers: [header])
+            .response { response in
+                print(response)
+            }
+    }
 }
