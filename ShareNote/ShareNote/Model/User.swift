@@ -10,7 +10,7 @@
 import Foundation
 
 // MARK: - MemberList
-struct MemberList: Codable {
+struct Member: Codable {
     let mbrID, mbrPwd: String
     let mbrName, mbrEmail, mbrUUID: String?
     let mbrType, mbrPhoneNum: String

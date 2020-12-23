@@ -19,10 +19,10 @@ struct JsonData: Decodable {
 
 // MARK: - Embedded
 struct Embedded: Codable {
-    let memberList: [MemberList]?
-    let categoryList: [CategoryList]?
+    let memberList: [Member]?
+    let categoryList: [Category]?
     let categoryDetailList: [CategoryDetailList]?
-    let categoryDTOList: [CategoryDTOList]?
+    let categoryDTOList: [CategoryDetail]?
     let tag: [Tag]?
 }
 

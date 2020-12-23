@@ -43,7 +43,7 @@ class NetworkHelper {
         
     }
     
-    func register(user: MemberList, completion: @escaping (Bool) -> Void) {
+    func register(user: Member, completion: @escaping (Bool) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member/join"        
         AF.request(url, method: .post, parameters: user, encoder: JSONParameterEncoder.default)
             .response { response in
@@ -51,10 +51,10 @@ class NetworkHelper {
             }
     }
     
-    func getAllMember(completion: @escaping ([MemberList]) -> Void) {
+    func getAllMember(completion: @escaping ([Member]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .validate(statusCode: 200..<400)
@@ -68,7 +68,7 @@ class NetworkHelper {
     func getMember(userID: String, completion: @escaping ([Bool]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -76,10 +76,10 @@ class NetworkHelper {
             }
     }
     
-    func modifiedMember(user: MemberList, completion: @escaping (Bool) -> Void) {
+    func modifiedMember(user: Member, completion: @escaping (Bool) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member"
         let header: HTTPHeader = HTTPHeader(name: "Authorization",
-                                            value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MTA5MzM0NzIsImlhdCI6MTYwODM0MTQ3MiwianRpIjoiZGF2ZSJ9.lw_IXBDlex2SR8kSC_teQ2pojUK2KLYXRw4XhPMT9pcja4aYYdJhoPQ191S_4Dyu35OaT3VCaQJoGQGPqS5APA")
+                                            value: TEST_AUTHORIZATION)
         let params: Parameters = ["mbrName" : "dave",
                                   "mbrPwd" : "dave",
                                   "mbrEmail" : "aaa@gmail.com",
@@ -93,7 +93,7 @@ class NetworkHelper {
     
     func deleteUser(completion: @escaping ([Bool]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member"
-        let header = HTTPHeader(name: "Authorization", value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MTA2Mzg2MjEsImlhdCI6MTYwODA0NjYyMSwianRpIjoiZGF2ZSJ9.MJ6VShEvREjDf_IJ2D7fuExdaFvfiMLEqDQA6pLW1OiAHRJZFqloowiFqHQPQdJA7Zjtwqe5gNYkRXggHrdF-w")
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, method: .delete, headers: [header])
             .response { response in
                 print(response)
@@ -103,9 +103,7 @@ class NetworkHelper {
     // MARK: Category
     func getCategory(completion: @escaping ([Bool]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member/category"
-        
-        let authorization = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MTEwMzUzNDQsImlhdCI6MTYwODQ0MzM0NCwianRpIjoiZGF2ZSJ9.LOYQ54uIRyfaFWZSYIBiBzmeJNbwq3aBdInzr3zRmGjjwBrxIoA2D51bjBfBP8gWEnf3JDY_dMndRAwonca5LQ"
-        let header = HTTPHeader(name: "Authorization", value: authorization)
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, headers: [header])
             .response { response in
                 if let json = try! response.result.get() {
@@ -116,9 +114,7 @@ class NetworkHelper {
     
     func addCategory(completion: @escaping ([Bool]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/member/category"
-        
-        let authorization = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MTEwMzUzNDQsImlhdCI6MTYwODQ0MzM0NCwianRpIjoiZGF2ZSJ9.LOYQ54uIRyfaFWZSYIBiBzmeJNbwq3aBdInzr3zRmGjjwBrxIoA2D51bjBfBP8gWEnf3JDY_dMndRAwonca5LQ"
-        let header = HTTPHeader(name: "Authorization", value: authorization)
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         
         // 추가 시 "mbrCategory": "1,2,3,4,5", 삭제 시 ""
         let params: Parameters = ["mbrCategory" : "1,2,7,10"];
@@ -129,10 +125,10 @@ class NetworkHelper {
             }
     }
     
-    func getAllCategory(completion: @escaping ([CategoryList]) -> Void) {
+    func getAllCategory(completion: @escaping ([Category]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/category"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -145,7 +141,7 @@ class NetworkHelper {
     func getAllDetailCategory(completion: @escaping ([CategoryDetailList]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/category/detail"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -158,7 +154,7 @@ class NetworkHelper {
     func getDetailCategory(completion: @escaping ([CategoryDetailList]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/category/detail/\(3)"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -173,7 +169,7 @@ class NetworkHelper {
             return
         }
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -183,10 +179,10 @@ class NetworkHelper {
             }
     }
     
-    func getTop10Category(completion: @escaping ([CategoryList]) -> Void) {
+    func getTop10Category(completion: @escaping ([Category]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/category/top10"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -200,7 +196,7 @@ class NetworkHelper {
     func getTag(completion: @escaping ([Tag]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/tag"
         let header = HTTPHeader(name: "Authorization",
-                                value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+                                value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
@@ -213,7 +209,7 @@ class NetworkHelper {
     func addTag(tag: Tag, completion: @escaping ([Bool]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/tag"
         
-        let authorization = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w"
+        let authorization = TEST_AUTHORIZATION
         let header = HTTPHeader(name: "Authorization", value: authorization)
         
         AF.request(url, method: .post, parameters: tag, encoder: JSONParameterEncoder.default, headers: [header])
@@ -224,7 +220,7 @@ class NetworkHelper {
     
     func deleteTag(completion: @escaping ([Bool]) -> Void) {
         let url = "http://52.79.246.196:8083/api/rest/tag/19"
-        let header = HTTPHeader(name: "Authorization", value: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDk5Mjk0MTgsImlhdCI6MTYwNzMzNzQxOCwianRpIjoidGVzdGVyMSJ9.bww7F2l4BvwcqOYBGQpb3KgJWi9kr2KbVTavuySJFSRbxEtXRMpP5JldrGsMNrpX1k3vEXDhxaqahF99ctp60w")
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, method: .delete, headers: [header])
             .response { response in
                 print(response)

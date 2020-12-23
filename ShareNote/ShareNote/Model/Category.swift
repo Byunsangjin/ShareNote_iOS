@@ -12,7 +12,7 @@
 import Foundation
 
 // MARK: - CategoryList
-struct CategoryList: Codable {
+struct Category: Codable {
     let ctgSeq: Int
     let ctgName: String
     let ctgUseYn: Bool
@@ -36,17 +36,8 @@ struct CategoryDetailList: Codable {
     let ctgDetailRegDate: String
 }
 
-// MARK: - Category
-struct Category: Codable {
-    let ctgSeq: Int
-    let ctgName: String
-    let ctgUseYn: Bool
-    let ctgUdtDate: String?
-    let ctgRegDate: String
-}
-
 // MARK: - CategoryDTOList
-struct CategoryDTOList: Codable {
+struct CategoryDetail: Codable {
     let ctgSeq: Int
     let ctgName: String
     let ctgPopularity: Int
