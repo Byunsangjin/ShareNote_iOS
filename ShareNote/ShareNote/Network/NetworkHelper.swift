@@ -59,7 +59,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .validate(statusCode: 200..<400)
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     completion(json.embedded.memberList!)
                 }
             }
@@ -132,7 +132,7 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     print(json.embedded.categoryList!)
                 }
             }
@@ -145,7 +145,7 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     print(json.embedded.categoryDetailList?.first)
                 }
             }
@@ -158,7 +158,7 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     print(json.embedded.categoryDetailList?.first)
                 }
             }
@@ -173,7 +173,7 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     print(json.embedded.categoryDTOList)
                 }
             }
@@ -186,7 +186,7 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     print(json.embedded.categoryList)
                 }
             }
@@ -200,7 +200,7 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
-                if let json = try! response.result.get() as? JsonData {
+                if let json = try? response.result.get() as JsonData {
                     print(json)
                 }
             }
