@@ -204,7 +204,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    SwiftyBeaver.verbose(json.embedded.category)
+                    SwiftyBeaver.verbose(json)
                 }
             }
     }
@@ -216,9 +216,13 @@ class NetworkHelper {
                                 value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
-            .responseDecodable(of: JsonData.self) { response in
-                if let json = try? response.result.get() as JsonData {
+            .responseJSON { response in
+                SwiftyBeaver.verbose(response)
+                
+                if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
                     SwiftyBeaver.verbose(json)
+                } else {
+                    SwiftyBeaver.verbose("Fail")
                 }
             }
     }
@@ -232,15 +236,25 @@ class NetworkHelper {
         AF.request(url, method: .post, parameters: tag, encoder: JSONParameterEncoder.default, headers: [header])
             .responseJSON { response in
                 SwiftyBeaver.verbose(response)
+                
+                if let data = response.data, let json = try? JSONDecoder().decode(Tag.self, from: data) {
+                    SwiftyBeaver.verbose(json)
+                } else {
+                    SwiftyBeaver.verbose("Fail")
+                }
             }
     }
     
-    func deleteTag(completion: ((Bool) -> Void)?) {
-        let url = "http://52.79.246.196:8083/api/rest/tag/19"
+    func deleteTag(tagNumber:Int, completion: ((Bool) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/tag/\(tagNumber)"
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, method: .delete, headers: [header])
             .response { response in
                 SwiftyBeaver.verbose(response)
+                
+                if let status = response.response?.statusCode {
+                    SwiftyBeaver.verbose(status)
+                }
             }
     }
 }
