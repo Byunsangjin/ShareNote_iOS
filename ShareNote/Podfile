@@ -30,6 +30,9 @@ target 'ShareNote' do
   #Alamofire
   pod 'Alamofire', '~> 5.2'
 
+  #SwiftyBeaver
+  pod 'SwiftyBeaver'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing

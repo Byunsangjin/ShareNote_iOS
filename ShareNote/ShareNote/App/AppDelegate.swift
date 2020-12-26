@@ -12,10 +12,13 @@ import NaverThirdPartyLogin
 import Firebase
 import GoogleSignIn
 import AuthenticationServices
+import SwiftyBeaver
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        SwiftyBeaver.addDestination(ConsoleDestination())
+        
         // KaKao
         RxKakaoSDKCommon.initSDK(appKey: KAKAO_NATIVE_KEY)
         
