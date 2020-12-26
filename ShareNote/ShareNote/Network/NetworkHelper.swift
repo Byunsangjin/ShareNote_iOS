@@ -60,7 +60,7 @@ class NetworkHelper {
             .validate(statusCode: 200..<400)
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    completion(json.embedded.memberList!)
+                    completion(json.embedded.member!)
                 }
             }
     }
@@ -133,7 +133,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.categoryList!)
+                    print(json.embedded.category!)
                 }
             }
     }
@@ -164,7 +164,7 @@ class NetworkHelper {
             }
     }
     
-    func getSearchCategory(keyword: String, completion: @escaping ([CategoryDetailList]) -> Void) {
+    func getSearchCategory(keyword: String, completion: @escaping ([CategoryDetail]) -> Void) {
         guard let url = "http://52.79.246.196:8083/api/rest/category/진단키트".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
@@ -174,7 +174,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.categoryDTOList)
+                    print(json.embedded.categoryDetail)
                 }
             }
     }
@@ -187,7 +187,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.categoryList)
+                    print(json.embedded.category)
                 }
             }
     }

@@ -18,7 +18,7 @@ struct Category: Codable {
     let ctgUseYn: Bool
     let ctgUdtDate: String?
     let ctgRegDate: String
-    let links: Links
+    let links: Links?
 
     enum CodingKeys: String, CodingKey {
         case ctgSeq, ctgName, ctgUseYn, ctgUdtDate, ctgRegDate
@@ -36,7 +36,7 @@ struct CategoryDetailList: Codable {
     let ctgDetailRegDate: String
 }
 
-// MARK: - CategoryDTOList
+// MARK: - CategoryDetail
 struct CategoryDetail: Codable {
     let ctgSeq: Int
     let ctgName: String

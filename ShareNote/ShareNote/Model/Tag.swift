@@ -5,6 +5,10 @@
 //  Created by sjbyun on 2020/12/22.
 //
 
+/**
+ 태그 관련 Model
+ */
+
 import Foundation
 
 // MARK: - Tag
