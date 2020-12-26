@@ -21,7 +21,6 @@ struct JsonData: Decodable {
 struct Embedded: Codable {
     let member: [Member]?
     let category: [Category]?
-    let categoryDetailList: [CategoryDetailList]?
     let categoryDetail: [CategoryDetail]?
     let tag: [Tag]?
 }

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
 import Alamofire
+import SwiftyBeaver
 
 class NetworkHelper {
     static let shared = NetworkHelper()
@@ -15,16 +15,17 @@ class NetworkHelper {
     private init() {}
     
     // MARK: User
-    func isExistID(userID: String, completion: @escaping (Bool) -> Void) {
+    func isExistID(userID: String, completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/duplicate_id/\(userID)"
         AF.request(url)
             .responseJSON { response in
+                SwiftyBeaver.verbose(response)
                 if let json = try! response.result.get() as? [String : Any] {
                     if let state = json["state"] as? Bool {
-                        completion(state)
+                        completion?(state)
                     }
                 } else {
-                    completion(false)
+                    completion?(false)
                 }
             }
     }
@@ -35,7 +36,7 @@ class NetworkHelper {
                                   "mbrPwd" : password]
         AF.request(url, method: .get, parameters: params)
             .responseJSON { response in
-                print(response)
+                SwiftyBeaver.verbose(response)
             }
     }
     
@@ -43,15 +44,15 @@ class NetworkHelper {
         
     }
     
-    func register(user: Member, completion: @escaping (Bool) -> Void) {
+    func register(user: Member, completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/join"        
         AF.request(url, method: .post, parameters: user, encoder: JSONParameterEncoder.default)
-            .response { response in
-                print(response)
+            .responseJSON { response in
+                SwiftyBeaver.verbose(response)
             }
     }
     
-    func getAllMember(completion: @escaping ([Member]) -> Void) {
+    func getAllMember(completion: (([Member]) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
@@ -60,72 +61,80 @@ class NetworkHelper {
             .validate(statusCode: 200..<400)
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    completion(json.embedded.member!)
+                    completion?(json.embedded.member!)
                 }
             }
     }
     
-    func getMember(userID: String, completion: @escaping ([Bool]) -> Void) {
-        let url = "http://52.79.246.196:8083/api/rest/member"
+    func getMember(userID: String, completion: ((Bool) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/member/\(userID)"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
-            .responseDecodable(of: JsonData.self) { response in
-                print(response)
-            }
-    }
-    
-    func modifiedMember(user: Member, completion: @escaping (Bool) -> Void) {
-        let url = "http://52.79.246.196:8083/api/rest/member"
-        let header: HTTPHeader = HTTPHeader(name: "Authorization",
-                                            value: TEST_AUTHORIZATION)
-        let params: Parameters = ["mbrName" : "dave",
-                                  "mbrPwd" : "dave",
-                                  "mbrEmail" : "aaa@gmail.com",
-                                  "mbrPhoneNum" : "01086973025"]
-                                                
-        AF.request(url, method: .put, parameters: params, encoding: JSONEncoding.default, headers: [header])
-            .response { response in
-                print("response + \(response)")
-            }
-    }
-    
-    func deleteUser(completion: @escaping ([Bool]) -> Void) {
-        let url = "http://52.79.246.196:8083/api/rest/member"
-        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
-        AF.request(url, method: .delete, headers: [header])
-            .response { response in
-                print(response)
-            }
-    }
-    
-    // MARK: Category
-    func getCategory(completion: @escaping ([Bool]) -> Void) {
-        let url = "http://52.79.246.196:8083/api/rest/member/category"
-        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
-        AF.request(url, headers: [header])
-            .response { response in
-                if let json = try! response.result.get() {
-                    print(json)
+            .responseJSON { response in
+                SwiftyBeaver.verbose(response)
+                if let status = response.response?.statusCode {
+                    SwiftyBeaver.verbose(status)
+                }
+                
+                
+                if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
+                    SwiftyBeaver.verbose(json)
+                } else {
+                    SwiftyBeaver.verbose("Fail")
                 }
             }
     }
     
-    func addCategory(completion: @escaping ([Bool]) -> Void) {
+    func modifiedMember(user: Member, completion: ((Bool) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/member"
+        let header: HTTPHeader = HTTPHeader(name: "Authorization",
+                                            value: TEST_AUTHORIZATION)
+        
+        AF.request(url, method: .put, parameters: user, encoder: JSONParameterEncoder.default, headers: [header])
+            .responseJSON { response in
+                SwiftyBeaver.verbose("response + \(response)")
+            }
+    }
+    
+    func deleteUser(completion: ((Bool) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/member"
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
+        AF.request(url, method: .delete, headers: [header])
+            .response { response in
+                SwiftyBeaver.verbose(response.response?.statusCode)
+            }
+    }
+    
+    // MARK: Category
+    func getCategory(completion: ((Bool) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/member/category"
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
+        AF.request(url, headers: [header])
+            .responseJSON { response in
+                SwiftyBeaver.verbose(response)
+                
+                if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
+                    SwiftyBeaver.verbose(json)
+                } else {
+                    SwiftyBeaver.verbose("Fail")
+                }
+            }
+    }
+    
+    func addCategory(params: Dictionary<String, String>, completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/category"
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         
         // 추가 시 "mbrCategory": "1,2,3,4,5", 삭제 시 ""
-        let params: Parameters = ["mbrCategory" : "1,2,7,10"];
-        
         AF.request(url, method: .put, parameters: params, encoding: JSONEncoding.default, headers: [header])
-            .response { response in
-                print("response + \(response)")
+            .responseJSON { response in
+                SwiftyBeaver.verbose("response + \(response)")
             }
     }
     
-    func getAllCategory(completion: @escaping ([Category]) -> Void) {
+    func getAllCategory(completion: (([Category]) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/category"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
@@ -133,12 +142,12 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.category!)
+                    SwiftyBeaver.verbose(json.embedded.category!)
                 }
             }
     }
     
-    func getAllDetailCategory(completion: @escaping ([CategoryDetailList]) -> Void) {
+    func getAllDetailCategory(completion: (([CategoryDetail]) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/category/detail"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
@@ -146,40 +155,48 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.categoryDetailList?.first)
+                    SwiftyBeaver.verbose(json.embedded.categoryDetail?.first)
                 }
             }
     }
     
-    func getDetailCategory(completion: @escaping ([CategoryDetailList]) -> Void) {
-        let url = "http://52.79.246.196:8083/api/rest/category/detail/\(3)"
+    func getDetailCategory(categoryNumber: Int, completion: (([CategoryDetail]) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/category/detail/\(categoryNumber)"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
-            .responseDecodable(of: JsonData.self) { response in
-                if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.categoryDetailList?.first)
+            .responseJSON { response in
+                SwiftyBeaver.verbose(response)
+                
+                if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
+                    SwiftyBeaver.verbose(json)
+                } else {
+                    SwiftyBeaver.verbose("Fail")
                 }
             }
     }
     
-    func getSearchCategory(keyword: String, completion: @escaping ([CategoryDetail]) -> Void) {
-        guard let url = "http://52.79.246.196:8083/api/rest/category/진단키트".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+    func getSearchCategory(keyword: String, completion: (([CategoryDetail]) -> Void)?) {
+        guard let url = "http://52.79.246.196:8083/api/rest/category/\(keyword)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
         
         AF.request(url, headers: [header])
-            .responseDecodable(of: JsonData.self) { response in
-                if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.categoryDetail)
+            .responseJSON { response in
+                SwiftyBeaver.verbose(response)
+                
+                if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
+                    SwiftyBeaver.verbose(json)
+                } else {
+                    SwiftyBeaver.verbose("Fail")
                 }
             }
     }
     
-    func getTop10Category(completion: @escaping ([Category]) -> Void) {
+    func getTop10Category(completion: (([Category]) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/category/top10"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
@@ -187,13 +204,13 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json.embedded.category)
+                    SwiftyBeaver.verbose(json.embedded.category)
                 }
             }
     }
     
     // MARK: Tag
-    func getTag(completion: @escaping ([Tag]) -> Void) {
+    func getTag(completion: (([Tag]) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/tag"
         let header = HTTPHeader(name: "Authorization",
                                 value: TEST_AUTHORIZATION)
@@ -201,12 +218,12 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    print(json)
+                    SwiftyBeaver.verbose(json)
                 }
             }
     }
     
-    func addTag(tag: Tag, completion: @escaping ([Bool]) -> Void) {
+    func addTag(tag: Tag, completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/tag"
         
         let authorization = TEST_AUTHORIZATION
@@ -214,16 +231,16 @@ class NetworkHelper {
         
         AF.request(url, method: .post, parameters: tag, encoder: JSONParameterEncoder.default, headers: [header])
             .responseJSON { response in
-                print(response)
+                SwiftyBeaver.verbose(response)
             }
     }
     
-    func deleteTag(completion: @escaping ([Bool]) -> Void) {
+    func deleteTag(completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/tag/19"
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, method: .delete, headers: [header])
             .response { response in
-                print(response)
+                SwiftyBeaver.verbose(response)
             }
     }
 }

@@ -14,6 +14,7 @@ struct Member: Codable {
     let mbrID, mbrPwd: String
     let mbrName, mbrEmail, mbrUUID: String?
     let mbrType, mbrPhoneNum: String
+    let mbrCategory: String?
     let mbrGrade: String?
     let mbrState: Int?
     let mbrUseYn: Bool?
@@ -25,18 +26,7 @@ struct Member: Codable {
         case mbrID = "mbrId"
         case mbrPwd, mbrName, mbrEmail
         case mbrUUID = "mbrUuid"
-        case mbrType, mbrPhoneNum, mbrGrade, mbrState, mbrUseYn, mbrUdtDate, mbrRegDate
+        case mbrType, mbrPhoneNum, mbrCategory, mbrGrade, mbrState, mbrUseYn, mbrUdtDate, mbrRegDate
         case links = "_links"
     }
-}
-
-struct User: Codable {
-    let mbrID, mbrPwd: String
-    let mbrName, mbrEmail, mbrUUID: String?
-    let mbrType, mbrPhoneNum: String
-    let mbrGrade: String?
-    let mbrState: Int?
-    let mbrUseYn: Bool?
-    let mbrUdtDate: String?
-    let mbrRegDate: String?
 }
