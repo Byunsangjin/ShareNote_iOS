@@ -16,8 +16,20 @@ import SwiftyBeaver
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         SwiftyBeaver.addDestination(ConsoleDestination())
+        
+        if #available(iOS 13, *) {
+            SwiftyBeaver.verbose("set in SceneDelegate")
+        } else {
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.rootViewController = UserPageViewController()
+            self.window = window
+            window.makeKeyAndVisible()
+        }
         
         // KaKao
         RxKakaoSDKCommon.initSDK(appKey: KAKAO_NATIVE_KEY)
