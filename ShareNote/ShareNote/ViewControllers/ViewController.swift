@@ -5,18 +5,18 @@
 //  Created by sjbyun on 2020/12/03.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
-import KakaoSDKAuth
-import KakaoSDKUser
-import RxKakaoSDKAuth
-import RxKakaoSDKUser
-import RxKakaoSDKCommon
-import NaverThirdPartyLogin
+import AuthenticationServices
 import Firebase
 import GoogleSignIn
-import AuthenticationServices
+import KakaoSDKAuth
+import KakaoSDKUser
+import NaverThirdPartyLogin
+import RxCocoa
+import RxKakaoSDKAuth
+import RxKakaoSDKCommon
+import RxKakaoSDKUser
+import RxSwift
+import UIKit
 
 enum LoginType: String {
     case none = "None"
