@@ -11,6 +11,8 @@
 		601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */; };
 		601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDCEF257CEBEF00DCB968 /* AppKey.swift */; };
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
+		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
+		6094163925A037A500D9DF42 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094163825A037A500D9DF42 /* LoginViewModel.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -55,6 +57,8 @@
 		601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		601DDCEF257CEBEF00DCB968 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		6094163825A037A500D9DF42 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 				60ADF4FB25792D39001A77C2 /* LaunchScreen.storyboard */,
 				60ADF4F025792D37001A77C2 /* AppDelegate.swift */,
 				60ADF4F225792D37001A77C2 /* SceneDelegate.swift */,
+				6094162E25A0156000D9DF42 /* AppCoordinator.swift */,
 				60ADF4FE25792D39001A77C2 /* Info.plist */,
 			);
 			path = App;
@@ -158,6 +163,14 @@
 				60ADF4F625792D37001A77C2 /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6094163725A0379400D9DF42 /* VIewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6094163825A037A500D9DF42 /* LoginViewModel.swift */,
+			);
+			path = VIewModel;
 			sourceTree = "<group>";
 		};
 		60ADF4E425792D37001A77C2 = {
@@ -191,6 +204,7 @@
 				601DDCD6257CE79000DCB968 /* ViewControllers */,
 				60C0CC8A25865B1D006FF0F9 /* Network */,
 				60C0CCB625866807006FF0F9 /* Model */,
+				6094163725A0379400D9DF42 /* VIewModel */,
 				601DDCD5257CE78E00DCB968 /* Resources */,
 				601DDCE2257CE8D900DCB968 /* Storyboards */,
 			);
@@ -530,6 +544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */,
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
 				60BCD5192591805B0025D3F5 /* Tag.swift in Sources */,
@@ -537,6 +552,7 @@
 				601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */,
 				60C0D0A2258F937B006FF0F9 /* User.swift in Sources */,
 				60C0D0A7258F93BC006FF0F9 /* Category.swift in Sources */,
+				6094163925A037A500D9DF42 /* LoginViewModel.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
 				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
 				60C0CCB825866A6A006FF0F9 /* JsonData.swift in Sources */,

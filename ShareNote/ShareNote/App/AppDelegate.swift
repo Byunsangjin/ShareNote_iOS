@@ -18,6 +18,7 @@ import SwiftyBeaver
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var appCoordinator: AppCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         SwiftyBeaver.addDestination(ConsoleDestination())
@@ -26,9 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SwiftyBeaver.verbose("set in SceneDelegate")
         } else {
             let window = UIWindow(frame: UIScreen.main.bounds)
-            window.rootViewController = UserPageViewController()
-            self.window = window
-            window.makeKeyAndVisible()
+            appCoordinator = AppCoordinator(window: window)
+            appCoordinator?.start()
         }
         
         // KaKao
