@@ -6,6 +6,7 @@
 //
 
 import SnapKit
+import RxSwift
 import Then
 import UIKit
 
@@ -104,11 +105,37 @@ class LoginViewController: UIViewController {
         $0.backgroundColor = .gray
     }
     
+    let viewModel = LoginViewModel()
+    
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
+        
+        // Bind input
+        idTextField.rx.text.orEmpty
+            .bind(to: viewModel.input.idText)
+            .disposed(by: disposeBag)
+        pwdTextField.rx.text.orEmpty
+            .bind(to: viewModel.input.pwdText)
+            .disposed(by: disposeBag)
+        loginButton.rx.tap
+            .bind(to: viewModel.input.buttonTap)
+            .disposed(by: disposeBag)
+        
+        // Bind output
+        viewModel.output.enableLoginButton
+            .observeOn(MainScheduler.instance)
+            .bind(to: loginButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        viewModel.output.errorMessage
+            .observeOn(MainScheduler.instance)
+            .bind(onNext: self.showErrorMsg(msg:))
+            .disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -194,5 +221,11 @@ class LoginViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+    
+    func showErrorMsg(msg: String) {
+        let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
