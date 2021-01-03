@@ -162,6 +162,7 @@ class RegisterViewController: UIViewController {
         
         atLabel.snp.makeConstraints { make in
             make.center.equalTo(emailContainerView.snp.center)
+            make.width.height.equalTo(30)
         }
         
         emailTextField.snp.makeConstraints { make in
