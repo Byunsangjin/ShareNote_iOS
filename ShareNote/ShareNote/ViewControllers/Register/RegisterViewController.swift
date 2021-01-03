@@ -5,9 +5,10 @@
 //  Created by sjbyun on 2021/01/02.
 //
 
-import Then
+import PanModal
 import SnapKit
 import TextFieldEffects
+import Then
 import UIKit
 
 class RegisterViewController: UIViewController {
@@ -109,7 +110,7 @@ class RegisterViewController: UIViewController {
     
     @objc
     func doubleCheckBtnTouched() {
-        
+        presentPanModal(EmailTableViewController())
     }
     
     func setUI() {
