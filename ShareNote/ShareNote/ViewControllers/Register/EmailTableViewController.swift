@@ -37,11 +37,14 @@ class EmailTableViewController: UIViewController {
     }
     
     func bindTableView() {
-        let cities = Observable.of(["Lisbon", "Copenhagen", "London", "Madrid", "Vienna"])
+        tableView.register(EmailTableViewCell.self, forCellReuseIdentifier: "EmailTableViewCell")
         
-        cities.bind(to: tableView.rx.items) { (tableView: UITableView, index: Int, element: String) in
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-            cell.textLabel?.text = element
+        let cities = Observable.of(["Lisbon", "Copenhagen", "London", "Madrid", "Vienna"])
+
+        cities.bind(to: tableView.rx.items) { [self] (tableView: UITableView, index: Int, element: String) in
+            let cell = EmailTableViewCell(style: .default, reuseIdentifier: "EmailTableViewCell")
+            cell.emailLabel.text = element
+            cell.checkButton.addTarget(self, action: #selector(checkBtnTouched), for: .touchUpInside)
             return cell
         }.disposed(by: disposeBag)
 
@@ -50,7 +53,11 @@ class EmailTableViewController: UIViewController {
                 SwiftyBeaver.verbose("\(model) was selected")
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    @objc
+    func checkBtnTouched() {
+        SwiftyBeaver.verbose("checkBtnTouched")
     }
     
     override func updateViewConstraints() {
