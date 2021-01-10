@@ -8,84 +8,74 @@
 import SwiftyBeaver
 import UIKit
 
+protocol PasswordProtocol {
+    func backwardAction()
+    func clearAction()
+    func numberAction(sender: UIButton)
+}
+
 class PasswordKeypadView: UIView {
-    
-    var keypadStackView = UIStackView().then {
-        $0.axis = .vertical
-        $0.spacing = 1.0
-        $0.alignment = .fill
-        $0.distribution = .fillEqually
+        
+    var keypadStackView = UIStackView().makeStackView(axis: .vertical).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     var numberArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    var delegate: PasswordProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .black
-        
         numberArray.shuffle()
-        
-        addSubview(keypadStackView)
-        
-        for _ in 0..<3 {
-            let stackView = UIStackView()
-            stackView.axis = .horizontal
-            stackView.spacing = 1.0
-            stackView.alignment = .fill
-            stackView.distribution = .fillEqually
-            
-            for _ in 0..<3 {
-                let button = UIButton()
-                button.setTitle(numberArray.popLast()!, for: .normal)
-                button.addTarget(self, action: #selector(numberBtnTouched), for: .touchUpInside)
-                stackView.addArrangedSubview(button)
-            }
-            
-            keypadStackView.addArrangedSubview(stackView)
-        }
-        
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 1.0
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        
-        let clearButton = UIButton()
-        clearButton.setTitle("Clear", for: .normal)
-        clearButton.addTarget(self, action: #selector(clearBtnTouched), for: .touchUpInside)
-        stackView.addArrangedSubview(clearButton)
-        
-        let button = UIButton()
-        button.setTitle(numberArray.popLast()!, for: .normal)
-        button.addTarget(self, action: #selector(numberBtnTouched), for: .touchUpInside)
-        stackView.addArrangedSubview(button)
-        
-        let backwardButton = UIButton()
-        backwardButton.setTitle("Backward", for: .normal)
-        backwardButton.addTarget(self, action: #selector(backwardBtnTouched), for: .touchUpInside)
-        stackView.addArrangedSubview(backwardButton)
-        
-        keypadStackView.addArrangedSubview(stackView)
+        setUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setUI() {
+        self.backgroundColor = .black
+        
+        addSubview(keypadStackView)
+        
+        for _ in 0..<3 {
+            let stackView = UIStackView().makeStackView()
+            
+            for _ in 0..<3 {
+                let numberButton = UIButton().makeButton(target: self, title: numberArray.popLast()!, selector: #selector(numberBtnTouched))
+                stackView.addArrangedSubview(numberButton)
+            }
+            
+            keypadStackView.addArrangedSubview(stackView)
+        }
+        
+        let stackView = UIStackView().makeStackView()
+        
+        let clearButton = UIButton().makeButton(target: self, title: "Clear", selector: #selector(clearBtnTouched))
+        stackView.addArrangedSubview(clearButton)
+        
+        let numberButton = UIButton().makeButton(target: self, title: numberArray.popLast()!, selector: #selector(numberBtnTouched))
+        stackView.addArrangedSubview(numberButton)
+        
+        let backwardButton = UIButton().makeButton(target: self, title: "Backward", selector: #selector(backwardBtnTouched))
+        stackView.addArrangedSubview(backwardButton)
+        
+        keypadStackView.addArrangedSubview(stackView)
+    }
+    
     @objc
     func clearBtnTouched() {
-        
+        delegate?.clearAction()
     }
 
     @objc
     func backwardBtnTouched() {
-        
+        delegate?.backwardAction()
     }
     
     @objc
     func numberBtnTouched(sender: UIButton) {
-        SwiftyBeaver.verbose("\(sender.titleLabel?.text)")
+        delegate?.numberAction(sender: sender)
     }
     
     override func updateConstraints() {
@@ -94,5 +84,25 @@ class PasswordKeypadView: UIView {
         }
         
         super.updateConstraints()
+    }
+}
+
+extension UIStackView {
+    func makeStackView(axis: NSLayoutConstraint.Axis = .horizontal) -> UIStackView {
+        self.axis = axis
+        self.spacing = 1.0
+        self.alignment = .fill
+        self.distribution = .fillEqually
+        
+        return self
+    }
+}
+
+extension UIButton {
+    func makeButton(target: Any?, title: String, selector: Selector) -> UIButton {
+        self.setTitle(title, for: .normal)
+        self.addTarget(target, action: selector, for: .touchUpInside)
+        
+        return self
     }
 }
