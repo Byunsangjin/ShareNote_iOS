@@ -119,7 +119,22 @@ class LoginViewController: UIViewController, View {
     }
     
     func bind(reactor: LoginReactor) {
+        // Action
+        idTextField.rx.text
+            .map { LoginReactor.Action.idTextChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
+        pwdTextField.rx.text
+            .map { LoginReactor.Action.pwdTextChaged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // State
+        reactor.state.map { $0.enableLogin }
+            .map { $0 ? UIColor.green : UIColor.red }
+            .bind(to: loginButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
     }
     
     func setUI() {

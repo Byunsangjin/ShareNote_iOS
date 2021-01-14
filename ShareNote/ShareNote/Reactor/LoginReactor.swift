@@ -15,8 +15,8 @@ class LoginReactor: Reactor {
     }
     
     enum Mutation {
-        case setId(String?)
-        case setPassword(String?)
+        case setId(String)
+        case setPassword(String)
     }
     
     struct State {
@@ -26,4 +26,36 @@ class LoginReactor: Reactor {
     }
     
     var initialState: State = State()
+    
+    func mutate(action: Action) -> Observable<Mutation> {
+        switch action {
+        case .idTextChanged(let id):
+            guard let id = id else { return.empty() }
+            
+            return Observable.just(Mutation.setId(id))
+            
+        case .pwdTextChaged(let password):
+            guard let password = password else { return.empty() }
+            
+            return Observable.just(Mutation.setPassword(password))
+            
+        case .login:
+            return.empty()
+        }
+    }
+    
+    func reduce(state: State, mutation: Mutation) -> State {
+        var newState = state
+        
+        switch mutation {
+        case .setId(let id):
+            newState.id = id
+        case .setPassword(let password):
+            newState.password = password
+        }
+        
+        newState.enableLogin = !newState.id.isEmpty && !newState.password.isEmpty
+        
+        return newState
+    }
 }
