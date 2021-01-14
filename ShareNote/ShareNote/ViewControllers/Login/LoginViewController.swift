@@ -105,8 +105,6 @@ class LoginViewController: UIViewController {
         $0.backgroundColor = .gray
     }
     
-    let viewModel = LoginViewModel()
-    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -115,27 +113,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
-        
-        // Bind input
-        idTextField.rx.text.orEmpty
-            .bind(to: viewModel.input.idText)
-            .disposed(by: disposeBag)
-        pwdTextField.rx.text.orEmpty
-            .bind(to: viewModel.input.pwdText)
-            .disposed(by: disposeBag)
-        loginButton.rx.tap
-            .bind(to: viewModel.input.buttonTap)
-            .disposed(by: disposeBag)
-        
-        // Bind output
-        viewModel.output.enableLoginButton
-            .observeOn(MainScheduler.instance)
-            .bind(to: loginButton.rx.backgroundColor)
-            .disposed(by: disposeBag)
-        viewModel.output.errorMessage
-            .observeOn(MainScheduler.instance)
-            .bind(onNext: self.showErrorMsg(msg:))
-            .disposed(by: disposeBag)
     }
     
     func setUI() {
