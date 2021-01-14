@@ -5,12 +5,13 @@
 //  Created by sjbyun on 2021/01/01.
 //
 
-import SnapKit
+import ReactorKit
 import RxSwift
+import SnapKit
 import Then
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, View {
     
     // MARK: Constants
     let logoImageView = UIImageView().then {
@@ -112,7 +113,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.reactor = LoginReactor()
+        
         setUI()
+    }
+    
+    func bind(reactor: LoginReactor) {
+        
     }
     
     func setUI() {
