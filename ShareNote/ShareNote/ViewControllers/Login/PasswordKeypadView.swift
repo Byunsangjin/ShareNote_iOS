@@ -21,8 +21,10 @@ class PasswordKeypadView: UIView {
     }
     
     var numberArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    
     var delegate: PasswordProtocol?
     
+    // MARK: Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
         numberArray.shuffle()
@@ -34,8 +36,6 @@ class PasswordKeypadView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = .black
-        
         addSubview(keypadStackView)
         
         for _ in 0..<3 {
@@ -90,7 +90,7 @@ class PasswordKeypadView: UIView {
 extension UIStackView {
     func makeStackView(axis: NSLayoutConstraint.Axis = .horizontal) -> UIStackView {
         self.axis = axis
-        self.spacing = 1.0
+        self.spacing = 0.5
         self.alignment = .fill
         self.distribution = .fillEqually
         
@@ -101,6 +101,9 @@ extension UIStackView {
 extension UIButton {
     func makeButton(target: Any?, title: String, selector: Selector) -> UIButton {
         self.setTitle(title, for: .normal)
+        self.setTitleColor(.black, for: .normal)
+        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.backgroundColor = .lightGray
         self.addTarget(target, action: selector, for: .touchUpInside)
         
         return self
