@@ -6,6 +6,7 @@
 //
 
 import ReactorKit
+import SwiftyBeaver
 
 class LoginReactor: Reactor {
     enum Action {
@@ -40,6 +41,23 @@ class LoginReactor: Reactor {
             return Observable.just(Mutation.setPassword(password))
             
         case .login:
+            // login logic
+            
+            let id = self.currentState.id
+            let password = self.currentState.password
+            
+            NetworkHelper.shared.userLogin(userID: id, password: password) { (isSuccess, member) in
+                let member = member
+                
+                if isSuccess {
+                    // 로그인 성공
+                    SwiftyBeaver.verbose("success = \(member)")
+                } else {
+                    // 로그인 실패
+                    SwiftyBeaver.verbose("false = \(member)")
+                }
+            }
+            
             return.empty()
         }
     }
