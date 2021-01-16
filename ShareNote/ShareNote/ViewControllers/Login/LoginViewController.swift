@@ -31,12 +31,14 @@ class LoginViewController: UIViewController, View {
     
     let idTextField = UITextField().then {
         $0.placeholder = "아이디"
-        $0.backgroundColor = .black
+        $0.backgroundColor = .white
+        $0.autocapitalizationType = .none
     }
     
     let pwdTextField = UITextField().then {
         $0.placeholder = "비밀번호"
-        $0.backgroundColor = .red
+        $0.backgroundColor = .white
+        $0.autocapitalizationType = .none
     }
     
     let loginButton = UIButton().then {
@@ -130,10 +132,19 @@ class LoginViewController: UIViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        loginButton.rx.tap
+            .map { LoginReactor.Action.login }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         // State
         reactor.state.map { $0.enableLogin }
             .map { $0 ? UIColor.green : UIColor.red }
             .bind(to: loginButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.enableLogin }
+            .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
     
