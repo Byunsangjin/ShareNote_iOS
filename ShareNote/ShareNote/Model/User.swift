@@ -11,22 +11,36 @@ import Foundation
 
 // MARK: - MemberList
 struct Member: Codable {
-    let mbrID, mbrPwd: String
-    let mbrName, mbrEmail, mbrUUID: String?
-    let mbrType, mbrPhoneNum: String
-    let mbrCategory: String?
+    let mbrID, mbrPwd, mbrName, mbrEmail: String?
+    let mbrUUID: String?
+    let mbrType, mbrPhoneNum: String?
+    let media, topic, bookmark: [String]?
+    let mbrPoint: Int?
+    let grade: Grade?
     let mbrGrade: String?
     let mbrState: Int?
     let mbrUseYn: Bool?
     let mbrUdtDate: String?
     let mbrRegDate: String?
     let links: Links?
+    let message: String?
+    let status: Int?
+    let errors: [String]?
+    let code: String?
 
     enum CodingKeys: String, CodingKey {
         case mbrID = "mbrId"
         case mbrPwd, mbrName, mbrEmail
         case mbrUUID = "mbrUuid"
-        case mbrType, mbrPhoneNum, mbrCategory, mbrGrade, mbrState, mbrUseYn, mbrUdtDate, mbrRegDate
+        case mbrType, mbrPhoneNum, media, topic, bookmark, mbrPoint, grade, mbrGrade, mbrState, mbrUseYn, mbrUdtDate, mbrRegDate, message, status, errors, code
         case links = "_links"
     }
+}
+
+struct Grade: Codable {
+    let grdRange: Int
+    let grdLevel, grdNickname: String
+    let grdUseYn: Bool
+    let grdUdtDate: String?
+    let grdRegDate: String
 }

@@ -30,13 +30,21 @@ class NetworkHelper {
             }
     }
     
-    func userLogin(userID: String, password: String) {
+    func userLogin(userID: String, password: String, completion: ((Bool, Member) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/auth?"
         let params: Parameters = ["mbrId" : userID,
                                   "mbrPwd" : password]
         AF.request(url, method: .get, parameters: params)
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
+                    DispatchQueue.main.async {
+                        if let _ = json.message {
+                            completion?(false, json)
+                        } else {
+                            completion?(true, json)
+                        }
+                    }
+                }
             }
     }
     
