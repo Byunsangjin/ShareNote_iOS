@@ -14,6 +14,8 @@ import GoogleSignIn
 import AuthenticationServices
 import SwiftyBeaver
 
+let logger = SwiftyBeaver.self
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -21,10 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        SwiftyBeaver.addDestination(ConsoleDestination())
+        logger.addDestination(ConsoleDestination())
         
         if #available(iOS 13, *) {
-            SwiftyBeaver.verbose("set in SceneDelegate")
+            logger.verbose("set in SceneDelegate")
         } else {
             let window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(window: window)

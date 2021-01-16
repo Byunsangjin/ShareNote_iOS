@@ -6,7 +6,6 @@
 //
 
 import ReactorKit
-import SwiftyBeaver
 
 class LoginReactor: Reactor {
     enum Action {
@@ -51,10 +50,10 @@ class LoginReactor: Reactor {
                 
                 if isSuccess {
                     // 로그인 성공
-                    SwiftyBeaver.verbose("success = \(member)")
+                    logger.verbose("success = \(member)")
                 } else {
                     // 로그인 실패
-                    SwiftyBeaver.verbose("false = \(member)")
+                    logger.verbose("false = \(member)")
                 }
             }
             

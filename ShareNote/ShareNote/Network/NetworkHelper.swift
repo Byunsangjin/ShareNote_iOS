@@ -5,9 +5,8 @@
 //  Created by sjbyun on 2020/12/15.
 //
 
-import Foundation
 import Alamofire
-import SwiftyBeaver
+import Foundation
 
 class NetworkHelper {
     static let shared = NetworkHelper()
@@ -19,7 +18,7 @@ class NetworkHelper {
         let url = "http://52.79.246.196:8083/api/rest/member/duplicate_id/\(userID)"
         AF.request(url)
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 if let json = try! response.result.get() as? [String : Any] {
                     if let state = json["state"] as? Bool {
                         completion?(state)
@@ -56,7 +55,7 @@ class NetworkHelper {
         let url = "http://52.79.246.196:8083/api/rest/member/join"        
         AF.request(url, method: .post, parameters: user, encoder: JSONParameterEncoder.default)
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
             }
     }
     
@@ -81,16 +80,16 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 if let status = response.response?.statusCode {
-                    SwiftyBeaver.verbose(status)
+                    logger.verbose(status)
                 }
                 
                 
                 if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 } else {
-                    SwiftyBeaver.verbose("Fail")
+                    logger.verbose("Fail")
                 }
             }
     }
@@ -102,7 +101,7 @@ class NetworkHelper {
         
         AF.request(url, method: .put, parameters: user, encoder: JSONParameterEncoder.default, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose("response + \(response)")
+                logger.verbose("response + \(response)")
             }
     }
     
@@ -111,7 +110,7 @@ class NetworkHelper {
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, method: .delete, headers: [header])
             .response { response in
-                SwiftyBeaver.verbose(response.response?.statusCode)
+                logger.verbose(response.response?.statusCode)
             }
     }
     
@@ -121,12 +120,12 @@ class NetworkHelper {
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 
                 if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 } else {
-                    SwiftyBeaver.verbose("Fail")
+                    logger.verbose("Fail")
                 }
             }
     }
@@ -138,7 +137,7 @@ class NetworkHelper {
         // 추가 시 "mbrCategory": "1,2,3,4,5", 삭제 시 ""
         AF.request(url, method: .put, parameters: params, encoding: JSONEncoding.default, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose("response + \(response)")
+                logger.verbose("response + \(response)")
             }
     }
     
@@ -150,7 +149,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    SwiftyBeaver.verbose(json.embedded.category!)
+                    logger.verbose(json.embedded.category!)
                 }
             }
     }
@@ -163,7 +162,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    SwiftyBeaver.verbose(json.embedded.categoryDetail?.first)
+                    logger.verbose(json.embedded.categoryDetail?.first)
                 }
             }
     }
@@ -175,12 +174,12 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 
                 if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 } else {
-                    SwiftyBeaver.verbose("Fail")
+                    logger.verbose("Fail")
                 }
             }
     }
@@ -194,12 +193,12 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 
                 if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 } else {
-                    SwiftyBeaver.verbose("Fail")
+                    logger.verbose("Fail")
                 }
             }
     }
@@ -212,7 +211,7 @@ class NetworkHelper {
         AF.request(url, headers: [header])
             .responseDecodable(of: JsonData.self) { response in
                 if let json = try? response.result.get() as JsonData {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 }
             }
     }
@@ -225,12 +224,12 @@ class NetworkHelper {
         
         AF.request(url, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 
                 if let data = response.data, let json = try? JSONDecoder().decode(JsonData.self, from: data) {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 } else {
-                    SwiftyBeaver.verbose("Fail")
+                    logger.verbose("Fail")
                 }
             }
     }
@@ -243,12 +242,12 @@ class NetworkHelper {
         
         AF.request(url, method: .post, parameters: tag, encoder: JSONParameterEncoder.default, headers: [header])
             .responseJSON { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 
                 if let data = response.data, let json = try? JSONDecoder().decode(Tag.self, from: data) {
-                    SwiftyBeaver.verbose(json)
+                    logger.verbose(json)
                 } else {
-                    SwiftyBeaver.verbose("Fail")
+                    logger.verbose("Fail")
                 }
             }
     }
@@ -258,10 +257,10 @@ class NetworkHelper {
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
         AF.request(url, method: .delete, headers: [header])
             .response { response in
-                SwiftyBeaver.verbose(response)
+                logger.verbose(response)
                 
                 if let status = response.response?.statusCode {
-                    SwiftyBeaver.verbose(status)
+                    logger.verbose(status)
                 }
             }
     }

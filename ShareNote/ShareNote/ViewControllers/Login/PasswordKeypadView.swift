@@ -5,7 +5,6 @@
 //  Created by sjbyun on 2021/01/10.
 //
 
-import SwiftyBeaver
 import UIKit
 
 protocol PasswordProtocol {

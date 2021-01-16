@@ -8,7 +8,6 @@
 import PanModal
 import RxCocoa
 import RxSwift
-import SwiftyBeaver
 import Then
 import UIKit
 
@@ -50,14 +49,14 @@ class EmailTableViewController: UIViewController {
 
         tableView.rx.modelSelected(String.self)
             .subscribe(onNext: { model in
-                SwiftyBeaver.verbose("\(model) was selected")
+                logger.verbose("\(model) was selected")
             })
             .disposed(by: disposeBag)
     }
     
     @objc
     func checkBtnTouched() {
-        SwiftyBeaver.verbose("checkBtnTouched")
+        logger.verbose("checkBtnTouched")
     }
     
     override func updateViewConstraints() {

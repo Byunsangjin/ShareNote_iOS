@@ -5,7 +5,6 @@
 //  Created by sjbyun on 2021/01/10.
 //
 
-import SwiftyBeaver
 import Then
 import UIKit
 
@@ -91,14 +90,14 @@ class SimplePasswordViewController: UIViewController {
 
 extension SimplePasswordViewController: PasswordProtocol {
     func backwardAction() {
-        SwiftyBeaver.verbose(#function)
+        logger.verbose(#function)
     }
     
     func clearAction() {
-        SwiftyBeaver.verbose(#function)
+        logger.verbose(#function)
     }
     
     func numberAction(sender: UIButton) {
-        SwiftyBeaver.verbose(sender.titleLabel?.text)
+        logger.verbose(sender.titleLabel?.text)
     }
 }
