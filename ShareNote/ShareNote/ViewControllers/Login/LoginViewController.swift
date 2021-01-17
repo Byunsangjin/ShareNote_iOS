@@ -118,6 +118,12 @@ class LoginViewController: UIViewController, View {
         self.reactor = LoginReactor()
         
         setUI()
+        
+        registButton.rx.tap
+            .subscribe ( onNext: {
+                self.present(RegisterViewController(), animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bind(reactor: LoginReactor) {
