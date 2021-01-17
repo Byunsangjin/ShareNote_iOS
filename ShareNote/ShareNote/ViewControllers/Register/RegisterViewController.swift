@@ -114,7 +114,31 @@ class RegisterViewController: UIViewController, View {
     }
     
     func bind(reactor: RegisterReactor) {
+        // Action
+        emailIDTextField.rx.text
+            .map { RegisterReactor.Action.emailIDTextChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
+        emailAddressTextField.rx.text
+            .map { RegisterReactor.Action.emailAddressTextChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.text
+            .map { RegisterReactor.Action.passwordTextChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        confirmPasswordTextField.rx.text
+            .map { RegisterReactor.Action.confirmPasswordTextChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        idTextField.rx.text
+            .map { RegisterReactor.Action.idTextChanged($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
     }
     
     @objc
