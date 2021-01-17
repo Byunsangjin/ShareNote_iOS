@@ -28,7 +28,7 @@ class RegisterViewController: UIViewController, View {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let emailTextField = HoshiTextField().then {
+    let emailIDTextField = HoshiTextField().then {
         $0.placeholder = "이메일"
         $0.borderInactiveColor = .gray
         $0.adjustsFontSizeToFitWidth = true
@@ -40,39 +40,39 @@ class RegisterViewController: UIViewController, View {
         $0.textColor = .black
     }
     
-    let addressTextField = HoshiTextField().then {
+    let emailAddressTextField = HoshiTextField().then {
         $0.placeholder = "이메일주소"
         $0.borderInactiveColor = .gray
         $0.adjustsFontSizeToFitWidth = true
     }
     
     // 비밀번호 확인
-    let pwdRepeatContainerView = UIView().then {
+    let confirmPasswordContainerView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let pwdRepeatTextField = HoshiTextField().then {
+    let confirmPasswordTextField = HoshiTextField().then {
         $0.placeholder = "비밀번호확인"
         $0.borderInactiveColor = .gray
     }
     
-    let pwdRepeatValidLabel = UILabel().then {
+    let confirmPasswordValidLabel = UILabel().then {
         $0.text = "비밀번호가 올바르지 않습니다."
         $0.font = UIFont.systemFont(ofSize: 11)
         $0.textColor = .orange
     }
     
     // 비밀번호
-    let pwdContainerView = UIView().then {
+    let passwordContainerView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let pwdTextField = HoshiTextField().then {
+    let passwordTextField = HoshiTextField().then {
         $0.placeholder = "비밀번호"
         $0.borderInactiveColor = .gray
     }
     
-    let pwdValidLabel = UILabel().then {
+    let passwordValidLabel = UILabel().then {
         $0.text = "비밀번호가 올바르지 않습니다."
         $0.font = UIFont.systemFont(ofSize: 11)
         $0.textColor = .orange
@@ -127,17 +127,17 @@ class RegisterViewController: UIViewController, View {
         view.addSubview(titleLabel)
         
         view.addSubview(emailContainerView)
-        emailContainerView.addSubview(emailTextField)
+        emailContainerView.addSubview(emailIDTextField)
         emailContainerView.addSubview(atLabel)
-        emailContainerView.addSubview(addressTextField)
+        emailContainerView.addSubview(emailAddressTextField)
 
-        view.addSubview(pwdRepeatContainerView)
-        pwdRepeatContainerView.addSubview(pwdRepeatTextField)
-        pwdRepeatContainerView.addSubview(pwdRepeatValidLabel)
+        view.addSubview(confirmPasswordContainerView)
+        confirmPasswordContainerView.addSubview(confirmPasswordTextField)
+        confirmPasswordContainerView.addSubview(confirmPasswordValidLabel)
         
-        view.addSubview(pwdContainerView)
-        pwdContainerView.addSubview(pwdTextField)
-        pwdContainerView.addSubview(pwdValidLabel)
+        view.addSubview(passwordContainerView)
+        passwordContainerView.addSubview(passwordTextField)
+        passwordContainerView.addSubview(passwordValidLabel)
         
         view.addSubview(idContainerView)
         idContainerView.addSubview(idTextField)
@@ -174,14 +174,14 @@ class RegisterViewController: UIViewController, View {
             make.width.height.equalTo(30)
         }
         
-        emailTextField.snp.makeConstraints { make in
+        emailIDTextField.snp.makeConstraints { make in
             make.top.equalTo(emailContainerView.snp.top)
             make.left.equalTo(emailContainerView)
             make.right.equalTo(atLabel.snp.left).offset(-15)
             make.height.equalTo(60)
         }
 
-        addressTextField.snp.makeConstraints { make in
+        emailAddressTextField.snp.makeConstraints { make in
             make.top.equalTo(emailContainerView.snp.top)
             make.left.equalTo(atLabel.snp.right).offset(15)
             make.right.equalTo(emailContainerView.snp.right)
@@ -189,44 +189,44 @@ class RegisterViewController: UIViewController, View {
         }
         
         // 비밀번호 확인
-        pwdRepeatContainerView.snp.makeConstraints { make in
+        confirmPasswordContainerView.snp.makeConstraints { make in
             make.top.equalTo(emailContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
             make.height.equalTo(80)
         }
         
-        pwdRepeatTextField.snp.makeConstraints { make in
-            make.top.equalTo(pwdRepeatContainerView.snp.top)
-            make.left.right.equalTo(pwdRepeatContainerView)
+        confirmPasswordTextField.snp.makeConstraints { make in
+            make.top.equalTo(confirmPasswordContainerView.snp.top)
+            make.left.right.equalTo(confirmPasswordContainerView)
             make.height.equalTo(60)
         }
         
-        pwdRepeatValidLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(pwdRepeatContainerView.snp.bottom)
-            make.left.equalTo(pwdRepeatContainerView).offset(5)
+        confirmPasswordValidLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(confirmPasswordContainerView.snp.bottom)
+            make.left.equalTo(confirmPasswordContainerView).offset(5)
         }
         
         // 비밀번호
-        pwdContainerView.snp.makeConstraints { make in
-            make.top.equalTo(pwdRepeatContainerView.snp.bottom)
+        passwordContainerView.snp.makeConstraints { make in
+            make.top.equalTo(confirmPasswordContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
             make.height.equalTo(80)
         }
 
-        pwdTextField.snp.makeConstraints { make in
-            make.top.equalTo(pwdContainerView.snp.top)
-            make.left.right.equalTo(pwdContainerView)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordContainerView.snp.top)
+            make.left.right.equalTo(passwordContainerView)
             make.height.equalTo(60)
         }
 
-        pwdValidLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(pwdContainerView.snp.bottom)
-            make.left.equalTo(pwdContainerView).offset(5)
+        passwordValidLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(passwordContainerView.snp.bottom)
+            make.left.equalTo(passwordContainerView).offset(5)
         }
 
         // 아이디
         idContainerView.snp.makeConstraints { make in
-            make.top.equalTo(pwdContainerView.snp.bottom)
+            make.top.equalTo(passwordContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
             make.height.equalTo(80)
         }
