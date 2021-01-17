@@ -6,12 +6,13 @@
 //
 
 import PanModal
+import ReactorKit
 import SnapKit
 import TextFieldEffects
 import Then
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, View {
     // MARK: Constants
     let topLabel = UILabel().then {
         $0.text = "회원가입"
@@ -101,11 +102,19 @@ class RegisterViewController: UIViewController {
         $0.addTarget(self, action: #selector(doubleCheckBtnTouched), for: .touchUpInside)
     }
     
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
+        self.reactor = RegisterReactor()
+        
         view.backgroundColor = .white
         
         setUI()
+    }
+    
+    func bind(reactor: RegisterReactor) {
+        
     }
     
     @objc

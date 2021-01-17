@@ -11,6 +11,7 @@
 		601DDC94257C9EEC00DCB968 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */; };
 		601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601DDCEF257CEBEF00DCB968 /* AppKey.swift */; };
 		6024832E25B084C900F446E9 /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024832D25B084C900F446E9 /* LoginReactor.swift */; };
+		602483EA25B3C93400F446E9 /* RegisterReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602483E925B3C93400F446E9 /* RegisterReactor.swift */; };
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
@@ -62,6 +63,7 @@
 		601DDC93257C9EEC00DCB968 /* UserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		601DDCEF257CEBEF00DCB968 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
 		6024832D25B084C900F446E9 /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
+		602483E925B3C93400F446E9 /* RegisterReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReactor.swift; sourceTree = "<group>"; };
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				6024832D25B084C900F446E9 /* LoginReactor.swift */,
+				602483E925B3C93400F446E9 /* RegisterReactor.swift */,
 			);
 			path = Reactor;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602483EA25B3C93400F446E9 /* RegisterReactor.swift in Sources */,
 				6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */,
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
