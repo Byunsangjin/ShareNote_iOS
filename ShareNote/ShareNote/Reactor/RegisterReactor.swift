@@ -15,6 +15,7 @@ class RegisterReactor: Reactor {
         case confirmPasswordTextChanged(String?)
         case emailIDTextChanged(String?)
         case emailAddressTextChanged(String?)
+        case regist
     }
     
     enum Mutation {
@@ -56,6 +57,10 @@ class RegisterReactor: Reactor {
         case .emailAddressTextChanged(let emailAddress):
             guard let emailAddress = emailAddress else { return.empty() }
             return Observable.just(Mutation.setEmailAddress(emailAddress))
+            
+        case .regist:
+            // Regist 로직 구현
+            return.empty()
         }
     }
     
