@@ -134,12 +134,32 @@ class LoginViewController: UIViewController, View {
             .disposed(by: disposeBag)
         
         pwdTextField.rx.text
-            .map { LoginReactor.Action.pwdTextChaged($0) }
+            .map { LoginReactor.Action.passwordTextChaged($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
         loginButton.rx.tap
-            .map { LoginReactor.Action.login }
+            .map { LoginReactor.Action.login(.none) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        appleLoginButton.rx.tap
+            .map { LoginReactor.Action.login(.apple) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        kakaoLoginButton.rx.tap
+            .map { LoginReactor.Action.login(.kakao) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        naverLoginButton.rx.tap
+            .map { LoginReactor.Action.login(.naver) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        googleLoginButton.rx.tap
+            .map { LoginReactor.Action.login(.google) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
