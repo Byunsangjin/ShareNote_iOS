@@ -50,10 +50,10 @@ class LoginReactor: Reactor {
                 
                 if isSuccess {
                     // 로그인 성공
-                    logger.verbose("success = \(member)")
+                    logger.info("success = \(member)")
                 } else {
                     // 로그인 실패
-                    logger.verbose("false = \(member)")
+                    logger.error("false = \(member)")
                 }
             }
             
