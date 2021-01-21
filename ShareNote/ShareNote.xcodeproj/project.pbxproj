@@ -15,6 +15,7 @@
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
+		60966C6025B9BB7B00C8E487 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -67,6 +68,7 @@
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		601DDCD6257CE79000DCB968 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				60966C5E25B9BAE900C8E487 /* MainTabBar */,
 				6094166625A0933300D9DF42 /* Register */,
 				60D3721C259F518E00BBAB36 /* Login */,
 				60ADF4F425792D37001A77C2 /* ViewController.swift */,
@@ -195,6 +198,14 @@
 				60CD8DC525A1C84800C29F0E /* EmailTableViewController.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		60966C5E25B9BAE900C8E487 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */,
+			);
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 		60ADF4E425792D37001A77C2 = {
@@ -589,6 +600,7 @@
 				60CD8FFE25AADB4900C29F0E /* SimplePasswordViewController.swift in Sources */,
 				60C0CCB825866A6A006FF0F9 /* JsonData.swift in Sources */,
 				60D37218259F514A00BBAB36 /* LoginViewController.swift in Sources */,
+				60966C6025B9BB7B00C8E487 /* MainTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
