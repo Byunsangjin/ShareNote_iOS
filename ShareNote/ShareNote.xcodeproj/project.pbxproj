@@ -16,6 +16,11 @@
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
 		60966C6025B9BB7B00C8E487 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */; };
+		60966CA525B9BF1100C8E487 /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CA425B9BF1100C8E487 /* HomeMainViewController.swift */; };
+		60966CAD25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CAC25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift */; };
+		60966CB225B9BFC400C8E487 /* TradingLogMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CB125B9BFC400C8E487 /* TradingLogMainViewController.swift */; };
+		60966CB725B9BFD000C8E487 /* BookmarkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CB625B9BFD000C8E487 /* BookmarkMainViewController.swift */; };
+		60966CBC25B9BFD800C8E487 /* MoreMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CBB25B9BFD800C8E487 /* MoreMainViewController.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -69,6 +74,11 @@
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		60966CA425B9BF1100C8E487 /* HomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
+		60966CAC25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyAnalysisMainViewController.swift; sourceTree = "<group>"; };
+		60966CB125B9BFC400C8E487 /* TradingLogMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingLogMainViewController.swift; sourceTree = "<group>"; };
+		60966CB625B9BFD000C8E487 /* BookmarkMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMainViewController.swift; sourceTree = "<group>"; };
+		60966CBB25B9BFD800C8E487 /* MoreMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMainViewController.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				60966C5E25B9BAE900C8E487 /* MainTabBar */,
+				60966C9F25B9BDEB00C8E487 /* Home */,
+				60966CA025B9BDFD00C8E487 /* CompanyAnalysis */,
+				60966CA125B9BE3E00C8E487 /* TradingLog */,
+				60966CA225B9BE4F00C8E487 /* Bookmark */,
+				60966CA325B9BE5E00C8E487 /* More */,
 				6094166625A0933300D9DF42 /* Register */,
 				60D3721C259F518E00BBAB36 /* Login */,
 				60ADF4F425792D37001A77C2 /* ViewController.swift */,
@@ -206,6 +221,46 @@
 				60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */,
 			);
 			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		60966C9F25B9BDEB00C8E487 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				60966CA425B9BF1100C8E487 /* HomeMainViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		60966CA025B9BDFD00C8E487 /* CompanyAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				60966CAC25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift */,
+			);
+			path = CompanyAnalysis;
+			sourceTree = "<group>";
+		};
+		60966CA125B9BE3E00C8E487 /* TradingLog */ = {
+			isa = PBXGroup;
+			children = (
+				60966CB125B9BFC400C8E487 /* TradingLogMainViewController.swift */,
+			);
+			path = TradingLog;
+			sourceTree = "<group>";
+		};
+		60966CA225B9BE4F00C8E487 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				60966CB625B9BFD000C8E487 /* BookmarkMainViewController.swift */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		60966CA325B9BE5E00C8E487 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				60966CBB25B9BFD800C8E487 /* MoreMainViewController.swift */,
+			);
+			path = More;
 			sourceTree = "<group>";
 		};
 		60ADF4E425792D37001A77C2 = {
@@ -582,7 +637,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				602483EA25B3C93400F446E9 /* RegisterReactor.swift in Sources */,
+				60966CBC25B9BFD800C8E487 /* MoreMainViewController.swift in Sources */,
 				6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */,
+				60966CB725B9BFD000C8E487 /* BookmarkMainViewController.swift in Sources */,
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
 				60BCD5192591805B0025D3F5 /* Tag.swift in Sources */,
@@ -592,8 +649,10 @@
 				60CD8DC625A1C84800C29F0E /* EmailTableViewController.swift in Sources */,
 				60C0D0A7258F93BC006FF0F9 /* Category.swift in Sources */,
 				6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */,
+				60966CAD25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
 				60CD8EA025A1E8E100C29F0E /* EmailTableViewCell.swift in Sources */,
+				60966CA525B9BF1100C8E487 /* HomeMainViewController.swift in Sources */,
 				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
 				60CD906C25AB0DF200C29F0E /* PasswordKeypadView.swift in Sources */,
 				6024832E25B084C900F446E9 /* LoginReactor.swift in Sources */,
@@ -601,6 +660,7 @@
 				60C0CCB825866A6A006FF0F9 /* JsonData.swift in Sources */,
 				60D37218259F514A00BBAB36 /* LoginViewController.swift in Sources */,
 				60966C6025B9BB7B00C8E487 /* MainTabBarViewController.swift in Sources */,
+				60966CB225B9BFC400C8E487 /* TradingLogMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
