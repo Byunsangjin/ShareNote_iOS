@@ -17,7 +17,7 @@ class CompanyAnalysisMainViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.view.backgroundColor = .orange
-        tabBarItem = UITabBarItem(title: "기업분석", image: UIImage(named: "icBarAnalysisSelect"), selectedImage: UIImage(named: "icBarAnalysisSelect"))
+        tabBarItem = UITabBarItem(title: "기업분석", image: UIImage(named: "icBarAnalysis"), selectedImage: UIImage(named: "icBarAnalysisSelect"))
     }
     
     required init?(coder: NSCoder) {

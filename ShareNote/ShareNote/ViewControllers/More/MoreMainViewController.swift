@@ -17,7 +17,7 @@ class MoreMainViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.view.backgroundColor = .blue
-        tabBarItem = UITabBarItem(title: "더보기", image: UIImage(named: "icBarAddSelect"), selectedImage: UIImage(named: "icBarAddSelect"))
+        tabBarItem = UITabBarItem(title: "더보기", image: UIImage(named: "icBarAdd"), selectedImage: UIImage(named: "icBarAddSelect"))
     }
     
     required init?(coder: NSCoder) {

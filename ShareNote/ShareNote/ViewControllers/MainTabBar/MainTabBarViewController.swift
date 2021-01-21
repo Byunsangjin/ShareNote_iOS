@@ -25,6 +25,7 @@ class MainTabBarViewController: UITabBarController {
                             moreMainViewController],
                            animated: false)
         
-        self.tabBar.isTranslucent = false
+        tabBar.isTranslucent = false
+        tabBar.tintColor = .black
     }
 }

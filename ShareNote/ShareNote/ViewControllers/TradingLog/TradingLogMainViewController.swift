@@ -15,9 +15,7 @@ class TradingLogMainViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-
-        self.view.backgroundColor = .yellow
-        tabBarItem = UITabBarItem(title: "매매일지", image: UIImage(named: "icBarWriteSelect"), selectedImage: UIImage(named: "icBarWriteSelect"))
+        tabBarItem = UITabBarItem(title: "매매일지", image: UIImage(named: "icBarWrite"), selectedImage: UIImage(named: "icBarWriteSelect"))
     }
     
     required init?(coder: NSCoder) {

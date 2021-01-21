@@ -17,7 +17,7 @@ class HomeMainViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         view.backgroundColor = .red
-        tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "icBarHomeSelect"), selectedImage: UIImage(named: "icBarHomeSelect"))
+        tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "icBarHome"), selectedImage: UIImage(named: "icBarHomeSelect"))
     }
     
     required init?(coder: NSCoder) {

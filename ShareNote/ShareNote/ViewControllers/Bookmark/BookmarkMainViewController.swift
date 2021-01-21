@@ -17,7 +17,7 @@ class BookmarkMainViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.view.backgroundColor = .green
-        tabBarItem = UITabBarItem(title: "쉐어킵", image: UIImage(named: "icBarSharekeepSelect"), selectedImage: UIImage(named: "icBarSharekeepSelect"))
+        tabBarItem = UITabBarItem(title: "쉐어킵", image: UIImage(named: "icBarSharekeep"), selectedImage: UIImage(named: "icBarSharekeepSelect"))
     }
     
     required init?(coder: NSCoder) {
