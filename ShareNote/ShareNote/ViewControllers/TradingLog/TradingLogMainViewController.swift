@@ -11,19 +11,16 @@ class TradingLogMainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        self.view.backgroundColor = .yellow
+        tabBarItem = UITabBarItem(title: "매매일지", image: UIImage(named: "icBarWriteSelect"), selectedImage: UIImage(named: "icBarWriteSelect"))
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
