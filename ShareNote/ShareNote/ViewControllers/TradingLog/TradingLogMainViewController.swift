@@ -15,6 +15,17 @@ class TradingLogMainViewController: UIViewController {
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
+    let viewHoneyPageButton = UIButton().then {
+        $0.setImage(UIImage(named: "icMyHoneyPage"), for: .normal)
+        $0.setImage(UIImage(named: "icMyHoneyPage"), for: .highlighted)
+    }
+    
+    let editButton = UIButton().then {
+        $0.setImage(UIImage(named: "icEdit"), for: .normal)
+        $0.setImage(UIImage(named: "icEdit"), for: .highlighted)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +45,8 @@ class TradingLogMainViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(titleLabel)
+        view.addSubview(viewHoneyPageButton)
+        view.addSubview(editButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -42,6 +55,16 @@ class TradingLogMainViewController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
+        }
+        
+        viewHoneyPageButton.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(16)
+        }
+        
+        editButton.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel)
+            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-16)
         }
         
         super.updateViewConstraints()
