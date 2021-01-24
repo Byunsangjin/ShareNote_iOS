@@ -6,6 +6,7 @@
 //
 
 import FSCalendar
+import RxSwift
 import Then
 import UIKit
 
@@ -34,7 +35,7 @@ class TradingLogMainViewController: UIViewController {
     
     let yearMonthLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 21)
-        $0.text = "2021.01"
+        $0.text = "Year.Month"
     }
     
     let yearMonthButton = UIButton().then {
@@ -110,8 +111,8 @@ class TradingLogMainViewController: UIViewController {
         calendarView.headerHeight = 0
         calendarView.scope = .month
         
-        logger.verbose(calendarView.currentPage.get(.month, .year, .day).day)
-        logger.verbose(calendarView.today?.get(.year, .month, .day).day)
+        let currentYearMonthString = calendarView.currentPage.getYearMonthString()
+        yearMonthLabel.text = currentYearMonthString
     }
     
     override func updateViewConstraints() {
