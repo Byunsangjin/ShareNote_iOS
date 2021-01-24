@@ -39,15 +39,34 @@ class TradingLogMainViewController: UIViewController {
     
     let yearMonthButton = UIButton().then {
         $0.setImage(UIImage(named: "icArrowDown"), for: .normal)
+        $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
     }
     
     let calendarView = FSCalendar()
+    
+    let foldButton = UIButton().then {
+        $0.setImage(UIImage(named: "icArrowDown"), for: .normal)
+        $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
+    }
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
         initCalendar()
+        
+        foldButton.addTarget(self, action: #selector(test), for: .touchUpInside)
+    }
+    
+    @objc
+    func test() {
+        if calendarView.scope == .month {
+            calendarView.setScope(.week, animated: true)
+        } else {
+            calendarView.setScope(.month, animated: true)
+        }
     }
     
     init() {
@@ -72,6 +91,7 @@ class TradingLogMainViewController: UIViewController {
         yearMonthContainerView.addSubview(yearMonthButton)
         
         view.addSubview(calendarView)
+        view.addSubview(foldButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -138,6 +158,12 @@ class TradingLogMainViewController: UIViewController {
             make.height.equalTo(329)
         }
         
+        foldButton.snp.makeConstraints { make in
+            make.top.equalTo(calendarView.snp.bottom)
+            make.centerX.equalTo(view)
+            make.height.equalTo(20)
+        }
+        
         super.updateViewConstraints()
     }
 }
@@ -152,4 +178,12 @@ extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate
         selectedCell.selectedBackgroundView = UIImageView(image: image)
     }
     
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        let height = calendar.scope == .month ? 329 : 100
+        calendarView.snp.updateConstraints { make in
+            make.height.equalTo(height)
+        }
+        
+        self.view.layoutIfNeeded()
+    }
 }
