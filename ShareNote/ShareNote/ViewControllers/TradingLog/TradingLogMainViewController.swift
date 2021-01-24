@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/01/21.
 //
 
+import FSCalendar
 import Then
 import UIKit
 
@@ -23,13 +24,19 @@ class TradingLogMainViewController: UIViewController {
     let editButton = UIButton().then {
         $0.setImage(UIImage(named: "icEdit"), for: .normal)
         $0.setImage(UIImage(named: "icEdit"), for: .highlighted)
-        
     }
+    
+    let divisionLine = UIView().then {
+        $0.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
+    }
+    
+    let calendarView = FSCalendar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
+        initCalendar()
     }
     
     init() {
@@ -47,8 +54,22 @@ class TradingLogMainViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(viewHoneyPageButton)
         view.addSubview(editButton)
+        view.addSubview(divisionLine)
+        
+        view.addSubview(calendarView)
         
         view.setNeedsUpdateConstraints()
+    }
+    
+    func initCalendar() {
+        calendarView.delegate = self
+        calendarView.dataSource = self
+        
+        calendarView.appearance.selectionColor = .none
+        calendarView.appearance.todayColor = .none
+        
+        calendarView.appearance.titleTodayColor = .black
+        calendarView.appearance.titleSelectionColor = .black
     }
     
     override func updateViewConstraints() {
@@ -67,6 +88,30 @@ class TradingLogMainViewController: UIViewController {
             make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-16)
         }
         
+        divisionLine.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(14.5)
+            make.left.right.equalTo(view)
+            make.height.equalTo(1)
+        }
+        
+        calendarView.snp.makeConstraints { make in
+            make.top.equalTo(divisionLine.snp.bottom)
+            make.left.right.equalTo(view)
+            make.height.equalTo(329)
+        }
+        
         super.updateViewConstraints()
     }
+}
+
+extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        guard let selectedCell = calendar.cell(for: date, at: monthPosition) else {
+            return
+        }
+        
+        let image = UIImage(named: "icCalendarSelect")
+        selectedCell.selectedBackgroundView = UIImageView(image: image)
+    }
+    
 }
