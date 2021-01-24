@@ -85,6 +85,13 @@ class TradingLogMainViewController: UIViewController {
         
         calendarView.appearance.titleTodayColor = .black
         calendarView.appearance.titleSelectionColor = .black
+        
+        calendarView.locale = Locale(identifier: "ko_KR")
+        calendarView.headerHeight = 0
+        calendarView.scope = .month
+        
+        logger.verbose(calendarView.currentPage.get(.month, .year, .day).day)
+        logger.verbose(calendarView.today?.get(.year, .month, .day).day)
     }
     
     override func updateViewConstraints() {
