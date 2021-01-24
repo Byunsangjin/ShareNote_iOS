@@ -45,6 +45,9 @@ target 'ShareNote' do
   #PanModal
   pod 'PanModal'
 
+  #FSCalender
+  pod 'FSCalendar'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing
