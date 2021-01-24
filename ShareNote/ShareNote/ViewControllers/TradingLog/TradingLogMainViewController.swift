@@ -30,6 +30,17 @@ class TradingLogMainViewController: UIViewController {
         $0.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
     }
     
+    let yearMonthContainerView = UIView()
+    
+    let yearMonthLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 21)
+        $0.text = "2021.01"
+    }
+    
+    let yearMonthButton = UIButton().then {
+        $0.setImage(UIImage(named: "icArrowDown"), for: .normal)
+    }
+    
     let calendarView = FSCalendar()
     
     override func viewDidLoad() {
@@ -55,6 +66,10 @@ class TradingLogMainViewController: UIViewController {
         view.addSubview(viewHoneyPageButton)
         view.addSubview(editButton)
         view.addSubview(divisionLine)
+        
+        view.addSubview(yearMonthContainerView)
+        yearMonthContainerView.addSubview(yearMonthLabel)
+        yearMonthContainerView.addSubview(yearMonthButton)
         
         view.addSubview(calendarView)
         
@@ -94,8 +109,24 @@ class TradingLogMainViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        calendarView.snp.makeConstraints { make in
+        yearMonthContainerView.snp.makeConstraints { make in
             make.top.equalTo(divisionLine.snp.bottom)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(52)
+        }
+        
+        yearMonthLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(yearMonthContainerView)
+            make.left.equalTo(yearMonthContainerView.snp.left).offset(20)
+        }
+        
+        yearMonthButton.snp.makeConstraints { make in
+            make.centerY.equalTo(yearMonthContainerView)
+            make.left.equalTo(yearMonthLabel.snp.right).offset(6)
+        }
+        
+        calendarView.snp.makeConstraints { make in
+            make.top.equalTo(yearMonthContainerView.snp.bottom)
             make.left.right.equalTo(view)
             make.height.equalTo(329)
         }
