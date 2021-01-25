@@ -58,11 +58,22 @@ class TradingLogMainViewController: UIViewController {
         setUI()
         initCalendar()
         
-        foldButton.addTarget(self, action: #selector(test), for: .touchUpInside)
+        yearMonthButton.rx.tap
+            .bind { [weak self] in
+                self?.yearMonthBtnTouched()
+            }.disposed(by: disposeBag)
+        
+        foldButton.rx.tap
+            .bind { [weak self] in
+                self?.foldBtnTouched()
+            }.disposed(by: disposeBag)
     }
     
-    @objc
-    func test() {
+    func yearMonthBtnTouched() {
+        
+    }
+    
+    func foldBtnTouched() {
         if calendarView.scope == .month {
             calendarView.setScope(.week, animated: true)
         } else {
