@@ -50,6 +50,8 @@ class TradingLogMainViewController: UIViewController {
         $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
     }
     
+    let datePicker = MonthYearPickerView()
+    
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -104,6 +106,8 @@ class TradingLogMainViewController: UIViewController {
         
         view.addSubview(calendarView)
         view.addSubview(foldButton)
+        
+        view.addSubview(datePicker)
         
         view.setNeedsUpdateConstraints()
     }
@@ -174,6 +178,11 @@ class TradingLogMainViewController: UIViewController {
             make.top.equalTo(calendarView.snp.bottom)
             make.centerX.equalTo(view)
             make.height.equalTo(20)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(view)
+            make.height.equalTo(300)
         }
         
         super.updateViewConstraints()
