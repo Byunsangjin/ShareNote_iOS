@@ -50,7 +50,7 @@ class TradingLogMainViewController: UIViewController {
         $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
     }
     
-    let datePicker = MonthYearPickerView()
+    let datePicker = YearMonthPickerView()
     
     var disposeBag = DisposeBag()
     
