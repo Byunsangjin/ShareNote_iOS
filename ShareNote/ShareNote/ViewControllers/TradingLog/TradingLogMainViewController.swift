@@ -50,7 +50,14 @@ class TradingLogMainViewController: UIViewController {
         $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
     }
     
+    let datePickerContainerView = UIView()
+    
     let datePicker = YearMonthPickerView()
+    
+    let datePickerSelectButton = UIButton().then {
+        $0.setTitle("완료", for: .normal)
+        $0.setTitleColor(.red, for: .normal)
+    }
     
     var disposeBag = DisposeBag()
     
@@ -107,7 +114,9 @@ class TradingLogMainViewController: UIViewController {
         view.addSubview(calendarView)
         view.addSubview(foldButton)
         
-        view.addSubview(datePicker)
+        view.addSubview(datePickerContainerView)
+        datePickerContainerView.addSubview(datePicker)
+        datePickerContainerView.addSubview(datePickerSelectButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -180,9 +189,19 @@ class TradingLogMainViewController: UIViewController {
             make.height.equalTo(20)
         }
         
-        datePicker.snp.makeConstraints { make in
+        datePickerContainerView.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(view)
             make.height.equalTo(300)
+        }
+        
+        datePickerSelectButton.snp.makeConstraints { make in
+            make.top.right.equalTo(datePickerContainerView)
+            make.height.equalTo(20)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(datePickerSelectButton.snp.bottom)
+            make.left.right.bottom.equalTo(datePickerContainerView)
         }
         
         super.updateViewConstraints()
