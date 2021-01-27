@@ -102,6 +102,31 @@ class TradingLogMainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func initCalendar() {
+        calendarView.delegate = self
+        calendarView.dataSource = self
+        
+        calendarView.appearance.selectionColor = .none
+        calendarView.appearance.todayColor = .none
+        
+        calendarView.appearance.titleTodayColor = .black
+        calendarView.appearance.titleSelectionColor = .black
+        
+        calendarView.locale = Locale(identifier: "ko_KR")
+        calendarView.headerHeight = 0
+        calendarView.scope = .month
+        
+        let currentYearMonthString = calendarView.currentPage.getYearMonthString()
+        yearMonthLabel.text = currentYearMonthString
+    }
+    
+    func initTableView() {
+        tradingLogTableView.dataSource = self
+        tradingLogTableView.delegate = self
+        
+        tradingLogTableView.register(TradingLogTableViewCell.self, forCellReuseIdentifier: "TradingLogTableViewCell")
+    }
+    
     func setUI() {
         view.backgroundColor = .white
         
@@ -124,29 +149,6 @@ class TradingLogMainViewController: UIViewController {
         view.addSubview(tradingLogTableView)
         
         view.setNeedsUpdateConstraints()
-    }
-    
-    func initCalendar() {
-        calendarView.delegate = self
-        calendarView.dataSource = self
-        
-        calendarView.appearance.selectionColor = .none
-        calendarView.appearance.todayColor = .none
-        
-        calendarView.appearance.titleTodayColor = .black
-        calendarView.appearance.titleSelectionColor = .black
-        
-        calendarView.locale = Locale(identifier: "ko_KR")
-        calendarView.headerHeight = 0
-        calendarView.scope = .month
-        
-        let currentYearMonthString = calendarView.currentPage.getYearMonthString()
-        yearMonthLabel.text = currentYearMonthString
-    }
-    
-    func initTableView() {
-        tradingLogTableView.dataSource = self
-        tradingLogTableView.delegate = self
     }
     
     override func updateViewConstraints() {
