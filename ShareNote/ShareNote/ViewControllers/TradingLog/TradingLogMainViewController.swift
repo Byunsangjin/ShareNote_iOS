@@ -59,6 +59,8 @@ class TradingLogMainViewController: UIViewController {
         $0.setTitleColor(.red, for: .normal)
     }
     
+    let tradingLogTableView = UITableView()
+    
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -66,6 +68,7 @@ class TradingLogMainViewController: UIViewController {
         
         setUI()
         initCalendar()
+        initTableView()
         
         yearMonthButton.rx.tap
             .bind { [weak self] in
@@ -118,6 +121,8 @@ class TradingLogMainViewController: UIViewController {
         datePickerContainerView.addSubview(datePicker)
         datePickerContainerView.addSubview(datePickerSelectButton)
         
+        view.addSubview(tradingLogTableView)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -137,6 +142,11 @@ class TradingLogMainViewController: UIViewController {
         
         let currentYearMonthString = calendarView.currentPage.getYearMonthString()
         yearMonthLabel.text = currentYearMonthString
+    }
+    
+    func initTableView() {
+        tradingLogTableView.dataSource = self
+        tradingLogTableView.delegate = self
     }
     
     override func updateViewConstraints() {
@@ -204,6 +214,11 @@ class TradingLogMainViewController: UIViewController {
             make.left.right.bottom.equalTo(datePickerContainerView)
         }
         
+        tradingLogTableView.snp.makeConstraints { make in
+            make.top.equalTo(calendarView.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         super.updateViewConstraints()
     }
 }
@@ -226,4 +241,20 @@ extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate
         
         self.view.layoutIfNeeded()
     }
+}
+
+extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        
+        cell.textLabel?.text = "\(indexPath.row)"
+        
+        return cell
+    }
+    
+    
 }
