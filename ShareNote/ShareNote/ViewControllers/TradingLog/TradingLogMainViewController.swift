@@ -251,9 +251,9 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        
-        cell.textLabel?.text = "\(indexPath.row)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TradingLogTableViewCell") as? TradingLogTableViewCell else {
+            return UITableViewCell()
+        }
         
         return cell
     }
