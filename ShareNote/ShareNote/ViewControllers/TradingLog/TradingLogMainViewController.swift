@@ -126,7 +126,7 @@ class TradingLogMainViewController: UIViewController {
         tradingLogTableView.dataSource = self
         tradingLogTableView.delegate = self
         
-        tradingLogTableView.register(TradingLogTableViewCell.self, forCellReuseIdentifier: "TradingLogTableViewCell")
+        tradingLogTableView.register(TradingNoneTableViewCell.self, forCellReuseIdentifier: "TradingLogTableViewCell")
     }
     
     func setUI() {
@@ -253,7 +253,7 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TradingLogTableViewCell") as? TradingLogTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TradingLogTableViewCell") as? TradingNoneTableViewCell else {
             return UITableViewCell()
         }
         
