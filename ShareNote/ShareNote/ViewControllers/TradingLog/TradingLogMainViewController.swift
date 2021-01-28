@@ -130,6 +130,7 @@ class TradingLogMainViewController: UIViewController {
         tradingLogTableView.dataSource = self
         tradingLogTableView.delegate = self
         
+        tradingLogTableView.register(TradingLogTableViewCell.self, forCellReuseIdentifier: "TradingLogTableViewCell")
         tradingLogTableView.register(TradingNoneTableViewCell.self, forCellReuseIdentifier: "TradingNoneTableViewCell")
     }
     
@@ -253,18 +254,39 @@ extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate
 
 extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TradingNoneTableViewCell") as? TradingNoneTableViewCell else {
-            return UITableViewCell()
+        var cell = UITableViewCell()
+        switch indexPath.row {
+        case 0:
+            if let _cell = tableView.dequeueReusableCell(withIdentifier: "TradingNoneTableViewCell") as? TradingNoneTableViewCell {
+                cell = _cell
+            }
+        case 1:
+            if let _cell = tableView.dequeueReusableCell(withIdentifier: "TradingLogTableViewCell") as? TradingLogTableViewCell {
+                cell = _cell
+            }
+        default:
+            break
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        CGFloat(113)
+        var height: CGFloat = 0
+        
+        switch indexPath.row {
+        case 0:
+            height = 123
+        case 1:
+            height = 92
+        default:
+            break
+        }
+        
+        return height
     }
 }
