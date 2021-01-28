@@ -14,7 +14,7 @@ class TradingNoneTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 7
         $0.layer.borderColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1).cgColor
         $0.layer.borderWidth = 1
-        $0.layer.applySketchShadow(color: .black, alpha: 0.05, x: 0, y: 1, blur: 2, spread: 0)
+        $0.layer.applySketchShadow()
     }
     
     let iconImageView = UIImageView().then {
@@ -81,28 +81,4 @@ class TradingNoneTableViewCell: UITableViewCell {
         
         super.updateConstraints()
     }
-}
-
-extension CALayer {
-  func applySketchShadow(
-    color: UIColor = .black,
-    alpha: Float = 0.5,
-    x: CGFloat = 0,
-    y: CGFloat = 2,
-    blur: CGFloat = 4,
-    spread: CGFloat = 0)
-  {
-    masksToBounds = false
-    shadowColor = color.cgColor
-    shadowOpacity = alpha
-    shadowOffset = CGSize(width: x, height: y)
-    shadowRadius = blur / 2.0
-    if spread == 0 {
-      shadowPath = nil
-    } else {
-      let dx = -spread
-      let rect = bounds.insetBy(dx: dx, dy: dx)
-      shadowPath = UIBezierPath(rect: rect).cgPath
-    }
-  }
 }
