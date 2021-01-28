@@ -10,6 +10,7 @@ import UIKit
 
 class TradingNoneTableViewCell: UITableViewCell {
     
+    // MARK: Constants
     let containerView = UIView().then {
         $0.layer.cornerRadius = 7
         $0.layer.borderColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1).cgColor
@@ -36,6 +37,7 @@ class TradingNoneTableViewCell: UITableViewCell {
         $0.titleLabel?.textColor = UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1)
     }
     
+    // MARK: Methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUI()
@@ -60,8 +62,6 @@ class TradingNoneTableViewCell: UITableViewCell {
         
         contentView.setNeedsUpdateConstraints()
     }
-    
-    
     
     override func updateConstraints() {
         containerView.snp.makeConstraints { make in

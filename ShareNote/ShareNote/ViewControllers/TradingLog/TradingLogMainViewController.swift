@@ -12,6 +12,7 @@ import UIKit
 
 class TradingLogMainViewController: UIViewController {
     
+    // MARK: Constants
     let titleLabel = UILabel().then {
         $0.text = "매매일지"
         $0.font = UIFont.boldSystemFont(ofSize: 18)
@@ -63,8 +64,10 @@ class TradingLogMainViewController: UIViewController {
         $0.separatorStyle = .none
     }
     
+    // MARK: Variables
     var disposeBag = DisposeBag()
     
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
