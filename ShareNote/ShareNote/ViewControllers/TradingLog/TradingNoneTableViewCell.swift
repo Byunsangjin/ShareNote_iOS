@@ -11,12 +11,7 @@ import UIKit
 class TradingNoneTableViewCell: UITableViewCell {
     
     // MARK: Constants
-    let containerView = UIView().then {
-        $0.layer.cornerRadius = 7
-        $0.layer.borderColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1).cgColor
-        $0.layer.borderWidth = 1
-        $0.layer.applySketchShadow()
-    }
+    let containerView = UIView().createCellContainerView()
     
     let iconImageView = UIImageView().then {
         $0.image = UIImage(named: "icNote")
@@ -52,6 +47,7 @@ class TradingNoneTableViewCell: UITableViewCell {
     }
     
     func setUI() {
+        backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 250/255)
         selectionStyle = .none
         
         contentView.addSubview(containerView)

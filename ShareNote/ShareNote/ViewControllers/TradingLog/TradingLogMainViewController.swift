@@ -62,6 +62,7 @@ class TradingLogMainViewController: UIViewController {
     
     let tradingLogTableView = UITableView().then {
         $0.separatorStyle = .none
+        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
     }
     
     // MARK: Variables
