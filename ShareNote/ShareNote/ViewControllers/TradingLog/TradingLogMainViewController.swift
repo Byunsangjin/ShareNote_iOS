@@ -59,7 +59,9 @@ class TradingLogMainViewController: UIViewController {
         $0.setTitleColor(.red, for: .normal)
     }
     
-    let tradingLogTableView = UITableView()
+    let tradingLogTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
     
     var disposeBag = DisposeBag()
     
@@ -217,7 +219,7 @@ class TradingLogMainViewController: UIViewController {
         }
         
         tradingLogTableView.snp.makeConstraints { make in
-            make.top.equalTo(calendarView.snp.bottom)
+            make.top.equalTo(foldButton.snp.bottom)
             make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
@@ -236,7 +238,7 @@ extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        let height = calendar.scope == .month ? 329 : 100
+        let height = calendar.scope == .month ? 329 : 80
         calendarView.snp.updateConstraints { make in
             make.height.equalTo(height)
         }
@@ -247,7 +249,7 @@ extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate
 
 extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -258,5 +260,7 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        CGFloat(113)
+    }
 }
