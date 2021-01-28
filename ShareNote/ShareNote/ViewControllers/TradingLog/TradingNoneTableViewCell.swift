@@ -46,6 +46,11 @@ class TradingNoneTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
+    }
+    
     func setUI() {
         backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 250/255)
         selectionStyle = .none
