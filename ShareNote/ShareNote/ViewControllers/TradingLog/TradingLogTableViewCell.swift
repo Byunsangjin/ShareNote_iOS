@@ -16,6 +16,7 @@ class TradingLogTableViewCell: UITableViewCell {
         $0.text = "기아차 10퍼센트 달성하자asdfk;lsdakfsadffdsfkjsdflksjdkl"
         $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
         $0.font = UIFont.systemFont(ofSize: 14)
+        $0.numberOfLines = 0
     }
     
     let createTimeLabel = UILabel().then {
@@ -67,7 +68,7 @@ class TradingLogTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(containerView).offset(16)
             make.left.equalTo(containerView).offset(15)
-            make.right.greaterThanOrEqualTo(createTimeLabel.snp.left).offset(27)
+            make.right.equalTo(createTimeLabel.snp.left).offset(-27)
         }
         
         createTimeLabel.snp.makeConstraints { make in
