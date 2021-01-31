@@ -31,6 +31,20 @@ class WriteTradingLogViewController: UIViewController {
         $0.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
     }
     
+    let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let scrollContentView = UIView().then {
+        $0.backgroundColor = .green
+    }
+    
+    let contentStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     let titleContainerView = UIView()
     
     let titleLabel = UILabel().then {
@@ -66,6 +80,10 @@ class WriteTradingLogViewController: UIViewController {
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
+    let testView = UIView().then {
+        $0.backgroundColor = .blue
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,16 +102,22 @@ class WriteTradingLogViewController: UIViewController {
         view.addSubview(saveButton)
         view.addSubview(divisionLine)
         
-        view.addSubview(titleContainerView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
+        scrollContentView.addSubview(contentStackView)
+        
+        contentStackView.addArrangedSubview(titleContainerView)
         titleContainerView.addSubview(titleLabel)
         titleContainerView.addSubview(titleTextField)
-        
-        view.addSubview(tagContainerView)
+
+        contentStackView.addArrangedSubview(tagContainerView)
         tagContainerView.addSubview(tagLabel)
-        
-        view.addSubview(dateContainerView)
+
+        contentStackView.addArrangedSubview(dateContainerView)
         dateContainerView.addSubview(dateLabel)
         dateContainerView.addSubview(dateContentLabel)
+        
+        contentStackView.addArrangedSubview(testView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -120,9 +144,21 @@ class WriteTradingLogViewController: UIViewController {
             make.height.equalTo(1)
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(divisionLine.snp.bottom)
+            make.bottom.left.width.equalTo(view)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.bottom.equalTo(scrollView)
+            make.width.equalTo(view)
+        }
+        
+        contentStackView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(scrollContentView)
+        }
+            
         titleContainerView.snp.makeConstraints { make in
-            make.top.equalTo(divisionLine.snp.bottom).offset(34)
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(50)
         }
         
@@ -130,39 +166,39 @@ class WriteTradingLogViewController: UIViewController {
             make.centerY.equalTo(titleContainerView)
             make.left.equalTo(titleContainerView).offset(20)
         }
-        
+
         titleTextField.snp.makeConstraints { make in
             make.centerY.equalTo(titleContainerView)
             make.left.equalTo(titleLabel.snp.right).offset(60)
             make.right.lessThanOrEqualTo(titleContainerView).offset(-20)
         }
-        
+
         tagContainerView.snp.makeConstraints { make in
-            make.top.equalTo(titleContainerView.snp.bottom)
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(50)
         }
-        
+
         tagLabel.snp.makeConstraints { make in
             make.centerY.equalTo(tagContainerView)
             make.left.equalTo(tagContainerView).offset(20)
         }
-        
+
         dateContainerView.snp.makeConstraints { make in
-            make.top.equalTo(tagContainerView.snp.bottom)
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(50)
         }
-        
+
         dateLabel.snp.makeConstraints { make in
             make.centerY.equalTo(dateContainerView)
             make.left.equalTo(dateContainerView).offset(20)
         }
-        
+
         dateContentLabel.snp.makeConstraints { make in
             make.centerY.equalTo(dateContainerView)
             make.left.equalTo(dateLabel.snp.right).offset(60)
             make.right.lessThanOrEqualTo(dateContainerView).offset(-20)
+        }
+        
+        testView.snp.makeConstraints { make in
+            make.height.equalTo(1500)
         }
         
         super.updateViewConstraints()
