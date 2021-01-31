@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icCellEdit.png",
+      "filename" : "icCellEidt.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icCellEdit@2x.png",
+      "filename" : "icCellEidt@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icCellEdit@3x.png",
+      "filename" : "icCellEidt@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
