@@ -18,4 +18,17 @@ extension UIView {
         
         return self
     }
+    
+    enum ViewSide: String {
+        case Left = "Left", Right = "Right", Top = "Top", Bottom = "Bottom"
+    }
+    
+    func addBottomLine() {
+        let border = CALayer()
+        border.borderColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1).cgColor
+        border.frame = CGRect(x: 20, y: frame.height - 1, width: frame.width - 40, height: 1)
+        border.borderWidth = 1
+        
+        layer.addSublayer(border)
+    }
 }
