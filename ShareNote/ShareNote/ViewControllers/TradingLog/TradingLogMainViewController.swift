@@ -289,4 +289,31 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
         
         return height
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title:  nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // Call edit action
+            // Reset state
+            success(true)
+        })
+        editAction.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        editAction.image = UIImage(named: "icCellEdit")
+        
+        let deleteAction = UIContextualAction(style: .normal, title:  nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // Call edit action
+            // Reset state
+            success(true)
+        })
+        deleteAction.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        deleteAction.image = UIImage(named: "icMainTrash")
+        
+        let configuration = UISwipeActionsConfiguration(actions:[deleteAction, editAction])
+        configuration.performsFirstActionWithFullSwipe = false
+
+        return configuration
+    }
 }
