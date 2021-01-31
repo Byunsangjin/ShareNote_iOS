@@ -131,7 +131,6 @@ class TradingLogTableViewCell: UITableViewCell {
         
         tagStackView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(scrollContentView)
-            make.width.equalTo(scrollContentView)
         }
         
         super.updateConstraints()
