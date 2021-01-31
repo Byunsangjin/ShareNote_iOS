@@ -34,8 +34,10 @@ class TradingLogTableViewCell: UITableViewCell {
     
     let tagStackView = UIStackView().then {
         $0.axis = .horizontal
+        $0.alignment = .fill
         $0.distribution = .fillProportionally
         $0.spacing = 4
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     // MARK: Methods
@@ -89,7 +91,7 @@ class TradingLogTableViewCell: UITableViewCell {
         containerView.addSubview(titleLabel)
         containerView.addSubview(createTimeLabel)
         
-        containerView.addSubview(tagScrollView)        
+        containerView.addSubview(tagScrollView)
         tagScrollView.addSubview(scrollContentView)
         scrollContentView.addSubview(tagStackView)
         
@@ -128,6 +130,7 @@ class TradingLogTableViewCell: UITableViewCell {
         
         tagStackView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(scrollContentView)
+            make.width.equalTo(scrollContentView)
         }
         
         super.updateConstraints()
