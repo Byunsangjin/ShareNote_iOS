@@ -85,6 +85,12 @@ class TradingLogMainViewController: UIViewController {
             .bind { [weak self] in
                 self?.foldBtnTouched()
             }.disposed(by: disposeBag)
+        
+        editButton.rx.tap
+            .bind { [weak self] in
+                let writeTradingLogVC = WriteTradingLogViewController()
+                self?.present(writeTradingLogVC, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     func yearMonthBtnTouched() {
