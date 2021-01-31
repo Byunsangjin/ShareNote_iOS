@@ -45,6 +45,27 @@ class WriteTradingLogViewController: UIViewController {
         $0.placeholder = "제목을 입력해주세요"
     }
     
+    let tagContainerView = UIView()
+    
+    let tagLabel = UILabel().then {
+        $0.text = "태그"
+        $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+        $0.font = UIFont.systemFont(ofSize: 14)
+    }
+    
+    let dateContainerView = UIView()
+    
+    let dateLabel = UILabel().then {
+        $0.text = "날짜"
+        $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+        $0.font = UIFont.systemFont(ofSize: 14)
+    }
+    
+    let dateContentLabel = UILabel().then {
+        $0.text = "2021년 1월 7일 오후 7:42"
+        $0.font = UIFont.systemFont(ofSize: 14)
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +87,13 @@ class WriteTradingLogViewController: UIViewController {
         view.addSubview(titleContainerView)
         titleContainerView.addSubview(titleLabel)
         titleContainerView.addSubview(titleTextField)
+        
+        view.addSubview(tagContainerView)
+        tagContainerView.addSubview(tagLabel)
+        
+        view.addSubview(dateContainerView)
+        dateContainerView.addSubview(dateLabel)
+        dateContainerView.addSubview(dateContentLabel)
         
         view.setNeedsUpdateConstraints()
     }
@@ -109,10 +137,40 @@ class WriteTradingLogViewController: UIViewController {
             make.right.lessThanOrEqualTo(titleContainerView).offset(-20)
         }
         
+        tagContainerView.snp.makeConstraints { make in
+            make.top.equalTo(titleContainerView.snp.bottom)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(50)
+        }
+        
+        tagLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(tagContainerView)
+            make.left.equalTo(tagContainerView).offset(20)
+        }
+        
+        dateContainerView.snp.makeConstraints { make in
+            make.top.equalTo(tagContainerView.snp.bottom)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(50)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(dateContainerView)
+            make.left.equalTo(dateContainerView).offset(20)
+        }
+        
+        dateContentLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(dateContainerView)
+            make.left.equalTo(dateLabel.snp.right).offset(60)
+            make.right.lessThanOrEqualTo(dateContainerView).offset(-20)
+        }
+        
         super.updateViewConstraints()
     }
     
     func setBottomLine() {
         titleContainerView.addBottomLine()
+        tagContainerView.addBottomLine()
+        dateContainerView.addBottomLine()
     }
 }
