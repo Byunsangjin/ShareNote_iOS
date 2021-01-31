@@ -64,6 +64,7 @@ class TradingLogTableViewCell: UITableViewCell {
     }
     
     func setUI() {
+        backgroundColor = .clear
         selectionStyle = .none
         
         for _ in 0..<10 {
