@@ -80,8 +80,19 @@ class WriteTradingLogViewController: UIViewController {
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
-    let testView = UIView().then {
-        $0.backgroundColor = .blue
+    let tradingShareContainerView = UIView().then {
+        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+    }
+    
+    let tradingShareTitleLabel = UILabel().then {
+        $0.text = "거래주식"
+        $0.font = UIFont.systemFont(ofSize: 16)
+    }
+    
+    let tradingShareAddButton = UIButton().then {
+        let buttonimage = UIImage(named: "icAdd")
+        $0.setImage(buttonimage, for: .normal)
+        $0.setImage(buttonimage, for: .highlighted)
     }
     
     // MARK: Methods
@@ -117,7 +128,9 @@ class WriteTradingLogViewController: UIViewController {
         dateContainerView.addSubview(dateLabel)
         dateContainerView.addSubview(dateContentLabel)
         
-        contentStackView.addArrangedSubview(testView)
+        contentStackView.addArrangedSubview(tradingShareContainerView)
+        dateContainerView.addSubview(tradingShareTitleLabel)
+        dateContainerView.addSubview(tradingShareAddButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -197,8 +210,19 @@ class WriteTradingLogViewController: UIViewController {
             make.right.lessThanOrEqualTo(dateContainerView).offset(-20)
         }
         
-        testView.snp.makeConstraints { make in
-            make.height.equalTo(1500)
+        tradingShareContainerView.snp.makeConstraints { make in
+            make.height.equalTo(340)
+        }
+        
+        tradingShareTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(tradingShareContainerView).offset(36)
+            make.left.equalTo(tradingShareContainerView).offset(20)
+        }
+        
+        tradingShareAddButton.snp.makeConstraints { make in
+            make.top.equalTo(tradingShareContainerView).offset(25)
+            make.right.equalTo(tradingShareContainerView).offset(-10)
+            make.width.height.equalTo(40)
         }
         
         super.updateViewConstraints()
