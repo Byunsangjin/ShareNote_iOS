@@ -44,6 +44,7 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.0)
     - PromisesObjC (~> 1.2)
   - FSCalendar (2.8.2)
+  - FSPagerView (0.8.3)
   - GoogleAppMeasurement (7.2.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
@@ -136,6 +137,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Auth
   - FSCalendar
+  - FSPagerView
   - GoogleSignIn
   - naveridlogin-sdk-ios
   - PanModal
@@ -160,6 +162,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
     - FSCalendar
+    - FSPagerView
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
@@ -198,6 +201,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 2d508e12e77e9691ca67d1669b91ee80f0985b29
   FirebaseInstallations: 9ab3a9a6522e687f59ff9bcfd92949ac85073f3c
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleAppMeasurement: 57a0df93dc2feb5176b1bac06012dbd725191ba5
   GoogleDataTransport: e4085e6762f36a6141738f46b0153473ce57fb18
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
@@ -226,6 +230,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 8df4c5835c447b522916914ff6f4affde797387f
+PODFILE CHECKSUM: 7535c4b65ac5d9793e69215476ed06549b9b5fc8
 
 COCOAPODS: 1.8.4
