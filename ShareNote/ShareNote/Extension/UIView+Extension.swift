@@ -19,6 +19,17 @@ extension UIView {
         return self
     }
     
+    func createTradingShareCellView() -> UIView {
+        backgroundColor = .white
+        
+        layer.cornerRadius = 7
+        layer.borderColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1).cgColor
+        layer.borderWidth = 1
+        layer.applySketchShadow(color: .black, alpha: 0.05, x: 0, y: 1, blur: 10, spread: 0)
+        
+        return self
+    }
+    
     enum ViewSide: String {
         case Left = "Left", Right = "Right", Top = "Top", Bottom = "Bottom"
     }
