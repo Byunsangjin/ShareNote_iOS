@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FSPagerView
 
 class WriteTradingLogViewController: UIViewController {
 
@@ -95,10 +96,19 @@ class WriteTradingLogViewController: UIViewController {
         $0.setImage(buttonimage, for: .highlighted)
     }
     
+    let tradingSharePageView = FSPagerView().then {
+        $0.transformer = .init(type: .linear)
+        
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        tradingSharePageView.delegate = self
+        tradingSharePageView.dataSource = self
+        tradingSharePageView.register(TradingSharePagerViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -129,8 +139,9 @@ class WriteTradingLogViewController: UIViewController {
         dateContainerView.addSubview(dateContentLabel)
         
         contentStackView.addArrangedSubview(tradingShareContainerView)
-        dateContainerView.addSubview(tradingShareTitleLabel)
-        dateContainerView.addSubview(tradingShareAddButton)
+        tradingShareContainerView.addSubview(tradingShareTitleLabel)
+        tradingShareContainerView.addSubview(tradingShareAddButton)
+        tradingShareContainerView.addSubview(tradingSharePageView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -225,6 +236,12 @@ class WriteTradingLogViewController: UIViewController {
             make.width.height.equalTo(40)
         }
         
+        tradingSharePageView.snp.makeConstraints { make in
+            make.top.equalTo(tradingShareTitleLabel.snp.bottom).offset(20)
+            make.left.right.equalTo(tradingShareContainerView)
+            make.height.equalTo(230)
+        }
+        
         super.updateViewConstraints()
     }
     
@@ -232,5 +249,17 @@ class WriteTradingLogViewController: UIViewController {
         titleContainerView.addBottomLine()
         tagContainerView.addBottomLine()
         dateContainerView.addBottomLine()
+    }
+}
+
+extension WriteTradingLogViewController: FSPagerViewDataSource, FSPagerViewDelegate {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return 5
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        
+        return cell
     }
 }
