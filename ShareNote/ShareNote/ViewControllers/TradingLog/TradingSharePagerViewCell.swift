@@ -49,3 +49,16 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         super.updateConstraints()
     }
 }
+
+class NameLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        font = UIFont.systemFont(ofSize: 14)
+        textColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
