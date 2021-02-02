@@ -12,8 +12,32 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     
     let containerView = UIView().createTradingShareCellView()
     
-    let shareNameLabel = UILabel().then {
+    let nameLabelStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .fillEqually
+        $0.spacing = 15
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let shareNameLabel = NameLabel().then {
         $0.text = "주식명"
+    }
+    
+    let categoryNameLabel = NameLabel().then {
+        $0.text = "분류"
+    }
+    
+    let tradingDateNameLabel = NameLabel().then {
+        $0.text = "거래시간"
+    }
+    
+    let purchasePriceNameLabel = NameLabel().then {
+        $0.text = "매수가"
+    }
+    
+    let appraisedPriceNameLabel = NameLabel().then {
+        $0.text = "평가금액"
     }
     
     override init(frame: CGRect) {
@@ -28,7 +52,13 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     
     func setUI() {
         contentView.addSubview(containerView)
-        containerView.addSubview(shareNameLabel)
+        
+        containerView.addSubview(nameLabelStackView)
+        nameLabelStackView.addArrangedSubview(shareNameLabel)
+        nameLabelStackView.addArrangedSubview(categoryNameLabel)
+        nameLabelStackView.addArrangedSubview(tradingDateNameLabel)
+        nameLabelStackView.addArrangedSubview(purchasePriceNameLabel)
+        nameLabelStackView.addArrangedSubview(appraisedPriceNameLabel)
         
         contentView.setNeedsUpdateConstraints()
     }
@@ -41,9 +71,11 @@ class TradingSharePagerViewCell: FSPagerViewCell {
             make.width.equalTo(contentView.snp.width).offset(-40)
         }
         
-        shareNameLabel.snp.makeConstraints { make in
+        nameLabelStackView.snp.makeConstraints { make in
             make.top.equalTo(containerView).offset(16)
             make.left.equalTo(containerView).offset(20)
+            make.bottom.equalTo(containerView).offset(-25)
+            make.width.equalTo(60)
         }
         
         super.updateConstraints()
