@@ -11,6 +11,7 @@ import FSPagerView
 class WriteTradingLogViewController: UIViewController {
 
     // MARK: Constants
+    // NavigationBar
     let navigationTitleLabel = UILabel().then {
         $0.text = "매매일지 작성"
         $0.font = UIFont.boldSystemFont(ofSize: 16)
@@ -46,6 +47,7 @@ class WriteTradingLogViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    // Title, Tag, Date ContainerView
     let titleContainerView = UIView()
     
     let titleLabel = UILabel().then {
@@ -81,13 +83,14 @@ class WriteTradingLogViewController: UIViewController {
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
+    // TradingShare ContainerView
     let tradingShareContainerView = UIView().then {
         $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
     }
     
     let tradingShareTitleLabel = UILabel().then {
         $0.text = "거래주식"
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     let tradingShareAddButton = UIButton().then {
@@ -105,6 +108,22 @@ class WriteTradingLogViewController: UIViewController {
         $0.setFillColor(UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), for: .selected)
         $0.itemSpacing = 10
         $0.interitemSpacing = 7
+    }
+    
+    // Aticle ContainerView
+    let articleContainerView = UIView().then {
+        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+    }
+    
+    let articleShareTitleLabel = UILabel().then {
+        $0.text = "관련기사"
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
+    }
+    
+    let articleAddButton = UIButton().then {
+        let buttonimage = UIImage(named: "icAdd")
+        $0.setImage(buttonimage, for: .normal)
+        $0.setImage(buttonimage, for: .highlighted)
     }
     
     // MARK: Methods
@@ -149,6 +168,10 @@ class WriteTradingLogViewController: UIViewController {
         tradingShareContainerView.addSubview(tradingShareAddButton)
         tradingShareContainerView.addSubview(tradingSharePageView)
         tradingShareContainerView.addSubview(pageControl)
+        
+        contentStackView.addArrangedSubview(articleContainerView)
+        articleContainerView.addSubview(articleShareTitleLabel)
+        articleContainerView.addSubview(articleAddButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -250,8 +273,24 @@ class WriteTradingLogViewController: UIViewController {
         }
         
         pageControl.snp.makeConstraints { make in
-            make.left.right.bottom.equalTo(tradingShareContainerView)
-            make.height.equalTo(7)
+            make.left.right.equalTo(tradingShareContainerView)
+            make.bottom.equalTo(tradingShareContainerView).offset(-2)
+            make.height.equalTo(10)
+        }
+        
+        articleContainerView.snp.makeConstraints { make in
+            make.height.equalTo(340)
+        }
+        
+        articleShareTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(articleContainerView).offset(36)
+            make.left.equalTo(articleContainerView).offset(20)
+        }
+        
+        articleAddButton.snp.makeConstraints { make in
+            make.top.equalTo(articleContainerView).offset(25)
+            make.right.equalTo(articleContainerView).offset(-10)
+            make.width.height.equalTo(40)
         }
         
         super.updateViewConstraints()
