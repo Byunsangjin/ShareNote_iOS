@@ -96,10 +96,7 @@ class WriteTradingLogViewController: UIViewController {
         $0.setImage(buttonimage, for: .highlighted)
     }
     
-    let tradingSharePageView = FSPagerView().then {
-        $0.transformer = .init(type: .linear)
-        
-    }
+    let tradingSharePageView = FSPagerView()
     
     // MARK: Methods
     override func viewDidLoad() {
