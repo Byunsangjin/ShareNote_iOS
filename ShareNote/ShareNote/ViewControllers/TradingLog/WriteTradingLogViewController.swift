@@ -98,6 +98,15 @@ class WriteTradingLogViewController: UIViewController {
     
     let tradingSharePageView = FSPagerView()
     
+    let pageControl = FSPageControl().then {
+        $0.numberOfPages = 5
+        $0.currentPage = 0
+        $0.setStrokeColor(UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 189/255), for: .normal)
+        $0.setFillColor(UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), for: .selected)
+        $0.itemSpacing = 10
+        $0.interitemSpacing = 7
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +148,7 @@ class WriteTradingLogViewController: UIViewController {
         tradingShareContainerView.addSubview(tradingShareTitleLabel)
         tradingShareContainerView.addSubview(tradingShareAddButton)
         tradingShareContainerView.addSubview(tradingSharePageView)
+        tradingShareContainerView.addSubview(pageControl)
         
         view.setNeedsUpdateConstraints()
     }
@@ -239,6 +249,11 @@ class WriteTradingLogViewController: UIViewController {
             make.height.equalTo(230)
         }
         
+        pageControl.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(tradingShareContainerView)
+            make.height.equalTo(7)
+        }
+        
         super.updateViewConstraints()
     }
     
@@ -258,5 +273,9 @@ extension WriteTradingLogViewController: FSPagerViewDataSource, FSPagerViewDeleg
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         
         return cell
+    }
+    
+    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+        pageControl.currentPage = targetIndex
     }
 }
