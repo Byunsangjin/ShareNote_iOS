@@ -7,6 +7,7 @@
 
 import UIKit
 import FSPagerView
+import RxSwift
 
 class WriteTradingLogViewController: UIViewController {
 
@@ -137,6 +138,9 @@ class WriteTradingLogViewController: UIViewController {
         $0.interitemSpacing = 7
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // Memo ContainerView
     let memoContainerView = UIView().then {
         $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
@@ -161,6 +165,11 @@ class WriteTradingLogViewController: UIViewController {
         articlePageView.delegate = self
         articlePageView.dataSource = self
         articlePageView.register(ArticlePagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        
+        tradingShareAddButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.tradingShareAddBtnTouched()
+            }).disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -359,6 +368,11 @@ class WriteTradingLogViewController: UIViewController {
         titleContainerView.addBottomLine()
         tagContainerView.addBottomLine()
         dateContainerView.addBottomLine()
+    }
+    
+    func tradingShareAddBtnTouched() {
+        let addTradingShareVC = AddTradingShareViewController()
+        present(addTradingShareVC, animated: true, completion: nil)
     }
 }
 
