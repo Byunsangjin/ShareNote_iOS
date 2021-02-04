@@ -217,12 +217,12 @@ class WriteTradingLogViewController: UIViewController {
         
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(divisionLine.snp.bottom)
-            make.bottom.left.width.equalTo(view)
+            make.bottom.left.width.equalTo(view.safeAreaLayoutGuide)
         }
         
         scrollContentView.snp.makeConstraints { make in
             make.top.left.bottom.equalTo(scrollView)
-            make.width.equalTo(view)
+            make.width.equalTo(view.safeAreaLayoutGuide)
         }
         
         contentStackView.snp.makeConstraints { make in
