@@ -188,6 +188,7 @@ class WriteTradingLogViewController: UIViewController {
         articleContainerView.addSubview(articleShareTitleLabel)
         articleContainerView.addSubview(articleAddButton)
         articleContainerView.addSubview(articlePageView)
+        articleContainerView.addSubview(articlePageControl)
         
         view.setNeedsUpdateConstraints()
     }
@@ -313,6 +314,12 @@ class WriteTradingLogViewController: UIViewController {
             make.top.equalTo(articleShareTitleLabel.snp.bottom).offset(20)
             make.left.right.equalTo(articleContainerView)
             make.height.equalTo(230)
+        }
+        
+        articlePageControl.snp.makeConstraints { make in
+            make.left.right.equalTo(articleContainerView)
+            make.bottom.equalTo(articleContainerView).offset(-2)
+            make.height.equalTo(10)
         }
         
         super.updateViewConstraints()
