@@ -129,7 +129,7 @@ class WriteTradingLogViewController: UIViewController {
     let articlePageView = FSPagerView()
     
     let articlePageControl = FSPageControl().then {
-        $0.numberOfPages = 5
+        $0.numberOfPages = 3
         $0.currentPage = 0
         $0.setStrokeColor(UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 189/255), for: .normal)
         $0.setFillColor(UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), for: .selected)
@@ -334,7 +334,11 @@ class WriteTradingLogViewController: UIViewController {
 
 extension WriteTradingLogViewController: FSPagerViewDataSource, FSPagerViewDelegate {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return 5
+        if pagerView === tradingSharePageView {
+            return 5
+        } else {
+            return 3
+        }
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
@@ -344,6 +348,10 @@ extension WriteTradingLogViewController: FSPagerViewDataSource, FSPagerViewDeleg
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
-        tradingSharePageControl.currentPage = targetIndex
+        if pagerView === tradingSharePageView {
+            tradingSharePageControl.currentPage = targetIndex
+        } else {
+            articlePageControl.currentPage = targetIndex
+        }
     }
 }
