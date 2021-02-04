@@ -101,7 +101,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let tradingSharePageView = FSPagerView()
     
-    let pageControl = FSPageControl().then {
+    let tradingSharePageControl = FSPageControl().then {
         $0.numberOfPages = 5
         $0.currentPage = 0
         $0.setStrokeColor(UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 189/255), for: .normal)
@@ -126,6 +126,17 @@ class WriteTradingLogViewController: UIViewController {
         $0.setImage(buttonimage, for: .highlighted)
     }
     
+    let articlePageView = FSPagerView()
+    
+    let articlePageControl = FSPageControl().then {
+        $0.numberOfPages = 5
+        $0.currentPage = 0
+        $0.setStrokeColor(UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 189/255), for: .normal)
+        $0.setFillColor(UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), for: .selected)
+        $0.itemSpacing = 10
+        $0.interitemSpacing = 7
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,6 +145,10 @@ class WriteTradingLogViewController: UIViewController {
         tradingSharePageView.delegate = self
         tradingSharePageView.dataSource = self
         tradingSharePageView.register(TradingSharePagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        
+        articlePageView.delegate = self
+        articlePageView.dataSource = self
+        articlePageView.register(ArticlePagerViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -167,11 +182,12 @@ class WriteTradingLogViewController: UIViewController {
         tradingShareContainerView.addSubview(tradingShareTitleLabel)
         tradingShareContainerView.addSubview(tradingShareAddButton)
         tradingShareContainerView.addSubview(tradingSharePageView)
-        tradingShareContainerView.addSubview(pageControl)
+        tradingShareContainerView.addSubview(tradingSharePageControl)
         
         contentStackView.addArrangedSubview(articleContainerView)
         articleContainerView.addSubview(articleShareTitleLabel)
         articleContainerView.addSubview(articleAddButton)
+        articleContainerView.addSubview(articlePageView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -272,7 +288,7 @@ class WriteTradingLogViewController: UIViewController {
             make.height.equalTo(230)
         }
         
-        pageControl.snp.makeConstraints { make in
+        tradingSharePageControl.snp.makeConstraints { make in
             make.left.right.equalTo(tradingShareContainerView)
             make.bottom.equalTo(tradingShareContainerView).offset(-2)
             make.height.equalTo(10)
@@ -291,6 +307,12 @@ class WriteTradingLogViewController: UIViewController {
             make.top.equalTo(articleContainerView).offset(25)
             make.right.equalTo(articleContainerView).offset(-10)
             make.width.height.equalTo(40)
+        }
+        
+        articlePageView.snp.makeConstraints { make in
+            make.top.equalTo(articleShareTitleLabel.snp.bottom).offset(20)
+            make.left.right.equalTo(articleContainerView)
+            make.height.equalTo(230)
         }
         
         super.updateViewConstraints()
@@ -315,6 +337,6 @@ extension WriteTradingLogViewController: FSPagerViewDataSource, FSPagerViewDeleg
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
-        pageControl.currentPage = targetIndex
+        tradingSharePageControl.currentPage = targetIndex
     }
 }
