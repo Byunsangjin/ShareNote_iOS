@@ -137,6 +137,18 @@ class WriteTradingLogViewController: UIViewController {
         $0.interitemSpacing = 7
     }
     
+    // Memo ContainerView
+    let memoContainerView = UIView().then {
+        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+    }
+    
+    let memoTitleLabel = UILabel().then {
+        $0.text = "메모"
+        $0.font = UIFont.boldSystemFont(ofSize: 16)
+    }
+    
+    let memoTextView = UITextView()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,6 +201,10 @@ class WriteTradingLogViewController: UIViewController {
         articleContainerView.addSubview(articleAddButton)
         articleContainerView.addSubview(articlePageView)
         articleContainerView.addSubview(articlePageControl)
+        
+        contentStackView.addArrangedSubview(memoContainerView)
+        memoContainerView.addSubview(memoTitleLabel)
+        memoContainerView.addSubview(memoTextView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -320,6 +336,20 @@ class WriteTradingLogViewController: UIViewController {
             make.left.right.equalTo(articleContainerView)
             make.bottom.equalTo(articleContainerView).offset(-2)
             make.height.equalTo(10)
+        }
+        
+        memoContainerView.snp.makeConstraints { make in
+            make.height.equalTo(340)
+        }
+        
+        memoTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(memoContainerView).offset(36)
+            make.left.equalTo(memoContainerView).offset(20)
+        }
+        
+        memoTextView.snp.makeConstraints { make in
+            make.top.equalTo(memoTitleLabel.snp.bottom).offset(15)
+            make.left.right.bottom.equalTo(memoContainerView)
         }
         
         super.updateViewConstraints()
