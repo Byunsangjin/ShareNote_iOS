@@ -20,23 +20,23 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let shareNameLabel = NameLabel().then {
+    private let shareNameLabel = NameLabel().then {
         $0.text = "주식명"
     }
     
-    let categoryNameLabel = NameLabel().then {
+    private let categoryNameLabel = NameLabel().then {
         $0.text = "분류"
     }
     
-    let tradingDateNameLabel = NameLabel().then {
+    private let tradingDateNameLabel = NameLabel().then {
         $0.text = "거래시간"
     }
     
-    let purchasePriceNameLabel = NameLabel().then {
+    private let purchasePriceNameLabel = NameLabel().then {
         $0.text = "매수가"
     }
     
-    let appraisedPriceNameLabel = NameLabel().then {
+    private let appraisedPriceNameLabel = NameLabel().then {
         $0.text = "평가금액"
     }
     
@@ -85,7 +85,7 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         setUI()
         self.contentView.layer.shadowRadius = 0
     }
-        
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -151,7 +151,7 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     }
 }
 
-class NameLabel: UILabel {
+private class NameLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
