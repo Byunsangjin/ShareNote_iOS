@@ -53,6 +53,30 @@ class AddTradingShareViewController: UIViewController {
     // Category Container
     let categoryContainerView = UIView()
     
+    let categoryNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "분류"
+    }
+    
+    let buyButton = UIButton().then {
+        $0.setTitle("매수", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+    }
+    
+    let sellButton = UIButton().then {
+        $0.setTitle("매도", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+    }
+    
+    let dividendButton = UIButton().then {
+        $0.setTitle("배당", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+    }
+    
+    let noDealButton = UIButton().then {
+        $0.setTitle("미거래", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+    }
+    
     // Trading Date Container
     let tradingContainerView = UIView()
     
@@ -93,6 +117,10 @@ class AddTradingShareViewController: UIViewController {
         
         contentStackView.addArrangedSubview(categoryContainerView)
         categoryContainerView.addSubview(categoryNameLabel)
+        categoryContainerView.addSubview(buyButton)
+        categoryContainerView.addSubview(sellButton)
+        categoryContainerView.addSubview(dividendButton)
+        categoryContainerView.addSubview(noDealButton)
         
         contentStackView.addArrangedSubview(tradingContainerView)
         
@@ -138,6 +166,35 @@ class AddTradingShareViewController: UIViewController {
             make.left.equalTo(shareTitleContainerView).offset(106)
             make.right.equalTo(shareTitleContainerView).offset(-22)
             make.centerY.equalTo(shareTitleContainerView)
+        }
+ 
+        categoryNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(categoryContainerView).offset(20)
+            make.centerY.equalTo(categoryContainerView)
+        }
+        
+        buyButton.snp.makeConstraints { make in
+            make.left.equalTo(shareTitleContainerView).offset(106)
+            make.centerY.equalTo(categoryContainerView)
+            make.width.equalTo(50)
+            make.height.equalTo(26)
+        }
+        
+        sellButton.snp.makeConstraints { make in
+            make.left.equalTo(buyButton.snp.right).offset(5)
+            make.centerY.width.height.equalTo(buyButton)
+            
+        }
+        
+        dividendButton.snp.makeConstraints { make in
+            make.left.equalTo(sellButton.snp.right).offset(5)
+            make.centerY.width.height.equalTo(buyButton)
+        }
+        
+        noDealButton.snp.makeConstraints { make in
+            make.left.equalTo(dividendButton.snp.right).offset(5)
+            make.centerY.width.equalTo(buyButton)
+            make.height.equalTo(26)
         }
         
         super.updateViewConstraints()
