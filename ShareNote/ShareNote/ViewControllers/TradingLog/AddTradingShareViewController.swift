@@ -9,6 +9,9 @@ import UIKit
 
 class AddTradingShareViewController: UIViewController {
 
+    static let nameLabelFont = UIFont.systemFont(ofSize: 14)
+    static let nameLabelTextColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+    
     // MARK: Constants
     let titleLabel = UILabel().then {
         $0.text = "거래주식"
@@ -32,8 +35,32 @@ class AddTradingShareViewController: UIViewController {
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
+        $0.distribution = .fillEqually
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    // Share Title Container
+    let shareTitleContainerView = UIView()
+    
+    let shareTitleNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "주식명"
+    }
+    
+    let shareSearchTextField = UITextField().then {
+        $0.placeholder = "종목코드/명 검색"
+    }
+    
+    // Category Container
+    let categoryContainerView = UIView()
+    
+    // Trading Date Container
+    let tradingContainerView = UIView()
+    
+    // Purchase Price Container
+    let purchasePriceContainerView = UIView()
+    
+    // Appraised Price Container
+    let appraisedPriceContainerView = UIView()
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -59,6 +86,19 @@ class AddTradingShareViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(scrollContentView)
         scrollContentView.addSubview(contentStackView)
+        
+        contentStackView.addArrangedSubview(shareTitleContainerView)
+        shareTitleContainerView.addSubview(shareTitleNameLabel)
+        shareTitleContainerView.addSubview(shareSearchTextField)
+        
+        contentStackView.addArrangedSubview(categoryContainerView)
+        categoryContainerView.addSubview(categoryNameLabel)
+        
+        contentStackView.addArrangedSubview(tradingContainerView)
+        
+        contentStackView.addArrangedSubview(purchasePriceContainerView)
+        
+        contentStackView.addArrangedSubview(appraisedPriceContainerView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -87,6 +127,17 @@ class AddTradingShareViewController: UIViewController {
         
         contentStackView.snp.makeConstraints { make in
             make.height.equalTo(250)
+        }
+        
+        shareTitleNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(shareTitleContainerView).offset(20)
+            make.centerY.equalTo(shareTitleContainerView)
+        }
+        
+        shareSearchTextField.snp.makeConstraints { make in
+            make.left.equalTo(shareTitleContainerView).offset(106)
+            make.right.equalTo(shareTitleContainerView).offset(-22)
+            make.centerY.equalTo(shareTitleContainerView)
         }
         
         super.updateViewConstraints()
