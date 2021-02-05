@@ -20,23 +20,26 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private let shareNameLabel = NameLabel().then {
+    static let labelFont = UIFont.systemFont(ofSize: 14)
+    static let labelTextColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1)
+    
+    let shareNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "주식명"
     }
     
-    private let categoryNameLabel = NameLabel().then {
+    let categoryNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "분류"
     }
     
-    private let tradingDateNameLabel = NameLabel().then {
+    let tradingDateNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "거래시간"
     }
     
-    private let purchasePriceNameLabel = NameLabel().then {
+    let purchasePriceNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "매수가"
     }
     
-    private let appraisedPriceNameLabel = NameLabel().then {
+    let appraisedPriceNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "평가금액"
     }
     
@@ -148,18 +151,5 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         }
         
         super.updateConstraints()
-    }
-}
-
-private class NameLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        font = UIFont.systemFont(ofSize: 14)
-        textColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
