@@ -21,6 +21,7 @@
 		6064CB7D25C8443C00E75D59 /* TradingSharePagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CB7C25C8443C00E75D59 /* TradingSharePagerViewCell.swift */; };
 		6064CB8225CC394100E75D59 /* ArticlePagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CB8125CC394100E75D59 /* ArticlePagerViewCell.swift */; };
 		6064CB8725CC4BD300E75D59 /* AddTradingShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CB8625CC4BD300E75D59 /* AddTradingShareViewController.swift */; };
+		6064CB9725CD848900E75D59 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CB9625CD848900E75D59 /* UILabel+Extension.swift */; };
 		6081403425BD2EC7008E6CAF /* Spoqa Han Sans Neo Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6081402F25BD2EC7008E6CAF /* Spoqa Han Sans Neo Light.otf */; };
 		6081403525BD2EC7008E6CAF /* Spoqa Han Sans Neo Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6081403025BD2EC7008E6CAF /* Spoqa Han Sans Neo Medium.otf */; };
 		6081403625BD2EC7008E6CAF /* Spoqa Han Sans Neo Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6081403125BD2EC7008E6CAF /* Spoqa Han Sans Neo Bold.otf */; };
@@ -94,6 +95,7 @@
 		6064CB7C25C8443C00E75D59 /* TradingSharePagerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingSharePagerViewCell.swift; sourceTree = "<group>"; };
 		6064CB8125CC394100E75D59 /* ArticlePagerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePagerViewCell.swift; sourceTree = "<group>"; };
 		6064CB8625CC4BD300E75D59 /* AddTradingShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTradingShareViewController.swift; sourceTree = "<group>"; };
+		6064CB9625CD848900E75D59 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		6081402F25BD2EC7008E6CAF /* Spoqa Han Sans Neo Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Light.otf"; sourceTree = "<group>"; };
 		6081403025BD2EC7008E6CAF /* Spoqa Han Sans Neo Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Medium.otf"; sourceTree = "<group>"; };
 		6081403125BD2EC7008E6CAF /* Spoqa Han Sans Neo Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Neo Bold.otf"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				6081409125BD52CA008E6CAF /* Date+Extension.swift */,
 				6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */,
 				6064CAA525C300E200E75D59 /* UIView+Extension.swift */,
+				6064CB9625CD848900E75D59 /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -718,6 +721,7 @@
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
 				6064CB8725CC4BD300E75D59 /* AddTradingShareViewController.swift in Sources */,
 				6064CA9425C1058000E75D59 /* TradingNoneTableViewCell.swift in Sources */,
+				6064CB9725CD848900E75D59 /* UILabel+Extension.swift in Sources */,
 				60BCD5192591805B0025D3F5 /* Tag.swift in Sources */,
 				6064CAA125C2FCB500E75D59 /* TradingLogTableViewCell.swift in Sources */,
 				60C0CD492587B6EB006FF0F9 /* NetworkHelper.swift in Sources */,
