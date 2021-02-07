@@ -72,14 +72,12 @@ class AddTradingShareViewController: UIViewController {
         $0.setTitle("미거래", for: .normal)
     }
     
-    // Buy Category Container
+    // Buy Category StackView
     let buyCategoryContainerStackView = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .fillEqually
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    // Trading Date Container
     let tradingDateContainerView = UIView()
     
     let tradingDateNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
@@ -97,7 +95,6 @@ class AddTradingShareViewController: UIViewController {
         $0.setImage(UIImage(named: "icChange"), for: .highlighted)
     }
     
-    // Purchase Price Container
     let purchasePriceContainerView = UIView()
     
     let purchasePriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
@@ -110,7 +107,6 @@ class AddTradingShareViewController: UIViewController {
         $0.label.text = "주"
     }
     
-    // Appraised Price Container
     let appraisedPriceContainerView = UIView()
     
     let appraisedPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
@@ -121,6 +117,62 @@ class AddTradingShareViewController: UIViewController {
         $0.label.text = "원"
     }
     
+    // Dividend StackView
+    let dividendStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+    }
+     
+    let dividendCycleContainerView = UIView()
+    
+    let dividendCycleNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "배당주기"
+    }
+    
+    let dividendCycleTextFieldView = TextFieldView().then {
+        $0.label.text = "회/연"
+    }
+    
+    let presentPriceContainerView = UIView()
+    
+    let presentPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "현재가"
+    }
+    
+    let presentPriceTextFieldView = TextFieldView().then {
+        $0.label.text = "원"
+    }
+    
+    let dividendsPerShareContainerView = UIView()
+    
+    let dividendsPerShareNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "주당 배당금"
+    }
+    
+    let dividendsPerSharePriceTextField = TextFieldView().then {
+        $0.label.text = "원"
+    }
+    
+    let dividendsPerShareAmountTextField = TextFieldView().then {
+        $0.label.text = "주"
+    }
+    
+    let totalDividentPriceContainerView = UIView()
+    
+    let totalDividentPriceTextField = TextFieldView().then {
+        $0.label.text = "원"
+    }
+    
+    let dividendRateContainerView = UIView()
+    
+    let dividendRateNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "배당 수익률"
+    }
+    
+    let dividendRateTextField = TextFieldView().then {
+        $0.label.text = "%"
+    }
+
     // Save Button
     let saveButton = UIButton().then {
         $0.setTitle("저장", for: .normal)
@@ -177,6 +229,9 @@ class AddTradingShareViewController: UIViewController {
         categoryContainerView.addSubview(noDealButton)
         
         addBuyCategoryView()
+        addDividendView()
+        
+        buyCategoryContainerStackView.isHidden = true
         
         view.addSubview(saveButton)
         
@@ -310,6 +365,72 @@ class AddTradingShareViewController: UIViewController {
             make.centerY.equalTo(appraisedPriceContainerView)
             make.height.equalTo(30)
         }
+        
+        dividendStackView.snp.makeConstraints { make in
+            make.height.equalTo(250)
+        }
+        
+        dividendCycleNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(dividendCycleContainerView).offset(20)
+            make.centerY.equalTo(dividendCycleContainerView)
+        }
+        
+        dividendCycleTextFieldView.snp.makeConstraints { make in
+            make.left.equalTo(dividendCycleContainerView).offset(106)
+            make.right.equalTo(dividendCycleContainerView).offset(-20)
+            make.centerY.equalTo(dividendCycleContainerView)
+            make.height.equalTo(30)
+        }
+        
+        presentPriceNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(presentPriceContainerView).offset(20)
+            make.centerY.equalTo(presentPriceContainerView)
+        }
+        
+        presentPriceTextFieldView.snp.makeConstraints { make in
+            make.left.equalTo(presentPriceContainerView).offset(106)
+            make.right.equalTo(presentPriceContainerView).offset(-20)
+            make.centerY.equalTo(presentPriceContainerView)
+            make.height.equalTo(30)
+        }
+        
+        dividendsPerShareNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(dividendsPerShareContainerView).offset(20)
+            make.centerY.equalTo(dividendsPerShareContainerView)
+        }
+        
+        dividendsPerSharePriceTextField.snp.makeConstraints { make in
+            make.left.equalTo(dividendsPerShareContainerView).offset(106)
+            make.right.equalTo(dividendsPerShareContainerView).offset(-113)
+            make.centerY.equalTo(dividendsPerShareContainerView)
+            make.height.equalTo(30)
+        }
+        
+        dividendsPerShareAmountTextField.snp.makeConstraints { make in
+            make.left.equalTo(dividendsPerSharePriceTextField.snp.right).offset(10)
+            make.right.equalTo(dividendsPerShareContainerView).offset(-20)
+            make.centerY.equalTo(dividendsPerSharePriceTextField)
+            make.height.equalTo(30)
+        }
+        
+        totalDividentPriceTextField.snp.makeConstraints { make in
+            make.left.equalTo(totalDividentPriceContainerView).offset(106)
+            make.right.equalTo(totalDividentPriceContainerView).offset(-20)
+            make.centerY.equalTo(totalDividentPriceContainerView)
+            make.height.equalTo(30)
+        }
+        
+        dividendRateNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(dividendRateContainerView).offset(20)
+            make.centerY.equalTo(dividendRateContainerView)
+        }
+        
+        dividendRateTextField.snp.makeConstraints { make in
+            make.left.equalTo(dividendRateContainerView).offset(106)
+            make.right.equalTo(dividendRateContainerView).offset(-20)
+            make.centerY.equalTo(dividendRateContainerView)
+            make.height.equalTo(30)
+        }
 
         saveButton.snp.makeConstraints { make in
             make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -337,6 +458,30 @@ class AddTradingShareViewController: UIViewController {
         buyCategoryContainerStackView.addArrangedSubview(appraisedPriceContainerView)
         appraisedPriceContainerView.addSubview(appraisedPriceNameLabel)
         appraisedPriceContainerView.addSubview(appraisedPriceTextFieldView)
+    }
+    
+    func addDividendView() {
+        contentStackView.addArrangedSubview(dividendStackView)
+        
+        dividendStackView.addArrangedSubview(dividendCycleContainerView)
+        dividendCycleContainerView.addSubview(dividendCycleNameLabel)
+        dividendCycleContainerView.addSubview(dividendCycleTextFieldView)
+        
+        dividendStackView.addArrangedSubview(presentPriceContainerView)
+        presentPriceContainerView.addSubview(presentPriceNameLabel)
+        presentPriceContainerView.addSubview(presentPriceTextFieldView)
+        
+        dividendStackView.addArrangedSubview(dividendsPerShareContainerView)
+        dividendsPerShareContainerView.addSubview(dividendsPerShareNameLabel)
+        dividendsPerShareContainerView.addSubview(dividendsPerSharePriceTextField)
+        dividendsPerShareContainerView.addSubview(dividendsPerShareAmountTextField)
+        
+        dividendStackView.addArrangedSubview(totalDividentPriceContainerView)
+        totalDividentPriceContainerView.addSubview(totalDividentPriceTextField)
+        
+        dividendStackView.addArrangedSubview(dividendRateContainerView)
+        dividendRateContainerView.addSubview(dividendRateNameLabel)
+        dividendRateContainerView.addSubview(dividendRateTextField)
     }
 }
 
@@ -374,6 +519,7 @@ class TextFieldView: UIView {
     
     var label = UILabel().then {
         $0.textColor = UIColor(red: 97/255, green: 97/255, blue: 97/255, alpha: 1)
+        $0.font = UIFont.systemFont(ofSize: 14)
     }
     
     override init(frame: CGRect) {
