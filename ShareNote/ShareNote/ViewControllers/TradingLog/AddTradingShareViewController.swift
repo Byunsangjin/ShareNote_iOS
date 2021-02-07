@@ -29,14 +29,12 @@ class AddTradingShareViewController: UIViewController {
         $0.showsHorizontalScrollIndicator = false
     }
     
-    let scrollContentView = UIView().then {
-        $0.backgroundColor = .green
-    }
+    let scrollContentView = UIView()
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
-        $0.distribution = .fillEqually
-        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.alignment = .fill
+        $0.distribution = .fill
     }
     
     // Share Title Container
@@ -74,11 +72,45 @@ class AddTradingShareViewController: UIViewController {
         $0.setTitle("미거래", for: .normal)
     }
     
+    // Buy Category Container
+    let buyCategoryContainerStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     // Trading Date Container
-    let tradingContainerView = UIView()
+    let tradingDateContainerView = UIView()
+    
+    let tradingDateNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "거래시간"
+    }
+    
+    let tradingDateContentLabel = UILabel().then {
+        $0.text = "2021년 1월 7일 오후 7:43"
+        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+    }
+    
+    let tradingDateChangeButton = UIButton().then {
+        $0.setImage(UIImage(named: "icChange"), for: .normal)
+        $0.setImage(UIImage(named: "icChange"), for: .highlighted)
+    }
     
     // Purchase Price Container
     let purchasePriceContainerView = UIView()
+    
+    let purchasePriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "매수가"
+    }
+    
+    let purchasePriceTextFieldView = textFieldView().then {
+        $0.label.text = "원"
+    }
+    
+    let purchaseQuantityTextFieldView = textFieldView().then {
+        $0.label.text = "주"
+    }
     
     // Appraised Price Container
     let appraisedPriceContainerView = UIView()
@@ -121,11 +153,19 @@ class AddTradingShareViewController: UIViewController {
         categoryContainerView.addSubview(dividendButton)
         categoryContainerView.addSubview(noDealButton)
         
-        contentStackView.addArrangedSubview(tradingContainerView)
+        contentStackView.addArrangedSubview(buyCategoryContainerStackView)
         
-        contentStackView.addArrangedSubview(purchasePriceContainerView)
+        buyCategoryContainerStackView.addArrangedSubview(tradingDateContainerView)
+        tradingDateContainerView.addSubview(tradingDateNameLabel)
+        tradingDateContainerView.addSubview(tradingDateContentLabel)
+        tradingDateContainerView.addSubview(tradingDateChangeButton)
         
-        contentStackView.addArrangedSubview(appraisedPriceContainerView)
+        buyCategoryContainerStackView.addArrangedSubview(purchasePriceContainerView)
+        purchasePriceContainerView.addSubview(purchasePriceNameLabel)
+        purchasePriceContainerView.addSubview(purchasePriceTextFieldView)
+        purchasePriceContainerView.addSubview(purchaseQuantityTextFieldView)
+        
+        buyCategoryContainerStackView.addArrangedSubview(appraisedPriceContainerView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -153,8 +193,11 @@ class AddTradingShareViewController: UIViewController {
         }
         
         contentStackView.snp.makeConstraints { make in            
-            make.top.left.right.equalTo(scrollContentView)
-            make.height.equalTo(250)
+            make.top.left.right.bottom.equalTo(scrollContentView)
+        }
+        
+        shareTitleContainerView.snp.makeConstraints { make in
+            make.height.equalTo(50)
         }
         
         shareTitleNameLabel.snp.makeConstraints { make in
@@ -166,6 +209,11 @@ class AddTradingShareViewController: UIViewController {
             make.left.equalTo(shareTitleContainerView).offset(106)
             make.right.equalTo(shareTitleContainerView).offset(-22)
             make.centerY.equalTo(shareTitleContainerView)
+            make.height.equalTo(22)
+        }
+        
+        categoryContainerView.snp.makeConstraints { make in
+            make.height.equalTo(50)
         }
  
         categoryNameLabel.snp.makeConstraints { make in
@@ -197,6 +245,46 @@ class AddTradingShareViewController: UIViewController {
             make.height.equalTo(26)
         }
         
+        buyCategoryContainerStackView.snp.makeConstraints { make in
+            make.height.equalTo(150)
+        }
+        
+        tradingDateNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(tradingDateContainerView).offset(20)
+            make.centerY.equalTo(tradingDateContainerView)
+        }
+        
+        tradingDateContentLabel.snp.makeConstraints { make in
+            make.left.equalTo(tradingDateContainerView).offset(106)
+            make.right.equalTo(tradingDateChangeButton).offset(10)
+            make.centerY.equalTo(tradingDateContainerView)
+        }
+        
+        tradingDateChangeButton.snp.makeConstraints { make in
+            make.right.equalTo(tradingDateContainerView).offset(-15)
+            make.centerY.equalTo(tradingDateContainerView)
+            make.width.height.equalTo(30)
+        }
+        
+        purchasePriceNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(purchasePriceContainerView).offset(20)
+            make.centerY.equalTo(purchasePriceContainerView)
+        }
+        
+        purchasePriceTextFieldView.snp.makeConstraints { make in
+            make.left.equalTo(purchasePriceContainerView).offset(106)
+            make.right.equalTo(purchasePriceContainerView).offset(-113)
+            make.centerY.equalTo(purchasePriceContainerView)
+            make.height.equalTo(30)
+        }
+
+        purchaseQuantityTextFieldView.snp.makeConstraints { make in
+            make.left.equalTo(purchasePriceTextFieldView.snp.right).offset(10)
+            make.right.equalTo(purchasePriceContainerView).offset(-20)
+            make.centerY.equalTo(purchasePriceContainerView)
+            make.height.equalTo(30)
+        }
+            
         super.updateViewConstraints()
     }
 }
@@ -224,5 +312,48 @@ class CategoryButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class textFieldView: UIView {
+    let textField = UITextField().then {
+        $0.textAlignment = .right
+        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+    }
+    
+    var label = UILabel().then {
+        $0.textColor = UIColor(red: 97/255, green: 97/255, blue: 97/255, alpha: 1)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUI() {
+        backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        
+        addSubview(textField)
+        addSubview(label)
+    }
+    
+    override func updateConstraints() {
+        textField.snp.makeConstraints { make in
+            make.left.lessThanOrEqualTo(self).offset(10)
+            make.right.equalTo(label.snp.left).offset(-5)
+            make.centerY.equalTo(self)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.right.equalTo(self).offset(-10)
+            make.centerY.equalTo(self)
+        }
+        
+        super.updateConstraints()
     }
 }
