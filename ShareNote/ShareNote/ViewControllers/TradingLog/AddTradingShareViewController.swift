@@ -121,6 +121,15 @@ class AddTradingShareViewController: UIViewController {
         $0.label.text = "원"
     }
     
+    // Save Button
+    let saveButton = UIButton().then {
+        $0.setTitle("저장", for: .normal)
+        $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.backgroundColor = UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1)
+        $0.layer.cornerRadius = 7
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,6 +184,8 @@ class AddTradingShareViewController: UIViewController {
         appraisedPriceContainerView.addSubview(appraisedPriceNameLabel)
         appraisedPriceContainerView.addSubview(appraisedPriceTextFieldView)
         
+        view.addSubview(saveButton)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -192,7 +203,8 @@ class AddTradingShareViewController: UIViewController {
         
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            make.bottom.left.width.equalTo(view.safeAreaLayoutGuide)
+            make.left.width.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(saveButton.snp.top).offset(-7)
         }
         
         scrollContentView.snp.makeConstraints { make in
@@ -303,6 +315,13 @@ class AddTradingShareViewController: UIViewController {
             make.right.equalTo(appraisedPriceContainerView).offset(-20)
             make.centerY.equalTo(appraisedPriceContainerView)
             make.height.equalTo(30)
+        }
+
+        saveButton.snp.makeConstraints { make in
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+            make.bottom.equalTo(view).offset(-37)
+            make.height.equalTo(45)
         }
         
         super.updateViewConstraints()
