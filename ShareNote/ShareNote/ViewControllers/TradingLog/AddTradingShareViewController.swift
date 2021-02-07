@@ -318,9 +318,9 @@ class AddTradingShareViewController: UIViewController {
         }
 
         saveButton.snp.makeConstraints { make in
-            make.left.equalTo(view).offset(20)
-            make.right.equalTo(view).offset(-20)
-            make.bottom.equalTo(view).offset(-37)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-7)
             make.height.equalTo(45)
         }
         
