@@ -104,16 +104,22 @@ class AddTradingShareViewController: UIViewController {
         $0.text = "매수가"
     }
     
-    let purchasePriceTextFieldView = textFieldView().then {
-        $0.label.text = "원"
-    }
+    let purchasePriceTextFieldView = TextFieldView()
     
-    let purchaseQuantityTextFieldView = textFieldView().then {
+    let purchaseQuantityTextFieldView = TextFieldView().then {
         $0.label.text = "주"
     }
     
     // Appraised Price Container
     let appraisedPriceContainerView = UIView()
+    
+    let appraisedPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "평가금액"
+    }
+    
+    let appraisedPriceTextFieldView = TextFieldView().then {
+        $0.label.text = "원"
+    }
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -166,6 +172,8 @@ class AddTradingShareViewController: UIViewController {
         purchasePriceContainerView.addSubview(purchaseQuantityTextFieldView)
         
         buyCategoryContainerStackView.addArrangedSubview(appraisedPriceContainerView)
+        appraisedPriceContainerView.addSubview(appraisedPriceNameLabel)
+        appraisedPriceContainerView.addSubview(appraisedPriceTextFieldView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -285,6 +293,18 @@ class AddTradingShareViewController: UIViewController {
             make.height.equalTo(30)
         }
             
+        appraisedPriceNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(appraisedPriceContainerView).offset(20)
+            make.centerY.equalTo(appraisedPriceContainerView)
+        }
+        
+        appraisedPriceTextFieldView.snp.makeConstraints { make in
+            make.left.equalTo(appraisedPriceContainerView).offset(106)
+            make.right.equalTo(appraisedPriceContainerView).offset(-20)
+            make.centerY.equalTo(appraisedPriceContainerView)
+            make.height.equalTo(30)
+        }
+        
         super.updateViewConstraints()
     }
 }
@@ -315,7 +335,7 @@ class CategoryButton: UIButton {
     }
 }
 
-class textFieldView: UIView {
+class TextFieldView: UIView {
     let textField = UITextField().then {
         $0.textAlignment = .right
         $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
