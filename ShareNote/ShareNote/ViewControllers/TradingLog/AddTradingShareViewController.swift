@@ -139,6 +139,14 @@ class AddTradingShareViewController: UIViewController {
         buyButton.isSelected = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        shareTitleContainerView.addBottomLine()
+        categoryContainerView.addBottomLine()
+        tradingDateContainerView.addBottomLine()
+        purchasePriceContainerView.addBottomLine()
+        appraisedPriceContainerView.addBottomLine()
+    }
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -168,21 +176,7 @@ class AddTradingShareViewController: UIViewController {
         categoryContainerView.addSubview(dividendButton)
         categoryContainerView.addSubview(noDealButton)
         
-        contentStackView.addArrangedSubview(buyCategoryContainerStackView)
-        
-        buyCategoryContainerStackView.addArrangedSubview(tradingDateContainerView)
-        tradingDateContainerView.addSubview(tradingDateNameLabel)
-        tradingDateContainerView.addSubview(tradingDateContentLabel)
-        tradingDateContainerView.addSubview(tradingDateChangeButton)
-        
-        buyCategoryContainerStackView.addArrangedSubview(purchasePriceContainerView)
-        purchasePriceContainerView.addSubview(purchasePriceNameLabel)
-        purchasePriceContainerView.addSubview(purchasePriceTextFieldView)
-        purchasePriceContainerView.addSubview(purchaseQuantityTextFieldView)
-        
-        buyCategoryContainerStackView.addArrangedSubview(appraisedPriceContainerView)
-        appraisedPriceContainerView.addSubview(appraisedPriceNameLabel)
-        appraisedPriceContainerView.addSubview(appraisedPriceTextFieldView)
+        addBuyCategoryView()
         
         view.addSubview(saveButton)
         
@@ -325,6 +319,24 @@ class AddTradingShareViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+    
+    func addBuyCategoryView() {
+        contentStackView.addArrangedSubview(buyCategoryContainerStackView)
+        
+        buyCategoryContainerStackView.addArrangedSubview(tradingDateContainerView)
+        tradingDateContainerView.addSubview(tradingDateNameLabel)
+        tradingDateContainerView.addSubview(tradingDateContentLabel)
+        tradingDateContainerView.addSubview(tradingDateChangeButton)
+        
+        buyCategoryContainerStackView.addArrangedSubview(purchasePriceContainerView)
+        purchasePriceContainerView.addSubview(purchasePriceNameLabel)
+        purchasePriceContainerView.addSubview(purchasePriceTextFieldView)
+        purchasePriceContainerView.addSubview(purchaseQuantityTextFieldView)
+        
+        buyCategoryContainerStackView.addArrangedSubview(appraisedPriceContainerView)
+        appraisedPriceContainerView.addSubview(appraisedPriceNameLabel)
+        appraisedPriceContainerView.addSubview(appraisedPriceTextFieldView)
     }
 }
 
