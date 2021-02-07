@@ -57,24 +57,21 @@ class AddTradingShareViewController: UIViewController {
         $0.text = "분류"
     }
     
-    let buyButton = UIButton().then {
+    let buyButton = CategoryButton().then {
         $0.setTitle("매수", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
     }
     
-    let sellButton = UIButton().then {
+    let sellButton = CategoryButton().then {
         $0.setTitle("매도", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
+        $0.isUserInteractionEnabled = true
     }
     
-    let dividendButton = UIButton().then {
+    let dividendButton = CategoryButton().then {
         $0.setTitle("배당", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
     }
     
-    let noDealButton = UIButton().then {
+    let noDealButton = CategoryButton().then {
         $0.setTitle("미거래", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
     }
     
     // Trading Date Container
@@ -91,6 +88,8 @@ class AddTradingShareViewController: UIViewController {
         super.viewDidLoad()
         
         setUI()
+        
+        buyButton.isSelected = true
     }
     
     init() {
@@ -153,7 +152,8 @@ class AddTradingShareViewController: UIViewController {
             make.width.equalTo(view.safeAreaLayoutGuide)
         }
         
-        contentStackView.snp.makeConstraints { make in
+        contentStackView.snp.makeConstraints { make in            
+            make.top.left.right.equalTo(scrollContentView)
             make.height.equalTo(250)
         }
         
@@ -198,5 +198,31 @@ class AddTradingShareViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+}
+
+class CategoryButton: UIButton {
+    override var isSelected: Bool {
+        didSet {
+            backgroundColor = isSelected ? UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1) : .clear
+            setNeedsDisplay()
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        self.setTitleColor(UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1), for: .normal)
+        self.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .selected)
+        
+        self.layer.cornerRadius = 15
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1).cgColor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
