@@ -73,7 +73,7 @@ class AddTradingShareViewController: UIViewController {
     }
     
     // Buy Category StackView
-    let buyCategoryContainerStackView = UIStackView().then {
+    let buyCategoryStackView = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .fillEqually
     }
@@ -231,7 +231,7 @@ class AddTradingShareViewController: UIViewController {
         addBuyCategoryView()
         addDividendView()
         
-        buyCategoryContainerStackView.isHidden = true
+        buyCategoryStackView.isHidden = true
         
         view.addSubview(saveButton)
         
@@ -314,7 +314,7 @@ class AddTradingShareViewController: UIViewController {
             make.height.equalTo(26)
         }
         
-        buyCategoryContainerStackView.snp.makeConstraints { make in
+        buyCategoryStackView.snp.makeConstraints { make in
             make.height.equalTo(150)
         }
         
@@ -443,19 +443,19 @@ class AddTradingShareViewController: UIViewController {
     }
     
     func addBuyCategoryView() {
-        contentStackView.addArrangedSubview(buyCategoryContainerStackView)
+        contentStackView.addArrangedSubview(buyCategoryStackView)
         
-        buyCategoryContainerStackView.addArrangedSubview(tradingDateContainerView)
+        buyCategoryStackView.addArrangedSubview(tradingDateContainerView)
         tradingDateContainerView.addSubview(tradingDateNameLabel)
         tradingDateContainerView.addSubview(tradingDateContentLabel)
         tradingDateContainerView.addSubview(tradingDateChangeButton)
         
-        buyCategoryContainerStackView.addArrangedSubview(purchasePriceContainerView)
+        buyCategoryStackView.addArrangedSubview(purchasePriceContainerView)
         purchasePriceContainerView.addSubview(purchasePriceNameLabel)
         purchasePriceContainerView.addSubview(purchasePriceTextFieldView)
         purchasePriceContainerView.addSubview(purchaseQuantityTextFieldView)
         
-        buyCategoryContainerStackView.addArrangedSubview(appraisedPriceContainerView)
+        buyCategoryStackView.addArrangedSubview(appraisedPriceContainerView)
         appraisedPriceContainerView.addSubview(appraisedPriceNameLabel)
         appraisedPriceContainerView.addSubview(appraisedPriceTextFieldView)
     }
