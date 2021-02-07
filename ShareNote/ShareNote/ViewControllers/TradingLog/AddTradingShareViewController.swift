@@ -178,6 +178,16 @@ class AddTradingShareViewController: UIViewController {
         $0.axis = .vertical
         $0.distribution = .fillEqually
     }
+    
+    let noDealPresentPriceContainerView = UIView()
+    
+    let noDealPresentPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+        $0.text = "현재가"
+    }
+    
+    let noDealPresentPriceTextFieldView = TextFieldView().then {
+        $0.label.text = "원"
+    }
 
     // Save Button
     let saveButton = UIButton().then {
@@ -203,6 +213,11 @@ class AddTradingShareViewController: UIViewController {
         tradingDateContainerView.addBottomLine()
         purchasePriceContainerView.addBottomLine()
         appraisedPriceContainerView.addBottomLine()
+        dividendCycleContainerView.addBottomLine()
+        presentPriceContainerView.addBottomLine()
+        totalDividentPriceContainerView.addBottomLine()
+        dividendRateContainerView.addBottomLine()
+        noDealPresentPriceContainerView.addBottomLine()
     }
     
     init() {
@@ -239,7 +254,8 @@ class AddTradingShareViewController: UIViewController {
         addNoDealView()
         
         buyCategoryStackView.isHidden = true
-        dividendStackView.isHidden = true
+        dividendStackView.isHidden = false
+        noDealStackView.isHidden = true
         
         view.addSubview(saveButton)
         
@@ -443,6 +459,18 @@ class AddTradingShareViewController: UIViewController {
         noDealStackView.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
+        
+        noDealPresentPriceNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(noDealPresentPriceContainerView).offset(20)
+            make.centerY.equalTo(noDealPresentPriceContainerView)
+        }
+        
+        noDealPresentPriceTextFieldView.snp.makeConstraints { make in
+            make.left.equalTo(noDealPresentPriceContainerView).offset(106)
+            make.right.equalTo(noDealPresentPriceContainerView).offset(-20)
+            make.centerY.equalTo(noDealPresentPriceContainerView)
+            make.height.equalTo(30)
+        }
 
         saveButton.snp.makeConstraints { make in
             make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -499,6 +527,8 @@ class AddTradingShareViewController: UIViewController {
     func addNoDealView() {
         contentStackView.addArrangedSubview(noDealStackView)
         
-        noDealStackView.addArrangedSubview(presentPriceContainerView)
+        noDealStackView.addArrangedSubview(noDealPresentPriceContainerView)
+        noDealPresentPriceContainerView.addSubview(noDealPresentPriceNameLabel)
+        noDealPresentPriceContainerView.addSubview(noDealPresentPriceTextFieldView)
     }
 }
