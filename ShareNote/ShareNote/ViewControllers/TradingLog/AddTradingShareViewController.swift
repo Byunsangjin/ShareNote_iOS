@@ -172,6 +172,12 @@ class AddTradingShareViewController: UIViewController {
     let dividendRateTextField = TextFieldView().then {
         $0.label.text = "%"
     }
+    
+    // NoDeal StackView
+    let noDealStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+    }
 
     // Save Button
     let saveButton = UIButton().then {
@@ -230,8 +236,10 @@ class AddTradingShareViewController: UIViewController {
         
         addBuyCategoryView()
         addDividendView()
+        addNoDealView()
         
         buyCategoryStackView.isHidden = true
+        dividendStackView.isHidden = true
         
         view.addSubview(saveButton)
         
@@ -431,6 +439,10 @@ class AddTradingShareViewController: UIViewController {
             make.centerY.equalTo(dividendRateContainerView)
             make.height.equalTo(30)
         }
+        
+        noDealStackView.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
 
         saveButton.snp.makeConstraints { make in
             make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -482,5 +494,11 @@ class AddTradingShareViewController: UIViewController {
         dividendStackView.addArrangedSubview(dividendRateContainerView)
         dividendRateContainerView.addSubview(dividendRateNameLabel)
         dividendRateContainerView.addSubview(dividendRateTextField)
+    }
+    
+    func addNoDealView() {
+        contentStackView.addArrangedSubview(noDealStackView)
+        
+        noDealStackView.addArrangedSubview(presentPriceContainerView)
     }
 }
