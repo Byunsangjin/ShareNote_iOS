@@ -30,6 +30,7 @@ class TextFieldView: UIView {
     
     func setUI() {
         backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        layer.cornerRadius = 7
         
         addSubview(textField)
         addSubview(label)
