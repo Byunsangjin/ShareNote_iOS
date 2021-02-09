@@ -98,6 +98,7 @@ PODS:
   - nanopb/encode (2.30906.0)
   - naveridlogin-sdk-ios (4.1.3)
   - PanModal (1.2.7)
+  - Popover (1.3.0)
   - PromisesObjC (1.2.11)
   - ReactorKit (2.1.1):
     - RxSwift (~> 5.0)
@@ -141,6 +142,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - naveridlogin-sdk-ios
   - PanModal
+  - Popover
   - ReactorKit
   - RxKakaoSDKAuth
   - RxKakaoSDKCommon
@@ -175,6 +177,7 @@ SPEC REPOS:
     - nanopb
     - naveridlogin-sdk-ios
     - PanModal
+    - Popover
     - PromisesObjC
     - ReactorKit
     - RxAlamofire
@@ -214,6 +217,7 @@ SPEC CHECKSUMS:
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   ReactorKit: 6d894a20c3d508344320901cd8e386fde92df4b6
   RxAlamofire: aa949d345b1689eae02b7c7a217518878144f6df
@@ -230,6 +234,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 7535c4b65ac5d9793e69215476ed06549b9b5fc8
+PODFILE CHECKSUM: 9e0d672d2f4de7da2f105cb3898ca715204b9fc0
 
 COCOAPODS: 1.8.4

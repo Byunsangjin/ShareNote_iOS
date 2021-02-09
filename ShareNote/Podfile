@@ -51,6 +51,9 @@ target 'ShareNote' do
   #FSPagerView
   pod 'FSPagerView'
 
+  #Popover
+  pod "Popover"
+  
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing
