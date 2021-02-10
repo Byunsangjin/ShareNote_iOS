@@ -6,9 +6,18 @@
 //
 
 import UIKit
+import Popover
 
 class AddTradingShareViewController: UIViewController {
-
+    let popover = Popover(options: [
+        .type(.auto),
+        .blackOverlayColor(.clear),
+        .arrowSize(CGSize(width: 0, height: 0)),
+        .dismissOnBlackOverlayTap(false),
+        .cornerRadius(0),
+        
+    ])
+    
     static let nameLabelFont = UIFont.systemFont(ofSize: 14)
     static let nameLabelTextColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
     
@@ -205,6 +214,8 @@ class AddTradingShareViewController: UIViewController {
         setUI()
         
         buyButton.isSelected = true
+        
+        shareSearchTextField.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -253,8 +264,8 @@ class AddTradingShareViewController: UIViewController {
         addDividendView()
         addNoDealView()
         
-        buyCategoryStackView.isHidden = true
-        dividendStackView.isHidden = false
+        buyCategoryStackView.isHidden = false
+        dividendStackView.isHidden = true
         noDealStackView.isHidden = true
         
         view.addSubview(saveButton)
@@ -531,4 +542,51 @@ class AddTradingShareViewController: UIViewController {
         noDealPresentPriceContainerView.addSubview(noDealPresentPriceNameLabel)
         noDealPresentPriceContainerView.addSubview(noDealPresentPriceTextFieldView)
     }
+}
+
+extension AddTradingShareViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        showPopover()
+        
+        return true
+    }
+    
+    func showPopover() {
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: self.shareSearchTextField.frame.width, height: 135))
+        
+        containerView.layer.addBorder([.top], color: UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), width: 3)
+        containerView.layer.addBorder([.left, .right, .bottom], color: UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1), width: 1)
+        
+        let tableViewFrame = containerView.frame.inset(by: UIEdgeInsets(top: 3, left: 1, bottom: 1, right: 1))
+        let tableView = UITableView(frame: tableViewFrame)
+        
+        containerView.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        
+        
+        popover.blackOverlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchOutside)))
+        popover.show(containerView, fromView: self.shareSearchTextField)
+    }
+    
+    @objc
+    func touchOutside() {
+        self.shareSearchTextField.endEditing(true)
+        self.popover.dismiss()
+    }
+}
+
+extension AddTradingShareViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.textLabel?.text = "\(indexPath.row)"
+        return cell
+    }
+    
+    
 }
