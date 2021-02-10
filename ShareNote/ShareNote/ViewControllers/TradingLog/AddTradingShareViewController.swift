@@ -564,8 +564,6 @@ extension AddTradingShareViewController: UITextFieldDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
-        
-        
         popover.blackOverlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchOutside)))
         popover.show(containerView, fromView: self.shareSearchTextField)
     }
@@ -587,6 +585,4 @@ extension AddTradingShareViewController: UITableViewDelegate, UITableViewDataSou
         cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }
-    
-    
 }
