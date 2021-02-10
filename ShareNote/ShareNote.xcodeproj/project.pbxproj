@@ -14,6 +14,7 @@
 		602483EA25B3C93400F446E9 /* RegisterReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602483E925B3C93400F446E9 /* RegisterReactor.swift */; };
 		60308CF925D000B80091ACC5 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60308CF825D000B80091ACC5 /* TextFieldView.swift */; };
 		60308CFE25D000D80091ACC5 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60308CFD25D000D80091ACC5 /* CategoryButton.swift */; };
+		60308D5C25D436850091ACC5 /* CompleteTradingLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60308D5B25D436850091ACC5 /* CompleteTradingLogViewController.swift */; };
 		6064CA8925BEF8FC00E75D59 /* YearMonthPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */; };
 		6064CA9425C1058000E75D59 /* TradingNoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA9325C1058000E75D59 /* TradingNoneTableViewCell.swift */; };
 		6064CA9C25C2F9F300E75D59 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */; };
@@ -90,6 +91,7 @@
 		602483E925B3C93400F446E9 /* RegisterReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReactor.swift; sourceTree = "<group>"; };
 		60308CF825D000B80091ACC5 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		60308CFD25D000D80091ACC5 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		60308D5B25D436850091ACC5 /* CompleteTradingLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTradingLogViewController.swift; sourceTree = "<group>"; };
 		6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPickerView.swift; sourceTree = "<group>"; };
 		6064CA9325C1058000E75D59 /* TradingNoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingNoneTableViewCell.swift; sourceTree = "<group>"; };
 		6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				6064CAA025C2FCB500E75D59 /* TradingLogTableViewCell.swift */,
 				6064CACB25C6884600E75D59 /* WriteTradingLogViewController.swift */,
 				6064CB8625CC4BD300E75D59 /* AddTradingShareViewController.swift */,
+				60308D5B25D436850091ACC5 /* CompleteTradingLogViewController.swift */,
 				6064CB7C25C8443C00E75D59 /* TradingSharePagerViewCell.swift */,
 				6064CB8125CC394100E75D59 /* ArticlePagerViewCell.swift */,
 				60308CF825D000B80091ACC5 /* TextFieldView.swift */,
@@ -749,6 +752,7 @@
 				6064CA9C25C2F9F300E75D59 /* CALayer+Extension.swift in Sources */,
 				60CD906C25AB0DF200C29F0E /* PasswordKeypadView.swift in Sources */,
 				60308CF925D000B80091ACC5 /* TextFieldView.swift in Sources */,
+				60308D5C25D436850091ACC5 /* CompleteTradingLogViewController.swift in Sources */,
 				6024832E25B084C900F446E9 /* LoginReactor.swift in Sources */,
 				6064CA8925BEF8FC00E75D59 /* YearMonthPickerView.swift in Sources */,
 				60CD8FFE25AADB4900C29F0E /* SimplePasswordViewController.swift in Sources */,
