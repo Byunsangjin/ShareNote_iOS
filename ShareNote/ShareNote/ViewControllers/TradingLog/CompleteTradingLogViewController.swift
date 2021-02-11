@@ -65,6 +65,10 @@ class CompleteTradingLogViewController: UIViewController {
     let segmentControl = UISegmentedControl(items: ["거래주식", "관련기사", "메모"]).then {
         $0.selectedSegmentIndex = 0
     }
+    
+    let segmentDivideLineView = UIView().then {
+        $0.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 238/255)
+    }
         
     var disposeBag = DisposeBag()
     
@@ -113,6 +117,8 @@ class CompleteTradingLogViewController: UIViewController {
         
         view.addSubview(segmentControl)
         segmentControl.removeBorder()
+        
+        view.addSubview(segmentDivideLineView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -176,6 +182,12 @@ class CompleteTradingLogViewController: UIViewController {
             make.centerX.equalTo(view)
             make.width.equalTo(view).offset(-40)
             make.height.equalTo(50)
+        }
+        
+        segmentDivideLineView.snp.makeConstraints { make in
+            make.top.equalTo(segmentControl.snp.bottom)
+            make.width.equalTo(view)
+            make.height.equalTo(1)
         }
         
         super.updateViewConstraints()
