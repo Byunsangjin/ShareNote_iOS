@@ -81,8 +81,12 @@ class CompleteTradingLogViewController: UIViewController {
         
         for _ in 0..<10 {
             let button = UIButton().then {
-                $0.setTitle("#Test", for: .normal)
-                $0.backgroundColor = .green
+                $0.setTitle("#보여지고", for: .normal)
+                $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+                $0.backgroundColor = UIColor(red: 1, green: 234/255, blue: 132/255, alpha: 1)
+                $0.layer.cornerRadius = 12
+                $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             }
             tagStackView.addArrangedSubview(button)
         }
