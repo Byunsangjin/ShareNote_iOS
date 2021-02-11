@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class CompleteTradingLogViewController: UIViewController {
     
@@ -61,10 +62,25 @@ class CompleteTradingLogViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    let segmentControl = UISegmentedControl(items: ["거래주식", "관련기사", "메모"]).then {
+        $0.selectedSegmentIndex = 0
+    }
+        
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
+        
+        segmentControl.rx.selectedSegmentIndex
+            .bind { property in
+                self.segmentControl.changeUnderlinePosition()
+            }.disposed(by: disposeBag)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        segmentControl.addUnderlineForSelectedSegment()
     }
     
     func setUI() {
@@ -94,6 +110,9 @@ class CompleteTradingLogViewController: UIViewController {
         tradingLogTitleContainerView.addSubview(tagScrollView)
         tagScrollView.addSubview(scrollContentView)
         scrollContentView.addSubview(tagStackView)
+        
+        view.addSubview(segmentControl)
+        segmentControl.removeBorder()
         
         view.setNeedsUpdateConstraints()
     }
@@ -150,6 +169,13 @@ class CompleteTradingLogViewController: UIViewController {
         
         tagStackView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(scrollContentView)
+        }
+        
+        segmentControl.snp.makeConstraints { make in
+            make.top.equalTo(tradingLogTitleContainerView.snp.bottom)
+            make.centerX.equalTo(view)
+            make.width.equalTo(view).offset(-40)
+            make.height.equalTo(50)
         }
         
         super.updateViewConstraints()
