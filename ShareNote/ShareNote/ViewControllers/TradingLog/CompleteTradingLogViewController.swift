@@ -46,6 +46,21 @@ class CompleteTradingLogViewController: UIViewController {
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
     
+    let tagScrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let scrollContentView = UIView()
+    
+    let tagStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fillProportionally
+        $0.spacing = 4
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,6 +78,18 @@ class CompleteTradingLogViewController: UIViewController {
         view.addSubview(tradingLogTitleContainerView)
         tradingLogTitleContainerView.addSubview(dateLabel)
         tradingLogTitleContainerView.addSubview(titleLabel)
+        
+        for _ in 0..<10 {
+            let button = UIButton().then {
+                $0.setTitle("#Test", for: .normal)
+                $0.backgroundColor = .green
+            }
+            tagStackView.addArrangedSubview(button)
+        }
+        
+        tradingLogTitleContainerView.addSubview(tagScrollView)
+        tagScrollView.addSubview(scrollContentView)
+        scrollContentView.addSubview(tagStackView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -104,6 +131,21 @@ class CompleteTradingLogViewController: UIViewController {
             make.top.equalTo(dateLabel.snp.bottom).offset(15)
             make.left.equalTo(tradingLogTitleContainerView).offset(20)
             make.right.equalTo(tradingLogTitleContainerView).offset(-20)
+        }
+        
+        tagScrollView.snp.makeConstraints { make in
+            make.left.equalTo(tradingLogTitleContainerView).offset(20)
+            make.right.bottom.equalTo(tradingLogTitleContainerView).offset(-20)
+            make.height.equalTo(20)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.right.equalTo(tagScrollView)
+            make.height.equalTo(tagScrollView)
+        }
+        
+        tagStackView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(scrollContentView)
         }
         
         super.updateViewConstraints()
