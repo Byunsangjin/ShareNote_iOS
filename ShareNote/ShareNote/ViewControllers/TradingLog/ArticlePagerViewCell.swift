@@ -52,6 +52,9 @@ class ArticlePagerViewCell: FSPagerViewCell {
         $0.backgroundColor = .yellow
     }
     
+    // MARK: Variables
+    var isShowButtons = true
+    
     // MARK: Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,8 +77,10 @@ class ArticlePagerViewCell: FSPagerViewCell {
         
         containerView.addSubview(articleContentLabel)
         
-        containerView.addSubview(editButton)
-        containerView.addSubview(deleteButton)
+        if (isShowButtons) {
+            containerView.addSubview(editButton)
+            containerView.addSubview(deleteButton)
+        }
         
         contentView.setNeedsUpdateConstraints()
     }
@@ -116,19 +121,21 @@ class ArticlePagerViewCell: FSPagerViewCell {
             make.top.equalTo(thumbnailImageView.snp.bottom).offset(15)
             make.left.equalTo(containerView).offset(20)
             make.right.equalTo(containerView).offset(-26)
-            make.bottom.equalTo(editButton.snp.top).offset(-25)
+            make.height.equalTo(74)
         }
         
-        editButton.snp.makeConstraints { make in
-            make.left.bottom.equalTo(containerView)
-            make.width.equalTo(248)
-            make.height.equalTo(45)
-        }
-        
-        deleteButton.snp.makeConstraints { make in
-            make.right.bottom.equalTo(containerView)
-            make.left.equalTo(editButton.snp.right)
-            make.height.equalTo(45)
+        if (isShowButtons) {
+            editButton.snp.makeConstraints { make in
+                make.left.bottom.equalTo(containerView)
+                make.width.equalTo(248)
+                make.height.equalTo(45)
+            }
+            
+            deleteButton.snp.makeConstraints { make in
+                make.right.bottom.equalTo(containerView)
+                make.left.equalTo(editButton.snp.right)
+                make.height.equalTo(45)
+            }
         }
         
         super.updateConstraints()

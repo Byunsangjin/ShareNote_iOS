@@ -83,6 +83,10 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         $0.backgroundColor = .yellow
     }
     
+    // MARK: Variables
+    var isShowButtons = true
+    
+    // MARK: Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
@@ -110,8 +114,10 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         contentLabelStackView.addArrangedSubview(purchasePriceContentLabel)
         contentLabelStackView.addArrangedSubview(appraisedPriceContentLabel)
         
-        containerView.addSubview(editButton)
-        containerView.addSubview(deleteButton)
+        if (isShowButtons) {
+            containerView.addSubview(editButton)
+            containerView.addSubview(deleteButton)
+        }
         
         contentView.setNeedsUpdateConstraints()
     }
@@ -127,27 +133,29 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         nameLabelStackView.snp.makeConstraints { make in
             make.top.equalTo(containerView).offset(16)
             make.left.equalTo(containerView).offset(20)
-            make.bottom.equalTo(editButton.snp.top).offset(-25)
             make.width.equalTo(52)
+            make.height.equalTo(145)
         }
         
         contentLabelStackView.snp.makeConstraints { make in
             make.top.equalTo(containerView).offset(16)
             make.left.equalTo(nameLabelStackView.snp.right).offset(45)
             make.right.equalTo(containerView)
-            make.bottom.equalTo(editButton.snp.top).offset(-25)
+            make.height.equalTo(145)
         }
         
-        editButton.snp.makeConstraints { make in
-            make.left.bottom.equalTo(containerView)
-            make.width.equalTo(248)
-            make.height.equalTo(45)
-        }
-        
-        deleteButton.snp.makeConstraints { make in
-            make.right.bottom.equalTo(containerView)
-            make.left.equalTo(editButton.snp.right)
-            make.height.equalTo(45)
+        if (isShowButtons) {
+            editButton.snp.makeConstraints { make in
+                make.left.bottom.equalTo(containerView)
+                make.width.equalTo(248)
+                make.height.equalTo(45)
+            }
+            
+            deleteButton.snp.makeConstraints { make in
+                make.right.bottom.equalTo(containerView)
+                make.left.equalTo(editButton.snp.right)
+                make.height.equalTo(45)
+            }
         }
         
         super.updateConstraints()
