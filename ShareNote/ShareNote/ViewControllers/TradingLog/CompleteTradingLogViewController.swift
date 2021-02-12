@@ -86,6 +86,10 @@ class CompleteTradingLogViewController: UIViewController {
         $0.backgroundColor = .red
     }
     
+    let moveTopScrollButton = UIButton().then {
+        $0.setImage(UIImage(named: "icTopScroll"), for: .normal)
+    }
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -165,6 +169,8 @@ class CompleteTradingLogViewController: UIViewController {
         articleCollectionView.delegate = self
         articleCollectionView.dataSource = self
         view.addSubview(memoTextView)
+        
+        view.addSubview(moveTopScrollButton)
         
         tradingShareCollectionView.register(TradingSharePagerViewCell.self, forCellWithReuseIdentifier: "TradingSharePagerViewCell")
         articleCollectionView.register(ArticlePagerViewCell.self, forCellWithReuseIdentifier: "ArticlePagerViewCell")
@@ -252,6 +258,12 @@ class CompleteTradingLogViewController: UIViewController {
         memoTextView.snp.makeConstraints { make in
             make.top.equalTo(segmentControl.snp.bottom)
             make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        moveTopScrollButton.snp.makeConstraints { make in
+            make.width.height.equalTo(46)
+            make.right.equalTo(-21)
+            make.bottom.equalTo(-30)
         }
         
         super.updateViewConstraints()
