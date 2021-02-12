@@ -63,6 +63,7 @@
 		60EFB9FE25D680270027B0E2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFB9FD25D680270027B0E2 /* UIColor+Extension.swift */; };
 		60EFBA0325D68C5B0027B0E2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBA0225D68C5B0027B0E2 /* UIFont+Extension.swift */; };
 		60EFBA0825D6A54F0027B0E2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60EFBA0725D6A54F0027B0E2 /* ColorAssets.xcassets */; };
+		60EFBA0D25D6CEBD0027B0E2 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBA0C25D6CEBD0027B0E2 /* AuthenticationViewController.swift */; };
 		AF09F919E17FE9DCDBB2FA53 /* Pods_ShareNote_ShareNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */; };
 		F57A80599348E5AF8A58EF5F /* Pods_ShareNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */; };
 /* End PBXBuildFile section */
@@ -152,6 +153,7 @@
 		60EFB9FD25D680270027B0E2 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		60EFBA0225D68C5B0027B0E2 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		60EFBA0725D6A54F0027B0E2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
+		60EFBA0C25D6CEBD0027B0E2 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9696D885676D7977D9388A74 /* Pods-ShareNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.release.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		6094166625A0933300D9DF42 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				60EFBA0C25D6CEBD0027B0E2 /* AuthenticationViewController.swift */,
 				6094166725A0933D00D9DF42 /* RegisterViewController.swift */,
 				60CD8E9F25A1E8E100C29F0E /* EmailTableViewCell.swift */,
 				60CD8DC525A1C84800C29F0E /* EmailTableViewController.swift */,
@@ -766,6 +769,7 @@
 				6081409225BD52CA008E6CAF /* Date+Extension.swift in Sources */,
 				60308D8725D594370091ACC5 /* UIImaeg+Extension.swift in Sources */,
 				60CD8EA025A1E8E100C29F0E /* EmailTableViewCell.swift in Sources */,
+				60EFBA0D25D6CEBD0027B0E2 /* AuthenticationViewController.swift in Sources */,
 				60966CA525B9BF1100C8E487 /* HomeMainViewController.swift in Sources */,
 				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
 				6064CB8225CC394100E75D59 /* ArticlePagerViewCell.swift in Sources */,
