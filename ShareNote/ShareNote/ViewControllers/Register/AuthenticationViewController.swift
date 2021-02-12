@@ -34,7 +34,46 @@ class AuthenticationViewController: UIViewController {
     let scrollContentView = UIView().then {
         $0.backgroundColor = .green
     }
+    
+    // 약관동의 View
+    let termsAndConditionsContainerView = UIView()
+    
+    let allAgreementButton = UIButton.createCheckButton()
+    
+    let allAgreementLabel = UILabel().then {
+        $0.text = "전체동의"
+        $0.font = UIFont.spoqaHanSans(size: 18, style: .Regular)
+        $0.textColor = UIColor.black1
+    }
+    
+    let termsAndConditionsButton = UIButton.createCheckButton()
+    
+    let termsAndConditionsLabel = UILabel.createAttributeLabel(text: "이용약관동의 (필수)")
         
+    let infomationReceiveButton = UIButton.createCheckButton()
+    
+    let infomationReceiveLabel = UILabel.createAttributeLabel(text: "투자 관련 에세이 등 정보 수신 동의 (선택)")
+    
+    let smsButton = UIButton.createCheckButton()
+    
+    let smsLabel = UILabel().then {
+        $0.text = "SMS"
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Regular)
+        $0.textColor = UIColor.black1
+    }
+    
+    let emailButton = UIButton.createCheckButton()
+    
+    let emailLabel = UILabel().then {
+        $0.text = "이메일"
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Regular)
+        $0.textColor = UIColor.black1
+    }
+    
+    let overFourteenYearButton = UIButton.createCheckButton()
+    
+    let overFourteenYearLabel = UILabel.createAttributeLabel(text: "만 14세 이상입니다. (필수)")
+    
     // MARK: Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -49,6 +88,20 @@ class AuthenticationViewController: UIViewController {
         
         view.addSubview(scrollView)
         scrollView.addSubview(scrollContentView)
+        
+        scrollContentView.addSubview(termsAndConditionsContainerView)
+        termsAndConditionsContainerView.addSubview(allAgreementButton)
+        termsAndConditionsContainerView.addSubview(allAgreementLabel)
+        termsAndConditionsContainerView.addSubview(termsAndConditionsButton)
+        termsAndConditionsContainerView.addSubview(termsAndConditionsLabel)
+        termsAndConditionsContainerView.addSubview(infomationReceiveButton)
+        termsAndConditionsContainerView.addSubview(infomationReceiveLabel)
+        termsAndConditionsContainerView.addSubview(smsButton)
+        termsAndConditionsContainerView.addSubview(smsLabel)
+        termsAndConditionsContainerView.addSubview(emailButton)
+        termsAndConditionsContainerView.addSubview(emailLabel)
+        termsAndConditionsContainerView.addSubview(overFourteenYearButton)
+        termsAndConditionsContainerView.addSubview(overFourteenYearLabel)
         
         view.setNeedsUpdateConstraints()
     }
@@ -79,6 +132,79 @@ class AuthenticationViewController: UIViewController {
         scrollContentView.snp.makeConstraints { make in
             make.top.left.bottom.equalTo(scrollView)
             make.width.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        termsAndConditionsContainerView.snp.makeConstraints { make in
+            make.top.equalTo(scrollContentView).offset(5)
+            make.left.right.equalTo(scrollContentView)
+            make.height.equalTo(182)
+        }
+        
+        allAgreementButton.snp.makeConstraints { make in
+            make.top.equalTo(termsAndConditionsContainerView)
+            make.left.equalTo(termsAndConditionsContainerView).offset(20)
+            make.width.height.equalTo(20)
+        }
+        
+        allAgreementLabel.snp.makeConstraints { make in
+            make.left.equalTo(allAgreementButton.snp.right).offset(10)
+            make.centerY.equalTo(allAgreementButton)
+        }
+        
+        termsAndConditionsButton.snp.makeConstraints { make in
+            make.top.equalTo(allAgreementButton.snp.bottom).offset(31)
+            make.left.equalTo(termsAndConditionsContainerView).offset(20)
+            make.width.height.equalTo(20)
+        }
+        
+        termsAndConditionsLabel.snp.makeConstraints { make in
+            make.left.equalTo(termsAndConditionsButton.snp.right).offset(10)
+            make.centerY.equalTo(termsAndConditionsButton)
+        }
+        
+        infomationReceiveButton.snp.makeConstraints { make in
+            make.top.equalTo(termsAndConditionsButton.snp.bottom).offset(21)
+            make.left.equalTo(termsAndConditionsContainerView).offset(20)
+            make.width.height.equalTo(20)
+        }
+        
+        infomationReceiveLabel.snp.makeConstraints { make in
+            make.left.equalTo(infomationReceiveButton.snp.right).offset(10)
+            make.centerY.equalTo(infomationReceiveButton)
+        }
+        
+        smsButton.snp.makeConstraints { make in
+            make.top.equalTo(infomationReceiveButton.snp.bottom).offset(10)
+            make.left.equalTo(termsAndConditionsContainerView).offset(50)
+            make.width.height.equalTo(20)
+        }
+        
+        smsLabel.snp.makeConstraints { make in
+            make.left.equalTo(smsButton.snp.right).offset(10)
+            make.right.equalTo(emailButton.snp.left).offset(-10)
+            make.centerY.equalTo(smsButton)
+        }
+        
+        emailButton.snp.makeConstraints { make in
+            make.top.equalTo(infomationReceiveButton.snp.bottom).offset(10)
+            make.left.equalTo(smsButton.snp.right).offset(72)
+            make.width.height.equalTo(20)
+        }
+        
+        emailLabel.snp.makeConstraints { make in
+            make.left.equalTo(emailButton.snp.right).offset(10)
+            make.centerY.equalTo(emailButton)
+        }
+        
+        overFourteenYearButton.snp.makeConstraints { make in
+            make.top.equalTo(smsButton.snp.bottom).offset(21)
+            make.left.equalTo(termsAndConditionsContainerView).offset(20)
+            make.width.height.equalTo(20)
+        }
+        
+        overFourteenYearLabel.snp.makeConstraints { make in
+            make.left.equalTo(overFourteenYearButton.snp.right).offset(10)
+            make.centerY.equalTo(overFourteenYearButton)
         }
         
         super.updateViewConstraints()
