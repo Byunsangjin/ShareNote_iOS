@@ -62,6 +62,7 @@
 		60D37218259F514A00BBAB36 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D37217259F514A00BBAB36 /* LoginViewController.swift */; };
 		60EFB9FE25D680270027B0E2 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFB9FD25D680270027B0E2 /* UIColor+Extension.swift */; };
 		60EFBA0325D68C5B0027B0E2 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBA0225D68C5B0027B0E2 /* UIFont+Extension.swift */; };
+		60EFBA0825D6A54F0027B0E2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60EFBA0725D6A54F0027B0E2 /* ColorAssets.xcassets */; };
 		AF09F919E17FE9DCDBB2FA53 /* Pods_ShareNote_ShareNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */; };
 		F57A80599348E5AF8A58EF5F /* Pods_ShareNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */; };
 /* End PBXBuildFile section */
@@ -150,6 +151,7 @@
 		60D37217259F514A00BBAB36 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		60EFB9FD25D680270027B0E2 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		60EFBA0225D68C5B0027B0E2 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		60EFBA0725D6A54F0027B0E2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9696D885676D7977D9388A74 /* Pods-ShareNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.release.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			children = (
 				60966D6425BB181500C8E487 /* Font */,
 				60ADF4F925792D39001A77C2 /* Assets.xcassets */,
+				60EFBA0725D6A54F0027B0E2 /* ColorAssets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60EFBA0825D6A54F0027B0E2 /* ColorAssets.xcassets in Resources */,
 				6081403425BD2EC7008E6CAF /* Spoqa Han Sans Neo Light.otf in Resources */,
 				6081403625BD2EC7008E6CAF /* Spoqa Han Sans Neo Bold.otf in Resources */,
 				60ADF4FD25792D39001A77C2 /* LaunchScreen.storyboard in Resources */,
