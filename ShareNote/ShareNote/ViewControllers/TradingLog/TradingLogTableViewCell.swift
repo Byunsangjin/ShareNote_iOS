@@ -19,12 +19,6 @@ class TradingLogTableViewCell: UITableViewCell {
         $0.numberOfLines = 0
     }
     
-    let createTimeLabel = UILabel().then {
-        $0.text = "PM 12:10 작성"
-        $0.textColor = UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 10)
-    }
-    
     let tagScrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
@@ -90,7 +84,6 @@ class TradingLogTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         
         containerView.addSubview(titleLabel)
-        containerView.addSubview(createTimeLabel)
         
         containerView.addSubview(tagScrollView)
         tagScrollView.addSubview(scrollContentView)
@@ -108,13 +101,7 @@ class TradingLogTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(containerView).offset(16)
             make.left.equalTo(containerView).offset(15)
-            make.right.equalTo(createTimeLabel.snp.left).offset(-27)
-        }
-        
-        createTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(containerView).offset(16)
-            make.right.equalTo(containerView.snp.right).offset(-15)
-            make.width.equalTo(64)
+            make.right.equalTo(containerView).offset(-16)
         }
         
         tagScrollView.snp.makeConstraints { make in
