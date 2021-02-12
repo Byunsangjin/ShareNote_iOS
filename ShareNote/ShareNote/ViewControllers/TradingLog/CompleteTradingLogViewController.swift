@@ -12,7 +12,7 @@ class CompleteTradingLogViewController: UIViewController {
     
     // Navigation ContainerView
     let navigationContainerView = UIView().then {
-        $0.backgroundColor = UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1)
+        $0.backgroundColor = UIColor.maincolor
     }
     
     let navigationTitleLabel = UILabel().then {
@@ -26,24 +26,24 @@ class CompleteTradingLogViewController: UIViewController {
     
     let editButton = UIButton().then {
         $0.setTitle("편집", for: .normal)
-        $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
+        $0.setTitleColor(UIColor.black2, for: .normal)
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
     // TradingLogTitle ContainerView
     let tradingLogTitleContainerView = UIView().then {
-        $0.backgroundColor = UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1)
+        $0.backgroundColor = UIColor.maincolor
     }
     
     let dateLabel = UILabel().then {
         $0.text = "2021년 1월 7일 오후 7:43"
-        $0.textColor = UIColor(red: 111/255, green: 93/255, blue: 0, alpha: 1)
+        $0.textColor = UIColor.mainBrown
         $0.font = UIFont.spoqaHanSans(size: 12)
     }
     
     let titleLabel = UILabel().then {
         $0.text = "기아차 가즈아~~"
-        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        $0.textColor = UIColor.black2
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Bold)
     }
     
@@ -67,7 +67,7 @@ class CompleteTradingLogViewController: UIViewController {
     }
     
     let segmentDivideLineView = UIView().then {
-        $0.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 238/255)
+        $0.backgroundColor = UIColor.grey7
     }
     
     static var collectionViewLayout = UICollectionViewFlowLayout().then {
@@ -75,11 +75,11 @@ class CompleteTradingLogViewController: UIViewController {
     }
     
     var tradingShareCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: collectionViewLayout).then {
-        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey8
     }
     
     var articleCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: collectionViewLayout).then {
-        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey8
     }
     
     let memoTextView = UITextView().then {
@@ -140,9 +140,9 @@ class CompleteTradingLogViewController: UIViewController {
         for _ in 0..<10 {
             let button = UIButton().then {
                 $0.setTitle("#보여지고", for: .normal)
-                $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
+                $0.setTitleColor(UIColor.black2, for: .normal)
                 $0.titleLabel?.font = UIFont.spoqaHanSans(size: 10, style: .Regular)
-                $0.backgroundColor = UIColor(red: 1, green: 234/255, blue: 132/255, alpha: 1)
+                $0.backgroundColor = UIColor.tag
                 $0.layer.cornerRadius = 12
                 $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             }

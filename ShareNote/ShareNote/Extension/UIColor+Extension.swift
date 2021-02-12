@@ -44,6 +44,10 @@ extension UIColor {
         return UIColor(white: 238.0 / 255.0, alpha: 1.0)
     }
     
+    class var tempGreyColor: UIColor {
+        return UIColor(white: 245.0 / 255.0, alpha: 1.0)
+    }
+    
     class var grey8: UIColor {
         return UIColor(white: 250.0 / 255.0, alpha: 1.0)
     }

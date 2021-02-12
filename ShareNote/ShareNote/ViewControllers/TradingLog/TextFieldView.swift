@@ -10,11 +10,11 @@ import UIKit
 class TextFieldView: UIView {
     let textField = UITextField().then {
         $0.textAlignment = .right
-        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        $0.textColor = UIColor.black2
     }
     
     var label = UILabel().then {
-        $0.textColor = UIColor(red: 97/255, green: 97/255, blue: 97/255, alpha: 1)
+        $0.textColor = UIColor.grey2
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
     }
     
@@ -29,7 +29,7 @@ class TextFieldView: UIView {
     }
     
     func setUI() {
-        backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        backgroundColor = UIColor.tempGreyColor
         layer.cornerRadius = 7
         
         addSubview(textField)

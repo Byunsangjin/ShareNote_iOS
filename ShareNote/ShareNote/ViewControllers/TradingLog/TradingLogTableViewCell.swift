@@ -14,7 +14,7 @@ class TradingLogTableViewCell: UITableViewCell {
     
     let titleLabel = UILabel().then {
         $0.text = "기아차 10퍼센트 달성하자"
-        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        $0.textColor = UIColor.black2
         $0.font = UIFont.spoqaHanSans(size: 14)
         $0.numberOfLines = 0
     }

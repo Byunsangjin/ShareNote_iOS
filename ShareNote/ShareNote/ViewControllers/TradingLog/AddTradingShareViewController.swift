@@ -19,13 +19,13 @@ class AddTradingShareViewController: UIViewController {
     ])
     
     static let nameLabelFont = UIFont.spoqaHanSans(size: 14)
-    static let nameLabelTextColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+    static let nameLabelTextColor = UIColor.grey3
     
     // MARK: Constants
     let titleLabel = UILabel().then {
         $0.text = "거래주식"
         $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
-        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        $0.textColor = UIColor.black2
     }
     
     let closeButton = UIButton().then {
@@ -96,7 +96,7 @@ class AddTradingShareViewController: UIViewController {
     let tradingDateContentLabel = UILabel().then {
         $0.text = "2021년 1월 7일 오후 7:43"
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
-        $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
+        $0.textColor = UIColor.black2
     }
     
     let tradingDateChangeButton = UIButton().then {
@@ -201,9 +201,9 @@ class AddTradingShareViewController: UIViewController {
     // Save Button
     let saveButton = UIButton().then {
         $0.setTitle("저장", for: .normal)
-        $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
+        $0.setTitleColor(UIColor.black2, for: .normal)
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
-        $0.backgroundColor = UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1)
+        $0.backgroundColor = UIColor.maincolor
         $0.layer.cornerRadius = 7
     }
     
@@ -554,8 +554,8 @@ extension AddTradingShareViewController: UITextFieldDelegate {
     func showPopover() {
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: self.shareSearchTextField.frame.width, height: 135))
         
-        containerView.layer.addBorder([.top], color: UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), width: 3)
-        containerView.layer.addBorder([.left, .right, .bottom], color: UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1), width: 1)
+        containerView.layer.addBorder([.top], color: UIColor.maincolor, width: 3)
+        containerView.layer.addBorder([.left, .right, .bottom], color: UIColor.grey6, width: 1)
         
         let tableViewFrame = containerView.frame.inset(by: UIEdgeInsets(top: 3, left: 1, bottom: 1, right: 1))
         let tableView = UITableView(frame: tableViewFrame)

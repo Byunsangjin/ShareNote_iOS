@@ -29,7 +29,7 @@ class TradingLogMainViewController: UIViewController {
     }
     
     let divisionLine = UIView().then {
-        $0.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey6
     }
     
     let yearMonthContainerView = UIView()
@@ -62,7 +62,7 @@ class TradingLogMainViewController: UIViewController {
     
     let tradingLogTableView = UITableView().then {
         $0.separatorStyle = .none
-        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey8
     }
     
     // MARK: Variables
@@ -306,7 +306,7 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
             // Reset state
             success(true)
         })
-        editAction.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        editAction.backgroundColor = UIColor.grey8
         editAction.image = UIImage(named: "icCellEdit")
         
         let deleteAction = UIContextualAction(style: .normal, title:  nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
@@ -314,7 +314,7 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
             // Reset state
             success(true)
         })
-        deleteAction.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        deleteAction.backgroundColor = UIColor.grey8
         deleteAction.image = UIImage(named: "icMainTrash")
         
         let configuration = UISwipeActionsConfiguration(actions:[deleteAction, editAction])

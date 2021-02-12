@@ -21,7 +21,7 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     }
     
     static let labelFont = UIFont.spoqaHanSans(size: 14)
-    static let labelTextColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1)
+    static let labelTextColor = UIColor.grey5
     
     let shareNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "주식명"
@@ -73,7 +73,7 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     
     let editButton = UIButton().then {
         $0.setTitle("수정하기", for: .normal)
-        $0.setTitleColor(UIColor(red: 97/255, green: 97/255, blue: 97/255, alpha: 1), for: .normal)
+        $0.setTitleColor(UIColor.grey2, for: .normal)
         $0.backgroundColor = .red
     }
     

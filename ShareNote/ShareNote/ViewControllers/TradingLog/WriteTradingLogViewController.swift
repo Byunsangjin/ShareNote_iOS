@@ -31,7 +31,7 @@ class WriteTradingLogViewController: UIViewController {
     }
     
     let divisionLine = UIView().then {
-        $0.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey6
     }
     
     let scrollView = UIScrollView().then {
@@ -53,7 +53,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let titleLabel = UILabel().then {
         $0.text = "제목"
-        $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+        $0.textColor = UIColor.grey3
         $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
@@ -67,7 +67,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let tagLabel = UILabel().then {
         $0.text = "태그"
-        $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+        $0.textColor = UIColor.grey3
         $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
@@ -75,7 +75,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let dateLabel = UILabel().then {
         $0.text = "날짜"
-        $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
+        $0.textColor = UIColor.grey3
         $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
@@ -86,7 +86,7 @@ class WriteTradingLogViewController: UIViewController {
     
     // TradingShare ContainerView
     let tradingShareContainerView = UIView().then {
-        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey8
     }
     
     let tradingShareTitleLabel = UILabel().then {
@@ -105,15 +105,15 @@ class WriteTradingLogViewController: UIViewController {
     let tradingSharePageControl = FSPageControl().then {
         $0.numberOfPages = 5
         $0.currentPage = 0
-        $0.setStrokeColor(UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 189/255), for: .normal)
-        $0.setFillColor(UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), for: .selected)
+        $0.setStrokeColor(UIColor.grey5, for: .normal)
+        $0.setFillColor(UIColor.maincolor, for: .selected)
         $0.itemSpacing = 10
         $0.interitemSpacing = 7
     }
     
     // Aticle ContainerView
     let articleContainerView = UIView().then {
-        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey8
     }
     
     let articleShareTitleLabel = UILabel().then {
@@ -132,8 +132,8 @@ class WriteTradingLogViewController: UIViewController {
     let articlePageControl = FSPageControl().then {
         $0.numberOfPages = 3
         $0.currentPage = 0
-        $0.setStrokeColor(UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 189/255), for: .normal)
-        $0.setFillColor(UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1), for: .selected)
+        $0.setStrokeColor(UIColor.grey5, for: .normal)
+        $0.setFillColor(UIColor.maincolor, for: .selected)
         $0.itemSpacing = 10
         $0.interitemSpacing = 7
     }
@@ -143,7 +143,7 @@ class WriteTradingLogViewController: UIViewController {
     
     // Memo ContainerView
     let memoContainerView = UIView().then {
-        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+        $0.backgroundColor = UIColor.grey8
     }
     
     let memoTitleLabel = UILabel().then {

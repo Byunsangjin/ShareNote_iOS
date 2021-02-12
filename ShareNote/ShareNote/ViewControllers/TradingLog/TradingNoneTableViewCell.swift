@@ -21,7 +21,7 @@ class TradingNoneTableViewCell: UITableViewCell {
         $0.text = "작성한 매매일지가 없어요"
         $0.textAlignment = .center
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
-        $0.textColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1)
+        $0.textColor = UIColor.grey1
     }
     
     let createButton = UIButton().then {
@@ -29,7 +29,7 @@ class TradingNoneTableViewCell: UITableViewCell {
         $0.setTitleColor(.gray, for: .normal)
         $0.titleLabel?.textAlignment = .center
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 12)
-        $0.titleLabel?.textColor = UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1)
+        $0.titleLabel?.textColor = UIColor.grey4
     }
     
     // MARK: Methods
@@ -52,7 +52,7 @@ class TradingNoneTableViewCell: UITableViewCell {
     }
     
     func setUI() {
-        backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 250/255)
+        backgroundColor = UIColor.grey8
         selectionStyle = .none
         
         contentView.addSubview(containerView)
