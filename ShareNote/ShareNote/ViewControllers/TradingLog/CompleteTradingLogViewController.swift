@@ -69,7 +69,24 @@ class CompleteTradingLogViewController: UIViewController {
     let segmentDivideLineView = UIView().then {
         $0.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 238/255)
     }
-        
+    
+    static var collectionViewLayout = UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .vertical
+    }
+    
+    var tradingShareCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: collectionViewLayout).then {
+        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+    }
+    
+    var articleCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: collectionViewLayout).then {
+        $0.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
+    }
+    
+    let memoTextView = UITextView().then {
+        $0.backgroundColor = .red
+    }
+    
+    // MARK: Variables
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -80,6 +97,27 @@ class CompleteTradingLogViewController: UIViewController {
         segmentControl.rx.selectedSegmentIndex
             .bind { property in
                 self.segmentControl.changeUnderlinePosition()
+                
+                switch property {
+                case 0:
+                    self.tradingShareCollectionView.isHidden = false
+                    self.articleCollectionView.isHidden = true
+                    self.memoTextView.isHidden = true
+                    break
+                case 1:
+                    self.tradingShareCollectionView.isHidden = true
+                    self.articleCollectionView.isHidden = false
+                    self.memoTextView.isHidden = true
+                    break
+                case 2:
+                    self.tradingShareCollectionView.isHidden = true
+                    self.articleCollectionView.isHidden = true
+                    self.memoTextView.isHidden = false
+                    break
+                default:
+                    break
+                }
+                
             }.disposed(by: disposeBag)
     }
     
@@ -119,6 +157,17 @@ class CompleteTradingLogViewController: UIViewController {
         segmentControl.removeBorder()
         
         view.addSubview(segmentDivideLineView)
+
+        view.addSubview(tradingShareCollectionView)
+        tradingShareCollectionView.delegate = self
+        tradingShareCollectionView.dataSource = self
+        view.addSubview(articleCollectionView)
+        articleCollectionView.delegate = self
+        articleCollectionView.dataSource = self
+        view.addSubview(memoTextView)
+        
+        tradingShareCollectionView.register(TradingSharePagerViewCell.self, forCellWithReuseIdentifier: "TradingSharePagerViewCell")
+        articleCollectionView.register(ArticlePagerViewCell.self, forCellWithReuseIdentifier: "ArticlePagerViewCell")
         
         view.setNeedsUpdateConstraints()
     }
@@ -190,6 +239,58 @@ class CompleteTradingLogViewController: UIViewController {
             make.height.equalTo(1)
         }
         
+        tradingShareCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(segmentControl.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        articleCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(segmentControl.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        memoTextView.snp.makeConstraints { make in
+            make.top.equalTo(segmentControl.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension CompleteTradingLogViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView {
+        case tradingShareCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TradingSharePagerViewCell", for: indexPath) as? TradingSharePagerViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.isShowButtons = false
+            return cell
+        case articleCollectionView:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArticlePagerViewCell", for: indexPath) as? ArticlePagerViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.isShowButtons = false
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width
+
+        return CGSize(width: width, height: 180)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 19, left: 0, bottom: 0, right: 0)
     }
 }
