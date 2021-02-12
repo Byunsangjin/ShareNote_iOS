@@ -11,7 +11,7 @@ import UIKit
 class ArticlePagerViewCell: FSPagerViewCell {
     
     // MARK: Constants
-    let containerView = UIView().createTradingShareCellView()
+    let containerView = UIView.createTradingShareCellView()
     
     let thumbnailImageView = UIImageView().then {
         $0.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)

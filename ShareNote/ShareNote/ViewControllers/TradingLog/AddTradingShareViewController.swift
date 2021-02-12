@@ -49,7 +49,7 @@ class AddTradingShareViewController: UIViewController {
     // Share Title Container
     let shareTitleContainerView = UIView()
     
-    let shareTitleNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let shareTitleNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "주식명"
     }
     
@@ -60,7 +60,7 @@ class AddTradingShareViewController: UIViewController {
     // Category Container
     let categoryContainerView = UIView()
     
-    let categoryNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let categoryNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "분류"
     }
     
@@ -89,7 +89,7 @@ class AddTradingShareViewController: UIViewController {
     
     let tradingDateContainerView = UIView()
     
-    let tradingDateNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let tradingDateNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "거래시간"
     }
     
@@ -106,7 +106,7 @@ class AddTradingShareViewController: UIViewController {
     
     let purchasePriceContainerView = UIView()
     
-    let purchasePriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let purchasePriceNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "매수가"
     }
     
@@ -118,7 +118,7 @@ class AddTradingShareViewController: UIViewController {
     
     let appraisedPriceContainerView = UIView()
     
-    let appraisedPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let appraisedPriceNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "평가금액"
     }
     
@@ -134,7 +134,7 @@ class AddTradingShareViewController: UIViewController {
      
     let dividendCycleContainerView = UIView()
     
-    let dividendCycleNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let dividendCycleNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "배당주기"
     }
     
@@ -144,7 +144,7 @@ class AddTradingShareViewController: UIViewController {
     
     let presentPriceContainerView = UIView()
     
-    let presentPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let presentPriceNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "현재가"
     }
     
@@ -154,7 +154,7 @@ class AddTradingShareViewController: UIViewController {
     
     let dividendsPerShareContainerView = UIView()
     
-    let dividendsPerShareNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let dividendsPerShareNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "주당 배당금"
     }
     
@@ -174,7 +174,7 @@ class AddTradingShareViewController: UIViewController {
     
     let dividendRateContainerView = UIView()
     
-    let dividendRateNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let dividendRateNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "배당 수익률"
     }
     
@@ -190,7 +190,7 @@ class AddTradingShareViewController: UIViewController {
     
     let noDealPresentPriceContainerView = UIView()
     
-    let noDealPresentPriceNameLabel = UILabel().createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
+    let noDealPresentPriceNameLabel = UILabel.createLabel(font: nameLabelFont, textColor: nameLabelTextColor).then {
         $0.text = "현재가"
     }
     

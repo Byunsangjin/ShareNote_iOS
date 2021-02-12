@@ -8,10 +8,11 @@
 import UIKit
 
 extension UILabel {
-    func createLabel(font: UIFont, textColor: UIColor) -> UILabel {
-        self.font = font
-        self.textColor = textColor
+    class func createLabel(font: UIFont, textColor: UIColor) -> UILabel {
+        let label = UILabel()
+        label.font = font
+        label.textColor = textColor
         
-        return self
+        return label
     }
 }

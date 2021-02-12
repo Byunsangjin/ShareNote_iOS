@@ -10,7 +10,7 @@ import UIKit
 class TradingLogTableViewCell: UITableViewCell {
 
     // MARK: Constants
-    let containerView = UIView().createCellContainerView()
+    let containerView = UIView.createCellContainerView()
     
     let titleLabel = UILabel().then {
         $0.text = "기아차 10퍼센트 달성하자"

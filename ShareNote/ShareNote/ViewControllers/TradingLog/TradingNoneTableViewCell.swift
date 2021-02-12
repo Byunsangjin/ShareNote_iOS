@@ -11,7 +11,7 @@ import UIKit
 class TradingNoneTableViewCell: UITableViewCell {
     
     // MARK: Constants
-    let containerView = UIView().createCellContainerView()
+    let containerView = UIView.createCellContainerView()
     
     let iconImageView = UIImageView().then {
         $0.image = UIImage(named: "icNote")

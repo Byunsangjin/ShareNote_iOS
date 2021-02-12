@@ -10,7 +10,7 @@ import FSPagerView
 
 class TradingSharePagerViewCell: FSPagerViewCell {
     
-    let containerView = UIView().createTradingShareCellView()
+    let containerView = UIView.createTradingShareCellView()
     
     let nameLabelStackView = UIStackView().then {
         $0.axis = .vertical
@@ -23,23 +23,23 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     static let labelFont = UIFont.systemFont(ofSize: 14)
     static let labelTextColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1)
     
-    let shareNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
+    let shareNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "주식명"
     }
     
-    let categoryNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
+    let categoryNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "분류"
     }
     
-    let tradingDateNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
+    let tradingDateNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "거래시간"
     }
     
-    let purchasePriceNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
+    let purchasePriceNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "매수가"
     }
     
-    let appraisedPriceNameLabel = UILabel().createLabel(font: labelFont, textColor: labelTextColor).then {
+    let appraisedPriceNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {
         $0.text = "평가금액"
     }
     
