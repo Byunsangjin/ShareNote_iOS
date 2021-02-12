@@ -64,20 +64,32 @@ class TradingLogTableViewCell: UITableViewCell {
         for _ in 0..<10 {
             let button = UIButton().then {
                 $0.setTitle("#Test", for: .normal)
-                $0.backgroundColor = .green
+                $0.setTitleColor(UIColor.black2, for: .normal)
+                $0.titleLabel?.font = UIFont.spoqaHanSans(size: 10, style: .Regular)
+                $0.backgroundColor = UIColor.tag
+                $0.layer.cornerRadius = 12
+                $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
             }
             tagStackView.addArrangedSubview(button)
         }
         
         let button2 = UIButton().then {
-            $0.setTitle("#Testㅁㄴㅇㅁㄴㅇ", for: .normal)
-            $0.backgroundColor = .green
+            $0.setTitle("#Test 라벨 입니다", for: .normal)
+            $0.setTitleColor(UIColor.black2, for: .normal)
+            $0.titleLabel?.font = UIFont.spoqaHanSans(size: 10, style: .Regular)
+            $0.backgroundColor = UIColor.tag
+            $0.layer.cornerRadius = 12
+            $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         }
         tagStackView.addArrangedSubview(button2)
         
         let button3 = UIButton().then {
-            $0.setTitle("#st", for: .normal)
-            $0.backgroundColor = .green
+            $0.setTitle("#Hi", for: .normal)
+            $0.setTitleColor(UIColor.black2, for: .normal)
+            $0.titleLabel?.font = UIFont.spoqaHanSans(size: 10, style: .Regular)
+            $0.backgroundColor = UIColor.tag
+            $0.layer.cornerRadius = 12
+            $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         }
         tagStackView.addArrangedSubview(button3)
         
