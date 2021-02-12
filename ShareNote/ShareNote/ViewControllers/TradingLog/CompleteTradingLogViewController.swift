@@ -101,6 +101,7 @@ class CompleteTradingLogViewController: UIViewController {
         segmentControl.rx.selectedSegmentIndex
             .bind { property in
                 self.segmentControl.changeUnderlinePosition()
+                self.moveTopScrollButton.isHidden = true
                 
                 switch property {
                 case 0:
@@ -117,6 +118,7 @@ class CompleteTradingLogViewController: UIViewController {
                     self.tradingShareCollectionView.isHidden = true
                     self.articleCollectionView.isHidden = true
                     self.memoTextView.isHidden = false
+                    self.moveTopScrollButton.isHidden = false
                     break
                 default:
                     break
@@ -262,8 +264,8 @@ class CompleteTradingLogViewController: UIViewController {
         
         moveTopScrollButton.snp.makeConstraints { make in
             make.width.height.equalTo(46)
-            make.right.equalTo(-21)
-            make.bottom.equalTo(-30)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
         
         super.updateViewConstraints()
