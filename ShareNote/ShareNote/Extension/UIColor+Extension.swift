@@ -9,74 +9,92 @@ import UIKit
 
 extension UIColor {
     class var black1: UIColor {
-        return UIColor(white: 0.0, alpha: 1.0)
+        guard let color = UIColor(named: "black1") else { return .black }
+        return color
     }
     
     class var black2: UIColor {
-        return UIColor(white: 33.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "black2") else { return .black }
+        return color
     }
     
     class var grey1: UIColor {
-        return UIColor(white: 66.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey1") else { return .black }
+        return color
     }
     
     class var grey2: UIColor {
-        return UIColor(white: 97.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey2") else { return .black }
+        return color
     }
     
     class var grey3: UIColor {
-        return UIColor(white: 117.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey3") else { return .black }
+        return color
     }
     
     class var grey4: UIColor {
-        return UIColor(white: 158.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey4") else { return .black }
+        return color
     }
     
     class var grey5: UIColor {
-        return UIColor(white: 189.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey5") else { return .black }
+        return color
     }
     
     class var grey6: UIColor {
-        return UIColor(white: 224.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey6") else { return .black }
+        return color
     }
     
     class var grey7: UIColor {
-        return UIColor(white: 238.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey7") else { return .black }
+        return color
     }
     
     class var tempGreyColor: UIColor {
-        return UIColor(white: 245.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "tempGreyColor") else { return .black }
+        return color
     }
     
     class var grey8: UIColor {
-        return UIColor(white: 250.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "grey8") else { return .black }
+        return color
     }
     
     class var white: UIColor {
-        return UIColor(white: 1.0, alpha: 1.0)
+        guard let color = UIColor(named: "white") else { return .black }
+        return color
     }
     
     class var maincolor: UIColor {
-        return UIColor(red: 1.0, green: 214.0 / 255.0, blue: 8.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "maincolor") else { return .black }
+        return color
     }
     
     class var tag: UIColor {
-        return UIColor(red: 1.0, green: 234.0 / 255.0, blue: 132.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "tag") else { return .black }
+        return color
     }
     
     class var tag2: UIColor {
-        return UIColor(red: 1.0, green: 246.0 / 255.0, blue: 199.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "tag2") else { return .black }
+        return color
     }
     
     class var mainBrown: UIColor {
-        return UIColor(red: 111.0 / 255.0, green: 93.0 / 255.0, blue: 0.0, alpha: 1.0)
+        guard let color = UIColor(named: "mainBrown") else { return .black }
+        return color
     }
     
     class var red: UIColor {
-        return UIColor(red: 230.0 / 255.0, green: 89.0 / 255.0, blue: 89.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "red") else { return .black }
+        return color
     }
     
     class var blue: UIColor {
-        return UIColor(red: 68.0 / 255.0, green: 182.0 / 255.0, blue: 253.0 / 255.0, alpha: 1.0)
+        guard let color = UIColor(named: "blue") else { return .black }
+        return color
     }
 }
