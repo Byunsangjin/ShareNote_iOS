@@ -20,7 +20,7 @@ class TradingNoneTableViewCell: UITableViewCell {
     let titleLabel = UILabel().then {
         $0.text = "작성한 매매일지가 없어요"
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
         $0.textColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1)
     }
     
@@ -28,7 +28,7 @@ class TradingNoneTableViewCell: UITableViewCell {
         $0.setTitle("작성하러가기", for: .normal)
         $0.setTitleColor(.gray, for: .normal)
         $0.titleLabel?.textAlignment = .center
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 12)
         $0.titleLabel?.textColor = UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1)
     }
     

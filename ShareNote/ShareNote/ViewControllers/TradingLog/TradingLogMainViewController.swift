@@ -15,7 +15,7 @@ class TradingLogMainViewController: UIViewController {
     // MARK: Constants
     let titleLabel = UILabel().then {
         $0.text = "매매일지"
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
     let viewHoneyPageButton = UIButton().then {
@@ -35,7 +35,7 @@ class TradingLogMainViewController: UIViewController {
     let yearMonthContainerView = UIView()
     
     let yearMonthLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 21)
+        $0.font = UIFont.spoqaHanSans(size: 20)
         $0.text = "Year.Month"
     }
     
