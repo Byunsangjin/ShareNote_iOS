@@ -15,19 +15,19 @@ class WriteTradingLogViewController: UIViewController {
     // NavigationBar
     let navigationTitleLabel = UILabel().then {
         $0.text = "매매일지 작성"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
     let cancelButton = UIButton().then {
         $0.setTitle("취소", for: .normal)
         $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
     let saveButton = UIButton().then {
         $0.setTitle("저장", for: .normal)
         $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
     let divisionLine = UIView().then {
@@ -54,11 +54,11 @@ class WriteTradingLogViewController: UIViewController {
     let titleLabel = UILabel().then {
         $0.text = "제목"
         $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
     let titleTextField = UITextField().then {
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
         $0.borderStyle = .none
         $0.placeholder = "제목을 입력해주세요"
     }
@@ -68,7 +68,7 @@ class WriteTradingLogViewController: UIViewController {
     let tagLabel = UILabel().then {
         $0.text = "태그"
         $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
     let dateContainerView = UIView()
@@ -76,12 +76,12 @@ class WriteTradingLogViewController: UIViewController {
     let dateLabel = UILabel().then {
         $0.text = "날짜"
         $0.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
     let dateContentLabel = UILabel().then {
         $0.text = "2021년 1월 7일 오후 7:42"
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
     }
     
     // TradingShare ContainerView
@@ -91,7 +91,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let tradingShareTitleLabel = UILabel().then {
         $0.text = "거래주식"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
     let tradingShareAddButton = UIButton().then {
@@ -118,7 +118,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let articleShareTitleLabel = UILabel().then {
         $0.text = "관련기사"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
     let articleAddButton = UIButton().then {
@@ -148,7 +148,7 @@ class WriteTradingLogViewController: UIViewController {
     
     let memoTitleLabel = UILabel().then {
         $0.text = "메모"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
     let memoTextView = UITextView()

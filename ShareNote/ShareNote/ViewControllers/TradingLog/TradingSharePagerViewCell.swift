@@ -20,7 +20,7 @@ class TradingSharePagerViewCell: FSPagerViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    static let labelFont = UIFont.systemFont(ofSize: 14)
+    static let labelFont = UIFont.spoqaHanSans(size: 14)
     static let labelTextColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1)
     
     let shareNameLabel = UILabel.createLabel(font: labelFont, textColor: labelTextColor).then {

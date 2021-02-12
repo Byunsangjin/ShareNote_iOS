@@ -15,7 +15,7 @@ class TextFieldView: UIView {
     
     var label = UILabel().then {
         $0.textColor = UIColor(red: 97/255, green: 97/255, blue: 97/255, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
     }
     
     override init(frame: CGRect) {

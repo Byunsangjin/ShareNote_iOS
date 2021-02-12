@@ -18,13 +18,13 @@ class AddTradingShareViewController: UIViewController {
         
     ])
     
-    static let nameLabelFont = UIFont.systemFont(ofSize: 14)
+    static let nameLabelFont = UIFont.spoqaHanSans(size: 14)
     static let nameLabelTextColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
     
     // MARK: Constants
     let titleLabel = UILabel().then {
         $0.text = "거래주식"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
         $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
     }
     
@@ -95,7 +95,7 @@ class AddTradingShareViewController: UIViewController {
     
     let tradingDateContentLabel = UILabel().then {
         $0.text = "2021년 1월 7일 오후 7:43"
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
         $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
     }
     
@@ -202,7 +202,7 @@ class AddTradingShareViewController: UIViewController {
     let saveButton = UIButton().then {
         $0.setTitle("저장", for: .normal)
         $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
         $0.backgroundColor = UIColor(red: 1, green: 214/255, blue: 8/255, alpha: 1)
         $0.layer.cornerRadius = 7
     }

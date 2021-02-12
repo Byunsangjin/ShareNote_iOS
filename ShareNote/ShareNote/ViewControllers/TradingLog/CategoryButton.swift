@@ -18,7 +18,7 @@ class CategoryButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        self.titleLabel?.font = UIFont.spoqaHanSans(size: 12)
         
         self.setTitleColor(UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1), for: .normal)
         self.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .selected)
