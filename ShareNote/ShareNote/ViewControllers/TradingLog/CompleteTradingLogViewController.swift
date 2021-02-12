@@ -17,7 +17,7 @@ class CompleteTradingLogViewController: UIViewController {
     
     let navigationTitleLabel = UILabel().then {
         $0.text = "매매일지 작성"
-        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
     let backButton = UIButton().then {
@@ -27,7 +27,7 @@ class CompleteTradingLogViewController: UIViewController {
     let editButton = UIButton().then {
         $0.setTitle("편집", for: .normal)
         $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
     // TradingLogTitle ContainerView
@@ -38,13 +38,13 @@ class CompleteTradingLogViewController: UIViewController {
     let dateLabel = UILabel().then {
         $0.text = "2021년 1월 7일 오후 7:43"
         $0.textColor = UIColor(red: 111/255, green: 93/255, blue: 0, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.font = UIFont.spoqaHanSans(size: 12)
     }
     
     let titleLabel = UILabel().then {
         $0.text = "기아차 가즈아~~"
         $0.textColor = UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
-        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Bold)
     }
     
     let tagScrollView = UIScrollView().then {
@@ -141,7 +141,7 @@ class CompleteTradingLogViewController: UIViewController {
             let button = UIButton().then {
                 $0.setTitle("#보여지고", for: .normal)
                 $0.setTitleColor(UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1), for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+                $0.titleLabel?.font = UIFont.spoqaHanSans(size: 10, style: .Regular)
                 $0.backgroundColor = UIColor(red: 1, green: 234/255, blue: 132/255, alpha: 1)
                 $0.layer.cornerRadius = 12
                 $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
