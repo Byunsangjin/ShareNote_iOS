@@ -12,7 +12,7 @@ class CompleteTradingLogViewController: UIViewController {
     
     // Navigation ContainerView
     let navigationContainerView = UIView().then {
-        $0.backgroundColor = UIColor.maincolor
+        $0.backgroundColor = UIColor.mainColor
     }
     
     let navigationTitleLabel = UILabel().then {
@@ -32,7 +32,7 @@ class CompleteTradingLogViewController: UIViewController {
     
     // TradingLogTitle ContainerView
     let tradingLogTitleContainerView = UIView().then {
-        $0.backgroundColor = UIColor.maincolor
+        $0.backgroundColor = UIColor.mainColor
     }
     
     let dateLabel = UILabel().then {

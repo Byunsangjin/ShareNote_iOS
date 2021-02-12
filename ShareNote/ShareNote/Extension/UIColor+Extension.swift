@@ -68,8 +68,8 @@ extension UIColor {
         return color
     }
     
-    class var maincolor: UIColor {
-        guard let color = UIColor(named: "maincolor") else { return .black }
+    class var mainColor: UIColor {
+        guard let color = UIColor(named: "mainColor") else { return .black }
         return color
     }
     

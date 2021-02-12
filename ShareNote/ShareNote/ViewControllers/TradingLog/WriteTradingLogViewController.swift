@@ -106,7 +106,7 @@ class WriteTradingLogViewController: UIViewController {
         $0.numberOfPages = 5
         $0.currentPage = 0
         $0.setStrokeColor(UIColor.grey5, for: .normal)
-        $0.setFillColor(UIColor.maincolor, for: .selected)
+        $0.setFillColor(UIColor.mainColor, for: .selected)
         $0.itemSpacing = 10
         $0.interitemSpacing = 7
     }
@@ -133,7 +133,7 @@ class WriteTradingLogViewController: UIViewController {
         $0.numberOfPages = 3
         $0.currentPage = 0
         $0.setStrokeColor(UIColor.grey5, for: .normal)
-        $0.setFillColor(UIColor.maincolor, for: .selected)
+        $0.setFillColor(UIColor.mainColor, for: .selected)
         $0.itemSpacing = 10
         $0.interitemSpacing = 7
     }

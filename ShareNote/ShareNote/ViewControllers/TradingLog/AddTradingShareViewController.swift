@@ -203,7 +203,7 @@ class AddTradingShareViewController: UIViewController {
         $0.setTitle("저장", for: .normal)
         $0.setTitleColor(UIColor.black2, for: .normal)
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
-        $0.backgroundColor = UIColor.maincolor
+        $0.backgroundColor = UIColor.mainColor
         $0.layer.cornerRadius = 7
     }
     
@@ -554,7 +554,7 @@ extension AddTradingShareViewController: UITextFieldDelegate {
     func showPopover() {
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: self.shareSearchTextField.frame.width, height: 135))
         
-        containerView.layer.addBorder([.top], color: UIColor.maincolor, width: 3)
+        containerView.layer.addBorder([.top], color: UIColor.mainColor, width: 3)
         containerView.layer.addBorder([.left, .right, .bottom], color: UIColor.grey6, width: 1)
         
         let tableViewFrame = containerView.frame.inset(by: UIEdgeInsets(top: 3, left: 1, bottom: 1, right: 1))

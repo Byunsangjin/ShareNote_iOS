@@ -28,7 +28,7 @@ extension UISegmentedControl{
         let underLineYPosition = self.bounds.size.height - 1.0
         let underlineFrame = CGRect(x: underlineXPosition, y: underLineYPosition, width: underlineWidth, height: underlineHeight)
         let underline = UIView(frame: underlineFrame)
-        underline.backgroundColor = UIColor.maincolor
+        underline.backgroundColor = UIColor.mainColor
         underline.tag = 1
         self.addSubview(underline)
     }

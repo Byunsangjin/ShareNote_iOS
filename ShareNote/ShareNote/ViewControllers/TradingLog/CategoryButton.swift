@@ -10,7 +10,7 @@ import UIKit
 class CategoryButton: UIButton {
     override var isSelected: Bool {
         didSet {
-            backgroundColor = isSelected ? UIColor.maincolor : .clear
+            backgroundColor = isSelected ? UIColor.mainColor : .clear
             setNeedsDisplay()
         }
     }
