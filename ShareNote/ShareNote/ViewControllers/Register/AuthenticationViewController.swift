@@ -96,15 +96,21 @@ class AuthenticationViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 20)
     }
     
-    let genderTextField = SkyFloatingLabelTextField.createTextField()
+    let genderTextField = SkyFloatingLabelTextField.createTextField().then {
+        $0.textAlignment = .center
+    }
     
     let dotStackView = UIStackView().then {
-        let image = UIImage(named: "dot")
-        let imageView = UIImageView(image: image)
-        
         for _ in 0..<6 {
+            let image = UIImage(named: "dot")
+            let imageView = UIImageView(image: image)
             $0.addArrangedSubview(imageView)
         }
+        
+        
+        $0.distribution = .fillEqually
+        $0.alignment = .fill
+        $0.spacing = 4
     }
     
     // MARK: Methods
@@ -266,6 +272,38 @@ class AuthenticationViewController: UIViewController {
         phoneNumberErrorLabel.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(phoneNumberContainerView)
             make.height.equalTo(15)
+        }
+        
+        birthDataContainerView.snp.makeConstraints { make in
+            make.top.equalTo(phoneNumberContainerView.snp.bottom).offset(30)
+            make.left.equalTo(scrollContentView).offset(20)
+            make.right.equalTo(scrollContentView).offset(-20)
+            make.height.equalTo(80)
+        }
+        
+        birthDataTextField.snp.makeConstraints { make in
+            make.left.equalTo(birthDataContainerView)
+            make.right.equalTo(divideLabel.snp.left).offset(-5)
+            make.height.equalTo(60)
+        }
+        
+        divideLabel.snp.makeConstraints { make in
+            make.right.equalTo(genderTextField.snp.left).offset(-5)
+            make.bottom.equalTo(genderTextField).offset(-10)
+            make.width.equalTo(10)
+        }
+        
+        genderTextField.snp.makeConstraints { make in
+            make.right.equalTo(dotStackView.snp.left).offset(-5)
+            make.width.equalTo(20)
+            make.height.equalTo(60)
+        }
+        
+        dotStackView.snp.makeConstraints { make in
+            make.right.equalTo(birthDataContainerView).offset(-5)
+            make.centerY.equalTo(divideLabel)
+            make.width.equalTo(50)
+            make.height.equalTo(5)
         }
         
         super.updateViewConstraints()
