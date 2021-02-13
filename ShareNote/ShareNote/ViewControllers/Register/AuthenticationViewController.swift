@@ -5,7 +5,9 @@
 //  Created by sjbyun on 2021/02/12.
 //
 
+import TextFieldEffects
 import UIKit
+import SkyFloatingLabelTextField
 
 class AuthenticationViewController: UIViewController {
     
@@ -32,7 +34,7 @@ class AuthenticationViewController: UIViewController {
     }
     
     let scrollContentView = UIView().then {
-        $0.backgroundColor = .green
+        $0.backgroundColor = .grey7
     }
     
     // 약관동의 View
@@ -74,6 +76,7 @@ class AuthenticationViewController: UIViewController {
     
     let overFourteenYearLabel = UILabel.createAttributeLabel(text: "만 14세 이상입니다. (필수)")
     
+    let phoneNumberTextField = SkyFloatingLabelTextField.createTextField(placeholder: "휴대폰번호(-없이 입력)")
     // MARK: Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -103,6 +106,8 @@ class AuthenticationViewController: UIViewController {
         termsAndConditionsContainerView.addSubview(overFourteenYearButton)
         termsAndConditionsContainerView.addSubview(overFourteenYearLabel)
         
+        scrollContentView.addSubview(phoneNumberTextField)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -130,8 +135,9 @@ class AuthenticationViewController: UIViewController {
         }
         
         scrollContentView.snp.makeConstraints { make in
-            make.top.left.bottom.equalTo(scrollView)
+            make.top.left.equalTo(scrollView)
             make.width.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view)
         }
         
         termsAndConditionsContainerView.snp.makeConstraints { make in
@@ -207,6 +213,39 @@ class AuthenticationViewController: UIViewController {
             make.centerY.equalTo(overFourteenYearButton)
         }
         
+        phoneNumberTextField.snp.makeConstraints { make in
+            make.top.equalTo(termsAndConditionsContainerView.snp.bottom).offset(40)
+            make.left.equalTo(scrollContentView).offset(20)
+            make.right.equalTo(scrollContentView).offset(-20)
+            make.height.equalTo(60)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension SkyFloatingLabelTextField {
+    class func createTextField(placeholder: String? = nil) -> SkyFloatingLabelTextField {
+        let textField = SkyFloatingLabelTextField()
+        
+        textField.textColor = .black2
+        textField.font = UIFont.spoqaHanSans(size: 20, style: .Regular)
+        
+        textField.lineHeight = 1
+        textField.selectedLineHeight = 2
+        textField.selectedLineColor = .mainColor
+        
+        guard let placeholder = placeholder else {
+            return textField
+        }
+        
+        textField.placeholder = placeholder
+        textField.placeholderColor = .grey4
+        textField.placeholderFont = UIFont.spoqaHanSans(size: 20)
+        textField.title = placeholder
+        textField.titleFont = UIFont.spoqaHanSans(size: 12, style: .Regular)
+        textField.selectedTitleColor = .grey4
+        
+        return textField
     }
 }
