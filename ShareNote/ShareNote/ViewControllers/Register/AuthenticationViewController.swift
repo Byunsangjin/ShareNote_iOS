@@ -76,7 +76,37 @@ class AuthenticationViewController: UIViewController {
     
     let overFourteenYearLabel = UILabel.createAttributeLabel(text: "만 14세 이상입니다. (필수)")
     
+    let phoneNumberContainerView = UIView()
+    
     let phoneNumberTextField = SkyFloatingLabelTextField.createTextField(placeholder: "휴대폰번호(-없이 입력)")
+    
+    let phoneNumberErrorLabel = UILabel().then {
+        $0.text = "올바르지 않은 형식입니다."
+        $0.textColor = .red
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
+    let birthDataContainerView = UIView()
+    
+    let birthDataTextField = SkyFloatingLabelTextField.createTextField(placeholder: "생년월일 입력")
+    
+    let divideLabel = UILabel().then {
+        $0.text = "-"
+        $0.textColor = .grey4
+        $0.font = UIFont.spoqaHanSans(size: 20)
+    }
+    
+    let genderTextField = SkyFloatingLabelTextField.createTextField()
+    
+    let dotStackView = UIStackView().then {
+        let image = UIImage(named: "dot")
+        let imageView = UIImageView(image: image)
+        
+        for _ in 0..<6 {
+            $0.addArrangedSubview(imageView)
+        }
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -106,7 +136,15 @@ class AuthenticationViewController: UIViewController {
         termsAndConditionsContainerView.addSubview(overFourteenYearButton)
         termsAndConditionsContainerView.addSubview(overFourteenYearLabel)
         
-        scrollContentView.addSubview(phoneNumberTextField)
+        scrollContentView.addSubview(phoneNumberContainerView)
+        phoneNumberContainerView.addSubview(phoneNumberTextField)
+        phoneNumberContainerView.addSubview(phoneNumberErrorLabel)
+        
+        scrollContentView.addSubview(birthDataContainerView)
+        birthDataContainerView.addSubview(birthDataTextField)
+        birthDataContainerView.addSubview(divideLabel)
+        birthDataContainerView.addSubview(genderTextField)
+        birthDataContainerView.addSubview(dotStackView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -213,11 +251,21 @@ class AuthenticationViewController: UIViewController {
             make.centerY.equalTo(overFourteenYearButton)
         }
         
-        phoneNumberTextField.snp.makeConstraints { make in
-            make.top.equalTo(termsAndConditionsContainerView.snp.bottom).offset(40)
+        phoneNumberContainerView.snp.makeConstraints { make in
+            make.top.equalTo(termsAndConditionsContainerView.snp.bottom).offset(50)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
+            make.height.equalTo(80)
+        }
+        
+        phoneNumberTextField.snp.makeConstraints { make in
+            make.left.right.equalTo(phoneNumberContainerView)
             make.height.equalTo(60)
+        }
+        
+        phoneNumberErrorLabel.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(phoneNumberContainerView)
+            make.height.equalTo(15)
         }
         
         super.updateViewConstraints()
