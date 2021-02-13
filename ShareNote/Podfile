@@ -53,7 +53,10 @@ target 'ShareNote' do
 
   #Popover
   pod "Popover"
-  
+ 
+  #SkyFloatingLabelTextField
+  pod 'SkyFloatingLabelTextField'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing
