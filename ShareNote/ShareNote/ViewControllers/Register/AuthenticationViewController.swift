@@ -8,12 +8,14 @@
 import TextFieldEffects
 import UIKit
 import SkyFloatingLabelTextField
+import SnapKit
 
 class AuthenticationViewController: UIViewController {
     
     // MARK: Constants
     let closeButton = UIButton().then {
         $0.setImage(UIImage(named: "icClose"), for: .normal)
+        $0.addTarget(self, action: #selector(test), for: .touchUpInside)
     }
     
     let navigationLabel = UILabel().then {
@@ -38,7 +40,9 @@ class AuthenticationViewController: UIViewController {
     }
     
     // 약관동의 View
-    let termsAndConditionsContainerView = UIView()
+    let termsAndConditionsContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let allAgreementButton = UIButton.createCheckButton()
     
@@ -107,17 +111,31 @@ class AuthenticationViewController: UIViewController {
             $0.addArrangedSubview(imageView)
         }
         
-        
         $0.distribution = .fillEqually
         $0.alignment = .fill
         $0.spacing = 4
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    let nameContainerView = UIView()
+    
+    let nameTexField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력")
+    
+    var height: Constraint?
     
     // MARK: Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
         
         setUI()
+    }
+    
+    @objc
+    func test() {
+        UIView.transition(with: scrollContentView, duration: 1, options: .transitionCrossDissolve, animations: {
+            self.termsAndConditionsContainerView.isHidden = false
+            self.height?.update(offset: 232)
+        }, completion: nil)
     }
     
     func setUI() {
@@ -152,6 +170,9 @@ class AuthenticationViewController: UIViewController {
         birthDataContainerView.addSubview(genderTextField)
         birthDataContainerView.addSubview(dotStackView)
         
+        scrollContentView.addSubview(nameContainerView)
+        scrollContentView.addSubview(nameTexField)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -180,14 +201,15 @@ class AuthenticationViewController: UIViewController {
         
         scrollContentView.snp.makeConstraints { make in
             make.top.left.equalTo(scrollView)
-            make.width.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view)
+            make.width.equalTo(scrollView)
+            make.bottom.equalTo(scrollView)
+            make.height.equalTo(520)
         }
         
         termsAndConditionsContainerView.snp.makeConstraints { make in
             make.top.equalTo(scrollContentView).offset(5)
             make.left.right.equalTo(scrollContentView)
-            make.height.equalTo(182)
+            self.height = make.height.equalTo(0).constraint
         }
         
         allAgreementButton.snp.makeConstraints { make in
@@ -258,10 +280,10 @@ class AuthenticationViewController: UIViewController {
         }
         
         phoneNumberContainerView.snp.makeConstraints { make in
-            make.top.equalTo(termsAndConditionsContainerView.snp.bottom).offset(50)
+            make.top.equalTo(termsAndConditionsContainerView.snp.bottom)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
-            make.height.equalTo(80)
+            make.height.equalTo(110)
         }
         
         phoneNumberTextField.snp.makeConstraints { make in
@@ -270,15 +292,16 @@ class AuthenticationViewController: UIViewController {
         }
         
         phoneNumberErrorLabel.snp.makeConstraints { make in
-            make.left.right.bottom.equalTo(phoneNumberContainerView)
+            make.top.equalTo(phoneNumberTextField.snp.bottom).offset(5)
+            make.left.right.equalTo(phoneNumberContainerView)
             make.height.equalTo(15)
         }
         
         birthDataContainerView.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberContainerView.snp.bottom).offset(30)
+            make.top.equalTo(phoneNumberContainerView.snp.bottom)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
-            make.height.equalTo(80)
+            make.height.equalTo(110)
         }
         
         birthDataTextField.snp.makeConstraints { make in
@@ -304,6 +327,18 @@ class AuthenticationViewController: UIViewController {
             make.centerY.equalTo(divideLabel)
             make.width.equalTo(50)
             make.height.equalTo(5)
+        }
+        
+        nameContainerView.snp.makeConstraints { make in
+            make.top.equalTo(birthDataContainerView.snp.bottom)
+            make.left.equalTo(scrollContentView).offset(20)
+            make.right.equalTo(scrollContentView).offset(-20)
+            make.height.equalTo(60)
+        }
+        
+        nameTexField.snp.makeConstraints { make in
+            make.top.left.right.equalTo(nameContainerView)
+            make.height.equalTo(60)
         }
         
         super.updateViewConstraints()
