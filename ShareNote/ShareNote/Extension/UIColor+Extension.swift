@@ -74,8 +74,8 @@ extension UIColor {
     /**
      rgb 245 245 245
      */
-    class var tempGreyColor: UIColor {
-        guard let color = UIColor(named: "tempGreyColor") else { return .black }
+    class var whiteTwo: UIColor {
+        guard let color = UIColor(named: "whiteTwo") else { return .black }
         return color
     }
     /**

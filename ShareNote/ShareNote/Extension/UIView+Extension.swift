@@ -22,7 +22,7 @@ extension UIView {
     
     class func createTradingShareCellView() -> UIView {
         let view = UIView.createCellContainerView()
-        view.layer.borderColor = UIColor.tempGreyColor.cgColor
+        view.layer.borderColor = UIColor.whiteTwo.cgColor
         view.layer.applySketchShadow(color: .black, alpha: 0.05, x: 0, y: 1, blur: 10, spread: 0)
         
         return view
@@ -34,7 +34,7 @@ extension UIView {
     
     func addBottomLine() {
         let border = CALayer()
-        border.borderColor = UIColor.tempGreyColor.cgColor
+        border.borderColor = UIColor.whiteTwo.cgColor
         border.frame = CGRect(x: 20, y: frame.height - 1, width: frame.width - 40, height: 1)
         border.borderWidth = 1
         
