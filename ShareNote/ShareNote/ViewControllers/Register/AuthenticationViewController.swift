@@ -10,6 +10,7 @@ import SkyFloatingLabelTextField
 import SnapKit
 import TextFieldEffects
 import UIKit
+import PanModal
 
 class AuthenticationViewController: UIViewController {
     
@@ -143,6 +144,13 @@ class AuthenticationViewController: UIViewController {
         $0.setTitleColor(.grey2, for: .normal)
     }
     
+    let certificationNumberButton = UIButton().then {
+        $0.setTitle("인증번호받기", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
+        $0.backgroundColor = UIColor.mainColor
+    }
+    
     // MARK: Variables
     var termsAndConditionsContainerViewHeight: Constraint?
     
@@ -268,6 +276,8 @@ class AuthenticationViewController: UIViewController {
         view.addSubview(nextAndCancelContainerView)
         nextAndCancelContainerView.addSubview(nextButton)
         nextAndCancelContainerView.addSubview(cancelButton)
+        
+        view.addSubview(certificationNumberButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -451,6 +461,11 @@ class AuthenticationViewController: UIViewController {
         cancelButton.snp.makeConstraints { make in
             make.left.equalTo(nextAndCancelContainerView).offset(20)
             make.centerY.equalTo(nextAndCancelContainerView)
+        }
+        
+        certificationNumberButton.snp.makeConstraints { make in
+            make.left.bottom.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(59)
         }
         
         super.updateViewConstraints()
