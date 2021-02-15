@@ -5,10 +5,11 @@
 //  Created by sjbyun on 2021/02/12.
 //
 
-import TextFieldEffects
-import UIKit
+import RxSwift
 import SkyFloatingLabelTextField
 import SnapKit
+import TextFieldEffects
+import UIKit
 
 class AuthenticationViewController: UIViewController {
     
@@ -80,7 +81,9 @@ class AuthenticationViewController: UIViewController {
     
     let overFourteenYearLabel = UILabel.createAttributeLabel(text: "만 14세 이상입니다. (필수)")
     
-    let phoneNumberContainerView = UIView()
+    let phoneNumberContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let phoneNumberTextField = SkyFloatingLabelTextField.createTextField(placeholder: "휴대폰번호(-없이 입력)")
     
@@ -90,7 +93,9 @@ class AuthenticationViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     
-    let birthDataContainerView = UIView()
+    let birthDataContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let birthDataTextField = SkyFloatingLabelTextField.createTextField(placeholder: "생년월일 입력")
     
@@ -121,21 +126,108 @@ class AuthenticationViewController: UIViewController {
     
     let nameTexField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력")
     
-    var height: Constraint?
+    let nextAndCancelContainerView = UIView().then {
+        $0.isHidden = true
+        $0.backgroundColor = UIColor.whiteTwo
+    }
     
+    let nextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+        $0.setTitleColor(.grey2, for: .normal)
+    }
+    
+    let cancelButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+        $0.setTitleColor(.grey2, for: .normal)
+    }
+    
+    // MARK: Variables
+    var termsAndConditionsContainerViewHeight: Constraint?
+    
+    var phoneNumberContainerViewHeight: Constraint?
+    
+    var birthDataContainerViewHeight: Constraint?
+    
+    var nextAndCancelContainerViewHeight: Constraint?
+    
+    var disposeBag = DisposeBag()
+    
+    var count = 0
+     
     // MARK: Methods
     override func viewDidLoad() {
         view.backgroundColor = .white
         
         setUI()
+        setKeyboardNotification()
+        
+        nextButton.rx.tap
+            .bind { [weak self] in
+                self?.nextBtnTouched()
+            }.disposed(by: disposeBag)
+        
+        cancelButton.rx.tap
+            .bind { [weak self] in
+                self?.view.endEditing(true)
+            }.disposed(by: disposeBag)
+    }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        self.nextAndCancelContainerView.isHidden = false
+                
+        self.nextAndCancelContainerViewHeight?.update(offset: -keyboardFrame.size.height)
+        self.nextAndCancelContainerView.updateConstraints()
+        
+        UIView.animate(withDuration: 1, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        nextAndCancelContainerView.isHidden = true
+        nextAndCancelContainerViewHeight?.update(offset: 0)
     }
     
     @objc
     func test() {
         UIView.transition(with: scrollContentView, duration: 1, options: .transitionCrossDissolve, animations: {
             self.termsAndConditionsContainerView.isHidden = false
-            self.height?.update(offset: 232)
+            self.termsAndConditionsContainerViewHeight?.update(offset: 232)
         }, completion: nil)
+    }
+    
+    func nextBtnTouched() {
+        UIView.transition(with: scrollContentView, duration: 1, options: .transitionCrossDissolve, animations: { [self] in
+            switch count {
+            case 0:
+                self.birthDataContainerView.isHidden = false
+                self.birthDataContainerViewHeight?.update(offset: 110)
+                self.birthDataTextField.becomeFirstResponder()
+            case 1:
+                self.phoneNumberContainerView.isHidden = false
+                self.phoneNumberContainerViewHeight?.update(offset: 110)
+                self.phoneNumberTextField.becomeFirstResponder()
+            case 2:
+                self.termsAndConditionsContainerView.isHidden = false
+                self.termsAndConditionsContainerViewHeight?.update(offset: 232)
+            default:
+                break
+            }
+        }, completion: { _ in
+            self.count += 1
+        })
     }
     
     func setUI() {
@@ -173,6 +265,10 @@ class AuthenticationViewController: UIViewController {
         scrollContentView.addSubview(nameContainerView)
         scrollContentView.addSubview(nameTexField)
         
+        view.addSubview(nextAndCancelContainerView)
+        nextAndCancelContainerView.addSubview(nextButton)
+        nextAndCancelContainerView.addSubview(cancelButton)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -209,7 +305,7 @@ class AuthenticationViewController: UIViewController {
         termsAndConditionsContainerView.snp.makeConstraints { make in
             make.top.equalTo(scrollContentView).offset(5)
             make.left.right.equalTo(scrollContentView)
-            self.height = make.height.equalTo(0).constraint
+            self.termsAndConditionsContainerViewHeight = make.height.equalTo(0).constraint
         }
         
         allAgreementButton.snp.makeConstraints { make in
@@ -283,7 +379,7 @@ class AuthenticationViewController: UIViewController {
             make.top.equalTo(termsAndConditionsContainerView.snp.bottom)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
-            make.height.equalTo(110)
+            self.phoneNumberContainerViewHeight = make.height.equalTo(0).constraint
         }
         
         phoneNumberTextField.snp.makeConstraints { make in
@@ -301,7 +397,7 @@ class AuthenticationViewController: UIViewController {
             make.top.equalTo(phoneNumberContainerView.snp.bottom)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
-            make.height.equalTo(110)
+            self.birthDataContainerViewHeight = make.height.equalTo(0).constraint
         }
         
         birthDataTextField.snp.makeConstraints { make in
@@ -339,6 +435,22 @@ class AuthenticationViewController: UIViewController {
         nameTexField.snp.makeConstraints { make in
             make.top.left.right.equalTo(nameContainerView)
             make.height.equalTo(60)
+        }
+        
+        nextAndCancelContainerView.snp.makeConstraints { make in
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(45)
+            self.nextAndCancelContainerViewHeight = make.bottom.equalTo(view).constraint
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.right.equalTo(nextAndCancelContainerView).offset(-20)
+            make.centerY.equalTo(nextAndCancelContainerView)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.left.equalTo(nextAndCancelContainerView).offset(20)
+            make.centerY.equalTo(nextAndCancelContainerView)
         }
         
         super.updateViewConstraints()
