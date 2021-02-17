@@ -180,6 +180,11 @@ class AuthenticationViewController: UIViewController {
             .bind { [weak self] in
                 self?.view.endEditing(true)
             }.disposed(by: disposeBag)
+        
+        certificationNumberButton.rx.tap
+            .bind { [weak self] in
+                self?.presentPanModal(CertificationNumberViewController())                
+            }.disposed(by: disposeBag)
     }
     
     func setKeyboardNotification() {
