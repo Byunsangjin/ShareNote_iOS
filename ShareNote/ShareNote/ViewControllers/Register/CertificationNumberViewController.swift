@@ -6,11 +6,13 @@
 //
 
 import PanModal
+import RxSwift
 import SkyFloatingLabelTextField
 import UIKit
 
 class CertificationNumberViewController: UIViewController {
 
+    // MARK: Constants
     let titleLabel = UILabel().then {
         $0.text = "인증번호를 요청해주세요."
         $0.textColor = .grey4
@@ -25,7 +27,9 @@ class CertificationNumberViewController: UIViewController {
         $0.layer.cornerRadius = 7
     }
     
-    let receiveTextFieldContainerView = UIView()
+    let receiveTextFieldContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let receiveTextField = SkyFloatingLabelTextField.createTextField(placeholder: "인증번호입력").then {
         $0.title = "인증번호를 입력해주세요."
@@ -53,12 +57,41 @@ class CertificationNumberViewController: UIViewController {
         $0.backgroundColor = .mainColor
     }
     
+    // MARK: Variables
+    var isKeyboardShow = false {
+        didSet {
+            titleLabel.isHidden = isKeyboardShow
+            receiveButton.isHidden = isKeyboardShow
+            
+            receiveTextFieldContainerView.isHidden = !isKeyboardShow
+            
+            panModalSetNeedsLayoutUpdate()
+            panModalTransition(to: .longForm)
+        }
+    }
+    
+    var viewHeight: CGFloat = 185
+    
+    var disposeBag = DisposeBag()
+    
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setKeyboardNotification()
+        receiveButton.rx.tap
+            .bind { [weak self] in
+                self?.receiveTextField.becomeFirstResponder()
+            }.disposed(by: disposeBag)
         
-        titleLabel.isHidden = true
-        receiveButton.isHidden = true
+        repeatButton.rx.tap
+            .bind { [weak self] in
+                self?.receiveTextFieldContainerView.endEditing(true)
+            }.disposed(by: disposeBag)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setUI() {
@@ -121,6 +154,26 @@ class CertificationNumberViewController: UIViewController {
         
         super.updateViewConstraints()
     }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        viewHeight = 225 + keyboardFrame.height
+        isKeyboardShow = true
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        viewHeight = 185
+        isKeyboardShow = false
+    }
 }
 
 extension CertificationNumberViewController: PanModalPresentable {
@@ -129,6 +182,6 @@ extension CertificationNumberViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        return .contentHeight(700)
+        return .contentHeight(viewHeight - self.view.safeAreaInsets.bottom)
     }
 }
