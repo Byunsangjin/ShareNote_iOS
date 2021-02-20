@@ -88,6 +88,12 @@ class CertificationNumberViewController: UIViewController {
             .bind { [weak self] in
                 self?.receiveTextFieldContainerView.endEditing(true)
             }.disposed(by: disposeBag)
+        
+        // 임시 구현
+        doneButton.rx.tap
+            .bind { [weak self] in
+                self?.present(PopupViewController(), animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
