@@ -7,8 +7,8 @@
 
 import PanModal
 import ReactorKit
+import SkyFloatingLabelTextField
 import SnapKit
-import TextFieldEffects
 import Then
 import UIKit
 
@@ -36,9 +36,7 @@ class RegisterViewController: UIViewController, View {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let emailIDTextField = HoshiTextField().then {
-        $0.placeholder = "이메일"
-        $0.borderInactiveColor = .gray
+    let emailIDTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이메일 입력").then {
         $0.adjustsFontSizeToFitWidth = true
     }
     
@@ -48,21 +46,14 @@ class RegisterViewController: UIViewController, View {
         $0.textColor = .black
     }
     
-    let emailAddressTextField = HoshiTextField().then {
-        $0.placeholder = "이메일주소"
-        $0.borderInactiveColor = .gray
-        $0.adjustsFontSizeToFitWidth = true
-    }
+    let emailAddressTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이메일 선택")
     
     // 비밀번호 확인
     let confirmPasswordContainerView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let confirmPasswordTextField = HoshiTextField().then {
-        $0.placeholder = "비밀번호확인"
-        $0.borderInactiveColor = .gray
-    }
+    let confirmPasswordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 확인")
     
     let confirmPasswordValidLabel = UILabel().then {
         $0.text = "비밀번호가 올바르지 않습니다."
@@ -75,10 +66,7 @@ class RegisterViewController: UIViewController, View {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let passwordTextField = HoshiTextField().then {
-        $0.placeholder = "비밀번호"
-        $0.borderInactiveColor = .gray
-    }
+    let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 입력")
     
     let passwordValidLabel = UILabel().then {
         $0.text = "비밀번호가 올바르지 않습니다."
@@ -91,10 +79,7 @@ class RegisterViewController: UIViewController, View {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let idTextField = HoshiTextField().then {
-        $0.placeholder = "아이디"
-        $0.borderInactiveColor = .gray
-    }
+    let idTextField = SkyFloatingLabelTextField.createTextField(placeholder: "아이디 입력")
     
     let idValidLabel = UILabel().then {
         $0.text = "이미 있는 아이디입니다."
@@ -105,8 +90,9 @@ class RegisterViewController: UIViewController, View {
     // 중복 확인 버튼
     let doubleCheckButton = UIButton().then {
         $0.setTitle("중복확인", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = .lightGray
+        $0.setTitleColor(.black2, for: .normal)
+        $0.backgroundColor = .mainColor
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
         $0.addTarget(self, action: #selector(doubleCheckBtnTouched), for: .touchUpInside)
     }
     
@@ -203,9 +189,9 @@ class RegisterViewController: UIViewController, View {
         
         // 이메일
         emailContainerView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(106)
             make.left.right.equalTo(topLabel)
-            make.height.equalTo(70)
+            make.height.equalTo(100)
         }
         
         atLabel.snp.makeConstraints { make in
@@ -231,7 +217,7 @@ class RegisterViewController: UIViewController, View {
         confirmPasswordContainerView.snp.makeConstraints { make in
             make.top.equalTo(emailContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
-            make.height.equalTo(80)
+            make.height.equalTo(140)
         }
         
         confirmPasswordTextField.snp.makeConstraints { make in
@@ -241,15 +227,15 @@ class RegisterViewController: UIViewController, View {
         }
         
         confirmPasswordValidLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(confirmPasswordContainerView.snp.bottom)
-            make.left.equalTo(confirmPasswordContainerView).offset(5)
+            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(5)
+            make.left.equalTo(confirmPasswordContainerView)
         }
         
         // 비밀번호
         passwordContainerView.snp.makeConstraints { make in
             make.top.equalTo(confirmPasswordContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
-            make.height.equalTo(80)
+            make.height.equalTo(140)
         }
 
         passwordTextField.snp.makeConstraints { make in
@@ -259,15 +245,15 @@ class RegisterViewController: UIViewController, View {
         }
 
         passwordValidLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(passwordContainerView.snp.bottom)
-            make.left.equalTo(passwordContainerView).offset(5)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
+            make.left.equalTo(passwordContainerView)
         }
 
         // 아이디
         idContainerView.snp.makeConstraints { make in
             make.top.equalTo(passwordContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
-            make.height.equalTo(80)
+            make.height.equalTo(140)
         }
 
         idTextField.snp.makeConstraints { make in
@@ -277,15 +263,15 @@ class RegisterViewController: UIViewController, View {
         }
 
         idValidLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(idContainerView.snp.bottom)
-            make.left.equalTo(idContainerView).offset(5)
+            make.top.equalTo(idTextField.snp.bottom).offset(5)
+            make.left.equalTo(idContainerView)
         }
         
         // 중복 확인 버튼
         doubleCheckButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.left.right.equalTo(view)
-            make.height.equalTo(40)
+            make.height.equalTo(45)
         }
         
         super.updateViewConstraints()
