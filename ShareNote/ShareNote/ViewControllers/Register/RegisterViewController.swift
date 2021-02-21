@@ -14,13 +14,21 @@ import UIKit
 
 class RegisterViewController: UIViewController, View {
     // MARK: Constants
+    let closeButton = UIButton().then {
+        $0.setImage(UIImage(named: "icClose"), for: .normal)
+        $0.setImage(UIImage(named: "icClose"), for: .highlighted)
+    }
+    
     let topLabel = UILabel().then {
         $0.text = "회원가입"
+        $0.textColor = .black2
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     
     let titleLabel = UILabel().then {
         $0.text = "아이디를 입력해주세요."
-        $0.font = UIFont.systemFont(ofSize: 20)
+        $0.textColor = .black2
+        $0.font = UIFont.spoqaHanSans(size: 24, style: .Regular)
     }
     
     // 이메일
@@ -147,6 +155,7 @@ class RegisterViewController: UIViewController, View {
     }
     
     func setUI() {
+        view.addSubview(closeButton)
         view.addSubview(topLabel)
         view.addSubview(titleLabel)
         
@@ -173,16 +182,22 @@ class RegisterViewController: UIViewController, View {
     }
     
     override func updateViewConstraints() {
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(39)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(15)
+            make.width.height.equalTo(30)
+        }
+        
         // Top Label
         topLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(40)
-            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
+            make.top.equalTo(closeButton.snp.bottom).offset(15)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
 
         // Title Label
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(topLabel.snp.bottom).offset(70)
+            make.top.equalTo(topLabel.snp.bottom).offset(19)
             make.left.right.equalTo(topLabel)
         }
         
