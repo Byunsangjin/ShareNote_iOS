@@ -100,6 +100,23 @@ class RegisterViewController: UIViewController, View {
         $0.addTarget(self, action: #selector(doubleCheckBtnTouched), for: .touchUpInside)
     }
     
+    let moveButtonContainerView = UIView().then {
+        $0.backgroundColor = .whiteTwo
+        $0.isHidden = true
+    }
+    
+    let cancelButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.grey2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+    }
+    
+    let nextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.setTitleColor(.grey2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+    }
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -207,6 +224,10 @@ class RegisterViewController: UIViewController, View {
 
         view.addSubview(bottomContainerView)
         bottomContainerView.addSubview(doubleCheckButton)
+        
+        view.addSubview(moveButtonContainerView)
+        moveButtonContainerView.addSubview(cancelButton)
+        moveButtonContainerView.addSubview(nextButton)
 
         view.setNeedsUpdateConstraints()
     }
@@ -320,6 +341,20 @@ class RegisterViewController: UIViewController, View {
         
         doubleCheckButton.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(bottomContainerView)
+        }
+        
+        moveButtonContainerView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(bottomContainerView)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.left.equalTo(moveButtonContainerView).offset(20)
+            make.centerY.equalTo(moveButtonContainerView)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.right.equalTo(moveButtonContainerView).offset(-20)
+            make.centerY.equalTo(moveButtonContainerView)
         }
         
         super.updateViewConstraints()
