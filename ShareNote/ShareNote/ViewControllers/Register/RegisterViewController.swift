@@ -90,6 +90,7 @@ class RegisterViewController: UIViewController, View {
     // 중복 확인 버튼
     let bottomContainerView = UIView().then {
         $0.backgroundColor = .yellow
+        $0.isHidden = true
     }
     
     let doubleCheckButton = UIButton().then {
@@ -102,7 +103,7 @@ class RegisterViewController: UIViewController, View {
     
     let moveButtonContainerView = UIView().then {
         $0.backgroundColor = .whiteTwo
-        $0.isHidden = true
+//        $0.isHidden = true
     }
     
     let cancelButton = UIButton().then {
@@ -118,8 +119,6 @@ class RegisterViewController: UIViewController, View {
     }
     
     // MARK: Variables
-    var disposeBag = DisposeBag()
-    
     var emailContainerViewHeight: Constraint?
     
     var confirmPasswordContainerViewHeight: Constraint?
@@ -130,6 +129,10 @@ class RegisterViewController: UIViewController, View {
     
     var bottomContainerViewBottomConstraint: Constraint?
     
+    var count = 0
+    
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         self.reactor = RegisterReactor()
@@ -139,33 +142,38 @@ class RegisterViewController: UIViewController, View {
         setUI()
         setKeyboardNotification()
         
-//        nextButton.rx.tap
-//            .bind { [weak self] in
-//                self?.nextBtnTouched()
-//            }.disposed(by: disposeBag)
+        cancelButton.rx.tap
+            .bind { [weak self] in
+                self?.view.endEditing(true)
+            }
+        
+        nextButton.rx.tap
+            .bind { [weak self] in
+                self?.nextBtnTouched()
+            }.disposed(by: disposeBag)
     }
     
-//    func nextBtnTouched() {
-//        UIView.transition(with: scrollContentView, duration: 1, options: .transitionCrossDissolve, animations: { [self] in
-//            switch count {
-//            case 0:
-//                self.birthDataContainerView.isHidden = false
-//                self.birthDataContainerViewHeight?.update(offset: 110)
-//                self.birthDataTextField.becomeFirstResponder()
-//            case 1:
-//                self.phoneNumberContainerView.isHidden = false
-//                self.phoneNumberContainerViewHeight?.update(offset: 110)
-//                self.phoneNumberTextField.becomeFirstResponder()
-//            case 2:
-//                self.termsAndConditionsContainerView.isHidden = false
-//                self.termsAndConditionsContainerViewHeight?.update(offset: 232)
-//            default:
-//                break
-//            }
-//        }, completion: { _ in
-//            self.count += 1
-//        })
-//    }
+    func nextBtnTouched() {
+        UIView.transition(with: view, duration: 1, options: .transitionCrossDissolve, animations: { [self] in
+            switch count {
+            case 0:
+                self.passwordContainerView.isHidden = false
+                self.passwordContainerViewHeight?.update(offset: 140)
+                self.passwordTextField.becomeFirstResponder()
+            case 1:
+                self.confirmPasswordContainerView.isHidden = false
+                self.confirmPasswordContainerViewHeight?.update(offset: 140)
+                self.confirmPasswordTextField.becomeFirstResponder()
+            case 2:
+                self.emailContainerView.isHidden = false
+                self.emailContainerViewHeight?.update(offset: 100)
+            default:
+                break
+            }
+        }, completion: { _ in
+            self.count += 1
+        })
+    }
     
     func bind(reactor: RegisterReactor) {
         // Action
