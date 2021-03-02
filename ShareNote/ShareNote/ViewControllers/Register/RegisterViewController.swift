@@ -145,7 +145,7 @@ class RegisterViewController: UIViewController, View {
         cancelButton.rx.tap
             .bind { [weak self] in
                 self?.view.endEditing(true)
-            }
+            }.disposed(by: disposeBag)
         
         nextButton.rx.tap
             .bind { [weak self] in
@@ -342,7 +342,7 @@ class RegisterViewController: UIViewController, View {
         
         // 중복 확인 버튼
         bottomContainerView.snp.makeConstraints { make in
-            bottomContainerViewBottomConstraint = make.bottom.equalTo(view).constraint
+            bottomContainerViewBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide).constraint
             make.left.right.equalTo(view)
             make.height.equalTo(45)
         }
@@ -377,11 +377,9 @@ class RegisterViewController: UIViewController, View {
     func keyboardWillShow(_ notification: Notification) {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-//        self.nextAndCancelContainerView.isHidden = false
-//
-        self.bottomContainerViewBottomConstraint?.update(offset: -keyboardFrame.size.height)
-//        self.nextAndCancelContainerView.updateConstraints()
+  
+        let keyboardBottom = keyboardFrame.size.height - view.safeAreaInsets.bottom
+        self.bottomContainerViewBottomConstraint?.update(offset: -keyboardBottom)
         
         UIView.animate(withDuration: 1, animations: { () -> Void in
             self.view.layoutIfNeeded()
@@ -390,7 +388,10 @@ class RegisterViewController: UIViewController, View {
     
     @objc
     func keyboardWillHide(_ notification: Notification) {
-//        nextAndCancelContainerView.isHidden = true
         bottomContainerViewBottomConstraint?.update(offset: 0)
+        
+        UIView.animate(withDuration: 1, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
     }
 }
