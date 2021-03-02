@@ -68,6 +68,7 @@
 		60EFBA9125DD570F0027B0E2 /* CertificationNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBA9025DD570F0027B0E2 /* CertificationNumberViewController.swift */; };
 		60EFBAAB25E161F10027B0E2 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBAAA25E161F10027B0E2 /* PopupViewController.swift */; };
 		60EFBAB025E2930A0027B0E2 /* SkyFloatingLabelTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBAAF25E2930A0027B0E2 /* SkyFloatingLabelTextField+Extension.swift */; };
+		60EFBAB525EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBAB425EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift */; };
 		AF09F919E17FE9DCDBB2FA53 /* Pods_ShareNote_ShareNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */; };
 		F57A80599348E5AF8A58EF5F /* Pods_ShareNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */; };
 /* End PBXBuildFile section */
@@ -162,6 +163,7 @@
 		60EFBA9025DD570F0027B0E2 /* CertificationNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationNumberViewController.swift; sourceTree = "<group>"; };
 		60EFBAAA25E161F10027B0E2 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		60EFBAAF25E2930A0027B0E2 /* SkyFloatingLabelTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkyFloatingLabelTextField+Extension.swift"; sourceTree = "<group>"; };
+		60EFBAB425EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistSimplePasswordViewController.swift; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9696D885676D7977D9388A74 /* Pods-ShareNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.release.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				6094166725A0933D00D9DF42 /* RegisterViewController.swift */,
 				60CD8E9F25A1E8E100C29F0E /* EmailTableViewCell.swift */,
 				60CD8DC525A1C84800C29F0E /* EmailTableViewController.swift */,
+				60EFBAB425EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				60EFB9FE25D680270027B0E2 /* UIColor+Extension.swift in Sources */,
 				60EFBA1525D6D7C60027B0E2 /* UIButton+Extension.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
+				60EFBAB525EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift in Sources */,
 				60308CFE25D000D80091ACC5 /* CategoryButton.swift in Sources */,
 				6081409225BD52CA008E6CAF /* Date+Extension.swift in Sources */,
 				60308D8725D594370091ACC5 /* UIImaeg+Extension.swift in Sources */,
