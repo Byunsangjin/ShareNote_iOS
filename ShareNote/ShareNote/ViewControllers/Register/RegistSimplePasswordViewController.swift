@@ -36,13 +36,13 @@ class RegistSimplePasswordViewController: UIViewController {
         $0.textAlignment = .center
     }
     
-//    let collectionButton = UICollectionView().then {
-//
-//    }
+    let keypad = KeypadView()
     
     // MARK: Methods
     override func viewDidLoad() {
         setUI()
+        
+        keypad.keypadDelegate = self
     }
     
     func setUI() {
@@ -53,6 +53,8 @@ class RegistSimplePasswordViewController: UIViewController {
         view.addSubview(descriptionLabel)
         view.addSubview(passwordIconStackView)
         view.addSubview(messageLabel)
+        
+        view.addSubview(keypad)
         
         view.setNeedsUpdateConstraints()
     }
@@ -89,6 +91,17 @@ class RegistSimplePasswordViewController: UIViewController {
             make.height.equalTo(16)
         }
         
+        keypad.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(240)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension RegistSimplePasswordViewController: KeypadDelegate {
+    func selectKeypad(sender: UIButton) {
+        print(sender.titleLabel?.text)
     }
 }
