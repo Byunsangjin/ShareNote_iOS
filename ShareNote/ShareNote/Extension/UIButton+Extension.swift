@@ -15,4 +15,13 @@ extension UIButton {
         
         return button
     }
+    
+    class func createNumberButton(number: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(number, for: .normal)
+        button.setTitleColor(.black2, for: .normal)
+        button.titleLabel?.font = UIFont.spoqaHanSans(size: 18, style: .Bold)
+        
+        return button
+    }    
 }
