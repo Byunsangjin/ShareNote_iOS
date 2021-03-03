@@ -27,7 +27,12 @@ class RegistSimplePasswordViewController: UIViewController {
         $0.textAlignment = .center
     }
     
-    let passwordIconStackView = UIStackView()
+    let passwordIconStackView = UIStackView().then {
+        for _ in 0..<6 {
+            let button = UIButton.createSimpleButton()
+            $0.addArrangedSubview(button)
+        }
+    }
     
     let messageLabel = UILabel().then {
         $0.text = "확인을 위해 한번 더 입력해 주세요"
@@ -79,14 +84,14 @@ class RegistSimplePasswordViewController: UIViewController {
         }
         
         passwordIconStackView.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(24)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(17)
             make.centerX.equalTo(view)
-            make.width.equalTo(160)
-            make.height.equalTo(15)
+            make.width.equalTo(174)
+            make.height.equalTo(29)
         }
         
         messageLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordIconStackView.snp.bottom).offset(15)
+            make.top.equalTo(passwordIconStackView.snp.bottom).offset(8)
             make.left.right.equalTo(view)
             make.height.equalTo(16)
         }
@@ -103,5 +108,16 @@ class RegistSimplePasswordViewController: UIViewController {
 extension RegistSimplePasswordViewController: KeypadDelegate {
     func selectKeypad(sender: UIButton) {
         print(sender.titleLabel?.text)
+    }
+}
+
+extension UIButton {
+    class func createSimpleButton() -> UIButton {
+        let button = UIButton()
+        button.setImage(UIImage(named: "imgEmpty"), for: .normal)
+        button.setImage(UIImage(named: "imgEmpty"), for: .highlighted)
+        button.setImage(UIImage(named: "imgFull"), for: .selected)
+        
+        return button
     }
 }
