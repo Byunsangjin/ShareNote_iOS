@@ -47,6 +47,36 @@ class MoreMainViewController: UIViewController {
         $0.setImage(UIImage(named: "iconsFold"), for: .normal)
     }
     
+    let serviceCenterButton = UIButton().then {
+        $0.setImage(UIImage(named: "icPlus1Service"), for: .normal)
+    }
+    
+    let serviceCenterLabel = UILabel().then {
+        $0.text = "고객센터"
+        $0.textColor = .black1
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
+    let noticeButton = UIButton().then {
+        $0.setImage(UIImage(named: "icPlus2Notice"), for: .normal)
+    }
+    
+    let noticeLabel = UILabel().then {
+        $0.text = "공지사항"
+        $0.textColor = .black1
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
+    let eventButton = UIButton().then {
+        $0.setImage(UIImage(named: "icPlus3Event"), for: .normal)
+    }
+    
+    let eventLabel = UILabel().then {
+        $0.text = "이벤트"
+        $0.textColor = .black1
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
     // MARK: Methods
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -74,6 +104,13 @@ class MoreMainViewController: UIViewController {
         moveHiveContainerView.addSubview(hiveIconImageView)
         moveHiveContainerView.addSubview(hiveLabel)
         moveHiveContainerView.addSubview(hiveMoveButton)
+        
+        view.addSubview(serviceCenterButton)
+        view.addSubview(serviceCenterLabel)
+        view.addSubview(noticeButton)
+        view.addSubview(noticeLabel)
+        view.addSubview(eventButton)
+        view.addSubview(eventLabel)
         
         view.setNeedsUpdateConstraints()
     }
@@ -117,6 +154,39 @@ class MoreMainViewController: UIViewController {
             make.right.equalTo(moveHiveContainerView).offset(-5)
             make.centerY.equalTo(moveHiveContainerView)
             make.width.height.equalTo(30)
+        }
+        
+        serviceCenterButton.snp.makeConstraints { make in
+            make.top.equalTo(moveHiveContainerView.snp.bottom).offset(25)
+            make.left.equalTo(view).offset(51)
+            make.width.height.equalTo(50)
+        }
+        
+        serviceCenterLabel.snp.makeConstraints { make in
+            make.top.equalTo(serviceCenterButton.snp.bottom)
+            make.centerX.equalTo(serviceCenterButton)
+        }
+        
+        noticeButton.snp.makeConstraints { make in
+            make.top.equalTo(serviceCenterButton)
+            make.centerX.equalTo(view)
+            make.width.height.equalTo(50)
+        }
+        
+        noticeLabel.snp.makeConstraints { make in
+            make.top.equalTo(noticeButton.snp.bottom)
+            make.centerX.equalTo(noticeButton)
+        }
+        
+        eventButton.snp.makeConstraints { make in
+            make.top.equalTo(serviceCenterButton)
+            make.right.equalTo(view).offset(-51)
+            make.width.height.equalTo(50)
+        }
+        
+        eventLabel.snp.makeConstraints { make in
+            make.top.equalTo(eventButton.snp.bottom)
+            make.centerX.equalTo(eventButton)
         }
         
         super.updateViewConstraints()
