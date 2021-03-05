@@ -8,8 +8,17 @@
 import UIKit
 
 class MoreMainViewController: UIViewController {
-
+    
     // MARK: Constants
+    let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let scrollContentView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
     let titleLabel = UILabel().then {
         $0.text = "더보기"
         $0.textColor = .black2
@@ -33,8 +42,7 @@ class MoreMainViewController: UIViewController {
     }
     
     let hiveIconImageView = UIImageView().then {
-//        $0.image = UIImage(named: "hive")
-        $0.backgroundColor = .green
+        $0.image = UIImage(named: "iconHoney")
     }
     
     let hiveLabel = UILabel().then {
@@ -77,6 +85,10 @@ class MoreMainViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     
+    let testView = UIView().then {
+        $0.backgroundColor = .yellow
+    }
+    
     // MARK: Methods
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -95,35 +107,49 @@ class MoreMainViewController: UIViewController {
     func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(titleLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
         
-        view.addSubview(nameLabel)
-        view.addSubview(detailButton)
+        scrollContentView.addSubview(titleLabel)
         
-        view.addSubview(moveHiveContainerView)
+        scrollContentView.addSubview(nameLabel)
+        scrollContentView.addSubview(detailButton)
+        
+        scrollContentView.addSubview(moveHiveContainerView)
         moveHiveContainerView.addSubview(hiveIconImageView)
         moveHiveContainerView.addSubview(hiveLabel)
         moveHiveContainerView.addSubview(hiveMoveButton)
         
-        view.addSubview(serviceCenterButton)
-        view.addSubview(serviceCenterLabel)
-        view.addSubview(noticeButton)
-        view.addSubview(noticeLabel)
-        view.addSubview(eventButton)
-        view.addSubview(eventLabel)
+        scrollContentView.addSubview(serviceCenterButton)
+        scrollContentView.addSubview(serviceCenterLabel)
+        scrollContentView.addSubview(noticeButton)
+        scrollContentView.addSubview(noticeLabel)
+        scrollContentView.addSubview(eventButton)
+        scrollContentView.addSubview(eventLabel)
+        
+        scrollContentView.addSubview(testView)
         
         view.setNeedsUpdateConstraints()
     }
     
     override func updateViewConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.top.left.bottom.width.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.bottom.width.equalTo(scrollView)
+            make.height.equalTo(757)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(scrollContentView).offset(60)
+            make.left.equalTo(scrollContentView).offset(20)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(31)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.left.equalTo(scrollContentView).offset(20)
         }
         
         detailButton.snp.makeConstraints { make in
@@ -134,8 +160,8 @@ class MoreMainViewController: UIViewController {
         
         moveHiveContainerView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(23)
-            make.centerX.equalTo(view)
-            make.width.equalTo(view).offset(-40)
+            make.centerX.equalTo(scrollContentView)
+            make.width.equalTo(scrollContentView).offset(-40)
             make.height.equalTo(45)
         }
         
@@ -158,7 +184,7 @@ class MoreMainViewController: UIViewController {
         
         serviceCenterButton.snp.makeConstraints { make in
             make.top.equalTo(moveHiveContainerView.snp.bottom).offset(25)
-            make.left.equalTo(view).offset(51)
+            make.left.equalTo(scrollContentView).offset(51)
             make.width.height.equalTo(50)
         }
         
@@ -169,7 +195,7 @@ class MoreMainViewController: UIViewController {
         
         noticeButton.snp.makeConstraints { make in
             make.top.equalTo(serviceCenterButton)
-            make.centerX.equalTo(view)
+            make.centerX.equalTo(scrollContentView)
             make.width.height.equalTo(50)
         }
         
@@ -180,7 +206,7 @@ class MoreMainViewController: UIViewController {
         
         eventButton.snp.makeConstraints { make in
             make.top.equalTo(serviceCenterButton)
-            make.right.equalTo(view).offset(-51)
+            make.right.equalTo(scrollContentView).offset(-51)
             make.width.height.equalTo(50)
         }
         
