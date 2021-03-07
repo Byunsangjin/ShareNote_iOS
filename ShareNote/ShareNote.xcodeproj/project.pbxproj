@@ -273,6 +273,8 @@
 		6064CA8725BEF8D800E75D59 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				60EFBB1225F491D90027B0E2 /* NavigationView.swift */,
+				60EFBADA25EE7AA60027B0E2 /* KeypadView.swift */,
 				6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */,
 			);
 			path = Custom;
@@ -315,7 +317,6 @@
 				60CD8E9F25A1E8E100C29F0E /* EmailTableViewCell.swift */,
 				60CD8DC525A1C84800C29F0E /* EmailTableViewController.swift */,
 				60EFBAB425EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift */,
-				60EFBADA25EE7AA60027B0E2 /* KeypadView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -376,7 +377,6 @@
 				60EFBB0325F484900027B0E2 /* MoreMenuTableViewCell.swift */,
 				60EFBB0825F489CB0027B0E2 /* MoreMenuHeaderView.swift */,
 				60EFBB0D25F4906B0027B0E2 /* ChangePasswordViewController.swift */,
-				60EFBB1225F491D90027B0E2 /* NavigationView.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
