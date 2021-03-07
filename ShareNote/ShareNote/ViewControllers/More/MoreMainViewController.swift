@@ -33,6 +33,7 @@ class MoreMainViewController: UIViewController {
     
     let detailButton = UIButton().then {
         $0.setImage(UIImage(named: "iconsMidDetail"), for: .normal)
+        $0.tintColor = .black
     }
     
     let moveHiveContainerView = UIView().then {
@@ -53,6 +54,7 @@ class MoreMainViewController: UIViewController {
     
     let hiveMoveButton = UIButton().then {
         $0.setImage(UIImage(named: "iconsFold"), for: .normal)
+        $0.tintColor = .black
     }
     
     let serviceCenterButton = UIButton().then {
@@ -85,9 +87,14 @@ class MoreMainViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     
-    let testView = UIView().then {
-        $0.backgroundColor = .yellow
+    let tableView = UITableView().then {
+        $0.isScrollEnabled = false
+        $0.separatorStyle = .none
     }
+    
+    let cellTitleArr = [["계정 관리", "잠금설정", "알림설정"],
+                        ["약관 및 개인정보처리", "오픈소스 라이센스"],
+                        ["버전정보"]]
     
     // MARK: Methods
     init() {
@@ -102,6 +109,11 @@ class MoreMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        tableView.register(MoreMenuTableViewCell.self, forCellReuseIdentifier: "MoreMenuTableViewCell")
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func setUI() {
@@ -127,7 +139,7 @@ class MoreMainViewController: UIViewController {
         scrollContentView.addSubview(eventButton)
         scrollContentView.addSubview(eventLabel)
         
-        scrollContentView.addSubview(testView)
+        scrollContentView.addSubview(tableView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -215,6 +227,69 @@ class MoreMainViewController: UIViewController {
             make.centerX.equalTo(eventButton)
         }
         
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(serviceCenterLabel.snp.bottom).offset(40)
+            make.left.right.bottom.equalTo(scrollContentView)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension MoreMainViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return 2
+        default:
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MoreMenuTableViewCell") as? MoreMenuTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.titleLabel.text = cellTitleArr[indexPath.section][indexPath.row]
+        
+        if indexPath.section == 0 && indexPath.row == 1 {
+            cell.descriptionLabel.text = "사용 안 함"
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = MoreMenuHeaderView()
+        
+        switch section {
+        case 0:
+            view.titleLabel.text = "개인/보안"
+        case 1:
+            view.titleLabel.text = "약관 및 정책"
+        default:
+            break
+        }
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 5
+        }
+        
+        return 47
     }
 }
