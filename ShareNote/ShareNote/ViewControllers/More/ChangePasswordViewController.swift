@@ -37,6 +37,12 @@ class ChangePasswordViewController: UIViewController {
         $0.placeholder = "새 비밀번호 재입력"
     }
     
+    let errorLabel = UILabel().then {
+        $0.text = "비밀번호가 일치하지 않습니다."
+        $0.textColor = .red
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
     let changeButton = UIButton().then {
         $0.setTitle("변경", for: .normal)
         $0.setTitleColor(.grey2, for: .normal)
@@ -60,7 +66,8 @@ class ChangePasswordViewController: UIViewController {
         
         view.addSubview(newPasswordLabel)
         view.addSubview(newPasswordTextField)
-        view.addSubview(newPasswordRepeatTextField)
+        view.addSubview(newPasswordRepeatTextField)        
+        view.addSubview(errorLabel)
         
         view.addSubview(changeButton)
         
@@ -100,6 +107,11 @@ class ChangePasswordViewController: UIViewController {
             make.top.equalTo(newPasswordTextField.snp.bottom).offset(25)
             make.left.right.equalTo(currentPasswordLabel)
             make.height.equalTo(35)
+        }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(newPasswordRepeatTextField.snp.bottom).offset(10)
+            make.left.right.equalTo(currentPasswordLabel)
         }
         
         changeButton.snp.makeConstraints { make in
