@@ -46,9 +46,10 @@ class ChangePasswordViewController: UIViewController {
     let changeButton = UIButton().then {
         $0.setTitle("변경", for: .normal)
         $0.setTitleColor(.grey2, for: .normal)
-        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16, style: .Regular)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
         $0.backgroundColor = .whiteTwo
         $0.addTarget(self, action: #selector(test), for: .touchUpInside)
+        $0.layer.cornerRadius = 7
     }
     
     // MARK: Methods
