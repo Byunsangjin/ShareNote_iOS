@@ -94,11 +94,11 @@ class AuthenticationViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     
-    let birthDataContainerView = UIView().then {
+    let birthDateContainerView = UIView().then {
         $0.isHidden = true
     }
     
-    let birthDataTextField = SkyFloatingLabelTextField.createTextField(placeholder: "생년월일 입력")
+    let birthDateTextField = SkyFloatingLabelTextField.createTextField(placeholder: "생년월일 입력")
     
     let divideLabel = UILabel().then {
         $0.text = "-"
@@ -156,7 +156,7 @@ class AuthenticationViewController: UIViewController {
     
     var phoneNumberContainerViewHeight: Constraint?
     
-    var birthDataContainerViewHeight: Constraint?
+    var birthDateContainerViewHeight: Constraint?
     
     var nextAndCancelContainerViewHeight: Constraint?
     
@@ -229,9 +229,9 @@ class AuthenticationViewController: UIViewController {
         UIView.transition(with: scrollContentView, duration: 1, options: .transitionCrossDissolve, animations: { [self] in
             switch count {
             case 0:
-                self.birthDataContainerView.isHidden = false
-                self.birthDataContainerViewHeight?.update(offset: 110)
-                self.birthDataTextField.becomeFirstResponder()
+                self.birthDateContainerView.isHidden = false
+                self.birthDateContainerViewHeight?.update(offset: 110)
+                self.birthDateTextField.becomeFirstResponder()
             case 1:
                 self.phoneNumberContainerView.isHidden = false
                 self.phoneNumberContainerViewHeight?.update(offset: 110)
@@ -273,11 +273,11 @@ class AuthenticationViewController: UIViewController {
         phoneNumberContainerView.addSubview(phoneNumberTextField)
         phoneNumberContainerView.addSubview(phoneNumberErrorLabel)
         
-        scrollContentView.addSubview(birthDataContainerView)
-        birthDataContainerView.addSubview(birthDataTextField)
-        birthDataContainerView.addSubview(divideLabel)
-        birthDataContainerView.addSubview(genderTextField)
-        birthDataContainerView.addSubview(dotStackView)
+        scrollContentView.addSubview(birthDateContainerView)
+        birthDateContainerView.addSubview(birthDateTextField)
+        birthDateContainerView.addSubview(divideLabel)
+        birthDateContainerView.addSubview(genderTextField)
+        birthDateContainerView.addSubview(dotStackView)
         
         scrollContentView.addSubview(nameContainerView)
         scrollContentView.addSubview(nameTexField)
@@ -412,15 +412,15 @@ class AuthenticationViewController: UIViewController {
             make.height.equalTo(15)
         }
         
-        birthDataContainerView.snp.makeConstraints { make in
+        birthDateContainerView.snp.makeConstraints { make in
             make.top.equalTo(phoneNumberContainerView.snp.bottom)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
-            self.birthDataContainerViewHeight = make.height.equalTo(0).constraint
+            self.birthDateContainerViewHeight = make.height.equalTo(0).constraint
         }
         
-        birthDataTextField.snp.makeConstraints { make in
-            make.left.equalTo(birthDataContainerView)
+        birthDateTextField.snp.makeConstraints { make in
+            make.left.equalTo(birthDateContainerView)
             make.right.equalTo(divideLabel.snp.left).offset(-5)
             make.height.equalTo(60)
         }
@@ -438,14 +438,14 @@ class AuthenticationViewController: UIViewController {
         }
         
         dotStackView.snp.makeConstraints { make in
-            make.right.equalTo(birthDataContainerView).offset(-5)
+            make.right.equalTo(birthDateContainerView).offset(-5)
             make.centerY.equalTo(divideLabel)
             make.width.equalTo(50)
             make.height.equalTo(5)
         }
         
         nameContainerView.snp.makeConstraints { make in
-            make.top.equalTo(birthDataContainerView.snp.bottom)
+            make.top.equalTo(birthDateContainerView.snp.bottom)
             make.left.equalTo(scrollContentView).offset(20)
             make.right.equalTo(scrollContentView).offset(-20)
             make.height.equalTo(60)
