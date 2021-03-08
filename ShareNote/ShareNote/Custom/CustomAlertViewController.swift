@@ -55,12 +55,21 @@ class CustomAlertViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /**
-     [CustomAlertController 생성자]
-     Alert의 Title은 필수, message는 옵셔널
-     첫번쨰 버튼의 타이틀은 필수, action은 옵셔널
-     두번째 버튼의 타이틀, action 모두 옵셔널
-     */
+    
+    /// CustomAlertControlller 생성
+    ///
+    /// Title 혹은 Title/Message를 모두 사용할 수 있도록 커먼하게 구현
+    ///
+    /// ActionButton을 한개 또는 두개까지 사용할 수 있도록 커먼하게 구현
+    ///
+    ///
+    /// - Parameters:
+    ///     - title: 타이틀 스트링
+    ///     - message: 메세지 스트링
+    ///     - firstActionTitle: 첫번째 Action Button Title, 오른쪽에 위치
+    ///     - firstAction: 첫번째 Action Button의 동작 method
+    ///     - secondActionTitle: 두번째 Action Button Title, 왼쪽에 위치
+    ///     - secondAction: 두번째 Action Button의 동작 method
     init(title: String, message: String?, firstActionTitle: String, firstAction: (() -> ())? = nil, secondActionTitle: String? = nil, secondAction:(()->())? = nil) {
         super.init(nibName: nil, bundle: nil)
         
