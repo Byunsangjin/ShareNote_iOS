@@ -19,7 +19,7 @@ class ChangePasswordViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
     }
     
-    let currentPasswordTextField = UITextField.createPasswordTextField().then {
+    let currentPasswordTextField = UITextField.createTextField(isSecureTextEntry: true).then {
         $0.placeholder = "현재 비밀번호 입력"
     }
     
@@ -29,11 +29,11 @@ class ChangePasswordViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
     }
     
-    let newPasswordTextField = UITextField.createPasswordTextField().then {
+    let newPasswordTextField = UITextField.createTextField(isSecureTextEntry: true).then {
         $0.placeholder = "새 비밀번호"
     }
     
-    let newPasswordRepeatTextField = UITextField.createPasswordTextField().then {
+    let newPasswordRepeatTextField = UITextField.createTextField(isSecureTextEntry: true).then {
         $0.placeholder = "새 비밀번호 재입력"
     }
     

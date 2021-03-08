@@ -8,7 +8,7 @@
 import SkyFloatingLabelTextField
 
 extension SkyFloatingLabelTextField {
-    class func createTextField(placeholder: String? = nil) -> SkyFloatingLabelTextField {
+    class func createTextField(placeholder: String?) -> SkyFloatingLabelTextField {
         let textField = SkyFloatingLabelTextField()
         
         textField.textColor = .black2

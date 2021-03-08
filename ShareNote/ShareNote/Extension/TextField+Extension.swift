@@ -8,13 +8,13 @@
 import UIKit
 
 extension UITextField {
-    class func createPasswordTextField() -> UITextField {
+    class func createTextField(isSecureTextEntry: Bool = false) -> UITextField {
         let textField = UITextField()
         
         textField.borderStyle = .none
         textField.backgroundColor = .whiteTwo
         
-        textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = isSecureTextEntry
         
         textField.layer.cornerRadius = 5
         

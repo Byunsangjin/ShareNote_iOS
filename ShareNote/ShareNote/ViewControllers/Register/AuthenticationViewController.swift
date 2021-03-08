@@ -106,7 +106,7 @@ class AuthenticationViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 20)
     }
     
-    let genderTextField = SkyFloatingLabelTextField.createTextField().then {
+    let genderTextField = SkyFloatingLabelTextField.createTextField(placeholder: nil).then {
         $0.textAlignment = .center
     }
     
