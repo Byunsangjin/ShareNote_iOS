@@ -48,12 +48,27 @@ class ChangePasswordViewController: UIViewController {
         $0.setTitleColor(.grey2, for: .normal)
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16, style: .Regular)
         $0.backgroundColor = .whiteTwo
+        $0.addTarget(self, action: #selector(test), for: .touchUpInside)
     }
     
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+    }
+    
+    @objc
+    func test() {
+        let customAlertVC = CustomAlertViewController(title: "비밀번호가 변경되었습니다.",
+                                                      message: nil,
+                                                      firstActionTitle: "확인",
+                                                      firstAction: { logger.verbose("확인") })
+                                                        
+        
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.view.addSubview(customAlertVC.view)
+            self.addChild(customAlertVC)
+        }, completion: nil)
     }
     
     func setUI() {
