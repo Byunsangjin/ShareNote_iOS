@@ -20,7 +20,7 @@ class MoreMenuTableViewCell: UITableViewCell {
     }
     
     let descriptionLabel = UILabel().then {
-        $0.textColor = .grey4
+        $0.textColor = .grey3
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     

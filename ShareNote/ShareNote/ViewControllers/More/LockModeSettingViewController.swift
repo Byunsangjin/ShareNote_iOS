@@ -96,7 +96,7 @@ class LockModeSettingViewController: UIViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(lockEnableDescriptionLabel.snp.bottom).offset(25)
-            make.width.equalTo(view)
+            make.centerX.width.equalTo(view)
             make.height.equalTo(110)
         }
         
@@ -114,7 +114,7 @@ extension LockModeSettingViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         
-        cell.titleLabel.isEnabled = lockEnableSwitch.isOn                
+        cell.titleLabel.isEnabled = lockEnableSwitch.isOn
         cell.titleLabel.text = cellTitleList[indexPath.row]
         
         return cell

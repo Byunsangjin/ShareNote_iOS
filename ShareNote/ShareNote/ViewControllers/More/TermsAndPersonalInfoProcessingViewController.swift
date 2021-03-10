@@ -52,7 +52,7 @@ class TermsAndPersonalInfoProcessingViewController: UIViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(navigationView.snp.bottom)
-            make.width.equalTo(view)
+            make.centerX.width.equalTo(view)
             make.height.equalTo(165)
         }
         
