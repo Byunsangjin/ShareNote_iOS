@@ -81,6 +81,7 @@
 		60EFBB6425F7AC110027B0E2 /* LockModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB6325F7AC110027B0E2 /* LockModeSettingViewController.swift */; };
 		60EFBB6E25F7C1CC0027B0E2 /* AlarmSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB6D25F7C1CC0027B0E2 /* AlarmSettingViewController.swift */; };
 		60EFBB7325F8E3390027B0E2 /* TermsAndPersonalInfoProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB7225F8E3390027B0E2 /* TermsAndPersonalInfoProcessingViewController.swift */; };
+		60EFBB7B25F8E5D90027B0E2 /* AppVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB7A25F8E5D90027B0E2 /* AppVersionViewController.swift */; };
 		AF09F919E17FE9DCDBB2FA53 /* Pods_ShareNote_ShareNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */; };
 		F57A80599348E5AF8A58EF5F /* Pods_ShareNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */; };
 /* End PBXBuildFile section */
@@ -188,6 +189,7 @@
 		60EFBB6325F7AC110027B0E2 /* LockModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockModeSettingViewController.swift; sourceTree = "<group>"; };
 		60EFBB6D25F7C1CC0027B0E2 /* AlarmSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingViewController.swift; sourceTree = "<group>"; };
 		60EFBB7225F8E3390027B0E2 /* TermsAndPersonalInfoProcessingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPersonalInfoProcessingViewController.swift; sourceTree = "<group>"; };
+		60EFBB7A25F8E5D90027B0E2 /* AppVersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionViewController.swift; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9696D885676D7977D9388A74 /* Pods-ShareNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.release.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.release.xcconfig"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				60EFBB6325F7AC110027B0E2 /* LockModeSettingViewController.swift */,
 				60EFBB6D25F7C1CC0027B0E2 /* AlarmSettingViewController.swift */,
 				60EFBB7225F8E3390027B0E2 /* TermsAndPersonalInfoProcessingViewController.swift */,
+				60EFBB7A25F8E5D90027B0E2 /* AppVersionViewController.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -837,6 +840,7 @@
 				6064CA9C25C2F9F300E75D59 /* CALayer+Extension.swift in Sources */,
 				60EFBAAB25E161F10027B0E2 /* PopupViewController.swift in Sources */,
 				60EFBB0E25F4906B0027B0E2 /* ChangePasswordViewController.swift in Sources */,
+				60EFBB7B25F8E5D90027B0E2 /* AppVersionViewController.swift in Sources */,
 				60CD906C25AB0DF200C29F0E /* PasswordKeypadView.swift in Sources */,
 				60308CF925D000B80091ACC5 /* TextFieldView.swift in Sources */,
 				60308D5C25D436850091ACC5 /* CompleteTradingLogViewController.swift in Sources */,
