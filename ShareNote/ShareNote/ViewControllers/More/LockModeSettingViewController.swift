@@ -37,6 +37,9 @@ class LockModeSettingViewController: UIViewController {
         $0.isScrollEnabled = false
     }
     
+    let cellTitleList = ["간편비밀번호 변경",
+                         "생체인증 사용"]
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -48,7 +51,7 @@ class LockModeSettingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(MoveDetailTableViewCell.self, forCellReuseIdentifier: "MoveDetailTableViewCell")
+        tableView.register(MoreMenuTableViewCell.self, forCellReuseIdentifier: "MoreMenuTableViewCell")
         
         lockEnableSwitch.rx.controlEvent(.valueChanged)
             .bind { [weak self] in
@@ -107,20 +110,12 @@ extension LockModeSettingViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MoveDetailTableViewCell") as? MoveDetailTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MoreMenuTableViewCell") as? MoreMenuTableViewCell else {
             return UITableViewCell()
         }
         
-        cell.titleLabel.isEnabled = lockEnableSwitch.isOn
-                
-        switch indexPath.row {
-        case 0:
-            cell.titleLabel.text = "간편비밀번호 변경"
-        case 1:
-            cell.titleLabel.text = "생체인증 사용"
-        default:
-            break
-        }
+        cell.titleLabel.isEnabled = lockEnableSwitch.isOn                
+        cell.titleLabel.text = cellTitleList[indexPath.row]
         
         return cell
     }
@@ -130,14 +125,7 @@ extension LockModeSettingViewController: UITableViewDelegate, UITableViewDataSou
             return
         }
         
-        switch indexPath.row {
-        case 0:
-            logger.verbose("간편비밀번호 변경")
-        case 1:
-            logger.verbose("생체인증 사용")
-        default:
-            break
-        }
+        logger.verbose(cellTitleList[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
