@@ -84,6 +84,7 @@
 		60EFBB7B25F8E5D90027B0E2 /* AppVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB7A25F8E5D90027B0E2 /* AppVersionViewController.swift */; };
 		60EFBB8025F907F60027B0E2 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB7F25F907F60027B0E2 /* UserInfoViewController.swift */; };
 		60EFBB8625F913240027B0E2 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB8425F913240027B0E2 /* AccountManagementViewController.swift */; };
+		60EFBB8F25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB8E25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift */; };
 		60EFBB9425FA5E3D0027B0E2 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EFBB9325FA5E3D0027B0E2 /* IntroView.swift */; };
 		AF09F919E17FE9DCDBB2FA53 /* Pods_ShareNote_ShareNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC64E44E704128825026FA46 /* Pods_ShareNote_ShareNoteUITests.framework */; };
 		F57A80599348E5AF8A58EF5F /* Pods_ShareNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71738D7BFB49AB3ED17188D /* Pods_ShareNote.framework */; };
@@ -195,6 +196,7 @@
 		60EFBB7A25F8E5D90027B0E2 /* AppVersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionViewController.swift; sourceTree = "<group>"; };
 		60EFBB7F25F907F60027B0E2 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		60EFBB8425F913240027B0E2 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
+		60EFBB8E25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyAnalysisIntroViewController.swift; sourceTree = "<group>"; };
 		60EFBB9325FA5E3D0027B0E2 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		6B54B1B8FAF83E9D019956B0 /* Pods_ShareNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D0D9251DF0F6FC82F37901F /* Pods-ShareNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareNote.debug.xcconfig"; path = "Target Support Files/Pods-ShareNote/Pods-ShareNote.debug.xcconfig"; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				60966CAC25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift */,
+				60EFBB8E25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift */,
 				60EFBB9325FA5E3D0027B0E2 /* IntroView.swift */,
 			);
 			path = CompanyAnalysis;
@@ -832,6 +835,7 @@
 				60966CAD25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift in Sources */,
 				60EFBA0325D68C5B0027B0E2 /* UIFont+Extension.swift in Sources */,
 				60EFB9FE25D680270027B0E2 /* UIColor+Extension.swift in Sources */,
+				60EFBB8F25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift in Sources */,
 				60EFBA1525D6D7C60027B0E2 /* UIButton+Extension.swift in Sources */,
 				60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */,
 				60EFBAB525EE6C0E0027B0E2 /* RegistSimplePasswordViewController.swift in Sources */,
