@@ -51,6 +51,7 @@ class CompanyAnalysisIntroViewController: UIViewController {
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
         $0.backgroundColor = .mainColor
         $0.layer.cornerRadius = 7
+        $0.isHidden = true
     }
     
     let dotStackOneView = UIStackView().then {
@@ -135,6 +136,14 @@ class CompanyAnalysisIntroViewController: UIViewController {
                 self.stepThreeCircleButton.isSelected = true
             } completion: { _ in
                 self.view.layoutIfNeeded()
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            UIView.transition(with: self.startButton, duration: 2, options: .transitionCrossDissolve) {
+                self.startButton.isHidden = false
+            } completion: { _ in
+                
             }
         }
     }
