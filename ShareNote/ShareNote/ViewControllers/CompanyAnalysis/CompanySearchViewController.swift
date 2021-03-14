@@ -33,7 +33,10 @@ class CompanySearchViewController: UIViewController {
         $0.leftView = leftView
     }
     
-    let emptyContainerView = UIView()
+    // Empty View
+    let emptyContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let emptyImageView = UIImageView().then {
         $0.image = UIImage(named: "illustSearch1")
@@ -47,10 +50,53 @@ class CompanySearchViewController: UIViewController {
         $0.textAlignment = .center
     }
     
+    // No Search View
+    let noSearchContainerView = UIView().then {
+        $0.isHidden = true
+    }
+    
+    let noSearchImageView = UIImageView().then {
+        $0.image = UIImage(named: "illustNotSearch")
+    }
+    
+    let noSearchTitleLabel = UILabel().then {
+        $0.text = "아쉽게도 검색 결과가 없습니다"
+        $0.textColor = .grey1
+        $0.font = UIFont.spoqaHanSans(size: 16)
+        $0.textAlignment = .center
+    }
+    
+    let noSearchDescriptionLabel = UILabel().then {
+        $0.text = "주식명이나 종목코드를\n다시 확인해주세요"
+        $0.textColor = .grey3
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+    }
+    
+    // Search Table View
+    let searchTableContainerView = UIView()
+    
+    let searchResultLabel = UILabel().then {
+        $0.text = "총 2건의 검색결과가 있습니다"
+        $0.textColor = .grey4
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
+    let searchTableView = UITableView().then {
+        $0.separatorStyle = .singleLine
+    }
+    
+    // MARK: Variables
+    var stockList = ["삼성전자 005930", "삼성전자우 000321", "랩지노믹스 123456", "가짜삼성주식 0123945"]
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
     }
     
     func setUI() {
@@ -63,6 +109,15 @@ class CompanySearchViewController: UIViewController {
         view.addSubview(emptyContainerView)
         emptyContainerView.addSubview(emptyImageView)
         emptyContainerView.addSubview(emptyLabel)
+        
+        view.addSubview(noSearchContainerView)
+        noSearchContainerView.addSubview(noSearchImageView)
+        noSearchContainerView.addSubview(noSearchTitleLabel)
+        noSearchContainerView.addSubview(noSearchDescriptionLabel)
+        
+        view.addSubview(searchTableContainerView)
+        searchTableContainerView.addSubview(searchResultLabel)
+        searchTableContainerView.addSubview(searchTableView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -80,6 +135,7 @@ class CompanySearchViewController: UIViewController {
             make.height.equalTo(45)
         }
         
+        // Empty View
         emptyContainerView.snp.makeConstraints { make in
             make.top.equalTo(searchTextField.snp.bottom)
             make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -96,7 +152,74 @@ class CompanySearchViewController: UIViewController {
             make.top.equalTo(emptyImageView.snp.bottom).offset(32.7)
             make.centerX.equalTo(emptyContainerView)
         }
+
+        // No Search View
+        noSearchContainerView.snp.makeConstraints { make in
+            make.top.equalTo(searchTextField.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        noSearchImageView.snp.makeConstraints { make in
+            make.top.equalTo(emptyContainerView).offset(108)
+            make.centerX.equalTo(emptyContainerView)
+            make.width.equalTo(80.5)
+            make.height.equalTo(79.4)
+        }
+        
+        noSearchTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(emptyImageView.snp.bottom).offset(32.7)
+            make.centerX.equalTo(emptyContainerView)
+        }
+        
+        noSearchDescriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(noSearchTitleLabel.snp.bottom).offset(9)
+            make.centerX.equalTo(emptyContainerView)
+        }
+        
+        // Search Table View
+        searchTableContainerView.snp.makeConstraints { make in
+            make.top.equalTo(searchTextField.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        searchResultLabel.snp.makeConstraints { make in
+            make.top.equalTo(searchTableContainerView).offset(20)
+            make.left.equalTo(searchTextField)
+        }
+        
+        searchTableView.snp.makeConstraints { make in
+            make.top.equalTo(searchResultLabel.snp.bottom).offset(5)
+            make.left.right.bottom.equalTo(searchTableContainerView)
+        }
         
         super.updateViewConstraints()
+    }
+}
+
+extension CompanySearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stockList.filter { $0.contains("삼성") }.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        let title = stockList.filter { $0.contains("삼성") }[indexPath.row]
+        
+        let range = (title as NSString).range(of: "삼성")
+        let attributeString = containTextChangeColor(title, range: range)
+        cell.textLabel?.attributedText = attributeString
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func containTextChangeColor(_ text: String, range: NSRange) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.mainColor, range: range)
+        return attributedString
     }
 }
