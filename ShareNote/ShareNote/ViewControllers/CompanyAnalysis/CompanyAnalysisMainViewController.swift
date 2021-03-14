@@ -5,6 +5,8 @@
 //  Created by sjbyun on 2021/01/21.
 //
 
+import PanModal
+import RxSwift
 import UIKit
 
 class CompanyAnalysisMainViewController: UIViewController {
@@ -62,6 +64,9 @@ class CompanyAnalysisMainViewController: UIViewController {
         $0.separatorStyle = .none
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +75,11 @@ class CompanyAnalysisMainViewController: UIViewController {
         testTableView.delegate = self
         testTableView.dataSource = self
         testTableView.register(AnalysisTableViewCell.self, forCellReuseIdentifier: "AnalysisTableViewCell")
+        
+        categoryButton.rx.tap
+            .bind { [weak self] in
+                self?.presentPanModal(CategoryTableViewController())
+            }.disposed(by: disposeBag)
     }
     
     init() {
