@@ -146,4 +146,10 @@ class AnalysisTableViewCell: UITableViewCell {
         }
         
         super.updateConstraints()
-    }}
+    }
+    
+    func changeTempCellColor() {
+        containerView.backgroundColor = .mainColor
+        divideView.backgroundColor = .grey8
+    }
+}
