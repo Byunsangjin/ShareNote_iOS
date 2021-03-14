@@ -16,8 +16,10 @@ class CompanyAnalysisMainViewController: UIViewController {
         $0.rightBarButton.setImage(UIImage(named: "icEdit"), for: .normal)
     }
     
+    // Empty View
     let emptyView = UIView().then {
         $0.backgroundColor = .clear
+        $0.isHidden = true
     }
     
     let emptyillustImage = UIImageView().then {
@@ -40,10 +42,34 @@ class CompanyAnalysisMainViewController: UIViewController {
         $0.layer.cornerRadius = 7
     }
     
+    // Main
+    let categoryButton = UIButton().then {
+        $0.setTitle("전체", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+        $0.setImage(UIImage(named: "icArrowDown2"), for: .normal)
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.contentHorizontalAlignment = .left
+        $0.titleEdgeInsets.left = 11
+        $0.imageEdgeInsets.left = 27
+        
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.grey6.cgColor
+        $0.layer.cornerRadius = 4
+    }
+    
+    let testTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        testTableView.delegate = self
+        testTableView.dataSource = self
+        testTableView.register(AnalysisTableViewCell.self, forCellReuseIdentifier: "AnalysisTableViewCell")
     }
     
     init() {
@@ -65,6 +91,10 @@ class CompanyAnalysisMainViewController: UIViewController {
         emptyView.addSubview(emptyLabel)
         emptyView.addSubview(writeButton)
         
+        view.addSubview(categoryButton)
+        
+        view.addSubview(testTableView)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -74,6 +104,7 @@ class CompanyAnalysisMainViewController: UIViewController {
             make.height.equalTo(45)
         }
         
+        // Empty View
         emptyView.snp.makeConstraints { make in
             make.top.equalTo(navigationView.snp.bottom)
             make.left.right.equalTo(view.safeAreaLayoutGuide)
@@ -98,6 +129,41 @@ class CompanyAnalysisMainViewController: UIViewController {
             make.height.equalTo(40)
         }
         
+        // Main
+        categoryButton.snp.makeConstraints { make in
+            make.top.equalTo(navigationView.snp.bottom).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.width.equalTo(70)
+            make.height.equalTo(36)
+        }
+        
+        testTableView.snp.makeConstraints { make in
+            make.top.equalTo(categoryButton.snp.bottom).offset(20)
+            make.left.right.bottom.equalTo(view)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension CompanyAnalysisMainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell") as? AnalysisTableViewCell else {
+            return UITableViewCell()
+        }
+                
+        if indexPath.row == 1 {
+            cell.changeTempCellColor()
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
     }
 }
