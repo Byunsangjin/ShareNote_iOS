@@ -42,6 +42,7 @@
 		60966CB225B9BFC400C8E487 /* TradingLogMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CB125B9BFC400C8E487 /* TradingLogMainViewController.swift */; };
 		60966CB725B9BFD000C8E487 /* BookmarkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CB625B9BFD000C8E487 /* BookmarkMainViewController.swift */; };
 		60966CBC25B9BFD800C8E487 /* MoreMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966CBB25B9BFD800C8E487 /* MoreMainViewController.swift */; };
+		609E13EC25FDC16200F80C1A /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E13EB25FDC16200F80C1A /* AnalysisTableViewCell.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -147,6 +148,7 @@
 		60966CB125B9BFC400C8E487 /* TradingLogMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingLogMainViewController.swift; sourceTree = "<group>"; };
 		60966CB625B9BFD000C8E487 /* BookmarkMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMainViewController.swift; sourceTree = "<group>"; };
 		60966CBB25B9BFD800C8E487 /* MoreMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMainViewController.swift; sourceTree = "<group>"; };
+		609E13EB25FDC16200F80C1A /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				60966CAC25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift */,
+				609E13EB25FDC16200F80C1A /* AnalysisTableViewCell.swift */,
 				60EFBB8E25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift */,
 				60EFBB9325FA5E3D0027B0E2 /* IntroView.swift */,
 			);
@@ -844,6 +847,7 @@
 				60308D8725D594370091ACC5 /* UIImaeg+Extension.swift in Sources */,
 				60CD8EA025A1E8E100C29F0E /* EmailTableViewCell.swift in Sources */,
 				60EFBA0D25D6CEBD0027B0E2 /* AuthenticationViewController.swift in Sources */,
+				609E13EC25FDC16200F80C1A /* AnalysisTableViewCell.swift in Sources */,
 				60EFBB5A25F658B90027B0E2 /* UIControl+Extension.swift in Sources */,
 				60966CA525B9BF1100C8E487 /* HomeMainViewController.swift in Sources */,
 				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
