@@ -15,7 +15,7 @@ class AppVersionViewController: UIViewController {
     }
     
     let logoImageView = UIImageView().then {
-        $0.image = nil
+        $0.image = UIImage(named: "logoSharenote")
     }
     
     let versionLabel = UILabel().then {
