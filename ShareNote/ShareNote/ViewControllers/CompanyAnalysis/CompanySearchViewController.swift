@@ -5,6 +5,8 @@
 //  Created by sjbyun on 2021/03/14.
 //
 
+import RxSwift
+import SnapKit
 import UIKit
 
 class CompanySearchViewController: UIViewController {
@@ -87,6 +89,22 @@ class CompanySearchViewController: UIViewController {
         $0.separatorStyle = .singleLine
     }
     
+    let cancelButtonView = UIView().then {
+        $0.backgroundColor = .whiteTwo
+        $0.isHidden = true
+    }
+    
+    let cancelButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.grey2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+    }
+    
+    // MARK: Variables
+    var cancelButtonViewBottomConstraint: Constraint?
+    
+    var disposeBag = DisposeBag()
+    
     // MARK: Variables
     var stockList = ["삼성전자 005930", "삼성전자우 000321", "랩지노믹스 123456", "가짜삼성주식 0123945"]
     
@@ -94,9 +112,15 @@ class CompanySearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setKeyboardNotification()
         
         searchTableView.delegate = self
         searchTableView.dataSource = self
+        
+        cancelButton.rx.tap
+            .bind { [weak self] in
+                self?.searchTextField.endEditing(true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -118,6 +142,9 @@ class CompanySearchViewController: UIViewController {
         view.addSubview(searchTableContainerView)
         searchTableContainerView.addSubview(searchResultLabel)
         searchTableContainerView.addSubview(searchTableView)
+        
+        view.addSubview(cancelButtonView)
+        cancelButtonView.addSubview(cancelButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -192,7 +219,44 @@ class CompanySearchViewController: UIViewController {
             make.left.right.bottom.equalTo(searchTableContainerView)
         }
         
+        // Cancel Button View
+        cancelButtonView.snp.makeConstraints { make in
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            cancelButtonViewBottomConstraint = make.bottom.equalTo(view).constraint
+            make.height.equalTo(45)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.right.equalTo(cancelButtonView).offset(-21)
+            make.centerY.equalTo(cancelButtonView)
+        }
+        
         super.updateViewConstraints()
+    }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        self.cancelButtonView.isHidden = false
+        
+        self.cancelButtonViewBottomConstraint?.update(offset: -keyboardFrame.size.height)
+        
+        UIView.animate(withDuration: 1, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        cancelButtonView.isHidden = true
+        self.cancelButtonViewBottomConstraint?.update(inset: 0)
     }
 }
 
