@@ -87,6 +87,7 @@ class CompanySearchViewController: UIViewController {
     
     let searchTableView = UITableView().then {
         $0.separatorStyle = .singleLine
+        $0.tableFooterView = UIView()
     }
     
     let cancelButtonView = UIView().then {
