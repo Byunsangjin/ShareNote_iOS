@@ -47,6 +47,7 @@
 		609E13F625FE0F7500F80C1A /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E13F525FE0F7500F80C1A /* SelectionViewController.swift */; };
 		609E13FB25FE1B2300F80C1A /* CompanySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E13FA25FE1B2300F80C1A /* CompanySelectionView.swift */; };
 		609E140025FE40CB00F80C1A /* CompanySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E13FF25FE40CB00F80C1A /* CompanySearchViewController.swift */; };
+		609E140525FF890B00F80C1A /* QuestionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609E140425FF890A00F80C1A /* QuestionSelectViewController.swift */; };
 		60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F025792D37001A77C2 /* AppDelegate.swift */; };
 		60ADF4F325792D37001A77C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F225792D37001A77C2 /* SceneDelegate.swift */; };
 		60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ADF4F425792D37001A77C2 /* ViewController.swift */; };
@@ -157,6 +158,7 @@
 		609E13F525FE0F7500F80C1A /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		609E13FA25FE1B2300F80C1A /* CompanySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySelectionView.swift; sourceTree = "<group>"; };
 		609E13FF25FE40CB00F80C1A /* CompanySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySearchViewController.swift; sourceTree = "<group>"; };
+		609E140425FF890A00F80C1A /* QuestionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectViewController.swift; sourceTree = "<group>"; };
 		60ADF4ED25792D37001A77C2 /* ShareNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60ADF4F025792D37001A77C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60ADF4F225792D37001A77C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				609E13F525FE0F7500F80C1A /* SelectionViewController.swift */,
 				609E13FA25FE1B2300F80C1A /* CompanySelectionView.swift */,
 				609E13FF25FE40CB00F80C1A /* CompanySearchViewController.swift */,
+				609E140425FF890A00F80C1A /* QuestionSelectViewController.swift */,
 			);
 			path = CompanyAnalysis;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				60308D8225D594220091ACC5 /* UISegmentControl+Extension.swift in Sources */,
 				6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */,
 				60966CAD25B9BF2000C8E487 /* CompanyAnalysisMainViewController.swift in Sources */,
+				609E140525FF890B00F80C1A /* QuestionSelectViewController.swift in Sources */,
 				60EFBA0325D68C5B0027B0E2 /* UIFont+Extension.swift in Sources */,
 				60EFB9FE25D680270027B0E2 /* UIColor+Extension.swift in Sources */,
 				60EFBB8F25FA5CBE0027B0E2 /* CompanyAnalysisIntroViewController.swift in Sources */,
