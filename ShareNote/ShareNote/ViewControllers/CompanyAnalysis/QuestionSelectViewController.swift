@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ExpyTableView
 
 class QuestionSelectViewController: UIViewController {
 
@@ -77,10 +78,22 @@ class QuestionSelectViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
     }
     
+    let questionTableView = ExpyTableView().then {
+        $0.separatorStyle = .none
+    }
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        questionTableView.delegate = self
+        questionTableView.dataSource = self
+        questionTableView.expandingAnimation = .top
+        questionTableView.collapsingAnimation = .top
+        
+        questionTableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "CategoryTableViewCell")
+        questionTableView.register(QuestionTableViewCell.self, forCellReuseIdentifier: "QuestionTableViewCell")
     }
     
     func setUI() {
@@ -109,6 +122,8 @@ class QuestionSelectViewController: UIViewController {
         questionCountView.addSubview(countLabel)
         
         scrollContentView.addSubview(categoryTitleLabel)
+        
+        scrollView.addSubview(questionTableView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -185,6 +200,117 @@ class QuestionSelectViewController: UIViewController {
             make.left.equalTo(selectionView)
         }
         
+        questionTableView.snp.makeConstraints { make in
+            make.top.equalTo(categoryTitleLabel.snp.bottom).offset(20)
+            make.width.equalTo(scrollContentView)
+            make.centerX.equalTo(scrollContentView)
+            make.bottom.equalTo(scrollContentView)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension QuestionSelectViewController: ExpyTableViewDelegate, ExpyTableViewDataSource {
+    func tableView(_ tableView: ExpyTableView, expyState state: ExpyState, changeForSection section: Int) {
+        
+    }
+    
+    func tableView(_ tableView: ExpyTableView, canExpandSection section: Int) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableViewCell") as? CategoryTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as? QuestionTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? CategoryTableViewCell else {
+            return
+        }
+        
+        cell.changeLayer()
+    }
+}
+
+extension UITableViewController {
+    func colorSection(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cornerRadius: CGFloat = 0.0
+        cell.backgroundColor = UIColor.clear
+        let layer: CAShapeLayer = CAShapeLayer()
+        let pathRef: CGMutablePath = CGMutablePath()
+        //dx leading an trailing margins
+        let bounds: CGRect = cell.bounds.insetBy(dx: 0, dy: 0)
+        var addLine: Bool = false
+        
+        if indexPath.row == 0 && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            pathRef.__addRoundedRect(transform: nil, rect: bounds, cornerWidth: cornerRadius, cornerHeight: cornerRadius)
+        } else if indexPath.row == 0 {
+            pathRef.move(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+            pathRef.addArc(tangent1End: CGPoint(x: bounds.minX, y: bounds.minY),
+                           tangent2End: CGPoint(x: bounds.midX, y: bounds.minY),
+                           radius: cornerRadius)
+            
+            pathRef.addArc(tangent1End: CGPoint(x: bounds.maxX, y: bounds.minY),
+                           tangent2End: CGPoint(x: bounds.maxX, y: bounds.midY),
+                           radius: cornerRadius)
+            pathRef.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+            addLine = true
+        } else if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            pathRef.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
+            pathRef.addArc(tangent1End: CGPoint(x: bounds.minX, y: bounds.maxY),
+                           tangent2End: CGPoint(x: bounds.midX, y: bounds.maxY),
+                           radius: cornerRadius)
+            
+            pathRef.addArc(tangent1End: CGPoint(x: bounds.maxX, y: bounds.maxY),
+                           tangent2End: CGPoint(x: bounds.maxX, y: bounds.midY),
+                           radius: cornerRadius)
+            pathRef.addLine(to: CGPoint(x: bounds.maxX, y: bounds.minY))
+        } else {
+            pathRef.addRect(bounds)
+            addLine = true
+        }
+        
+        layer.path = pathRef
+        layer.strokeColor = UIColor.lightGray.cgColor
+        layer.lineWidth = 0.5
+        layer.fillColor = UIColor.white.cgColor
+        
+        if addLine == true {
+            let lineLayer: CALayer = CALayer()
+            let lineHeight: CGFloat = (1 / UIScreen.main.scale)
+            lineLayer.frame = CGRect(x: bounds.minX, y: bounds.size.height - lineHeight, width: bounds.size.width, height: lineHeight)
+            lineLayer.backgroundColor = UIColor.clear.cgColor
+            layer.addSublayer(lineLayer)
+        }
+        
+        let backgroundView: UIView = UIView(frame: bounds)
+        backgroundView.layer.insertSublayer(layer, at: 0)
+        backgroundView.backgroundColor = .white
+        cell.backgroundView = backgroundView
     }
 }
