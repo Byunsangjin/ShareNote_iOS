@@ -9,7 +9,9 @@ import UIKit
 
 class QuestionTableViewCell: UITableViewCell {
     // MARK: Constants
-    let containerView = UIView()
+    let containerView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
     let titleLabel = UILabel().then {
         $0.text = "시가총액은 얼마인가요?"

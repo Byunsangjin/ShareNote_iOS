@@ -10,7 +10,7 @@ import UIKit
 class CategoryTableViewCell: UITableViewCell {
     
     // MARK: Constants
-    let containerView = UIView.createCellContainerView()
+    let containerView = UIView.createTradingShareCellView()
     
     let titleLabel = UILabel().then {
         $0.text = "이런 저런 이런저런에 대해 알아보세요."
