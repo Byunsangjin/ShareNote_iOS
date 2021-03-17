@@ -5,6 +5,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - ExpyTableView (1.2.1)
   - Firebase/Analytics (7.2.0):
     - Firebase/Core
   - Firebase/Auth (7.2.0):
@@ -136,6 +137,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - ExpyTableView
   - Firebase/Analytics
   - Firebase/Auth
   - FSCalendar
@@ -159,6 +161,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AppAuth
+    - ExpyTableView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -200,6 +203,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  ExpyTableView: 19cf224c2ff04b1ec215ec52bc4ba6f81fa809ed
   Firebase: 456eeacc158d8c58586b7871619a81bb9f27d4ae
   FirebaseAnalytics: 2673264e482b428df13786b59165ebf420881d7a
   FirebaseAuth: e6a214cc897d2eab7635b1e5dd6b4298fd1e776b
@@ -238,6 +242,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 5eae52168fa34823f2b2e77d72a168982e9d8f0e
+PODFILE CHECKSUM: 166668af1f01063bdb2998fe0ff76d98477f4283
 
 COCOAPODS: 1.8.4
