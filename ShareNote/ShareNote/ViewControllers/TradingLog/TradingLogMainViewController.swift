@@ -41,14 +41,12 @@ class TradingLogMainViewController: UIViewController {
     
     let yearMonthButton = UIButton().then {
         $0.setImage(UIImage(named: "icArrowDown"), for: .normal)
-        $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
     }
     
     let calendarView = FSCalendar()
     
     let foldButton = UIButton().then {
         $0.setImage(UIImage(named: "icArrowDown"), for: .normal)
-        $0.setImage(UIImage(named: "icArrowDown"), for: .highlighted)
     }
     
     let datePickerContainerView = UIView()
