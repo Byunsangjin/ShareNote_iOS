@@ -36,6 +36,7 @@
 		608410862600F549000FAE7B /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608410852600F549000FAE7B /* CategoryTableViewCell.swift */; };
 		6084108B2600F550000FAE7B /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084108A2600F550000FAE7B /* QuestionTableViewCell.swift */; };
 		60841090260247B3000FAE7B /* QuestionConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084108F260247B3000FAE7B /* QuestionConfirmViewController.swift */; };
+		608410952603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */; };
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
@@ -150,6 +151,7 @@
 		608410852600F549000FAE7B /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		6084108A2600F550000FAE7B /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		6084108F260247B3000FAE7B /* QuestionConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionConfirmViewController.swift; sourceTree = "<group>"; };
+		608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionConfirmTableViewCell.swift; sourceTree = "<group>"; };
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				608410852600F549000FAE7B /* CategoryTableViewCell.swift */,
 				6084108A2600F550000FAE7B /* QuestionTableViewCell.swift */,
 				6084108F260247B3000FAE7B /* QuestionConfirmViewController.swift */,
+				608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */,
 			);
 			path = CompanyAnalysis;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				60EFBAAB25E161F10027B0E2 /* PopupViewController.swift in Sources */,
 				60EFBB0E25F4906B0027B0E2 /* ChangePasswordViewController.swift in Sources */,
 				6084108B2600F550000FAE7B /* QuestionTableViewCell.swift in Sources */,
+				608410952603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift in Sources */,
 				609E13F625FE0F7500F80C1A /* SelectionViewController.swift in Sources */,
 				60EFBB7B25F8E5D90027B0E2 /* AppVersionViewController.swift in Sources */,
 				60CD906C25AB0DF200C29F0E /* PasswordKeypadView.swift in Sources */,
