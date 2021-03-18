@@ -62,10 +62,12 @@ class QuestionConfirmViewController: UIViewController {
         
         selectedQuestionTableView.delegate = self
         selectedQuestionTableView.dataSource = self
+        
+        selectedQuestionTableView.register(QuestionConfirmTableViewCell.self, forCellReuseIdentifier: "QuestionConfirmTableViewCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.selectedQuestionTableView.setEditing(true, animated: true)
+        self.selectedQuestionTableView.setEditing(true, animated: true)
     }
     
     func setUI() {
@@ -141,9 +143,10 @@ extension QuestionConfirmViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "\(indexPath.row)"
-        cell.selectionStyle = .none
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionConfirmTableViewCell") as? QuestionConfirmTableViewCell else {
+            return UITableViewCell()
+        }
+        
         return cell
     }
     
@@ -158,6 +161,10 @@ extension QuestionConfirmViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
