@@ -256,4 +256,8 @@ extension QuestionSelectViewController: ExpyTableViewDelegate, ExpyTableViewData
         
         cell.changeLayer()
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
