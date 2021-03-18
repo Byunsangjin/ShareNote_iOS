@@ -34,11 +34,21 @@ class QuestionConfirmViewController: UIViewController {
     let selectedQuestionTableView = UITableView()
     
     let createQuestionButton = UIButton().then {
-        $0.backgroundColor = .yellow
+        $0.backgroundColor = .white
+        
+        $0.layer.cornerRadius = 7
+        $0.layer.borderWidth = 2
+        $0.layer.borderColor = UIColor.mainColor.cgColor
+        $0.layer.applySketchShadow(color: .black1, alpha: 0.05, x: 0, y: 1, blur: 10, spread: 0)
     }
     
     let okButton = UIButton().then {
-        $0.backgroundColor = .blue
+        $0.setTitle("질문 작성하기", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
+        
+        $0.backgroundColor = .mainColor
+        $0.layer.cornerRadius = 7
     }
     
     var height: Constraint?
