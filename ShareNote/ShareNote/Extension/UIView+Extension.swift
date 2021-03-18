@@ -23,7 +23,7 @@ extension UIView {
     class func createTradingShareCellView() -> UIView {
         let view = UIView.createCellContainerView()
         view.layer.borderColor = UIColor.whiteTwo.cgColor
-        view.layer.applySketchShadow(color: .black, alpha: 0.05, x: 0, y: 1, blur: 10, spread: 0)
+        view.layer.applySketchShadow(color: .black1, alpha: 0.05, x: 0, y: 1, blur: 10, spread: 0)
         
         return view
     }
