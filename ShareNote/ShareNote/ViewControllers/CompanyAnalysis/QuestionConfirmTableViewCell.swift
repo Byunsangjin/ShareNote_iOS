@@ -9,6 +9,8 @@ import UIKit
 
 class QuestionConfirmTableViewCell: UITableViewCell {
     // MARK: Constants
+    let containerView = UIView.createTradingShareCellView()
+    
     let titleLabel = UILabel().then {
         $0.text = "시가총액은 얼마인가요?"
         $0.textColor = .black2
@@ -17,6 +19,10 @@ class QuestionConfirmTableViewCell: UITableViewCell {
     
     let trashButton = UIButton().then {
         $0.setImage(UIImage(named: "icTrash"), for: .normal)
+    }
+    
+    let moveImageView = UIImageView().then {
+        $0.image = UIImage(named: "icMove")
     }
     
     // MARK: Methods
@@ -37,21 +43,35 @@ class QuestionConfirmTableViewCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
         
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(trashButton)
+        contentView.addSubview(containerView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(trashButton)
+        containerView.addSubview(moveImageView)
                 
         contentView.setNeedsUpdateConstraints()
     }
     
     override func updateConstraints() {
+        containerView.snp.makeConstraints { make in
+            make.top.centerX.equalTo(contentView)
+            make.width.equalTo(contentView.snp.width).offset(-40)
+            make.height.equalTo(55)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(contentView).offset(15)
-            make.centerY.equalTo(contentView)
+            make.left.equalTo(containerView).offset(15)
+            make.centerY.equalTo(containerView)
         }
         
         trashButton.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right)
             make.centerY.equalTo(titleLabel)
+            make.width.height.equalTo(30)
+        }
+        
+        moveImageView.snp.makeConstraints { make in
+            make.right.equalTo(containerView).offset(-13)
+            make.centerY.equalTo(containerView)
             make.width.height.equalTo(30)
         }
         
