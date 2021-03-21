@@ -31,15 +31,50 @@ class QuestionConfirmViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 12)
     }
     
-    let selectedQuestionTableView = UITableView()
+    let selectedQuestionTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
     
-    let createQuestionButton = UIButton().then {
+    let directInputContainerView = UIView().then {
         $0.backgroundColor = .white
-        
         $0.layer.cornerRadius = 7
         $0.layer.borderWidth = 2
         $0.layer.borderColor = UIColor.mainColor.cgColor
         $0.layer.applySketchShadow(color: .black1, alpha: 0.05, x: 0, y: 1, blur: 10, spread: 0)
+    }
+    
+    let addDirectInputView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let directInputLabel = UILabel().then {
+        $0.text = "직접입력"
+        $0.textColor = .black2
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Bold)
+    }
+    
+    let addDirectInputImageView = UIImageView().then {
+        $0.image = UIImage(named: "icPlus")
+    }
+    
+    let directInputTextField = UITextField().then {
+        $0.placeholder = "질문을 입력해 주세요."
+        
+        
+        $0.attributedPlaceholder = NSAttributedString(string: "질문을 입력해 주세요.",
+                                                      attributes: [.font : UIFont.spoqaHanSans(size: 14, style: .Bold),
+                                                                   .foregroundColor : UIColor.grey4])
+        $0.font = UIFont.spoqaHanSans(size: 14, style: .Bold)
+        $0.textColor = .black2
+        $0.isHidden = true
+    }
+    
+    let inputCompleteButton = UIButton().then {
+        $0.setTitle("입력완료", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
+        $0.backgroundColor = .mainColor
+        $0.isHidden = true
     }
     
     let okButton = UIButton().then {
@@ -51,7 +86,10 @@ class QuestionConfirmViewController: UIViewController {
         $0.layer.cornerRadius = 7
     }
     
+    // MARK: Variables
     var height: Constraint?
+    
+    var inputCompleteBottom: Constraint?
     
     var count = 3
     
@@ -64,10 +102,10 @@ class QuestionConfirmViewController: UIViewController {
         selectedQuestionTableView.dataSource = self
         
         selectedQuestionTableView.register(QuestionConfirmTableViewCell.self, forCellReuseIdentifier: "QuestionConfirmTableViewCell")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.selectedQuestionTableView.setEditing(true, animated: true)
+        
+        addDirectInputView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(directBtnTouched)))
+        
+        setKeyboardNotification()
     }
     
     func setUI() {
@@ -81,7 +119,13 @@ class QuestionConfirmViewController: UIViewController {
         
         view.addSubview(selectedQuestionTableView)
         
-        view.addSubview(createQuestionButton)
+        view.addSubview(directInputContainerView)
+        directInputContainerView.addSubview(addDirectInputView)
+        addDirectInputView.addSubview(directInputLabel)
+        addDirectInputView.addSubview(addDirectInputImageView)
+        directInputContainerView.addSubview(directInputTextField)
+        
+        view.addSubview(inputCompleteButton)
         
         view.addSubview(okButton)
         
@@ -114,16 +158,42 @@ class QuestionConfirmViewController: UIViewController {
         selectedQuestionTableView.snp.makeConstraints { make in
             make.top.equalTo(titleView.snp.bottom).offset(12)
             make.centerX.equalTo(view)
-            make.width.equalTo(titleView)
-            height = make.height.equalTo(132).priority(.medium).constraint
+            make.width.equalTo(view.safeAreaLayoutGuide)
+            height = make.height.equalTo(195).priority(.medium).constraint
             make.bottom.lessThanOrEqualTo(okButton.snp.top).offset(-115).priority(.high)
         }
         
-        createQuestionButton.snp.makeConstraints { make in
+        directInputContainerView.snp.makeConstraints { make in
             make.top.equalTo(selectedQuestionTableView.snp.bottom).offset(30)
             make.centerX.equalTo(view)
             make.width.equalTo(titleView)
             make.height.equalTo(55)
+        }
+        
+        addDirectInputView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(directInputContainerView)
+        }
+        
+        directInputLabel.snp.makeConstraints { make in
+            make.left.equalTo(addDirectInputView).offset(15)
+            make.centerY.equalTo(addDirectInputView)
+        }
+        
+        addDirectInputImageView.snp.makeConstraints { make in
+            make.right.equalTo(addDirectInputView).offset(-13)
+            make.centerY.equalTo(addDirectInputView)
+            make.width.height.equalTo(30)
+        }
+        
+        directInputTextField.snp.makeConstraints { make in
+            make.left.right.equalTo(directInputContainerView).offset(20)
+            make.centerY.equalTo(directInputContainerView)
+        }
+        
+        inputCompleteButton.snp.makeConstraints { make in
+            make.left.right.equalTo(view)
+            inputCompleteBottom = make.bottom.equalTo(view).constraint
+            make.height.equalTo(45)
         }
         
         okButton.snp.makeConstraints { make in
@@ -134,6 +204,38 @@ class QuestionConfirmViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        self.inputCompleteButton.isHidden = false
+        self.inputCompleteBottom?.update(offset: -keyboardFrame.size.height)
+        self.inputCompleteButton.updateConstraints()
+
+        UIView.animate(withDuration: 1, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        inputCompleteButton.isHidden = true
+        inputCompleteBottom?.update(offset: 0)
+    }
+    
+    @objc
+    func directBtnTouched() {
+        addDirectInputView.isHidden = true
+        directInputTextField.isHidden = false
+        directInputTextField.becomeFirstResponder()
     }
 }
 
@@ -154,20 +256,11 @@ extension QuestionConfirmViewController: UITableViewDelegate, UITableViewDataSou
         count += 1
         tableView.insertRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .top)
         
-//        DispatchQueue.main.async { [weak self] in
-            self.height?.update(offset: tableView.contentSize.height)
-//        }
+        let height = tableView.contentSize.height / 44 * 65
+        self.height?.update(offset: height)
     }
     
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 }
