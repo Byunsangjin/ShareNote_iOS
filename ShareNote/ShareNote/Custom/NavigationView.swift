@@ -16,9 +16,14 @@ class NavigationView: UIView {
     
     let leftBarButton = UIButton().then {
         $0.setImage(UIImage(named: "iconsGotobac"), for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
-    let rightBarButton = UIButton()
+    let rightBarButton = UIButton().then {
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
