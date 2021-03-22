@@ -39,6 +39,7 @@
 		608410952603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */; };
 		6084109A26078089000FAE7B /* WriteCompanyAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084109926078089000FAE7B /* WriteCompanyAnalysisViewController.swift */; };
 		6084109F2608C87E000FAE7B /* QuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084109E2608C87E000FAE7B /* QuestListTableViewCell.swift */; };
+		608410A42608DD45000FAE7B /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608410A32608DD45000FAE7B /* InputTextViewController.swift */; };
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
@@ -156,6 +157,7 @@
 		608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionConfirmTableViewCell.swift; sourceTree = "<group>"; };
 		6084109926078089000FAE7B /* WriteCompanyAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompanyAnalysisViewController.swift; sourceTree = "<group>"; };
 		6084109E2608C87E000FAE7B /* QuestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestListTableViewCell.swift; sourceTree = "<group>"; };
+		608410A32608DD45000FAE7B /* InputTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */,
 				6084109926078089000FAE7B /* WriteCompanyAnalysisViewController.swift */,
 				6084109E2608C87E000FAE7B /* QuestListTableViewCell.swift */,
+				608410A32608DD45000FAE7B /* InputTextViewController.swift */,
 			);
 			path = CompanyAnalysis;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				609E13F125FDD02900F80C1A /* CategoryTableViewController.swift in Sources */,
 				60308CF925D000B80091ACC5 /* TextFieldView.swift in Sources */,
 				60308D5C25D436850091ACC5 /* CompleteTradingLogViewController.swift in Sources */,
+				608410A42608DD45000FAE7B /* InputTextViewController.swift in Sources */,
 				6024832E25B084C900F446E9 /* LoginReactor.swift in Sources */,
 				60EFBB9425FA5E3D0027B0E2 /* IntroView.swift in Sources */,
 				60EFBA9125DD570F0027B0E2 /* CertificationNumberViewController.swift in Sources */,
