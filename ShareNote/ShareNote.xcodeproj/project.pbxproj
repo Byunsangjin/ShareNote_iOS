@@ -38,6 +38,7 @@
 		60841090260247B3000FAE7B /* QuestionConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084108F260247B3000FAE7B /* QuestionConfirmViewController.swift */; };
 		608410952603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */; };
 		6084109A26078089000FAE7B /* WriteCompanyAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084109926078089000FAE7B /* WriteCompanyAnalysisViewController.swift */; };
+		6084109F2608C87E000FAE7B /* QuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6084109E2608C87E000FAE7B /* QuestListTableViewCell.swift */; };
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
@@ -154,6 +155,7 @@
 		6084108F260247B3000FAE7B /* QuestionConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionConfirmViewController.swift; sourceTree = "<group>"; };
 		608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionConfirmTableViewCell.swift; sourceTree = "<group>"; };
 		6084109926078089000FAE7B /* WriteCompanyAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCompanyAnalysisViewController.swift; sourceTree = "<group>"; };
+		6084109E2608C87E000FAE7B /* QuestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestListTableViewCell.swift; sourceTree = "<group>"; };
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				6084108F260247B3000FAE7B /* QuestionConfirmViewController.swift */,
 				608410942603A4CB000FAE7B /* QuestionConfirmTableViewCell.swift */,
 				6084109926078089000FAE7B /* WriteCompanyAnalysisViewController.swift */,
+				6084109E2608C87E000FAE7B /* QuestListTableViewCell.swift */,
 			);
 			path = CompanyAnalysis;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6084109F2608C87E000FAE7B /* QuestListTableViewCell.swift in Sources */,
 				602483EA25B3C93400F446E9 /* RegisterReactor.swift in Sources */,
 				60966CBC25B9BFD800C8E487 /* MoreMainViewController.swift in Sources */,
 				60EFBB0425F484900027B0E2 /* MoreMenuTableViewCell.swift in Sources */,
