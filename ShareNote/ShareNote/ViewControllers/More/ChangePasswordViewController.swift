@@ -66,10 +66,7 @@ class ChangePasswordViewController: UIViewController {
                                                       firstAction: { logger.verbose("확인") })
                                                         
         
-        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
-            self.view.addSubview(customAlertVC.view)
-            self.addChild(customAlertVC)
-        }, completion: nil)
+        customAlertVC.alertShow(parent: self)
     }
     
     func setUI() {
