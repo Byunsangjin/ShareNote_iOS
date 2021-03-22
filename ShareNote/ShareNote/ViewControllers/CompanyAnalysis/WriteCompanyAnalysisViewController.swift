@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/21.
 //
 
+import RxSwift
 import UIKit
 
 class WriteCompanyAnalysisViewController: UIViewController {
@@ -16,6 +17,8 @@ class WriteCompanyAnalysisViewController: UIViewController {
         $0.leftBarButton.setImage(nil, for: .normal)
         $0.leftBarButton.setTitle("취소", for: .normal)
         $0.rightBarButton.setTitle("저장", for: .normal)
+        
+        $0.rightBarButton.addTarget(self, action: #selector(saveBtnTouched), for: .touchUpInside)
     }
     
     let contentStackView = UIStackView().then {
@@ -60,6 +63,7 @@ class WriteCompanyAnalysisViewController: UIViewController {
     }
     
     let tagInputTextField = UITextField().then {
+        $0.placeholder = "태그를 입력해주세요 (최대10개)"
         $0.font = UIFont.spoqaHanSans(size: 14)
         $0.textColor = .black2
     }
@@ -265,6 +269,19 @@ class WriteCompanyAnalysisViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+    
+    @objc
+    func saveBtnTouched() {
+        let customAlertVC = CustomAlertViewController(title: "임시저장 기능",
+                                                message: "아직 저장되지 않은 기업분석입니다.\n저장하지 않은 기업분석은 임시저장됩니다.",
+                                                firstActionTitle: "확인", firstAction: {
+                                                    logger.verbose("확인")
+                                                }, secondActionTitle: "취소") {
+            logger.verbose("취소")
+        }
+        
+        customAlertVC.alertShow(parent: self)
     }
 }
 
