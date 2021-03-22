@@ -59,12 +59,54 @@ class WriteCompanyAnalysisViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
+    let tagInputTextField = UITextField()
+    
+    let tagAddButton = UIButton().then {
+        $0.setTitle("추가", for: .normal)
+        $0.setTitleColor(.mainColor, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
+    }
+    
     let tagContainerView = UIView()
+    
+    let tagScrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let scrollContentView = UIView()
+    
+    let tagStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fillProportionally
+        $0.spacing = 4
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let listTitleLabel = UILabel().then {
+        $0.text = "질문 리스트"
+        $0.textColor = .black2
+        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
+    }
+    
+    let editButton = UIButton().then {
+        let attributeString = NSAttributedString(string: "편집하기",
+                                                 attributes: [NSAttributedString.Key.font : UIFont.spoqaHanSans(size: 11),
+                                                              NSAttributedString.Key.foregroundColor : UIColor.grey3,
+                                                              NSAttributedString.Key.underlineStyle : true])
+        $0.setAttributedTitle(attributeString, for: .normal)
+    }
+    
+    let listTableView = UITableView()
     
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        listTableView.delegate = self
+        listTableView.dataSource = self
     }
     
     func setUI() {
@@ -84,8 +126,30 @@ class WriteCompanyAnalysisViewController: UIViewController {
         
         contentStackView.addArrangedSubview(tagInputContainerView)
         tagInputContainerView.addSubview(tagInputTitleLabel)
+        tagInputContainerView.addSubview(tagInputTextField)
+        tagInputContainerView.addSubview(tagAddButton)
         
         contentStackView.addArrangedSubview(tagContainerView)
+        tagContainerView.addSubview(tagScrollView)
+        tagScrollView.addSubview(scrollContentView)
+        scrollContentView.addSubview(tagStackView)
+        
+        for _ in 0..<10 {
+            let button = UIButton().then {
+                $0.setTitle("#보여지고", for: .normal)
+                $0.setTitleColor(UIColor.black2, for: .normal)
+                $0.titleLabel?.font = UIFont.spoqaHanSans(size: 10, style: .Regular)
+                $0.backgroundColor = UIColor.tag
+                $0.layer.cornerRadius = 12
+                $0.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            }
+            tagStackView.addArrangedSubview(button)
+        }
+        
+        view.addSubview(listTitleLabel)
+        view.addSubview(editButton)
+        
+        view.addSubview(listTableView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -140,10 +204,67 @@ class WriteCompanyAnalysisViewController: UIViewController {
             make.centerY.equalTo(tagInputContainerView)
         }
         
+        tagInputTextField.snp.makeConstraints { make in
+            make.left.equalTo(tagInputTitleLabel).offset(60)
+            make.right.equalTo(tagAddButton.snp.right).offset(-20)
+            make.centerY.equalTo(tagInputContainerView)
+        }
+        
+        tagAddButton.snp.makeConstraints { make in
+            make.right.equalTo(tagInputContainerView).offset(-20)
+            make.centerY.equalTo(tagInputContainerView)
+        }
+        
         tagContainerView.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
         
+        tagScrollView.snp.makeConstraints { make in
+            make.left.equalTo(tagContainerView).offset(20)
+            make.right.equalTo(tagContainerView).offset(-20)
+            make.centerY.equalTo(tagContainerView)
+            make.height.equalTo(20)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.right.equalTo(tagScrollView)
+            make.height.equalTo(tagScrollView)
+        }
+        
+        tagStackView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(scrollContentView)
+        }
+        
+        listTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentStackView.snp.bottom).offset(35)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+        }
+        
+        editButton.snp.makeConstraints { make in
+            make.top.equalTo(listTitleLabel)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-23)
+        }
+        
+        listTableView.snp.makeConstraints { make in
+            make.top.equalTo(listTitleLabel.snp.bottom).offset(18)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-11)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension WriteCompanyAnalysisViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        cell.textLabel?.text = "\(indexPath.row)"
+        
+        return cell
     }
 }
