@@ -59,7 +59,10 @@ class WriteCompanyAnalysisViewController: UIViewController {
         $0.font = UIFont.spoqaHanSans(size: 14)
     }
     
-    let tagInputTextField = UITextField()
+    let tagInputTextField = UITextField().then {
+        $0.font = UIFont.spoqaHanSans(size: 14)
+        $0.textColor = .black2
+    }
     
     let tagAddButton = UIButton().then {
         $0.setTitle("추가", for: .normal)
@@ -98,7 +101,15 @@ class WriteCompanyAnalysisViewController: UIViewController {
         $0.setAttributedTitle(attributeString, for: .normal)
     }
     
-    let listTableView = UITableView()
+    let listTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
+    
+    // MARK: Variables
+    var questionList = ["시가총액은 얼마인가요?",
+                        "작년 영업이익률은 몇퍼센트였나요?최대",
+                        "경쟁사는 어떤 기업인가요?",
+                        "주요 상품/서비스는 무엇인가요?"]
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -107,6 +118,8 @@ class WriteCompanyAnalysisViewController: UIViewController {
         
         listTableView.delegate = self
         listTableView.dataSource = self
+        
+        listTableView.register(QuestListTableViewCell.self, forCellReuseIdentifier: "QuestListTableViewCell")
     }
     
     func setUI() {
@@ -257,14 +270,24 @@ class WriteCompanyAnalysisViewController: UIViewController {
 
 extension WriteCompanyAnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return questionList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "QuestListTableViewCell") as? QuestListTableViewCell else {
+            return UITableViewCell()
+        }
         
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.titleLabel.text = questionList[indexPath.row]
+        
+        if indexPath.row == 1 {
+            cell.complete()
+        }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 }
