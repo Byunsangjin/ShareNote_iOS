@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class NavigationView: UIView {
     
+    // MARK: Constants
     let titleLabel = UILabel().then {
         $0.textColor = .black2
         $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
@@ -25,6 +27,10 @@ class NavigationView: UIView {
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
+    // MARK: Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()

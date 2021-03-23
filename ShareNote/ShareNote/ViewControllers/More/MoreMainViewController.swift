@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/01/21.
 //
 
+import RxSwift
 import UIKit
 
 class MoreMainViewController: UIViewController {
@@ -96,6 +97,9 @@ class MoreMainViewController: UIViewController {
                         ["약관 및 개인정보처리", "오픈소스 라이센스"],
                         ["버전정보"]]
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -114,6 +118,12 @@ class MoreMainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        detailButton.rx.tap
+            .bind { [weak self] in
+                let userInfoViewController = UserInfoViewController()
+                self?.navigationController?.pushViewController(userInfoViewController, animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

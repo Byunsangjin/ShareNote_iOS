@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/08.
 //
 
+import RxSwift
 import UIKit
 
 class ChangeMyInfoViewController: UIViewController {
@@ -43,10 +44,23 @@ class ChangeMyInfoViewController: UIViewController {
         $0.layer.cornerRadius = 7
     }
     
+    // MARK: Variables
+    let disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+        
+        okButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

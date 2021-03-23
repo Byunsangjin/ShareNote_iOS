@@ -16,13 +16,14 @@ class MainTabBarViewController: UITabBarController {
         let companyAnalysisMainViewController = CompanyAnalysisMainViewController()
         let tradingLogMainViewController = TradingLogMainViewController()
         let bookmarkMainViewController = BookmarkMainViewController()
-        let moreMainViewController = MoreMainViewController()
+        let moreMainNavigationController = UINavigationController(rootViewController: MoreMainViewController())
+        moreMainNavigationController.isNavigationBarHidden = true
         
         setViewControllers([homeMainViewController,
                             companyAnalysisMainViewController,
                             tradingLogMainViewController,
                             bookmarkMainViewController,
-                            moreMainViewController],
+                            moreMainNavigationController],
                            animated: false)
         
         tabBar.isTranslucent = false
