@@ -57,6 +57,11 @@ class LockModeSettingViewController: UIViewController {
             .bind { [weak self] in
                 self?.tableView.reloadData()
             }.disposed(by: disposeBag)
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

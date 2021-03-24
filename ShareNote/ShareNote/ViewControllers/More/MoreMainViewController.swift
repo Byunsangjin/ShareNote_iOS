@@ -97,6 +97,10 @@ class MoreMainViewController: UIViewController {
                         ["약관 및 개인정보처리", "오픈소스 라이센스"],
                         ["버전정보"]]
     
+    let moveViewControllerList = [[AccountManagementViewController(), LockModeSettingViewController(), nil],
+                                  [TermsAndPersonalInfoProcessingViewController(), nil],
+                                  [AppVersionViewController()]]
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -274,6 +278,15 @@ extension MoreMainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if let moveViewController = moveViewControllerList[section][row] {
+            self.navigationController?.pushViewController(moveViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

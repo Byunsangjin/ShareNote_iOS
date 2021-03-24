@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/10.
 //
 
+import RxSwift
 import UIKit
 
 class TermsAndPersonalInfoProcessingViewController: UIViewController {
@@ -23,6 +24,9 @@ class TermsAndPersonalInfoProcessingViewController: UIViewController {
                          "개인정보 수집 이용동의",
                          "개인정보 처리방침"];
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,11 @@ class TermsAndPersonalInfoProcessingViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(MoreMenuTableViewCell.self, forCellReuseIdentifier: "MoreMenuTableViewCell")
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

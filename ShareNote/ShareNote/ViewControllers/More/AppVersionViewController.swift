@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/10.
 //
 
+import RxSwift
 import UIKit
 
 class AppVersionViewController: UIViewController {
@@ -26,10 +27,18 @@ class AppVersionViewController: UIViewController {
         $0.numberOfLines = 0
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

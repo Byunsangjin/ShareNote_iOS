@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/10.
 //
 
+import RxSwift
 import UIKit
 
 class AccountManagementViewController: UIViewController {
@@ -29,6 +30,9 @@ class AccountManagementViewController: UIViewController {
                           "비밀번호변경",
                           nil]
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+        
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,11 @@ class AccountManagementViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(MoreMenuTableViewCell.self, forCellReuseIdentifier: "MoreMenuTableViewCell")
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
