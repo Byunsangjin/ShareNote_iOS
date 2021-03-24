@@ -18,9 +18,10 @@ class MoreMenuHeaderView: UIView {
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(title: String) {
+        super.init(frame: CGRect.zero)
         
+        titleLabel.text = title
         setUI()
     }
     

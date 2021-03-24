@@ -281,18 +281,28 @@ extension MoreMainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = MoreMenuHeaderView()
+        let view: UIView
         
         switch section {
         case 0:
-            view.titleLabel.text = "개인/보안"
+            view = MoreMenuHeaderView(title: "개인/보안")
         case 1:
-            view.titleLabel.text = "약관 및 정책"
+            view = MoreMenuHeaderView(title: "약관 및 정책")
         default:
+            view = UIView()
+            view.backgroundColor = .whiteTwo
             break
         }
         
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 5
+        }
+
+        return 42
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
