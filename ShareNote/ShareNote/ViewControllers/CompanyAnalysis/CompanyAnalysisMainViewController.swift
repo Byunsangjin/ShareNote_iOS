@@ -72,6 +72,10 @@ class CompanyAnalysisMainViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         
+        let introViewController = CompanyAnalysisIntroViewController()
+        self.addChild(introViewController)
+        self.view.addSubview(introViewController.view)
+        
         testTableView.delegate = self
         testTableView.dataSource = self
         testTableView.register(AnalysisTableViewCell.self, forCellReuseIdentifier: "AnalysisTableViewCell")

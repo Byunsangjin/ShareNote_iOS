@@ -5,10 +5,12 @@
 //  Created by sjbyun on 2021/03/11.
 //
 
+import RxSwift
 import UIKit
 
 class CompanyAnalysisIntroViewController: UIViewController {
         
+    // MARK: Constants
     let stepOne = IntroView(numberOfStep: 1,
                             title: "관심있는 기업을 선택하세요",
                             description: "코스피와 코스닥에 상장된 기업의 정보를\n제공합니다").then {
@@ -84,10 +86,19 @@ class CompanyAnalysisIntroViewController: UIViewController {
         }
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        startButton.rx.tap
+            .bind { [weak self] in
+                self?.view.removeFromSuperview()
+                self?.removeFromParent()
+            }.disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {

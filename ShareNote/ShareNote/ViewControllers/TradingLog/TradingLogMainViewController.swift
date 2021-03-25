@@ -49,7 +49,9 @@ class TradingLogMainViewController: UIViewController {
         $0.setImage(UIImage(named: "icArrowDown"), for: .normal)
     }
     
-    let datePickerContainerView = UIView()
+    let datePickerContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let datePicker = YearMonthPickerView()
     
