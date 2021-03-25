@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/09.
 //
 
+import RxSwift
 import UIKit
 
 class AlarmSettingViewController: UIViewController {
@@ -24,10 +25,18 @@ class AlarmSettingViewController: UIViewController {
         $0.onTintColor = .mainColor
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

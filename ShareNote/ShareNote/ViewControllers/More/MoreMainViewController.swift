@@ -97,7 +97,7 @@ class MoreMainViewController: UIViewController {
                         ["약관 및 개인정보처리", "오픈소스 라이센스"],
                         ["버전정보"]]
     
-    let moveViewControllerList = [[AccountManagementViewController(), LockModeSettingViewController(), nil],
+    let moveViewControllerList = [[AccountManagementViewController(), LockModeSettingViewController(), AlarmSettingViewController()],
                                   [TermsAndPersonalInfoProcessingViewController(), nil],
                                   [AppVersionViewController()]]
     

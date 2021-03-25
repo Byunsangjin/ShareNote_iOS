@@ -106,7 +106,13 @@ extension AccountManagementViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        logger.verbose(cellTitleList[indexPath.row])
+        let row = indexPath.row
+        
+        if row == 2 {
+            self.navigationController?.pushViewController(ChangePasswordViewController(), animated: true)
+        } else if row == 3 {
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -5,10 +5,12 @@
 //  Created by sjbyun on 2021/03/07.
 //
 
+import RxSwift
 import UIKit
 
 class ChangePasswordViewController: UIViewController {
 
+    // MARK: Constants
     let navigationView = NavigationView().then {
         $0.titleLabel.text = "비밀번호변경"
     }
@@ -52,10 +54,18 @@ class ChangePasswordViewController: UIViewController {
         $0.layer.cornerRadius = 7
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     @objc
@@ -63,7 +73,9 @@ class ChangePasswordViewController: UIViewController {
         let customAlertVC = CustomAlertViewController(title: "비밀번호가 변경되었습니다.",
                                                       message: nil,
                                                       firstActionTitle: "확인",
-                                                      firstAction: { logger.verbose("확인") })
+                                                      firstAction: { [weak self] in
+                                                        self?.navigationController?.popViewController(animated: true)
+                                                      })
                                                         
         
         customAlertVC.alertShow(parent: self)
