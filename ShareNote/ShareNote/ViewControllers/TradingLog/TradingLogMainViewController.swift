@@ -242,8 +242,13 @@ extension TradingLogMainViewController: FSCalendarDataSource, FSCalendarDelegate
             return
         }
         
-        let image = UIImage(named: "icCalendarSelect")
-        selectedCell.selectedBackgroundView = UIImageView(image: image)
+        let imageView = UIImageView(image: UIImage(named: "icCalendarToday"))
+        
+        let dx = CGFloat(selectedCell.titleLabel.frame.width - 35) / 2.0
+        let dy = CGFloat(selectedCell.titleLabel.frame.height - 30) / 2.0
+        
+        selectedCell.selectedBackgroundView = imageView
+        selectedCell.selectedBackgroundView?.frame = CGRect(x: dx, y: dy, width: 35, height: 30)
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
