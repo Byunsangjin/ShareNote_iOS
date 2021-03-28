@@ -112,13 +112,13 @@ class CompanySearchViewController: UIViewController {
     
     var searchText = ""
     
+    var delegate: SelectionViewDelegate?
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         setKeyboardNotification()
-        
-//        searchTextField.delegate = self
         
         searchTableView.delegate = self
         searchTableView.dataSource = self
@@ -317,6 +317,8 @@ extension CompanySearchViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let title = stockList.filter { $0.contains(searchText) }[indexPath.row]
+        delegate?.didSelectCompany(title: title)
         self.navigationController?.popViewController(animated: true)
     }
     

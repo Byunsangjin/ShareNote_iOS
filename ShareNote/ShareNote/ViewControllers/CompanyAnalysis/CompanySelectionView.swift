@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/14.
 //
 
+import RxSwift
 import UIKit
 
 class CompanySelectionView: UIView {
@@ -23,6 +24,7 @@ class CompanySelectionView: UIView {
     let titleLabel = UILabel().then {
         $0.textColor = .black2
         $0.font = UIFont.spoqaHanSans(size: 16)
+        $0.numberOfLines = 0
     }
     
     let iconImageView = UIImageView().then {
@@ -38,9 +40,26 @@ class CompanySelectionView: UIView {
         $0.isHidden = true
     }
     
+    // MARK: Variables
+    var isEnable = true {
+        willSet {
+            if newValue {
+                enableView()
+            } else {
+                disableView()
+            }
+        }
+    }
+    
+    var disposeBag = DisposeBag()
+    
+    var delegate: SelectionViewDelegate?
+    
     // MARK: Methods
     init(numberOfStep: Int, title: String, isEnable: Bool) {
         super.init(frame: CGRect.zero)
+        
+        setUI()
         
         numberLabel.text = "\(numberOfStep)"
         titleLabel.text = title
@@ -48,11 +67,15 @@ class CompanySelectionView: UIView {
                 
         applyShadow()
         
+        self.isEnable = isEnable
         if isEnable == false {
             disableView()
         }
         
-        setUI()
+        changeButton.rx.tap
+            .bind { [weak self] in
+                self?.delegate?.changeButtonTouched?()
+            }.disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -118,6 +141,8 @@ class CompanySelectionView: UIView {
         }
         
         self.layer.shadowOpacity = 0
+        
+        changeGestureState(isEnable: false)
     }
     
     func enableView() {
@@ -135,5 +160,13 @@ class CompanySelectionView: UIView {
         }
         
         self.layer.shadowOpacity = 0.13
+        
+        changeGestureState(isEnable: true)
+    }
+    
+    func changeGestureState(isEnable: Bool) {
+        self.gestureRecognizers?.forEach({ gesture in
+            gesture.isEnabled = isEnable
+        })
     }
 }

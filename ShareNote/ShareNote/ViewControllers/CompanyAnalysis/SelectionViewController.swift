@@ -8,6 +8,12 @@
 import RxSwift
 import UIKit
 
+@objc protocol SelectionViewDelegate {
+    func didSelectCompany(title: String)
+            
+    @objc optional func changeButtonTouched()
+}
+
 class SelectionViewController: UIViewController {
 
     // MARK: Constants
@@ -25,6 +31,7 @@ class SelectionViewController: UIViewController {
     
     let questionSelectionContainerView = CompanySelectionView(numberOfStep: 2, title: "맞춤 질문 구성하기", isEnable: false)
     
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -33,6 +40,8 @@ class SelectionViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         
+        companySelectionContainerView.delegate = self
+        
         closeButton.rx.tap
             .bind { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
@@ -40,6 +49,9 @@ class SelectionViewController: UIViewController {
         
         companySelectionContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                                                   action: #selector(companySelectionViewTouched)))
+        
+        questionSelectionContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                                   action: #selector(questionSelectionViewTouched)))
     }
     
     func setUI() {
@@ -85,6 +97,32 @@ class SelectionViewController: UIViewController {
     
     @objc
     func companySelectionViewTouched() {
-        navigationController?.pushViewController(CompanySearchViewController(), animated: true)
+        let companySearchViewController = CompanySearchViewController()
+        companySearchViewController.delegate = self
+        navigationController?.pushViewController(companySearchViewController, animated: true)
+    }
+    
+    @objc
+    func questionSelectionViewTouched() {
+        let questionSelectViewController = QuestionSelectViewController()
+        navigationController?.pushViewController(questionSelectViewController, animated: true)
+    }
+}
+
+extension SelectionViewController: SelectionViewDelegate {
+    func didSelectCompany(title: String) {
+        let string = title.replacingOccurrences(of: " ", with: "\n")
+        let lastString = string.split(separator: "\n").map(String.init).last!
+        let attributeText = NSMutableAttributedString(string: string,
+                                                      attributes: [.font : UIFont.spoqaHanSans(size: 12),
+                                                                   .foregroundColor : UIColor.grey4])
+        attributeText.addAttribute(.font, value: UIFont.spoqaHanSans(size: 16), range: (string as NSString).range(of: lastString))
+        companySelectionContainerView.titleLabel.attributedText = attributeText
+        companySelectionContainerView.isEnable = false
+        questionSelectionContainerView.isEnable = true
+    }
+    
+    func changeButtonTouched() {
+        companySelectionViewTouched()
     }
 }
