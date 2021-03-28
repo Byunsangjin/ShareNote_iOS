@@ -19,13 +19,11 @@ class TradingLogMainViewController: UIViewController {
     }
     
     let viewHoneyPageButton = UIButton().then {
-        $0.setImage(UIImage(named: "icMyHoneyPage"), for: .normal)
-        $0.setImage(UIImage(named: "icMyHoneyPage"), for: .highlighted)
+        $0.setImage(UIImage(named: "iconHoney"), for: .normal)
     }
     
     let editButton = UIButton().then {
         $0.setImage(UIImage(named: "icEdit"), for: .normal)
-        $0.setImage(UIImage(named: "icEdit"), for: .highlighted)
     }
     
     let divisionLine = UIView().then {

@@ -14,7 +14,7 @@ class CompanyAnalysisMainViewController: UIViewController {
     // MARK: Constants
     let navigationView = NavigationView().then {
         $0.titleLabel.text = "기업분석"
-        $0.leftBarButton.setImage(UIImage(named: "icMyHoneyPage"), for: .normal)
+        $0.leftBarButton.setImage(UIImage(named: "iconHoney"), for: .normal)
         $0.rightBarButton.setImage(UIImage(named: "icEdit"), for: .normal)
     }
     
