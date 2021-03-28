@@ -5,8 +5,9 @@
 //  Created by sjbyun on 2021/03/17.
 //
 
-import UIKit
+import RxSwift
 import SnapKit
+import UIKit
 
 class QuestionConfirmViewController: UIViewController {
 
@@ -91,7 +92,12 @@ class QuestionConfirmViewController: UIViewController {
     
     var inputCompleteBottom: Constraint?
     
-    var count = 3
+    var disposeBag = DisposeBag()
+    
+    var questionList = ["시가총액은 얼마인가요?",
+                        "작년 영업이익률은 몇퍼센트였나요?",
+                        "주요 상품/서비스는 무엇인가요?",
+                        "경쟁사는 어떤 기업인가요?"]
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -106,6 +112,16 @@ class QuestionConfirmViewController: UIViewController {
         addDirectInputView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(directBtnTouched)))
         
         setKeyboardNotification()
+        
+        inputCompleteButton.rx.tap
+            .bind { [weak self] in
+                self?.insertQuestion()
+            }.disposed(by: disposeBag)
+        
+        okButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.pushViewController(WriteCompanyAnalysisViewController(), animated: true)                
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -237,11 +253,23 @@ class QuestionConfirmViewController: UIViewController {
         directInputTextField.isHidden = false
         directInputTextField.becomeFirstResponder()
     }
+    
+    func insertQuestion() {
+        let text = directInputTextField.text
+        questionList.append(text!)
+        selectedQuestionTableView.insertRows(at: [IndexPath(row: questionList.count - 1, section: 0)], with: .top)
+        selectedQuestionTableView.scrollToRow(at: IndexPath(row: questionList.count - 1, section: 0), at: .top, animated: true)
+        directInputTextField.text = ""
+        directInputTextField.endEditing(true)
+
+        let height = selectedQuestionTableView.contentSize.height / 44 * 65
+        self.height?.update(offset: height)
+    }
 }
 
 extension QuestionConfirmViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count
+        return questionList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -249,15 +277,9 @@ extension QuestionConfirmViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        count += 1
-        tableView.insertRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .top)
+        cell.titleLabel.text = questionList[indexPath.row]
         
-        let height = tableView.contentSize.height / 44 * 65
-        self.height?.update(offset: height)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

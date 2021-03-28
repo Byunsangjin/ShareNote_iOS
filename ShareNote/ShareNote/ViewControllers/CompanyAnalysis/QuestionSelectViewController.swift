@@ -5,8 +5,9 @@
 //  Created by sjbyun on 2021/03/15.
 //
 
-import UIKit
 import ExpyTableView
+import RxSwift
+import UIKit
 
 class QuestionSelectViewController: UIViewController {
 
@@ -83,6 +84,16 @@ class QuestionSelectViewController: UIViewController {
         $0.backgroundColor = .whiteTwo
     }
     
+    let okButton = UIButton().then {
+        $0.setTitle("완료", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.backgroundColor = .mainColor
+        $0.layer.cornerRadius = 7
+    }
+    
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +106,16 @@ class QuestionSelectViewController: UIViewController {
         
         questionTableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "CategoryTableViewCell")
         questionTableView.register(QuestionTableViewCell.self, forCellReuseIdentifier: "QuestionTableViewCell")
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+        
+        okButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.pushViewController(QuestionConfirmViewController(), animated: true)                
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -126,6 +147,8 @@ class QuestionSelectViewController: UIViewController {
         
         scrollView.addSubview(questionTableView)
         
+        view.addSubview(okButton)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -138,7 +161,7 @@ class QuestionSelectViewController: UIViewController {
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(navigationView.snp.bottom)
             make.left.width.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(okButton)
         }
         
         scrollContentView.snp.makeConstraints { make in
@@ -206,6 +229,13 @@ class QuestionSelectViewController: UIViewController {
             make.width.equalTo(scrollContentView)
             make.centerX.equalTo(scrollContentView)
             make.bottom.equalTo(scrollContentView)
+        }
+        
+        okButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-37)
+            make.centerX.equalTo(view)
+            make.width.equalTo(view).offset(-40)
+            make.height.equalTo(45)
         }
         
         super.updateViewConstraints()

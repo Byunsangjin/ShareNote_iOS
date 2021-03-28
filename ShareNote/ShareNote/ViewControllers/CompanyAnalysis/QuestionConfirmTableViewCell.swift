@@ -12,7 +12,6 @@ class QuestionConfirmTableViewCell: UITableViewCell {
     let containerView = UIView.createTradingShareCellView()
     
     let titleLabel = UILabel().then {
-        $0.text = "시가총액은 얼마인가요?"
         $0.textColor = .black2
         $0.font = UIFont.spoqaHanSans(size: 14, style: .Bold)
     }
