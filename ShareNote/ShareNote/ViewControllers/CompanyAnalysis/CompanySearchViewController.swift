@@ -77,7 +77,9 @@ class CompanySearchViewController: UIViewController {
     }
     
     // Search Table View
-    let searchTableContainerView = UIView()
+    let searchTableContainerView = UIView().then {
+        $0.isHidden = false
+    }
     
     let searchResultLabel = UILabel().then {
         $0.text = "총 2건의 검색결과가 있습니다"
@@ -106,8 +108,9 @@ class CompanySearchViewController: UIViewController {
     
     var disposeBag = DisposeBag()
     
-    // MARK: Variables
     var stockList = ["삼성전자 005930", "삼성전자우 000321", "랩지노믹스 123456", "가짜삼성주식 0123945"]
+    
+    var searchText = ""
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -115,13 +118,44 @@ class CompanySearchViewController: UIViewController {
         setUI()
         setKeyboardNotification()
         
+//        searchTextField.delegate = self
+        
         searchTableView.delegate = self
         searchTableView.dataSource = self
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
         
         cancelButton.rx.tap
             .bind { [weak self] in
                 self?.searchTextField.endEditing(true)
             }.disposed(by: disposeBag)
+        
+        searchTextField.rx.text
+            .map { [weak self] in
+                self?.searchText = $0!
+            }.bind { [weak self] isTextEmpty in
+                self?.searchTableView.reloadData()
+            }.disposed(by: disposeBag)
+        
+        searchTextField.rx.text
+            .map {
+                ($0?.count)! > 0
+            }.bind { [weak self] isExistText in
+                self?.emptyContainerView.isHidden = isExistText
+                
+                if isExistText == false {
+                    self?.noSearchContainerView.isHidden = true
+                    self?.searchTableContainerView.isHidden = true
+                } else {
+                    let isSearchText = (self?.stockList.filter { $0.contains(self!.searchText) }.count)! > 0
+                    self?.noSearchContainerView.isHidden = isSearchText
+                    self?.searchTableContainerView.isHidden = !isSearchText
+                }
+            }.disposed(by: disposeBag)
+            
     }
     
     func setUI() {
@@ -263,15 +297,15 @@ class CompanySearchViewController: UIViewController {
 
 extension CompanySearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stockList.filter { $0.contains("삼성") }.count
+        return stockList.filter { $0.contains(searchText) }.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         
-        let title = stockList.filter { $0.contains("삼성") }[indexPath.row]
+        let title = stockList.filter { $0.contains(searchText) }[indexPath.row]
         
-        let range = (title as NSString).range(of: "삼성")
+        let range = (title as NSString).range(of: searchText)
         let attributeString = containTextChangeColor(title, range: range)
         cell.textLabel?.attributedText = attributeString
         
@@ -280,6 +314,10 @@ extension CompanySearchViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func containTextChangeColor(_ text: String, range: NSRange) -> NSAttributedString {

@@ -11,15 +11,20 @@ class AnalysisTableHeaderView: UIView {
     
     // MARK: Constants
     let titleLabel = UILabel().then {
+        $0.text = "작성중이던 기업분석이 있어요!"
         $0.textColor = .grey3
         $0.font = UIFont.spoqaHanSans(size: 12)
     }
     
     // MARK: Methods
-    init(title: String) {
+    init(title: String?) {
         super.init(frame: CGRect.zero)
         setUI()
-        titleLabel.text = title
+        if title != nil {
+            titleLabel.text = title
+        } else {
+            changeTempCellFont()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -39,5 +44,10 @@ class AnalysisTableHeaderView: UIView {
         }
         
         super.updateConstraints()
+    }
+    
+    func changeTempCellFont() {
+        titleLabel.textColor = .black2
+        titleLabel.font = UIFont.spoqaHanSans(size: 16)
     }
 }

@@ -5,10 +5,12 @@
 //  Created by sjbyun on 2021/03/14.
 //
 
+import RxSwift
 import UIKit
 
 class SelectionViewController: UIViewController {
 
+    // MARK: Constants
     let closeButton = UIButton().then {
         $0.setImage(UIImage(named: "icClose"), for: .normal)
     }
@@ -23,10 +25,21 @@ class SelectionViewController: UIViewController {
     
     let questionSelectionContainerView = CompanySelectionView(numberOfStep: 2, title: "맞춤 질문 구성하기", isEnable: false)
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        closeButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        companySelectionContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                                  action: #selector(companySelectionViewTouched)))
     }
     
     func setUI() {
@@ -68,5 +81,10 @@ class SelectionViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+    
+    @objc
+    func companySelectionViewTouched() {
+        navigationController?.pushViewController(CompanySearchViewController(), animated: true)
     }
 }

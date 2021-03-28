@@ -85,6 +85,14 @@ class CompanyAnalysisMainViewController: UIViewController {
             .bind { [weak self] in
                 self?.presentPanModal(CategoryTableViewController())
             }.disposed(by: disposeBag)
+        
+        navigationView.rightBarButton.rx.tap
+            .bind { [weak self] in
+                let selectionNavigationController = UINavigationController(rootViewController: SelectionViewController())
+                selectionNavigationController.isNavigationBarHidden = true
+                selectionNavigationController.modalPresentationStyle = .fullScreen
+                self?.present(selectionNavigationController, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     init() {
@@ -167,15 +175,19 @@ extension CompanyAnalysisMainViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if section == 0 {
+            return 1
+        }
+        
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnalysisTableViewCell") as? AnalysisTableViewCell else {
             return UITableViewCell()
         }
-                
-        if indexPath.row == 1 {
+        
+        if indexPath.section == 0 {
             cell.changeTempCellColor()
         }
         
@@ -187,7 +199,13 @@ extension CompanyAnalysisMainViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = AnalysisTableHeaderView(title: "2월 6일 토요일")
+        let headerView: AnalysisTableHeaderView
+        if section == 0 {
+            headerView = AnalysisTableHeaderView(title: nil)
+        } else {
+            headerView = AnalysisTableHeaderView(title: "2월 6일 토요일")
+        }
+        
         return headerView
     }
 }

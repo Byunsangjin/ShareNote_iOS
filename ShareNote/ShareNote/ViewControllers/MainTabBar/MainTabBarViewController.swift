@@ -13,14 +13,19 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         let homeMainViewController = HomeMainViewController()
-        let companyAnalysisMainViewController = CompanyAnalysisMainViewController()
+        
+        let companyAnalysisMainNavigationController = UINavigationController(rootViewController: CompanyAnalysisMainViewController())
+        companyAnalysisMainNavigationController.isNavigationBarHidden = true
+        
         let tradingLogMainViewController = TradingLogMainViewController()
+        
         let bookmarkMainViewController = BookmarkMainViewController()
+        
         let moreMainNavigationController = UINavigationController(rootViewController: MoreMainViewController())
         moreMainNavigationController.isNavigationBarHidden = true
         
         setViewControllers([homeMainViewController,
-                            companyAnalysisMainViewController,
+                            companyAnalysisMainNavigationController,
                             tradingLogMainViewController,
                             bookmarkMainViewController,
                             moreMainNavigationController],
