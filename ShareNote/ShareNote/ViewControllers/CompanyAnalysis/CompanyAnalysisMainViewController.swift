@@ -62,6 +62,7 @@ class CompanyAnalysisMainViewController: UIViewController {
     
     let testTableView = UITableView().then {
         $0.separatorStyle = .none
+        $0.backgroundColor = .grey8
     }
     
     // MARK: Variables
@@ -72,9 +73,9 @@ class CompanyAnalysisMainViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         
-        let introViewController = CompanyAnalysisIntroViewController()
-        self.addChild(introViewController)
-        self.view.addSubview(introViewController.view)
+//        let introViewController = CompanyAnalysisIntroViewController()
+//        self.addChild(introViewController)
+//        self.view.addSubview(introViewController.view)
         
         testTableView.delegate = self
         testTableView.dataSource = self
@@ -161,6 +162,10 @@ class CompanyAnalysisMainViewController: UIViewController {
 }
 
 extension CompanyAnalysisMainViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -178,6 +183,11 @@ extension CompanyAnalysisMainViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 132
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = AnalysisTableHeaderView(title: "2월 6일 토요일")
+        return headerView
     }
 }

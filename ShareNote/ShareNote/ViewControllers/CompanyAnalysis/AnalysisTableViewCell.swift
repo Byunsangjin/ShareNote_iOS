@@ -109,7 +109,8 @@ class AnalysisTableViewCell: UITableViewCell {
     
     override func updateConstraints() {
         containerView.snp.makeConstraints { make in
-            make.top.bottom.centerX.equalTo(contentView)
+            make.top.centerX.equalTo(contentView)
+            make.bottom.equalTo(contentView).offset(-20)
             make.width.equalTo(contentView.snp.width).offset(-40)
         }
         
@@ -130,9 +131,11 @@ class AnalysisTableViewCell: UITableViewCell {
         }
         
         tagScrollView.snp.makeConstraints { make in
-            make.left.equalTo(containerView).offset(15)
-            make.right.equalTo(containerView).offset(-15)
+//            make.left.equalTo(containerView).offset(15)
+//            make.right.equalTo(containerView).offset(-15)
             make.bottom.equalTo(containerView).offset(-16)
+            make.centerX.equalTo(containerView)
+            make.width.equalTo(containerView).offset(-30)
             make.height.equalTo(20)
         }
         
