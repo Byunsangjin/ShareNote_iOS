@@ -115,6 +115,8 @@ class WriteCompanyAnalysisViewController: UIViewController {
                         "경쟁사는 어떤 기업인가요?",
                         "주요 상품/서비스는 무엇인가요?"]
     
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,6 +126,21 @@ class WriteCompanyAnalysisViewController: UIViewController {
         listTableView.dataSource = self
         
         listTableView.register(QuestListTableViewCell.self, forCellReuseIdentifier: "QuestListTableViewCell")
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+        
+        navigationView.rightBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.pushViewController(CompleteCompanyAnalysisViewController(), animated: true)
+            }.disposed(by: disposeBag)
+        
+        editButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -302,6 +319,10 @@ extension WriteCompanyAnalysisViewController: UITableViewDelegate, UITableViewDa
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        present(InputTextViewController(), animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

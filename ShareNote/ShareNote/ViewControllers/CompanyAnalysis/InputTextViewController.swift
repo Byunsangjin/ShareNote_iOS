@@ -75,6 +75,16 @@ class InputTextViewController: UIViewController {
             .bind { [weak self] in
                 self?.textView.endEditing(true)
             }.disposed(by: disposeBag)
+        
+        closeButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        saveButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {

@@ -118,6 +118,11 @@ class QuestionConfirmViewController: UIViewController {
                 self?.insertQuestion()
             }.disposed(by: disposeBag)
         
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+        
         okButton.rx.tap
             .bind { [weak self] in
                 self?.navigationController?.pushViewController(WriteCompanyAnalysisViewController(), animated: true)                
