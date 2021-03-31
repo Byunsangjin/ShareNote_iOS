@@ -30,6 +30,8 @@ class NavigationView: UIView {
     // MARK: Variables
     var disposeBag = DisposeBag()
     
+    var borderColor: UIColor = .grey6
+    
     // MARK: Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,7 +43,7 @@ class NavigationView: UIView {
     }
     
     override func layoutSubviews() {
-        self.layer.addBorder([.bottom], color: .grey6, width: 1)
+        self.layer.addBorder([.bottom], color: borderColor, width: 1)
     }
     
     func setUI() {

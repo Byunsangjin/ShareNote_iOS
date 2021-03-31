@@ -11,23 +11,11 @@ class CompleteCompanyAnalysisViewController: UIViewController {
 
     // MARK: Constants
     // Navigation ContainerView
-    let navigationContainerView = UIView().then {
-        $0.backgroundColor = UIColor.mainColor
-    }
-    
-    let navigationTitleLabel = UILabel().then {
-        $0.text = "매매일지 작성"
-        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
-    }
-    
-    let backButton = UIButton().then {
-        $0.setImage(UIImage(named: "icBack"), for: .normal)
-    }
-    
-    let editButton = UIButton().then {
-        $0.setTitle("편집", for: .normal)
-        $0.setTitleColor(UIColor.black2, for: .normal)
-        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
+    let navigationView = NavigationView().then {
+        $0.titleLabel.text = "기업분석 작성"
+        $0.rightBarButton.setTitle("편집", for: .normal)
+        $0.backgroundColor = .mainColor
+        $0.borderColor = .clear
     }
     
     // CompleteCompanyAnalysis ContainerView
@@ -99,10 +87,7 @@ class CompleteCompanyAnalysisViewController: UIViewController {
     func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(navigationContainerView)
-        navigationContainerView.addSubview(navigationTitleLabel)
-        navigationContainerView.addSubview(backButton)
-        navigationContainerView.addSubview(editButton)
+        view.addSubview(navigationView)
         
         view.addSubview(completeCompanyAnalysisContainerView)
         completeCompanyAnalysisContainerView.addSubview(dateLabel)
@@ -132,28 +117,13 @@ class CompleteCompanyAnalysisViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
-        navigationContainerView.snp.makeConstraints { make in
+        navigationView.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(45)
         }
         
-        navigationTitleLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(navigationContainerView)
-        }
-        
-        backButton.snp.makeConstraints { make in
-            make.left.equalTo(navigationContainerView.safeAreaLayoutGuide).offset(15)
-            make.centerY.equalTo(navigationContainerView)
-            make.width.height.equalTo(30)
-        }
-        
-        editButton.snp.makeConstraints { make in
-            make.right.equalTo(navigationContainerView.safeAreaLayoutGuide).offset(-20)
-            make.centerY.equalTo(navigationContainerView)
-        }
-        
         completeCompanyAnalysisContainerView.snp.makeConstraints { make in
-            make.top.equalTo(navigationContainerView.snp.bottom)
+            make.top.equalTo(navigationView.snp.bottom)
             make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(165)
         }
