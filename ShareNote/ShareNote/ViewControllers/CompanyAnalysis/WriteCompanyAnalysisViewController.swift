@@ -17,8 +17,6 @@ class WriteCompanyAnalysisViewController: UIViewController {
         $0.leftBarButton.setImage(nil, for: .normal)
         $0.leftBarButton.setTitle("취소", for: .normal)
         $0.rightBarButton.setTitle("저장", for: .normal)
-        
-        $0.rightBarButton.addTarget(self, action: #selector(saveBtnTouched), for: .touchUpInside)
     }
     
     let contentStackView = UIStackView().then {
@@ -129,7 +127,7 @@ class WriteCompanyAnalysisViewController: UIViewController {
         
         navigationView.leftBarButton.rx.tap
             .bind { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
+                self?.saveBtnTouched()
             }.disposed(by: disposeBag)
         
         navigationView.rightBarButton.rx.tap
@@ -293,7 +291,7 @@ class WriteCompanyAnalysisViewController: UIViewController {
         let customAlertVC = CustomAlertViewController(title: "임시저장 기능",
                                                 message: "아직 저장되지 않은 기업분석입니다.\n저장하지 않은 기업분석은 임시저장됩니다.",
                                                 firstActionTitle: "확인", firstAction: {
-                                                    logger.verbose("확인")
+                                                    self.navigationController?.popViewController(animated: true)
                                                 }, secondActionTitle: "취소") {
             logger.verbose("취소")
         }

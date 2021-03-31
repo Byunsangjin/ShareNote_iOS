@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/03/23.
 //
 
+import RxSwift
 import UIKit
 
 class CompleteCompanyAnalysisViewController: UIViewController {
@@ -73,6 +74,8 @@ class CompleteCompanyAnalysisViewController: UIViewController {
     var descriptionList = ["0000조 0000억", "반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.",
                            "반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한나뉘나뉘나뉘어지는데 …","더보기는 7줄을 초과했을 때 보이며, 더보기를 클릭 시 !!!!   이렇게 보입니다.             며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한나뉘나뉘나뉘어지는데며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한나뉘나뉘나뉘어지는데 …며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한나뉘나뉘나뉘어지는데 …며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한다.반도체는 설계와 생산으로 나뉘는데 삼성전자는 설계와 생산을 모두 진행한다.반도체, 휴대폰, 생활가전이며 매출의 대부분은 반도체가 차지한나뉘나뉘나뉘어지는데 …"]
     
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +85,16 @@ class CompleteCompanyAnalysisViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(CompleteCompanyAnalysisTableViewCell.self, forCellReuseIdentifier: "CompleteCompanyAnalysisTableViewCell")
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+        
+        navigationView.rightBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
