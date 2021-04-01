@@ -12,26 +12,17 @@ import RxSwift
 class WriteTradingLogViewController: UIViewController {
 
     // MARK: Constants
-    // NavigationBar
-    let navigationTitleLabel = UILabel().then {
-        $0.text = "매매일지 작성"
-        $0.font = UIFont.spoqaHanSans(size: 16, style: .Bold)
-    }
-    
-    let cancelButton = UIButton().then {
-        $0.setTitle("취소", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
-    }
-    
-    let saveButton = UIButton().then {
-        $0.setTitle("저장", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
-    }
-    
-    let divisionLine = UIView().then {
-        $0.backgroundColor = UIColor.grey6
+    let navigationView = NavigationView().then {
+        $0.titleLabel.text = "매매일지 작성"
+        
+        $0.leftBarButton.setImage(nil, for: .normal)
+        $0.leftBarButton.setTitle("취소", for: .normal)
+        $0.leftBarButton.setTitleColor(.black2, for: .normal)
+        $0.leftBarButton.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
+        
+        $0.rightBarButton.setTitle("저장", for: .normal)
+        $0.rightBarButton.setTitleColor(.black2, for: .normal)
+        $0.rightBarButton.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
     }
     
     let scrollView = UIScrollView().then {
@@ -39,9 +30,7 @@ class WriteTradingLogViewController: UIViewController {
         $0.showsHorizontalScrollIndicator = false
     }
     
-    let scrollContentView = UIView().then {
-        $0.backgroundColor = .green
-    }
+    let scrollContentView = UIView()
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
@@ -166,6 +155,19 @@ class WriteTradingLogViewController: UIViewController {
         articlePageView.dataSource = self
         articlePageView.register(ArticlePagerViewCell.self, forCellWithReuseIdentifier: "cell")
         
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        navigationView.rightBarButton.rx.tap
+            .bind { [weak self] in
+                let completeTradingLogNavigationViewController = UINavigationController(rootViewController: CompleteTradingLogViewController())
+                completeTradingLogNavigationViewController.isNavigationBarHidden = true
+                completeTradingLogNavigationViewController.modalPresentationStyle = .fullScreen
+                self?.present(completeTradingLogNavigationViewController, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
         tradingShareAddButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.tradingShareAddBtnTouched()
@@ -179,10 +181,7 @@ class WriteTradingLogViewController: UIViewController {
     func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(navigationTitleLabel)
-        view.addSubview(cancelButton)
-        view.addSubview(saveButton)
-        view.addSubview(divisionLine)
+        view.addSubview(navigationView)
         
         view.addSubview(scrollView)
         scrollView.addSubview(scrollContentView)
@@ -219,29 +218,13 @@ class WriteTradingLogViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
-        navigationTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(14)
-            make.centerX.equalTo(view)
-        }
-        
-        cancelButton.snp.makeConstraints { make in
-            make.centerY.equalTo(navigationTitleLabel)
-            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
-        }
-        
-        saveButton.snp.makeConstraints { make in
-            make.centerY.equalTo(navigationTitleLabel)
-            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
-        }
-        
-        divisionLine.snp.makeConstraints { make in
-            make.top.equalTo(navigationTitleLabel.snp.bottom).offset(12)
-            make.left.right.equalTo(view)
-            make.height.equalTo(1)
+        navigationView.snp.makeConstraints { make in
+            make.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(45)
         }
         
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(divisionLine.snp.bottom)
+            make.top.equalTo(navigationView.snp.bottom)
             make.bottom.left.width.equalTo(view.safeAreaLayoutGuide)
         }
         

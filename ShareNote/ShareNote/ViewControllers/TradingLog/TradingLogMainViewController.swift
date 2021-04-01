@@ -86,9 +86,14 @@ class TradingLogMainViewController: UIViewController {
         
         editButton.rx.tap
             .bind { [weak self] in
-                let writeTradingLogVC = WriteTradingLogViewController()
-                self?.present(writeTradingLogVC, animated: true, completion: nil)
+                self?.presentWriteTradingLogViewController()
             }.disposed(by: disposeBag)
+    }
+    
+    func presentWriteTradingLogViewController() {
+        let writeTradingLogViewController = WriteTradingLogViewController()
+        writeTradingLogViewController.modalPresentationStyle = .fullScreen
+        self.present(writeTradingLogViewController, animated: true, completion: nil)
     }
     
     func yearMonthBtnTouched() {
@@ -268,10 +273,16 @@ extension TradingLogMainViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
+        
         switch indexPath.row {
         case 0:
             if let _cell = tableView.dequeueReusableCell(withIdentifier: "TradingNoneTableViewCell") as? TradingNoneTableViewCell {
                 cell = _cell
+                
+                _cell.createButton.rx.tap
+                    .bind { [weak self] in
+                        self?.presentWriteTradingLogViewController()
+                    }.disposed(by: disposeBag)
             }
         case 1:
             if let _cell = tableView.dequeueReusableCell(withIdentifier: "TradingLogTableViewCell") as? TradingLogTableViewCell {
