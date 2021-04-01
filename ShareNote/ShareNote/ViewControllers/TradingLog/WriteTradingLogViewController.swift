@@ -162,10 +162,8 @@ class WriteTradingLogViewController: UIViewController {
         
         navigationView.rightBarButton.rx.tap
             .bind { [weak self] in
-                let completeTradingLogNavigationViewController = UINavigationController(rootViewController: CompleteTradingLogViewController())
-                completeTradingLogNavigationViewController.isNavigationBarHidden = true
-                completeTradingLogNavigationViewController.modalPresentationStyle = .fullScreen
-                self?.present(completeTradingLogNavigationViewController, animated: true, completion: nil)
+                let completeTradingLogViewController = CompleteTradingLogViewController()
+                self?.navigationController?.pushViewController(completeTradingLogViewController, animated: true)
             }.disposed(by: disposeBag)
         
         tradingShareAddButton.rx.tap

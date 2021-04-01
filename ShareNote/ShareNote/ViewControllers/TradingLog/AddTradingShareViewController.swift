@@ -5,8 +5,9 @@
 //  Created by sjbyun on 2021/02/05.
 //
 
-import UIKit
 import Popover
+import RxSwift
+import UIKit
 
 class AddTradingShareViewController: UIViewController {
     let popover = Popover(options: [
@@ -207,6 +208,9 @@ class AddTradingShareViewController: UIViewController {
         $0.layer.cornerRadius = 7
     }
     
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,6 +220,16 @@ class AddTradingShareViewController: UIViewController {
         buyButton.isSelected = true
         
         shareSearchTextField.delegate = self
+        
+        closeButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        saveButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {

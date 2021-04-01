@@ -91,9 +91,10 @@ class TradingLogMainViewController: UIViewController {
     }
     
     func presentWriteTradingLogViewController() {
-        let writeTradingLogViewController = WriteTradingLogViewController()
-        writeTradingLogViewController.modalPresentationStyle = .fullScreen
-        self.present(writeTradingLogViewController, animated: true, completion: nil)
+        let writeTradingLogNavigationController = UINavigationController(rootViewController: WriteTradingLogViewController())
+        writeTradingLogNavigationController.modalPresentationStyle = .fullScreen
+        writeTradingLogNavigationController.isNavigationBarHidden = true
+        self.present(writeTradingLogNavigationController, animated: true, completion: nil)
     }
     
     func yearMonthBtnTouched() {

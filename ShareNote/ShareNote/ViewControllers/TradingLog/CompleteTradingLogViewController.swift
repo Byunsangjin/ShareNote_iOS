@@ -19,6 +19,8 @@ class CompleteTradingLogViewController: UIViewController {
         $0.rightBarButton.titleLabel?.font = UIFont.spoqaHanSans(size: 14)
         
         $0.backgroundColor = .mainColor
+        
+        $0.borderColor = .clear
     }
     
     // TradingLogTitle ContainerView
@@ -115,6 +117,16 @@ class CompleteTradingLogViewController: UIViewController {
                     break
                 }
                 
+            }.disposed(by: disposeBag)
+        
+        navigationView.leftBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }.disposed(by: disposeBag)
+        
+        navigationView.rightBarButton.rx.tap
+            .bind { [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
     }
     

@@ -74,13 +74,11 @@ class TradingSharePagerViewCell: FSPagerViewCell {
     let editButton = UIButton().then {
         $0.setTitle("수정하기", for: .normal)
         $0.setTitleColor(UIColor.grey2, for: .normal)
-        $0.backgroundColor = .red
     }
     
     let deleteButton = UIButton().then {
         $0.setImage(UIImage(named: "icMainTrash"), for: .normal)
         $0.setImage(UIImage(named: "icMainTrash"), for: .highlighted)
-        $0.backgroundColor = .yellow
     }
     
     // MARK: Variables
