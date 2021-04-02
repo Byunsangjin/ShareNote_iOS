@@ -22,12 +22,34 @@ class LoginViewController: UIViewController {
         $0.numberOfLines = 0
     }
     
+    let passwordContainerView = UIView()
+    
+    let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호를 입력해주세요").then {
+        $0.title = "비밀번호 입력"
+    }
+
+    let findPasswordButton = UIButton().then {
+        let attributeString = NSAttributedString(string: "비밀번호가 기억나지 않습니다.",
+                                                 attributes: [NSAttributedString.Key.font : UIFont.spoqaHanSans(size: 12, style: .Regular),
+                                                              NSAttributedString.Key.foregroundColor : UIColor.grey4,
+                                                              NSAttributedString.Key.underlineStyle : true,
+                                                              NSAttributedString.Key.underlineColor : UIColor.grey4])
+        $0.setAttributedTitle(attributeString, for: .normal)
+    }
+    
+    let idContainerView = UIView()
+    
     let idTextField = SkyFloatingLabelTextField.createTextField(placeholder: "아이디를 입력해주세요.").then {
         $0.title = "아이디 입력"
     }
     
-    let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호를 입력해주세요").then {
-        $0.title = "비밀번호 입력"
+    let findIdButton = UIButton().then {
+        let attributeString = NSAttributedString(string: "아이디가 기억나지 않습니다.",
+                                                 attributes: [NSAttributedString.Key.font : UIFont.spoqaHanSans(size: 12, style: .Regular),
+                                                              NSAttributedString.Key.foregroundColor : UIColor.grey4,
+                                                              NSAttributedString.Key.underlineStyle : true,
+                                                              NSAttributedString.Key.underlineColor : UIColor.grey4])
+        $0.setAttributedTitle(attributeString, for: .normal)
     }
     
     // MARK: Variables
@@ -43,8 +65,14 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(titleLabel)
-        view.addSubview(idTextField)
-        view.addSubview(passwordTextField)
+        
+        view.addSubview(passwordContainerView)
+        passwordContainerView.addSubview(passwordTextField)
+        passwordContainerView.addSubview(findPasswordButton)
+        
+        view.addSubview(idContainerView)
+        idContainerView.addSubview(idTextField)
+        idContainerView.addSubview(findIdButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -56,16 +84,38 @@ class LoginViewController: UIViewController {
             make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
         
-        passwordTextField.snp.makeConstraints { make in
+        passwordContainerView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(80)
             make.left.right.equalTo(titleLabel)
+            make.height.equalTo(90)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordContainerView)
+            make.left.right.equalTo(passwordContainerView)
             make.height.equalTo(60)
         }
         
-        idTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(50)
+        findPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
+            make.left.equalTo(passwordContainerView)
+        }
+        
+        idContainerView.snp.makeConstraints { make in
+            make.top.equalTo(passwordContainerView.snp.bottom).offset(30)
             make.left.right.equalTo(titleLabel)
+            make.height.equalTo(90)
+        }
+        
+        idTextField.snp.makeConstraints { make in
+            make.top.equalTo(idContainerView)
+            make.left.right.equalTo(idContainerView)
             make.height.equalTo(60)
+        }
+
+        findIdButton.snp.makeConstraints { make in
+            make.top.equalTo(idTextField.snp.bottom).offset(5)
+            make.left.equalTo(idContainerView)
         }
         
         super.updateViewConstraints()
