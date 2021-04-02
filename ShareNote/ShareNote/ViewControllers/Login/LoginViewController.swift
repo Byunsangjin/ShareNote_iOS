@@ -52,6 +52,42 @@ class LoginViewController: UIViewController {
         $0.setAttributedTitle(attributeString, for: .normal)
     }
     
+    let divideLineView = UIView().then {
+        $0.backgroundColor = .grey5
+    }
+    
+    let divideLabel = UILabel().then {
+        $0.text = "간편 로그인"
+        $0.textColor = .grey5
+        $0.font = UIFont.spoqaHanSans(size: 12)
+        $0.textAlignment = .center
+        
+        $0.backgroundColor = .white
+    }
+    
+    let simpleLoginStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 20
+        $0.distribution = .fillEqually
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let naverLoginButton = UIButton().then {
+        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+    }
+    
+    let kakaoLoginButton = UIButton().then {
+        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+    }
+    
+    let googleLoginButton = UIButton().then {
+        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+    }
+    
+    let appleLoginButton = UIButton().then {
+        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+    }
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -59,6 +95,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        simpleLoginStackView.addArrangedSubview(naverLoginButton)
+        simpleLoginStackView.addArrangedSubview(kakaoLoginButton)
+        simpleLoginStackView.addArrangedSubview(googleLoginButton)
+        simpleLoginStackView.addArrangedSubview(appleLoginButton)
     }
     
     func setUI() {
@@ -73,6 +114,11 @@ class LoginViewController: UIViewController {
         view.addSubview(idContainerView)
         idContainerView.addSubview(idTextField)
         idContainerView.addSubview(findIdButton)
+        
+        view.addSubview(divideLineView)
+        view.addSubview(divideLabel)
+        
+        view.addSubview(simpleLoginStackView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -116,6 +162,25 @@ class LoginViewController: UIViewController {
         findIdButton.snp.makeConstraints { make in
             make.top.equalTo(idTextField.snp.bottom).offset(5)
             make.left.equalTo(idContainerView)
+        }
+        
+        divideLineView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-245)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.height.equalTo(1)
+        }
+        
+        divideLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(divideLineView)
+            make.width.equalTo(98)
+        }
+        
+        simpleLoginStackView.snp.makeConstraints { make in
+            make.top.equalTo(divideLabel).offset(35)
+            make.centerX.equalTo(view)
+            make.width.equalTo(220)
+            make.height.equalTo(40)
         }
         
         super.updateViewConstraints()
