@@ -88,13 +88,45 @@ class LoginViewController: UIViewController {
         $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
     }
     
+    let keyboardFloatingView = UIView().then {
+        $0.isHidden = true
+    }
+    
+    let moveButtonContainerView = UIView().then {
+        $0.backgroundColor = .whiteTwo
+        $0.isHidden = true
+    }
+    
+    let cancelButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.grey2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+    }
+    
+    let nextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.setTitleColor(.grey2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+    }
+    
+    let loginButton = UIButton().then {
+        $0.setTitle("로그인", for: .normal)
+        $0.setTitleColor(.grey2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
+        $0.backgroundColor = .whiteTwo
+//        $0.isHidden = true
+    }
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
+    
+    var keyboardFloatingViewBottom: Constraint?
     
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setKeyboardNotification()
         
         simpleLoginStackView.addArrangedSubview(naverLoginButton)
         simpleLoginStackView.addArrangedSubview(kakaoLoginButton)
@@ -119,6 +151,12 @@ class LoginViewController: UIViewController {
         view.addSubview(divideLabel)
         
         view.addSubview(simpleLoginStackView)
+        
+        view.addSubview(keyboardFloatingView)
+        keyboardFloatingView.addSubview(moveButtonContainerView)
+        moveButtonContainerView.addSubview(cancelButton)
+        moveButtonContainerView.addSubview(nextButton)
+        keyboardFloatingView.addSubview(loginButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -183,6 +221,56 @@ class LoginViewController: UIViewController {
             make.height.equalTo(40)
         }
         
+        keyboardFloatingView.snp.makeConstraints { make in
+            make.left.right.equalTo(view)
+            keyboardFloatingViewBottom = make.bottom.equalTo(view).constraint
+            make.height.equalTo(45)
+        }
+        
+        moveButtonContainerView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(keyboardFloatingView)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.left.equalTo(moveButtonContainerView).offset(20)
+            make.centerY.equalTo(moveButtonContainerView)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.right.equalTo(moveButtonContainerView).offset(-20)
+            make.centerY.equalTo(moveButtonContainerView)
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(keyboardFloatingView)
+        }
+        
         super.updateViewConstraints()
+    }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        self.keyboardFloatingView.isHidden = false
+                
+        self.keyboardFloatingViewBottom?.update(offset: -keyboardFrame.size.height)
+        self.keyboardFloatingView.updateConstraints()
+        
+        UIView.animate(withDuration: 1, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        keyboardFloatingView.isHidden = true
+        keyboardFloatingViewBottom?.update(offset: 0)
     }
 }
