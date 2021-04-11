@@ -77,15 +77,15 @@ class LoginViewController: UIViewController {
     }
     
     let kakaoLoginButton = UIButton().then {
-        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+        $0.setImage(UIImage(named: "iconLoginKakao"), for: .normal)
     }
     
     let googleLoginButton = UIButton().then {
-        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+        $0.setImage(UIImage(named: "iconLoginGoogle"), for: .normal)
     }
     
     let appleLoginButton = UIButton().then {
-        $0.setImage(UIImage(named: "iconLoginNaver"), for: .normal)
+        $0.setImage(UIImage(named: "iconLoginApple"), for: .normal)
     }
     
     let keyboardFloatingView = UIView().then {
