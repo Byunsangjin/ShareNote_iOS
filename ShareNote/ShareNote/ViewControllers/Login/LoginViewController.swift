@@ -5,6 +5,7 @@
 //  Created by sjbyun on 2021/01/01.
 //
 
+import NaverThirdPartyLogin
 import ReactorKit
 import RxSwift
 import SkyFloatingLabelTextField
@@ -128,6 +129,8 @@ class LoginViewController: UIViewController {
 //        $0.isHidden = true
     }
     
+    let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -159,9 +162,8 @@ class LoginViewController: UIViewController {
             }.disposed(by: disposeBag)
         
         loginButton.rx.tap
-            .bind { _ in
-                let mainTabBarViewController = MainTabBarViewController()
-                UIApplication.shared.keyWindow?.rootViewController = mainTabBarViewController
+            .bind { [weak self] in
+                self?.presentMainTabViewController()
             }.disposed(by: disposeBag)
         
         idTextField.rx.controlEvent([.editingDidBegin])
@@ -184,7 +186,14 @@ class LoginViewController: UIViewController {
                 self?.findPasswordButton.isHidden = true
             }.disposed(by: disposeBag)
         
-        self.scrollContentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(contentViewTouched)))        
+        self.scrollContentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(contentViewTouched)))
+        
+        naverLoginInstance?.delegate = self
+        
+        naverLoginButton.rx.tap
+            .bind { [weak self] in
+                self?.naverLoginInstance?.requestThirdPartyLogin()
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -349,5 +358,32 @@ class LoginViewController: UIViewController {
     @objc
     func contentViewTouched() {
         self.scrollContentView.endEditing(true)
+    }
+    
+    func presentMainTabViewController() {
+        let mainTabBarViewController = MainTabBarViewController()
+        UIApplication.shared.keyWindow?.rootViewController = mainTabBarViewController
+    }
+}
+
+extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
+    // 로그인 성공했을 경우 호출
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        self.presentMainTabViewController()
+    }
+        
+    // 접근 토큰 갱신
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        self.presentMainTabViewController()
+    }
+    
+    // 로그아웃 할 경우 호출 (토큰 삭제)
+    func oauth20ConnectionDidFinishDeleteToken() {
+        naverLoginInstance?.requestDeleteToken()
+    }
+    
+    // 모든 Error
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        
     }
 }
