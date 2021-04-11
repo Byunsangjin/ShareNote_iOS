@@ -5,8 +5,10 @@
 //  Created by sjbyun on 2021/01/01.
 //
 
+import KakaoSDKAuth
 import NaverThirdPartyLogin
 import ReactorKit
+import RxKakaoSDKAuth
 import RxSwift
 import SkyFloatingLabelTextField
 import SnapKit
@@ -194,6 +196,11 @@ class LoginViewController: UIViewController {
             .bind { [weak self] in
                 self?.naverLoginInstance?.requestThirdPartyLogin()
             }.disposed(by: disposeBag)
+        
+        kakaoLoginButton.rx.tap
+            .bind { [weak self] in
+                self?.kakaoLoginBtnTouched()
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -363,6 +370,22 @@ class LoginViewController: UIViewController {
     func presentMainTabViewController() {
         let mainTabBarViewController = MainTabBarViewController()
         UIApplication.shared.keyWindow?.rootViewController = mainTabBarViewController
+    }
+    
+    func kakaoLoginBtnTouched() {
+        if (AuthApi.isKakaoTalkLoginAvailable()) {
+            AuthApi.shared.rx.loginWithKakaoTalk()
+                .subscribe(onNext:{ [weak self] (oauthToken) in
+                    logger.verbose("loginWithKakaoTalk() success.")
+                    
+                    //do something
+                    _ = oauthToken
+                    self?.presentMainTabViewController()
+                }, onError: {error in
+                    logger.verbose(error)
+                })
+                .disposed(by: disposeBag)
+        }
     }
 }
 
