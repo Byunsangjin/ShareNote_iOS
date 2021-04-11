@@ -5,6 +5,9 @@
 //  Created by sjbyun on 2021/01/01.
 //
 
+import AuthenticationServices
+import Firebase
+import GoogleSignIn
 import KakaoSDKAuth
 import NaverThirdPartyLogin
 import ReactorKit
@@ -200,6 +203,15 @@ class LoginViewController: UIViewController {
         kakaoLoginButton.rx.tap
             .bind { [weak self] in
                 self?.kakaoLoginBtnTouched()
+            }.disposed(by: disposeBag)
+                
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        
+        googleLoginButton.rx.tap
+            .bind { _ in
+                GIDSignIn.sharedInstance()?.signIn()
             }.disposed(by: disposeBag)
     }
     
@@ -408,5 +420,26 @@ extension LoginViewController : NaverThirdPartyLoginConnectionDelegate {
     // 모든 Error
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
         
+    }
+}
+
+extension LoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        logger.verbose("didSignInFor")
+      if let error = error {
+        // ...
+        return
+      }
+
+      guard let authentication = user.authentication else { return }
+      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                        accessToken: authentication.accessToken)
+      // ...
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        logger.verbose("didDisconnectWith")
+        // Perform any operations when the user disconnects from app here.
+        // ...
     }
 }
