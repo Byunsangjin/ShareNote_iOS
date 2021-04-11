@@ -105,8 +105,14 @@ class LoginViewController: UIViewController {
         $0.setImage(UIImage(named: "iconLoginApple"), for: .normal)
     }
     
+    let orLabel = UILabel().then {
+        $0.text = "or"
+        $0.textColor = .grey4
+        $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+    }
+    
     let registerButton = UIButton().then {
-        let attributeString = NSAttributedString(string: "회원가입하기",
+        let attributeString = NSAttributedString(string: "쉐어노트 회원가입하기",
                                                  attributes: [NSAttributedString.Key.font : UIFont.spoqaHanSans(size: 12, style: .Regular),
                                                               NSAttributedString.Key.foregroundColor : UIColor.grey4,
                                                               NSAttributedString.Key.underlineStyle : true,
@@ -267,6 +273,7 @@ class LoginViewController: UIViewController {
         
         scrollContentView.addSubview(simpleLoginStackView)
         
+        scrollContentView.addSubview(orLabel)
         scrollContentView.addSubview(registerButton)
         
         scrollContentView.addSubview(keyboardFloatingView)
@@ -342,14 +349,19 @@ class LoginViewController: UIViewController {
         }
         
         simpleLoginStackView.snp.makeConstraints { make in
-            make.top.equalTo(divideLabel).offset(35)
+            make.top.equalTo(divideLabel.snp.bottom).offset(35)
             make.centerX.equalTo(scrollContentView)
             make.width.equalTo(220)
             make.height.equalTo(40)
         }
         
+        orLabel.snp.makeConstraints { make in
+            make.top.equalTo(simpleLoginStackView.snp.bottom).offset(30)
+            make.centerX.equalTo(scrollContentView)
+        }
+        
         registerButton.snp.makeConstraints { make in
-            make.top.equalTo(simpleLoginStackView.snp.bottom).offset(20)
+            make.top.equalTo(orLabel.snp.bottom).offset(20)
             make.centerX.equalTo(scrollContentView)
         }
         
@@ -402,7 +414,19 @@ class LoginViewController: UIViewController {
         })
         
         scrollView.isScrollEnabled = false
-//        scrollView.setContentOffset(CGPoint.zero, animated: true)
+        
+        setTextFieldContentOffset()
+    }
+    
+    func setTextFieldContentOffset() {
+        if idTextField.isFirstResponder {
+            if idContainerView.frame.origin.y + 100 > keyboardFloatingView.frame.origin.y {
+                let y = idContainerView.frame.origin.y + 100 - keyboardFloatingView.frame.origin.y
+                scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
+            }
+        } else if passwordTextField.isFirstResponder {
+            
+        }
     }
     
     @objc
@@ -410,6 +434,7 @@ class LoginViewController: UIViewController {
         scrollView.isScrollEnabled = true
         keyboardFloatingView.isHidden = true
         keyboardFloatingViewBottom?.update(offset: 0)
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @objc
