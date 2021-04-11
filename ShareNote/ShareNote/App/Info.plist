@@ -24,13 +24,19 @@
 			<key>CFBundleURLName</key>
 			<string>naverLogin</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>sharenote</string>
+			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kakaoLogin</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>kakao{NativeKey}</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
