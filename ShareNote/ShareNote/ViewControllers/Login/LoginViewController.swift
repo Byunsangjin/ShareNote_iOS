@@ -15,6 +15,13 @@ import UIKit
 class LoginViewController: UIViewController {
     
     // MARK: Constants
+    let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let scrollContentView = UIView()
+    
     let titleLabel = UILabel().then {
         $0.text = "건강한 주식투자를\n시작해볼까요?"
         $0.textColor = .black2
@@ -22,7 +29,9 @@ class LoginViewController: UIViewController {
         $0.numberOfLines = 0
     }
     
-    let passwordContainerView = UIView()
+    let passwordContainerView = UIView().then {
+        $0.isHidden = true
+    }
     
     let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호를 입력해주세요").then {
         $0.title = "비밀번호 입력"
@@ -35,6 +44,7 @@ class LoginViewController: UIViewController {
                                                               NSAttributedString.Key.underlineStyle : true,
                                                               NSAttributedString.Key.underlineColor : UIColor.grey4])
         $0.setAttributedTitle(attributeString, for: .normal)
+        $0.isHidden = true
     }
     
     let idContainerView = UIView()
@@ -50,6 +60,7 @@ class LoginViewController: UIViewController {
                                                               NSAttributedString.Key.underlineStyle : true,
                                                               NSAttributedString.Key.underlineColor : UIColor.grey4])
         $0.setAttributedTitle(attributeString, for: .normal)
+        $0.isHidden = true
     }
     
     let divideLineView = UIView().then {
@@ -122,6 +133,8 @@ class LoginViewController: UIViewController {
     
     var keyboardFloatingViewBottom: Constraint?
     
+    var idContainerTopConstraint: Constraint?
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,27 +145,70 @@ class LoginViewController: UIViewController {
         simpleLoginStackView.addArrangedSubview(kakaoLoginButton)
         simpleLoginStackView.addArrangedSubview(googleLoginButton)
         simpleLoginStackView.addArrangedSubview(appleLoginButton)
+        
+        cancelButton.rx.tap
+            .bind { [weak self] in
+                self?.view.endEditing(true)
+            }.disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .bind { [weak self] in
+                self?.passwordContainerView.isHidden = false
+                self?.passwordTextField.becomeFirstResponder()
+                self?.idContainerTopConstraint?.update(offset: 120)
+            }.disposed(by: disposeBag)
+        
+        loginButton.rx.tap
+            .bind { _ in
+                let mainTabBarViewController = MainTabBarViewController()
+                UIApplication.shared.keyWindow?.rootViewController = mainTabBarViewController
+            }.disposed(by: disposeBag)
+        
+        idTextField.rx.controlEvent([.editingDidBegin])
+            .bind { [weak self] in
+                self?.findIdButton.isHidden = false
+            }.disposed(by: disposeBag)
+        
+        idTextField.rx.controlEvent([.editingDidEnd])
+            .bind { [weak self] in
+                self?.findIdButton.isHidden = true
+            }.disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent([.editingDidBegin])
+            .bind { [weak self] in
+                self?.findPasswordButton.isHidden = false
+            }.disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent([.editingDidEnd])
+            .bind { [weak self] in
+                self?.findPasswordButton.isHidden = true
+            }.disposed(by: disposeBag)
+        
+        self.scrollContentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(contentViewTouched)))        
     }
     
     func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(titleLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
         
-        view.addSubview(passwordContainerView)
+        scrollContentView.addSubview(titleLabel)
+        
+        scrollContentView.addSubview(passwordContainerView)
         passwordContainerView.addSubview(passwordTextField)
         passwordContainerView.addSubview(findPasswordButton)
         
-        view.addSubview(idContainerView)
+        scrollContentView.addSubview(idContainerView)
         idContainerView.addSubview(idTextField)
         idContainerView.addSubview(findIdButton)
         
-        view.addSubview(divideLineView)
-        view.addSubview(divideLabel)
+        scrollContentView.addSubview(divideLineView)
+        scrollContentView.addSubview(divideLabel)
         
-        view.addSubview(simpleLoginStackView)
+        scrollContentView.addSubview(simpleLoginStackView)
         
-        view.addSubview(keyboardFloatingView)
+        scrollContentView.addSubview(keyboardFloatingView)
         keyboardFloatingView.addSubview(moveButtonContainerView)
         moveButtonContainerView.addSubview(cancelButton)
         moveButtonContainerView.addSubview(nextButton)
@@ -162,10 +218,20 @@ class LoginViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.bottom.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.height.equalTo(763)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(118)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.top.equalTo(scrollContentView).offset(118)
+            make.left.equalTo(scrollContentView).offset(20)
+            make.right.equalTo(scrollContentView).offset(-20)
         }
         
         passwordContainerView.snp.makeConstraints { make in
@@ -186,7 +252,7 @@ class LoginViewController: UIViewController {
         }
         
         idContainerView.snp.makeConstraints { make in
-            make.top.equalTo(passwordContainerView.snp.bottom).offset(30)
+            idContainerTopConstraint = make.top.equalTo(passwordContainerView).offset(0).constraint
             make.left.right.equalTo(titleLabel)
             make.height.equalTo(90)
         }
@@ -203,9 +269,9 @@ class LoginViewController: UIViewController {
         }
         
         divideLineView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-245)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.equalTo(scrollContentView.snp.bottom).offset(-245)
+            make.left.equalTo(scrollContentView).offset(20)
+            make.right.equalTo(scrollContentView).offset(-20)
             make.height.equalTo(1)
         }
         
@@ -216,13 +282,13 @@ class LoginViewController: UIViewController {
         
         simpleLoginStackView.snp.makeConstraints { make in
             make.top.equalTo(divideLabel).offset(35)
-            make.centerX.equalTo(view)
+            make.centerX.equalTo(scrollContentView)
             make.width.equalTo(220)
             make.height.equalTo(40)
         }
         
         keyboardFloatingView.snp.makeConstraints { make in
-            make.left.right.equalTo(view)
+            make.left.right.equalTo(scrollContentView)
             keyboardFloatingViewBottom = make.bottom.equalTo(view).constraint
             make.height.equalTo(45)
         }
@@ -259,18 +325,29 @@ class LoginViewController: UIViewController {
         let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         self.keyboardFloatingView.isHidden = false
-                
+        self.moveButtonContainerView.isHidden = !idTextField.isFirstResponder
+        self.loginButton.isHidden = !passwordTextField.isFirstResponder
+        
         self.keyboardFloatingViewBottom?.update(offset: -keyboardFrame.size.height)
         self.keyboardFloatingView.updateConstraints()
         
         UIView.animate(withDuration: 1, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
+        
+        scrollView.isScrollEnabled = false
+//        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @objc
     func keyboardWillHide(_ notification: Notification) {
+        scrollView.isScrollEnabled = true
         keyboardFloatingView.isHidden = true
         keyboardFloatingViewBottom?.update(offset: 0)
+    }
+    
+    @objc
+    func contentViewTouched() {
+        self.scrollContentView.endEditing(true)
     }
 }
