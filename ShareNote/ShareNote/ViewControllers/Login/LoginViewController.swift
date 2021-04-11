@@ -105,6 +105,15 @@ class LoginViewController: UIViewController {
         $0.setImage(UIImage(named: "iconLoginApple"), for: .normal)
     }
     
+    let registerButton = UIButton().then {
+        let attributeString = NSAttributedString(string: "회원가입하기",
+                                                 attributes: [NSAttributedString.Key.font : UIFont.spoqaHanSans(size: 12, style: .Regular),
+                                                              NSAttributedString.Key.foregroundColor : UIColor.grey4,
+                                                              NSAttributedString.Key.underlineStyle : true,
+                                                              NSAttributedString.Key.underlineColor : UIColor.grey4])
+        $0.setAttributedTitle(attributeString, for: .normal)
+    }
+    
     let keyboardFloatingView = UIView().then {
         $0.isHidden = true
     }
@@ -228,6 +237,13 @@ class LoginViewController: UIViewController {
                     authorizationController.performRequests()
                 }.disposed(by: disposeBag)
         }
+        
+        registerButton.rx.tap
+            .bind { [weak self] in
+                let registerViewController = RegisterViewController()
+                registerViewController.modalPresentationStyle = .fullScreen
+                self?.present(registerViewController, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -250,6 +266,8 @@ class LoginViewController: UIViewController {
         scrollContentView.addSubview(divideLabel)
         
         scrollContentView.addSubview(simpleLoginStackView)
+        
+        scrollContentView.addSubview(registerButton)
         
         scrollContentView.addSubview(keyboardFloatingView)
         keyboardFloatingView.addSubview(moveButtonContainerView)
@@ -328,6 +346,11 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(scrollContentView)
             make.width.equalTo(220)
             make.height.equalTo(40)
+        }
+        
+        registerButton.snp.makeConstraints { make in
+            make.top.equalTo(simpleLoginStackView.snp.bottom).offset(20)
+            make.centerX.equalTo(scrollContentView)
         }
         
         keyboardFloatingView.snp.makeConstraints { make in

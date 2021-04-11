@@ -21,6 +21,14 @@ class EmailTableViewController: UIViewController {
     // MARK: Variables
     var disposeBag = DisposeBag()
     
+    var emailList = Observable.of(["직적입력",
+                                   "naver.com",
+                                   "gmail.com",
+                                   "daum.net",
+                                   "nate.com",
+                                   "hanmail.com",
+                                   "kakao.com"])
+    
     // MARK: Methods
     override func viewDidLoad() {
         self.view.backgroundColor = .red
@@ -38,20 +46,19 @@ class EmailTableViewController: UIViewController {
     func bindTableView() {
         tableView.register(EmailTableViewCell.self, forCellReuseIdentifier: "EmailTableViewCell")
         
-        let cities = Observable.of(["Lisbon", "Copenhagen", "London", "Madrid", "Vienna"])
-
-        cities.bind(to: tableView.rx.items) { [self] (tableView: UITableView, index: Int, element: String) in
-            let cell = EmailTableViewCell(style: .default, reuseIdentifier: "EmailTableViewCell")
-            cell.emailLabel.text = element
-            cell.checkButton.addTarget(self, action: #selector(checkBtnTouched), for: .touchUpInside)
+        emailList.bind(to: tableView.rx.items) { (tableView: UITableView, index: Int, element: String) in
+            let cell = UITableViewCell()
+            cell.textLabel?.text = element
             return cell
         }.disposed(by: disposeBag)
 
         tableView.rx.modelSelected(String.self)
-            .subscribe(onNext: { model in
-                logger.verbose("\(model) was selected")
+            .subscribe(onNext: { [weak self] model in
+                self?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
+        
+        tableView.rowHeight = 59
     }
     
     @objc

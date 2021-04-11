@@ -14,6 +14,13 @@ import UIKit
 
 class RegisterViewController: UIViewController, View {
     // MARK: Constants
+    let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+    }
+    
+    let scrollContentView = UIView()
+    
     let closeButton = UIButton().then {
         $0.setImage(UIImage(named: "icClose"), for: .normal)
         $0.setImage(UIImage(named: "icClose"), for: .highlighted)
@@ -43,10 +50,14 @@ class RegisterViewController: UIViewController, View {
     let atLabel = UILabel().then {
         $0.text = "@"
         $0.font = UIFont.systemFont(ofSize: 20)
-        $0.textColor = .black
+        $0.textColor = .grey4
     }
     
-    let emailAddressTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이메일 선택")
+    let emailAddressButton = UIButton().then {
+        $0.setTitle("이메일 선택", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 20)
+    }
     
     // 비밀번호 확인
     let confirmPasswordContainerView = UIView().then {
@@ -103,7 +114,7 @@ class RegisterViewController: UIViewController, View {
     
     let moveButtonContainerView = UIView().then {
         $0.backgroundColor = .whiteTwo
-//        $0.isHidden = true
+        $0.isHidden = true
     }
     
     let cancelButton = UIButton().then {
@@ -151,10 +162,20 @@ class RegisterViewController: UIViewController, View {
             .bind { [weak self] in
                 self?.nextBtnTouched()
             }.disposed(by: disposeBag)
+        
+        emailAddressButton.rx.tap
+            .bind { [weak self] in
+                self?.presentPanModal(EmailTableViewController())
+            }.disposed(by: disposeBag)
+        
+        closeButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     func nextBtnTouched() {
-        UIView.transition(with: view, duration: 1, options: .transitionCrossDissolve, animations: { [self] in
+        UIView.transition(with: view, duration: 0.5, options: .transitionCrossDissolve, animations: { [self] in
             switch count {
             case 0:
                 self.passwordContainerView.isHidden = false
@@ -182,10 +203,10 @@ class RegisterViewController: UIViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        emailAddressTextField.rx.text
-            .map { RegisterReactor.Action.emailAddressTextChanged($0) }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
+//        emailAddressButton.rx.text
+//            .map { RegisterReactor.Action.emailAddressTextChanged($0) }
+//            .bind(to: reactor.action)
+//            .disposed(by: disposeBag)
         
         passwordTextField.rx.text
             .map { RegisterReactor.Action.passwordTextChanged($0) }
@@ -209,31 +230,34 @@ class RegisterViewController: UIViewController, View {
     }
     
     func setUI() {
-        view.addSubview(closeButton)
-        view.addSubview(topLabel)
-        view.addSubview(titleLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollContentView)
         
-        view.addSubview(emailContainerView)
+        scrollContentView.addSubview(closeButton)
+        scrollContentView.addSubview(topLabel)
+        scrollContentView.addSubview(titleLabel)
+        
+        scrollContentView.addSubview(emailContainerView)
         emailContainerView.addSubview(emailIDTextField)
         emailContainerView.addSubview(atLabel)
-        emailContainerView.addSubview(emailAddressTextField)
+        emailContainerView.addSubview(emailAddressButton)
 
-        view.addSubview(confirmPasswordContainerView)
+        scrollContentView.addSubview(confirmPasswordContainerView)
         confirmPasswordContainerView.addSubview(confirmPasswordTextField)
         confirmPasswordContainerView.addSubview(confirmPasswordValidLabel)
         
-        view.addSubview(passwordContainerView)
+        scrollContentView.addSubview(passwordContainerView)
         passwordContainerView.addSubview(passwordTextField)
         passwordContainerView.addSubview(passwordValidLabel)
         
-        view.addSubview(idContainerView)
+        scrollContentView.addSubview(idContainerView)
         idContainerView.addSubview(idTextField)
         idContainerView.addSubview(idValidLabel)
 
-        view.addSubview(bottomContainerView)
+        scrollContentView.addSubview(bottomContainerView)
         bottomContainerView.addSubview(doubleCheckButton)
         
-        view.addSubview(moveButtonContainerView)
+        scrollContentView.addSubview(moveButtonContainerView)
         moveButtonContainerView.addSubview(cancelButton)
         moveButtonContainerView.addSubview(nextButton)
 
@@ -241,17 +265,27 @@ class RegisterViewController: UIViewController, View {
     }
     
     override func updateViewConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.bottom.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.height.equalTo(763)
+        }
+        
         closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(39)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(15)
+            make.top.equalTo(scrollContentView).offset(39)
+            make.left.equalTo(scrollContentView).offset(15)
             make.width.height.equalTo(30)
         }
         
         // Top Label
         topLabel.snp.makeConstraints { make in
             make.top.equalTo(closeButton.snp.bottom).offset(15)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.left.equalTo(scrollContentView).offset(20)
+            make.right.equalTo(scrollContentView).offset(-20)
         }
 
         // Title Label
@@ -268,7 +302,8 @@ class RegisterViewController: UIViewController, View {
         }
         
         atLabel.snp.makeConstraints { make in
-            make.center.equalTo(emailContainerView.snp.center)
+            make.top.equalTo(emailContainerView).offset(25)
+            make.centerX.equalTo(emailContainerView)
             make.width.height.equalTo(30)
         }
         
@@ -279,9 +314,9 @@ class RegisterViewController: UIViewController, View {
             make.height.equalTo(60)
         }
 
-        emailAddressTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailContainerView.snp.top)
-            make.left.equalTo(atLabel.snp.right).offset(15)
+        emailAddressButton.snp.makeConstraints { make in
+            make.centerY.equalTo(atLabel)
+            make.left.equalTo(atLabel.snp.right).offset(10)
             make.right.equalTo(emailContainerView.snp.right)
             make.height.equalTo(60)
         }
@@ -375,9 +410,11 @@ class RegisterViewController: UIViewController, View {
     
     @objc
     func keyboardWillShow(_ notification: Notification) {
+        moveButtonContainerView.isHidden = false
+        
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-  
+        
         let keyboardBottom = keyboardFrame.size.height - view.safeAreaInsets.bottom
         self.bottomContainerViewBottomConstraint?.update(offset: -keyboardBottom)
         
@@ -388,6 +425,8 @@ class RegisterViewController: UIViewController, View {
     
     @objc
     func keyboardWillHide(_ notification: Notification) {
+        moveButtonContainerView.isHidden = true
+        
         bottomContainerViewBottomConstraint?.update(offset: 0)
         
         UIView.animate(withDuration: 1, animations: { () -> Void in
