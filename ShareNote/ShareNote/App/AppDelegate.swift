@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.addDestination(ConsoleDestination())
         
         if #available(iOS 13, *) {
+            self.window?.overrideUserInterfaceStyle = .light
             logger.verbose("set in SceneDelegate")
         } else {
             let window = UIWindow(frame: UIScreen.main.bounds)

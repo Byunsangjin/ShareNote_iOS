@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
+            window.overrideUserInterfaceStyle = .light
             appCoordinator = AppCoordinator(window: window)
             appCoordinator?.start()
         }
