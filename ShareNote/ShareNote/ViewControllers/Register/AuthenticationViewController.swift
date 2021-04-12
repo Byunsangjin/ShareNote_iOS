@@ -37,9 +37,7 @@ class AuthenticationViewController: UIViewController {
         $0.showsHorizontalScrollIndicator = false
     }
     
-    let scrollContentView = UIView().then {
-        $0.backgroundColor = .grey7
-    }
+    let scrollContentView = UIView()
     
     // 약관동의 View
     let termsAndConditionsContainerView = UIView().then {
@@ -125,7 +123,7 @@ class AuthenticationViewController: UIViewController {
     
     let nameContainerView = UIView()
     
-    let nameTexField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력")
+    let nameTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력")
     
     let nextAndCancelContainerView = UIView().then {
         $0.isHidden = true
@@ -171,6 +169,11 @@ class AuthenticationViewController: UIViewController {
         setUI()
         setKeyboardNotification()
         
+        closeButton.rx.tap
+            .bind { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
         nextButton.rx.tap
             .bind { [weak self] in
                 self?.nextBtnTouched()
@@ -206,15 +209,40 @@ class AuthenticationViewController: UIViewController {
         self.nextAndCancelContainerViewHeight?.update(offset: -keyboardFrame.size.height)
         self.nextAndCancelContainerView.updateConstraints()
         
-        UIView.animate(withDuration: 1, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
+        
+        setTextFieldContentOffset()
+    }
+    
+    func setTextFieldContentOffset() {
+        certificationNumberButton.isHidden = true
+        
+        if nameTextField.isFirstResponder {
+            if nameContainerView.frame.origin.y + nameContainerView.frame.height > nextAndCancelContainerView.frame.origin.y {
+                let y = nameContainerView.frame.origin.y + nameContainerView.frame.height + 50 - nextAndCancelContainerView.frame.origin.y
+                scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
+            }
+        } else if birthDateTextField.isFirstResponder || genderTextField.isFirstResponder {
+            if birthDateContainerView.frame.origin.y + birthDateContainerView.frame.height > nextAndCancelContainerView.frame.origin.y {
+                let y = birthDateContainerView.frame.origin.y + birthDateContainerView.frame.height - nextAndCancelContainerView.frame.origin.y
+                scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
+            }
+        } else if phoneNumberTextField.isFirstResponder {
+            if phoneNumberContainerView.frame.origin.y + phoneNumberContainerView.frame.height > nextAndCancelContainerView.frame.origin.y {
+                let y = phoneNumberContainerView.frame.origin.y + phoneNumberContainerView.frame.height - nextAndCancelContainerView.frame.origin.y
+                scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
+            }
+        }
     }
     
     @objc
     func keyboardWillHide(_ notification: Notification) {
+        certificationNumberButton.isHidden = false
         nextAndCancelContainerView.isHidden = true
         nextAndCancelContainerViewHeight?.update(offset: 0)
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     @objc
@@ -248,12 +276,12 @@ class AuthenticationViewController: UIViewController {
     }
     
     func setUI() {
-        view.addSubview(closeButton)
-        view.addSubview(navigationLabel)
-        view.addSubview(descriptionLabel)
-        
         view.addSubview(scrollView)
         scrollView.addSubview(scrollContentView)
+        
+        scrollContentView.addSubview(closeButton)
+        scrollContentView.addSubview(navigationLabel)
+        scrollContentView.addSubview(descriptionLabel)
         
         scrollContentView.addSubview(termsAndConditionsContainerView)
         termsAndConditionsContainerView.addSubview(allAgreementButton)
@@ -280,7 +308,7 @@ class AuthenticationViewController: UIViewController {
         birthDateContainerView.addSubview(dotStackView)
         
         scrollContentView.addSubview(nameContainerView)
-        scrollContentView.addSubview(nameTexField)
+        nameContainerView.addSubview(nameTextField)
         
         view.addSubview(nextAndCancelContainerView)
         nextAndCancelContainerView.addSubview(nextButton)
@@ -292,37 +320,34 @@ class AuthenticationViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        scrollContentView.snp.makeConstraints { make in
+            make.top.left.bottom.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.height.equalTo(860)
+        }
+        
         closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(39)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(15)
+            make.top.equalTo(scrollContentView).offset(39)
+            make.left.equalTo(scrollContentView).offset(15)
             make.width.height.equalTo(30)
         }
         
         navigationLabel.snp.makeConstraints { make in
             make.top.equalTo(closeButton.snp.bottom).offset(15)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.left.equalTo(scrollContentView).offset(20)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(navigationLabel.snp.bottom).offset(19)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
-        }
-        
-        scrollView.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(106)
-            make.left.width.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        scrollContentView.snp.makeConstraints { make in
-            make.top.left.equalTo(scrollView)
-            make.width.equalTo(scrollView)
-            make.bottom.equalTo(scrollView)
-            make.height.equalTo(520)
+            make.left.equalTo(scrollContentView).offset(20)
         }
         
         termsAndConditionsContainerView.snp.makeConstraints { make in
-            make.top.equalTo(scrollContentView).offset(5)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(113)
             make.left.right.equalTo(scrollContentView)
             self.termsAndConditionsContainerViewHeight = make.height.equalTo(0).constraint
         }
@@ -451,13 +476,13 @@ class AuthenticationViewController: UIViewController {
             make.height.equalTo(60)
         }
         
-        nameTexField.snp.makeConstraints { make in
+        nameTextField.snp.makeConstraints { make in
             make.top.left.right.equalTo(nameContainerView)
             make.height.equalTo(60)
         }
         
         nextAndCancelContainerView.snp.makeConstraints { make in
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.equalTo(scrollContentView)
             make.height.equalTo(45)
             self.nextAndCancelContainerViewHeight = make.bottom.equalTo(view).constraint
         }
@@ -473,7 +498,7 @@ class AuthenticationViewController: UIViewController {
         }
         
         certificationNumberButton.snp.makeConstraints { make in
-            make.left.bottom.right.equalTo(view.safeAreaLayoutGuide)
+            make.left.bottom.right.equalTo(scrollContentView)
             make.height.equalTo(59)
         }
         
