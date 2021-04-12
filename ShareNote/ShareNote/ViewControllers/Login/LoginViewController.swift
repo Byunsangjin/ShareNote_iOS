@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
     
     let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호를 입력해주세요").then {
         $0.title = "비밀번호 입력"
+        $0.isSecureTextEntry = true
     }
 
     let findPasswordButton = UIButton().then {
@@ -250,6 +251,20 @@ class LoginViewController: UIViewController {
                 registerViewController.modalPresentationStyle = .fullScreen
                 self?.present(registerViewController, animated: true, completion: nil)
             }.disposed(by: disposeBag)
+        
+        findIdButton.rx.tap
+            .bind { [weak self] in
+                let authenticationViewController = AuthenticationViewController()
+                authenticationViewController.modalPresentationStyle = .fullScreen
+                self?.present(authenticationViewController, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        findPasswordButton.rx.tap
+            .bind { [weak self] in
+                let authenticationViewController = AuthenticationViewController()
+                authenticationViewController.modalPresentationStyle = .fullScreen
+                self?.present(authenticationViewController, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -409,11 +424,11 @@ class LoginViewController: UIViewController {
         self.keyboardFloatingViewBottom?.update(offset: -keyboardFrame.size.height)
         self.keyboardFloatingView.updateConstraints()
         
-        UIView.animate(withDuration: 1, animations: { () -> Void in
-            self.view.layoutIfNeeded()
-        })
-        
         scrollView.isScrollEnabled = false
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
         
         setTextFieldContentOffset()
     }
@@ -421,11 +436,14 @@ class LoginViewController: UIViewController {
     func setTextFieldContentOffset() {
         if idTextField.isFirstResponder {
             if idContainerView.frame.origin.y + 100 > keyboardFloatingView.frame.origin.y {
-                let y = idContainerView.frame.origin.y + 100 - keyboardFloatingView.frame.origin.y
+                let y = idContainerView.frame.origin.y + idContainerView.frame.height - keyboardFloatingView.frame.origin.y
                 scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
             }
         } else if passwordTextField.isFirstResponder {
-            
+            if passwordContainerView.frame.origin.y + 100 > keyboardFloatingView.frame.origin.y {
+                let y = passwordContainerView.frame.origin.y + passwordContainerView.frame.height - keyboardFloatingView.frame.origin.y
+                scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
+            }
         }
     }
     
@@ -490,14 +508,13 @@ extension LoginViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         logger.verbose("didSignInFor")
       if let error = error {
-        // ...
+        logger.verbose(error)
         return
       }
 
       guard let authentication = user.authentication else { return }
-      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+      let _ = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                         accessToken: authentication.accessToken)
-      // ...
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
