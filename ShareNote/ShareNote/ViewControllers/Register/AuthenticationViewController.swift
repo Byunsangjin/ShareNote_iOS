@@ -60,7 +60,7 @@ class AuthenticationViewController: UIViewController {
     
     let infomationReceiveLabel = UILabel.createAttributeLabel(text: "투자 관련 에세이 등 정보 수신 동의 (선택)")
     
-    let smsButton = UIButton.createCheckButton()
+    let snsButton = UIButton.createCheckButton()
     
     let smsLabel = UILabel().then {
         $0.text = "SMS"
@@ -188,6 +188,36 @@ class AuthenticationViewController: UIViewController {
             .bind { [weak self] in
                 self?.presentPanModal(CertificationNumberViewController())                
             }.disposed(by: disposeBag)
+        
+        allAgreementButton.rx.tap
+            .bind { [weak self] in
+                self?.allAgreementButton.isSelected.toggle()
+            }.disposed(by: disposeBag)
+        
+        termsAndConditionsButton.rx.tap
+            .bind { [weak self] in
+                self?.termsAndConditionsButton.isSelected.toggle()
+            }.disposed(by: disposeBag)
+        
+        infomationReceiveButton.rx.tap
+            .bind { [weak self] in
+                self?.infomationReceiveButton.isSelected.toggle()
+            }.disposed(by: disposeBag)
+        
+        snsButton.rx.tap
+            .bind { [weak self] in
+                self?.snsButton.isSelected.toggle()
+            }.disposed(by: disposeBag)
+        
+        emailButton.rx.tap
+            .bind { [weak self] in
+                self?.emailButton.isSelected.toggle()
+            }.disposed(by: disposeBag)
+        
+        overFourteenYearButton.rx.tap
+            .bind { [weak self] in
+                self?.overFourteenYearButton.isSelected.toggle()
+            }.disposed(by: disposeBag)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -290,7 +320,7 @@ class AuthenticationViewController: UIViewController {
         termsAndConditionsContainerView.addSubview(termsAndConditionsLabel)
         termsAndConditionsContainerView.addSubview(infomationReceiveButton)
         termsAndConditionsContainerView.addSubview(infomationReceiveLabel)
-        termsAndConditionsContainerView.addSubview(smsButton)
+        termsAndConditionsContainerView.addSubview(snsButton)
         termsAndConditionsContainerView.addSubview(smsLabel)
         termsAndConditionsContainerView.addSubview(emailButton)
         termsAndConditionsContainerView.addSubview(emailLabel)
@@ -385,21 +415,21 @@ class AuthenticationViewController: UIViewController {
             make.centerY.equalTo(infomationReceiveButton)
         }
         
-        smsButton.snp.makeConstraints { make in
+        snsButton.snp.makeConstraints { make in
             make.top.equalTo(infomationReceiveButton.snp.bottom).offset(10)
             make.left.equalTo(termsAndConditionsContainerView).offset(50)
             make.width.height.equalTo(20)
         }
         
         smsLabel.snp.makeConstraints { make in
-            make.left.equalTo(smsButton.snp.right).offset(10)
+            make.left.equalTo(snsButton.snp.right).offset(10)
             make.right.equalTo(emailButton.snp.left).offset(-10)
-            make.centerY.equalTo(smsButton)
+            make.centerY.equalTo(snsButton)
         }
         
         emailButton.snp.makeConstraints { make in
             make.top.equalTo(infomationReceiveButton.snp.bottom).offset(10)
-            make.left.equalTo(smsButton.snp.right).offset(72)
+            make.left.equalTo(snsButton.snp.right).offset(72)
             make.width.height.equalTo(20)
         }
         
@@ -409,7 +439,7 @@ class AuthenticationViewController: UIViewController {
         }
         
         overFourteenYearButton.snp.makeConstraints { make in
-            make.top.equalTo(smsButton.snp.bottom).offset(21)
+            make.top.equalTo(snsButton.snp.bottom).offset(21)
             make.left.equalTo(termsAndConditionsContainerView).offset(20)
             make.width.height.equalTo(20)
         }
