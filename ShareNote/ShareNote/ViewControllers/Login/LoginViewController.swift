@@ -146,8 +146,10 @@ class LoginViewController: UIViewController {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.grey2, for: .normal)
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
-        $0.backgroundColor = .whiteTwo
-//        $0.isHidden = true
+        $0.setBackgroundColor(.whiteTwo, for: .normal)
+        $0.setBackgroundColor(.mainColor, for: .selected)
+        
+        $0.addTarget(self, action: #selector(loginBtnTouched), for: .touchUpInside)
     }
     
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
@@ -158,6 +160,10 @@ class LoginViewController: UIViewController {
     var keyboardFloatingViewBottom: Constraint?
     
     var idContainerTopConstraint: Constraint?
+    
+    var id = ""
+    
+    var password = ""
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -180,11 +186,6 @@ class LoginViewController: UIViewController {
                 self?.passwordContainerView.isHidden = false
                 self?.passwordTextField.becomeFirstResponder()
                 self?.idContainerTopConstraint?.update(offset: 120)
-            }.disposed(by: disposeBag)
-        
-        loginButton.rx.tap
-            .bind { [weak self] in
-                self?.presentMainTabViewController()
             }.disposed(by: disposeBag)
         
         idTextField.rx.controlEvent([.editingDidBegin])
@@ -265,6 +266,16 @@ class LoginViewController: UIViewController {
                 authenticationViewController.modalPresentationStyle = .fullScreen
                 self?.present(authenticationViewController, animated: true, completion: nil)
             }.disposed(by: disposeBag)
+        
+        idTextField.rx.text
+            .subscribe(onNext: { [weak self] text in
+                self?.isEnableLogin()
+            }).disposed(by: disposeBag)
+        
+        passwordTextField.rx.text
+            .subscribe(onNext: { [weak self] text in
+                self?.isEnableLogin()
+            }).disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -478,6 +489,23 @@ class LoginViewController: UIViewController {
                     logger.verbose(error)
                 })
                 .disposed(by: disposeBag)
+        }
+    }
+    
+    func isEnableLogin() {
+        let isEnable = idTextField.text!.count > 0 && passwordTextField.text!.count > 0
+        loginButton.isSelected = isEnable
+    }
+    
+    @objc
+    func loginBtnTouched() {        
+        guard let id = idTextField.text, let password = passwordTextField.text else { return }
+        NetworkHelper.shared.userLogin(userID: id, password: password) { [weak self] (isSuccessed, m) in
+            if isSuccessed {
+                self?.presentMainTabViewController()
+            } else {
+                logger.verbose("로그인 실패")
+            }
         }
     }
 }
