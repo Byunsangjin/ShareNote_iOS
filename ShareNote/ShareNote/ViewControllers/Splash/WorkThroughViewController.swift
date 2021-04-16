@@ -13,6 +13,23 @@ class WorkThroughViewController: UIViewController {
     // MARK: Constants
     let pagerView = FSPagerView()
     
+    let pageControl = FSPageControl().then {
+        $0.numberOfPages = 4
+        $0.currentPage = 0
+        $0.setStrokeColor(UIColor.grey5, for: .normal)
+        $0.setFillColor(UIColor.mainColor, for: .selected)
+        $0.itemSpacing = 7
+        $0.interitemSpacing = 8
+    }
+    
+    let startButton = UIButton().then {
+        $0.setTitle("시작하기", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
+        $0.backgroundColor = .mainColor
+        $0.layer.cornerRadius = 4
+    }
+        
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +44,9 @@ class WorkThroughViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(pagerView)
+        view.addSubview(pageControl)
+        
+        view.addSubview(startButton)
         
         view.setNeedsUpdateConstraints()
     }
@@ -37,6 +57,19 @@ class WorkThroughViewController: UIViewController {
             make.centerX.equalTo(view)
             make.width.equalTo(375)
             make.height.equalTo(210)
+        }
+        
+        pageControl.snp.makeConstraints { make in
+            make.top.equalTo(pagerView.snp.bottom).offset(38)
+            make.centerX.equalTo(view)
+            make.height.equalTo(10)
+        }
+        
+        startButton.snp.makeConstraints { make in
+            make.top.equalTo(pageControl.snp.bottom).offset(90)
+            make.centerX.equalTo(view)
+            make.width.equalTo(view).offset(-40)
+            make.height.equalTo(55)
         }
         
         super.updateViewConstraints()
