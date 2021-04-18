@@ -53,10 +53,8 @@ class WorkThroughViewController: UIViewController {
     
     override func updateViewConstraints() {
         pagerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(200)
-            make.centerX.equalTo(view)
-            make.width.equalTo(375)
-            make.height.equalTo(210)
+            make.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(view).multipliedBy(0.6)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -86,8 +84,8 @@ extension WorkThroughViewController: FSPagerViewDataSource, FSPagerViewDelegate 
             return FSPagerViewCell()
         }
         
-        let image = UIImage(named: "icIllust0\(index + 1)")
-        cell.imageView?.image = image
+//        let image = UIImage(named: "icIllust0\(index + 1)")
+//        cell.imageView?.image = image
         
         return cell
     }
