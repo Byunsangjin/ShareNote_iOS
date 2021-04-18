@@ -64,12 +64,15 @@ class RegisterViewController: UIViewController, View {
         $0.isHidden = true
     }
     
-    let confirmPasswordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 확인")
+    let confirmPasswordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 확인").then {
+        $0.isSecureTextEntry = true
+    }
     
     let confirmPasswordValidLabel = UILabel().then {
         $0.text = "비밀번호가 올바르지 않습니다."
         $0.font = UIFont.systemFont(ofSize: 11)
         $0.textColor = .orange
+        $0.isHidden = true
     }
     
     // 비밀번호
@@ -77,12 +80,8 @@ class RegisterViewController: UIViewController, View {
         $0.isHidden = true
     }
     
-    let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 입력")
-    
-    let passwordValidLabel = UILabel().then {
-        $0.text = "비밀번호가 올바르지 않습니다."
-        $0.font = UIFont.systemFont(ofSize: 11)
-        $0.textColor = .orange
+    let passwordTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 입력").then {
+        $0.isSecureTextEntry = true
     }
     
     // 아이디
@@ -96,6 +95,7 @@ class RegisterViewController: UIViewController, View {
         $0.text = "이미 있는 아이디입니다."
         $0.font = UIFont.systemFont(ofSize: 11)
         $0.textColor = .orange
+        $0.isHidden = true
     }
     
     // 중복 확인 버튼
@@ -222,11 +222,30 @@ class RegisterViewController: UIViewController, View {
             .map { RegisterReactor.Action.idTextChanged($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+        
+        idTextField.rx.controlEvent([.editingDidEnd])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = true
+            }.disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent([.editingDidBegin])
+            .bind { [weak self] in
+                self?.moveButtonContainerView.isHidden = false
+            }.disposed(by: disposeBag)
     }
     
     @objc
     func doubleCheckBtnTouched() {
-        presentPanModal(EmailTableViewController())
+//        presentPanModal(EmailTableViewController())
+        guard let id = idTextField.text else { return }
+        NetworkHelper.shared.isExistID(userID: id) { [weak self] isExist in
+            if isExist {
+                self?.idValidLabel.isHidden = false
+            } else {
+                logger.verbose("사용 가능한 아이디")
+                self?.nextBtnTouched()
+            }
+        }
     }
     
     func setUI() {
@@ -257,7 +276,7 @@ class RegisterViewController: UIViewController, View {
         scrollContentView.addSubview(bottomContainerView)
         bottomContainerView.addSubview(doubleCheckButton)
         
-        scrollContentView.addSubview(moveButtonContainerView)
+        bottomContainerView.addSubview(moveButtonContainerView)
         moveButtonContainerView.addSubview(cancelButton)
         moveButtonContainerView.addSubview(nextButton)
 
@@ -410,7 +429,7 @@ class RegisterViewController: UIViewController, View {
     
     @objc
     func keyboardWillShow(_ notification: Notification) {
-        moveButtonContainerView.isHidden = false
+        bottomContainerView.isHidden = false
         
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -425,7 +444,7 @@ class RegisterViewController: UIViewController, View {
     
     @objc
     func keyboardWillHide(_ notification: Notification) {
-        moveButtonContainerView.isHidden = true
+        bottomContainerView.isHidden = true
         
         bottomContainerViewBottomConstraint?.update(offset: 0)
         
