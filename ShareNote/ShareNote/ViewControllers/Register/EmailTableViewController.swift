@@ -29,6 +29,8 @@ class EmailTableViewController: UIViewController {
                                    "hanmail.com",
                                    "kakao.com"])
     
+    var delegate: RegisterDelegate?
+    
     // MARK: Methods
     override func viewDidLoad() {
         self.view.backgroundColor = .red
@@ -53,8 +55,11 @@ class EmailTableViewController: UIViewController {
         }.disposed(by: disposeBag)
 
         tableView.rx.modelSelected(String.self)
-            .subscribe(onNext: { [weak self] model in
-                self?.dismiss(animated: true, completion: nil)
+            .subscribe(onNext: { [weak self] email in
+                self?.dismiss(animated: true) {
+                    logger.verbose(email)
+                    self?.delegate?.didSelectEmail(email: email)
+                }
             })
             .disposed(by: disposeBag)
         

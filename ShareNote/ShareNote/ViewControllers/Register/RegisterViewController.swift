@@ -129,6 +129,13 @@ class RegisterViewController: UIViewController, View {
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 14, style: .Regular)
     }
     
+    let completeButton = UIButton().then {
+        $0.setTitle("완료", for: .normal)
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
+        $0.backgroundColor = .mainColor
+    }
+    
     // MARK: Variables
     var emailContainerViewHeight: Constraint?
     
@@ -165,12 +172,44 @@ class RegisterViewController: UIViewController, View {
         
         emailAddressButton.rx.tap
             .bind { [weak self] in
-                self?.presentPanModal(EmailTableViewController())
+                let emailTableViewController = EmailTableViewController()
+                emailTableViewController.delegate = self
+                self?.presentPanModal(emailTableViewController)
             }.disposed(by: disposeBag)
         
         closeButton.rx.tap
             .bind { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        idTextField.rx.controlEvent([.editingDidBegin])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = false
+            }.disposed(by: disposeBag)
+        
+        idTextField.rx.controlEvent([.editingDidEnd])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = true
+            }.disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent([.editingDidBegin])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = false
+            }.disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent([.editingDidEnd])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = true
+            }.disposed(by: disposeBag)
+        
+        confirmPasswordTextField.rx.controlEvent([.editingDidBegin])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = false
+            }.disposed(by: disposeBag)
+        
+        confirmPasswordTextField.rx.controlEvent([.editingDidEnd])
+            .bind { [weak self] in
+                self?.doubleCheckButton.isHidden = true
             }.disposed(by: disposeBag)
     }
     
@@ -236,7 +275,6 @@ class RegisterViewController: UIViewController, View {
     
     @objc
     func doubleCheckBtnTouched() {
-//        presentPanModal(EmailTableViewController())
         guard let id = idTextField.text else { return }
         NetworkHelper.shared.isExistID(userID: id) { [weak self] isExist in
             if isExist {
@@ -267,7 +305,6 @@ class RegisterViewController: UIViewController, View {
         
         scrollContentView.addSubview(passwordContainerView)
         passwordContainerView.addSubview(passwordTextField)
-        passwordContainerView.addSubview(passwordValidLabel)
         
         scrollContentView.addSubview(idContainerView)
         idContainerView.addSubview(idTextField)
@@ -280,6 +317,8 @@ class RegisterViewController: UIViewController, View {
         moveButtonContainerView.addSubview(cancelButton)
         moveButtonContainerView.addSubview(nextButton)
 
+        scrollContentView.addSubview(completeButton)
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -371,11 +410,6 @@ class RegisterViewController: UIViewController, View {
             make.height.equalTo(60)
         }
 
-        passwordValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
-            make.left.equalTo(passwordContainerView)
-        }
-
         // 아이디
         idContainerView.snp.makeConstraints { make in
             make.top.equalTo(passwordContainerView.snp.bottom)
@@ -419,6 +453,11 @@ class RegisterViewController: UIViewController, View {
             make.centerY.equalTo(moveButtonContainerView)
         }
         
+        completeButton.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(59)
+        }
+        
         super.updateViewConstraints()
     }
     
@@ -452,4 +491,14 @@ class RegisterViewController: UIViewController, View {
             self.view.layoutIfNeeded()
         })
     }
+}
+
+extension RegisterViewController: RegisterDelegate {
+    func didSelectEmail(email: String) {
+        emailAddressButton.setTitle(email, for: .normal)
+    }
+}
+
+protocol RegisterDelegate {
+    func didSelectEmail(email: String)
 }
