@@ -21,13 +21,13 @@ class EmailTableViewController: UIViewController {
     // MARK: Variables
     var disposeBag = DisposeBag()
     
-    var emailList = Observable.of(["직적입력",
-                                   "naver.com",
-                                   "gmail.com",
-                                   "daum.net",
-                                   "nate.com",
-                                   "hanmail.com",
-                                   "kakao.com"])
+    var emailList = ["직적입력",
+                     "naver.com",
+                     "gmail.com",
+                     "daum.net",
+                     "nate.com",
+                     "hanmail.com",
+                     "kakao.com"]
     
     var delegate: RegisterDelegate?
     
@@ -46,23 +46,9 @@ class EmailTableViewController: UIViewController {
     }
     
     func bindTableView() {
-        tableView.register(EmailTableViewCell.self, forCellReuseIdentifier: "EmailTableViewCell")
-        
-        emailList.bind(to: tableView.rx.items) { (tableView: UITableView, index: Int, element: String) in
-            let cell = UITableViewCell()
-            cell.textLabel?.text = element
-            return cell
-        }.disposed(by: disposeBag)
-
-        tableView.rx.modelSelected(String.self)
-            .subscribe(onNext: { [weak self] email in
-                self?.dismiss(animated: true) {
-                    logger.verbose(email)
-                    self?.delegate?.didSelectEmail(email: email)
-                }
-            })
-            .disposed(by: disposeBag)
-        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.rowHeight = 59
     }
     
@@ -92,5 +78,28 @@ extension EmailTableViewController: PanModalPresentable {
     
     var anchorModalToLongForm: Bool {
         return false
+    }
+}
+
+extension EmailTableViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return emailList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell()
+        }
+        
+        cell.textLabel?.text = emailList[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) { [weak self] in
+            guard let email = self?.emailList[indexPath.row] else { return }
+            self?.delegate?.didSelectEmail(email: email)
+        }
     }
 }

@@ -172,6 +172,7 @@ class RegisterViewController: UIViewController, View {
         
         emailAddressButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 let emailTableViewController = EmailTableViewController()
                 emailTableViewController.delegate = self
                 self?.presentPanModal(emailTableViewController)
@@ -182,35 +183,54 @@ class RegisterViewController: UIViewController, View {
                 self?.dismiss(animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
-        idTextField.rx.controlEvent([.editingDidBegin])
+        idTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
             .bind { [weak self] in
-                self?.doubleCheckButton.isHidden = false
+                guard let isResponder = self?.idTextField.isFirstResponder else { return }
+                self?.doubleCheckButton.isHidden = !isResponder
+                self?.moveButtonContainerView.isHidden = isResponder
             }.disposed(by: disposeBag)
         
-        idTextField.rx.controlEvent([.editingDidEnd])
+        passwordTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
             .bind { [weak self] in
-                self?.doubleCheckButton.isHidden = true
+                guard let isResponder = self?.passwordTextField.isFirstResponder else { return }
+                self?.doubleCheckButton.isHidden = isResponder
+                self?.moveButtonContainerView.isHidden = !isResponder
             }.disposed(by: disposeBag)
         
-        passwordTextField.rx.controlEvent([.editingDidBegin])
+        confirmPasswordTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd])
             .bind { [weak self] in
-                self?.doubleCheckButton.isHidden = false
+                guard let isResponder = self?.confirmPasswordTextField.isFirstResponder else { return }
+                self?.doubleCheckButton.isHidden = isResponder
+                self?.moveButtonContainerView.isHidden = !isResponder
             }.disposed(by: disposeBag)
         
-        passwordTextField.rx.controlEvent([.editingDidEnd])
-            .bind { [weak self] in
-                self?.doubleCheckButton.isHidden = true
-            }.disposed(by: disposeBag)
+        completeButton.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let member = self?.createMember() else { return }
+                NetworkHelper.shared.register(user: member) { isSuccessed in
+                    if isSuccessed {
+                        let customAlertViewController = CustomAlertViewController(title: "쉐어노트\n회원가입을 축하합니다!",
+                                                                                  message: "로그인 후 쉐어노트에서\n금융생활을 기록하세요!",
+                                                                                  firstActionTitle: "로그인", firstAction:  {
+                                                                                    self?.dismiss(animated: true, completion: nil)
+                                                                                  })
+                        customAlertViewController.alertShow(parent: self!)
+                    } else {
+                        logger.error("회원가입 실패")
+                    }
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func createMember() -> Member? {
+        guard let id = idTextField.text else { return nil }
+        guard let password = passwordTextField.text else { return nil }
+        guard let emailId = emailIDTextField.text else { return nil }
+        guard let emailAddress = emailAddressButton.titleLabel?.text else { return nil }
+        let email = "\(emailId)@\(emailAddress)"
+        let member = Member(id: id, password: password, phoneNumber: "01012341234", email: email)
         
-        confirmPasswordTextField.rx.controlEvent([.editingDidBegin])
-            .bind { [weak self] in
-                self?.doubleCheckButton.isHidden = false
-            }.disposed(by: disposeBag)
-        
-        confirmPasswordTextField.rx.controlEvent([.editingDidEnd])
-            .bind { [weak self] in
-                self?.doubleCheckButton.isHidden = true
-            }.disposed(by: disposeBag)
+        return member
     }
     
     func nextBtnTouched() {
@@ -241,11 +261,6 @@ class RegisterViewController: UIViewController, View {
             .map { RegisterReactor.Action.emailIDTextChanged($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
-        
-//        emailAddressButton.rx.text
-//            .map { RegisterReactor.Action.emailAddressTextChanged($0) }
-//            .bind(to: reactor.action)
-//            .disposed(by: disposeBag)
         
         passwordTextField.rx.text
             .map { RegisterReactor.Action.passwordTextChanged($0) }

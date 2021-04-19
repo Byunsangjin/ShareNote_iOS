@@ -55,7 +55,12 @@ class NetworkHelper {
         let url = "http://52.79.246.196:8083/api/rest/member/join"        
         AF.request(url, method: .post, parameters: user, encoder: JSONParameterEncoder.default)
             .responseJSON { response in
-                logger.verbose(response)
+                if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
+                    json.status! > 200 ? completion?(false) : completion?(true)
+                } else {
+                    logger.verbose("Fail")
+                    completion?(false)
+                }
             }
     }
     

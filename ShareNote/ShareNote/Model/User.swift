@@ -13,7 +13,8 @@ import Foundation
 struct Member: Codable {
     let mbrID, mbrPwd, mbrName, mbrEmail: String?
     let mbrUUID: String?
-    let mbrType, mbrPhoneNum: String?
+    let mbrType: String? = "normal"
+    let mbrPhoneNum: String?
     let media, topic, bookmark: [String]?
     let mbrPoint: Int?
     let grade: Grade?
@@ -28,6 +29,31 @@ struct Member: Codable {
     let errors: [String]?
     let code: String?
 
+    init(id: String, password: String, phoneNumber: String, email: String) {
+        mbrID = id
+        mbrPwd = password
+        mbrPhoneNum = phoneNumber
+        mbrEmail = email
+        
+        mbrName = nil
+        mbrUUID = nil
+        media = nil
+        topic = nil
+        bookmark = nil
+        mbrPoint = nil
+        grade = nil
+        mbrGrade = nil
+        mbrState = nil
+        mbrUseYn = nil
+        mbrUdtDate = nil
+        mbrRegDate = nil
+        links = nil
+        message = nil
+        status = nil
+        errors = nil
+        code = nil
+    }
+    
     enum CodingKeys: String, CodingKey {
         case mbrID = "mbrId"
         case mbrPwd, mbrName, mbrEmail
