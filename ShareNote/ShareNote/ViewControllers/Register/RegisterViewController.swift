@@ -51,12 +51,15 @@ class RegisterViewController: UIViewController, View {
         $0.text = "@"
         $0.font = UIFont.systemFont(ofSize: 20)
         $0.textColor = .grey4
+        $0.textAlignment = .center
     }
     
     let emailAddressButton = UIButton().then {
         $0.setTitle("이메일 선택", for: .normal)
         $0.setTitleColor(.black2, for: .normal)
         $0.titleLabel?.font = UIFont.spoqaHanSans(size: 20)
+        $0.setImage(UIImage(named: "iconsDropbox"), for: .normal)
+        $0.semanticContentAttribute = .forceRightToLeft
     }
     
     // 비밀번호 확인
@@ -389,8 +392,7 @@ class RegisterViewController: UIViewController, View {
 
         emailAddressButton.snp.makeConstraints { make in
             make.centerY.equalTo(atLabel)
-            make.left.equalTo(atLabel.snp.right).offset(10)
-            make.right.equalTo(emailContainerView.snp.right)
+            make.left.equalTo(atLabel.snp.right)
             make.height.equalTo(60)
         }
         
