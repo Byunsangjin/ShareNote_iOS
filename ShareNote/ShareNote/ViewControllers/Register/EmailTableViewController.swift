@@ -8,6 +8,7 @@
 import PanModal
 import RxCocoa
 import RxSwift
+import SkyFloatingLabelTextField
 import Then
 import UIKit
 
@@ -16,6 +17,20 @@ class EmailTableViewController: UIViewController {
     // MARK: Constants
     let tableView = UITableView().then {
         $0.separatorStyle = .none
+    }
+    
+    let textFieldContainerView = UIView().then {
+        $0.isHidden = true
+    }
+    
+    let atLabel = UILabel().then {
+        $0.text = "@"
+        $0.textColor = .grey4
+        $0.font = UIFont.spoqaHanSans(size: 20)
+    }
+    
+    let emailTextField = SkyFloatingLabelTextField.createTextField(placeholder: "직접입력").then {
+        $0.title = "이메일주소 직접입력"
     }
     
     // MARK: Variables
@@ -31,16 +46,29 @@ class EmailTableViewController: UIViewController {
     
     var delegate: RegisterDelegate?
     
+    var height: CGFloat = 0
+    
     // MARK: Methods
     override func viewDidLoad() {
-        self.view.backgroundColor = .red
-        
         setUI()
         bindTableView()
+        setKeyboardNotification()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        height = tableView.contentSize.height
+        panModalSetNeedsLayoutUpdate()
+        panModalTransition(to: .longForm)
     }
     
     func setUI() {
+        view.backgroundColor = .white
+        
         view.addSubview(tableView)
+        
+        view.addSubview(textFieldContainerView)
+        textFieldContainerView.addSubview(atLabel)
+        textFieldContainerView.addSubview(emailTextField)
         
         view.setNeedsUpdateConstraints()
     }
@@ -63,7 +91,48 @@ class EmailTableViewController: UIViewController {
             make.width.height.equalTo(view)
         }
         
+        textFieldContainerView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+            make.height.equalTo(60)
+        }
+        
+        atLabel.snp.makeConstraints { make in
+            make.left.equalTo(textFieldContainerView)
+            make.bottom.equalTo(textFieldContainerView).offset(-5)
+            make.width.equalTo(20)
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.left.equalTo(atLabel.snp.right).offset(6)
+            make.right.equalTo(textFieldContainerView)
+            make.bottom.equalTo(textFieldContainerView)
+        }
+        
         super.updateViewConstraints()
+    }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        height = keyboardFrame.size.height + textFieldContainerView.frame.height + 25
+        panModalSetNeedsLayoutUpdate()
+        panModalTransition(to: .longForm)
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        height = tableView.contentSize.height
+        panModalSetNeedsLayoutUpdate()
+        panModalTransition(to: .longForm)
     }
 }
 
@@ -73,7 +142,7 @@ extension EmailTableViewController: PanModalPresentable {
     }
     
     var longFormHeight: PanModalHeight {
-        return .maxHeightWithTopInset(self.view.frame.height / 2)
+        return .contentHeight(height)
     }
     
     var anchorModalToLongForm: Bool {
@@ -97,6 +166,13 @@ extension EmailTableViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            tableView.isHidden = true
+            textFieldContainerView.isHidden = false
+            emailTextField.becomeFirstResponder()
+            return
+        }
+        
         dismiss(animated: true) { [weak self] in
             guard let email = self?.emailList[indexPath.row] else { return }
             self?.delegate?.didSelectEmail(email: email)
