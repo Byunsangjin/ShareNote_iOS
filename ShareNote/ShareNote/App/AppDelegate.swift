@@ -25,14 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         logger.addDestination(ConsoleDestination())
         
-        if #available(iOS 13, *) {
-            self.window?.overrideUserInterfaceStyle = .light
-            logger.verbose("set in SceneDelegate")
-        } else {
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            appCoordinator = AppCoordinator(window: window)
-            appCoordinator?.start()
-        }
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        appCoordinator = AppCoordinator(window: window)
+        appCoordinator?.start()        
         
         // KaKao
         RxKakaoSDKCommon.initSDK(appKey: KAKAO_NATIVE_KEY)
