@@ -228,7 +228,7 @@ class RegisterViewController: UIViewController, View {
         guard let emailId = emailIDTextField.text else { return nil }
         guard let emailAddress = emailAddressButton.titleLabel?.text else { return nil }
         let email = "\(emailId)@\(emailAddress)"
-        let member = Member(id: id, password: password, phoneNumber: "01012341234", email: email)
+        let member = Member(id: id, password: password, email: email)
         
         return member
     }

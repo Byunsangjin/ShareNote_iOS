@@ -11,47 +11,28 @@ import Foundation
 
 // MARK: - MemberList
 struct Member: Codable {
-    let mbrID, mbrPwd, mbrName, mbrEmail: String?
-    let mbrUUID: String?
-    let mbrType: String? = "normal"
-    let mbrPhoneNum: String?
-    let media, topic, bookmark: [String]?
-    let mbrPoint: Int?
-    let grade: Grade?
-    let mbrGrade: String?
-    let mbrState: Int?
-    let mbrUseYn: Bool?
-    let mbrUdtDate: String?
-    let mbrRegDate: String?
-    let links: Links?
-    let message: String?
-    let status: Int?
-    let errors: [String]?
-    let code: String?
+    var mbrID, mbrPwd, mbrName, mbrEmail: String?
+    var mbrUUID: String?
+    var mbrType: String? = "normal"
+    var mbrPhoneNum: String?
+    var media, topic, bookmark: [String]?
+    var mbrPoint: Int?
+    var grade: Grade?
+    var mbrGrade: String?
+    var mbrState: Int?
+    var mbrUseYn: Bool?
+    var mbrUdtDate: String?
+    var mbrRegDate: String?
+    var links: Links?
+    var message: String?
+    var status: Int?
+    var errors: [String]?
+    var code: String?
 
-    init(id: String, password: String, phoneNumber: String, email: String) {
+    init(id: String, password: String, email: String) {
         mbrID = id
         mbrPwd = password
-        mbrPhoneNum = phoneNumber
         mbrEmail = email
-        
-        mbrName = nil
-        mbrUUID = nil
-        media = nil
-        topic = nil
-        bookmark = nil
-        mbrPoint = nil
-        grade = nil
-        mbrGrade = nil
-        mbrState = nil
-        mbrUseYn = nil
-        mbrUdtDate = nil
-        mbrRegDate = nil
-        links = nil
-        message = nil
-        status = nil
-        errors = nil
-        code = nil
     }
     
     enum CodingKeys: String, CodingKey {
