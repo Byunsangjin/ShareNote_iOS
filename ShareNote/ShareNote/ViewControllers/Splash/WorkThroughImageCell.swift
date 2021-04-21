@@ -12,14 +12,12 @@ class WorkThroughImageCell: FSPagerViewCell {
     
     // MARK: Constants
     let titleLabel = UILabel().then {
-        $0.text = "Share Note"
         $0.font = UIFont.spoqaHanSans(size: 22, style: .Bold)
         $0.textColor = .black2
         $0.textAlignment = .center
     }
     
     let descriptionLabel = UILabel().then {
-        $0.text = "쉐어노트와 함께 건강한 주식투자를 시작하세요"
         $0.font = UIFont.spoqaHanSans(size: 16)
         $0.textColor = .black2
         $0.numberOfLines = 0
@@ -31,7 +29,6 @@ class WorkThroughImageCell: FSPagerViewCell {
     // MARK: Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView?.image = UIImage(named: "icIllust01")
         setUI()
     }
     
@@ -40,6 +37,8 @@ class WorkThroughImageCell: FSPagerViewCell {
     }
     
     func setUI() {
+        contentView.layer.shadowRadius = 0
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(workThroghImageView)
@@ -48,21 +47,20 @@ class WorkThroughImageCell: FSPagerViewCell {
     }
     
     override func updateConstraints() {
-//        titleLabel.snp.makeConstraints { make in
-//            make.bottom.equalTo(descriptionLabel).offset(-18)
-//            make.width.equalTo(contentView)
-//        }
-//        
-//        descriptionLabel.snp.makeConstraints { make in
-//            make.bottom.equalTo(workThroghImageView).offset(90)
-//            make.width.equalTo(contentView)
-//        }
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(95)
+            make.left.right.equalTo(contentView)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(18)
+            make.left.right.equalTo(titleLabel)
+        }
         
         workThroghImageView.snp.makeConstraints { make in
-            make.bottom.equalTo(contentView)
-            make.centerX.equalTo(contentView)
-            make.width.equalTo(375)
-            make.height.equalTo(210)
+            make.top.equalTo(titleLabel.snp.bottom).offset(108)
+            make.left.right.equalTo(contentView)
+            make.height.equalTo(248)
         }
         
         super.updateConstraints()
