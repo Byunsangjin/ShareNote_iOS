@@ -6,6 +6,7 @@
 //
 
 import FSPagerView
+import RxSwift
 import UIKit
 
 class WorkThroughViewController: UIViewController {
@@ -48,6 +49,8 @@ class WorkThroughViewController: UIViewController {
                            "매매일지를 작성하며 투자의 근거를 되돌아보세요\n정보를 기록하고 관리할 수 있어요",
                            "시장의 이슈를 한눈에, 쉐어노티Pick, 개인투자자가\n주목한 이슈와 관련된 기업을 한 눈에 볼 수 있어요"]
     
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +59,13 @@ class WorkThroughViewController: UIViewController {
         pagerView.dataSource = self
         pagerView.delegate = self
         pagerView.register(WorkThroughImageCell.self, forCellWithReuseIdentifier: "WorkThroughImageCell")
+        
+        startButton.rx.tap
+            .bind { [weak self] in
+                let loginViewController = LoginViewController()
+                loginViewController.modalPresentationStyle = .fullScreen
+                self?.present(loginViewController, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
