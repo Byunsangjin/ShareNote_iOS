@@ -8,13 +8,38 @@
 import UIKit
 
 class BottomButtonView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    // MARK: Constants
+    let button = UIButton().then {
+        $0.setTitleColor(.black2, for: .normal)
+        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16 )
+        $0.backgroundColor = .mainColor
     }
-    */
-
+    
+    // MARK: Methods
+    init(title: String) {
+        super.init(frame: .zero)
+        setUI()
+        button.setTitle(title, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUI() {
+        self.backgroundColor = .mainColor
+        
+        self.addSubview(button)
+        
+        self.setNeedsUpdateConstraints()
+    }
+    
+    override func updateConstraints() {
+        button.snp.makeConstraints { make in
+            make.top.left.right.equalTo(self)
+            make.height.equalTo(59)
+        }
+        
+        super.updateConstraints()
+    }
 }
