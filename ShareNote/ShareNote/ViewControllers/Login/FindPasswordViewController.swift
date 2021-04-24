@@ -41,6 +41,7 @@ class FindPasswordViewController: UIViewController {
         $0.text = "등록하신 핸드폰 번호로 임시 비밀번호가 발급됩니다."
         $0.textColor = .grey4
         $0.font = UIFont.spoqaHanSans(size: 12, style: .Regular)
+        $0.isHidden = true
     }
     
     // 휴대폰번호
@@ -50,6 +51,8 @@ class FindPasswordViewController: UIViewController {
     
     let phoneNumberTextField = SkyFloatingLabelTextField.createTextField(placeholder: "휴대폰번호(-없이 입력)").then {
         $0.title = "휴대폰번호"
+        $0.keyboardType = .numberPad
+        $0.tag = 2
     }
     
     // 이름 입력
@@ -57,14 +60,18 @@ class FindPasswordViewController: UIViewController {
         $0.isHidden = true
     }
     
-    let nameTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력")
+    let nameTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력").then {
+        $0.tag = 1
+    }
     
     // 아이디
     let idContainerView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let idTextField = SkyFloatingLabelTextField.createTextField(placeholder: "아이디 입력")
+    let idTextField = SkyFloatingLabelTextField.createTextField(placeholder: "아이디 입력").then {
+        $0.tag = 0
+    }
     
     let receiveButton = BottomButtonView(title: "임시 비밀번호 받기")
     
@@ -79,13 +86,13 @@ class FindPasswordViewController: UIViewController {
     
     var passwordContainerViewHeight: Constraint?
     
-    var idContainerViewHeight: Constraint?
-    
     var bottomContainerViewBottomConstraint: Constraint?
     
-    var count = 0
-    
     var disposeBag = DisposeBag()
+    
+    var titleList = ["아이디를 입력해주세요.",
+                     "이름을 입력해주세요",
+                     "휴대폰 번호를 입력해주세요."]
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -97,6 +104,14 @@ class FindPasswordViewController: UIViewController {
         idTextField.delegate = self
         nameTextField.delegate = self
         phoneNumberTextField.delegate = self
+        
+        receiveButton.button.rx.tap
+            .bind { [weak self] in
+                let alertController = CustomAlertViewController(title: "임시 비밀번호를 발급해드렸습니다.", message: nil, firstActionTitle: "확인", firstAction: {
+                    self?.dismiss(animated: true, completion: nil)
+                })
+                alertController.alertShow(parent: self)
+            }.disposed(by: disposeBag)
     }
     
     func setUI() {
@@ -132,8 +147,7 @@ class FindPasswordViewController: UIViewController {
         }
         
         scrollContentView.snp.makeConstraints { make in
-            make.top.left.bottom.equalTo(scrollView)
-            make.width.equalTo(scrollView)
+            make.top.left.bottom.width.equalTo(scrollView)
             make.height.equalTo(763)
         }
         
@@ -191,7 +205,7 @@ class FindPasswordViewController: UIViewController {
         idContainerView.snp.makeConstraints { make in
             make.top.equalTo(nameTextFieldContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
-            idContainerViewHeight = make.height.equalTo(110).constraint
+            make.height.equalTo(110)
         }
         
         idTextField.snp.makeConstraints { make in
@@ -202,7 +216,7 @@ class FindPasswordViewController: UIViewController {
         
         receiveButton.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(view)
-            let height = 59 + view.safeAreaInsets.bottom
+            let height = 59 + (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
             make.height.equalTo(height)
         }
         
@@ -269,6 +283,9 @@ class FindPasswordViewController: UIViewController {
 
 extension FindPasswordViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        titleLabel.text = titleList[textField.tag]
+        descriptionLabel.isHidden = textField.tag != 2
+        
         DispatchQueue.main.async { [weak self] in
             guard let containerView = textField.superview else { return }
             let containerViewBottomY = containerView.frame.origin.y + containerView.frame.height

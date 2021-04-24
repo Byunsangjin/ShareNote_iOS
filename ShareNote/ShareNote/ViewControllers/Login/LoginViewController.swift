@@ -262,9 +262,9 @@ class LoginViewController: UIViewController {
         
         findPasswordButton.rx.tap
             .bind { [weak self] in
-                let authenticationViewController = AuthenticationViewController()
-                authenticationViewController.modalPresentationStyle = .fullScreen
-                self?.present(authenticationViewController, animated: true, completion: nil)
+                let findPasswordViewController = FindPasswordViewController()
+                findPasswordViewController.modalPresentationStyle = .fullScreen
+                self?.present(findPasswordViewController, animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         idTextField.rx.text

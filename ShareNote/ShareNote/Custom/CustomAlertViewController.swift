@@ -151,13 +151,13 @@ class CustomAlertViewController: UIViewController {
         super.updateViewConstraints()
     }
     
-    func alertShow(parent: UIViewController) {
-        guard let parentView = parent.view else {
-            return
-        }
+    func alertShow(parent: UIViewController?) {
+        guard let parentViewController = parent else { return }
+        guard let parentView = parentViewController.view else { return }
+        
         UIView.transition(with: parentView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
             parentView.addSubview(self.view)
-            parent.addChild(self)
+            parentViewController.addChild(self)
         }, completion: nil)
     }
     
