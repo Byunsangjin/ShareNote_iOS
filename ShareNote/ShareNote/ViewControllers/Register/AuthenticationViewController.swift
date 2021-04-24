@@ -191,31 +191,37 @@ class AuthenticationViewController: UIViewController {
         
         allAgreementButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 self?.allAgreementButton.isSelected.toggle()
             }.disposed(by: disposeBag)
         
         termsAndConditionsButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 self?.termsAndConditionsButton.isSelected.toggle()
             }.disposed(by: disposeBag)
         
         infomationReceiveButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 self?.infomationReceiveButton.isSelected.toggle()
             }.disposed(by: disposeBag)
         
         snsButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 self?.snsButton.isSelected.toggle()
             }.disposed(by: disposeBag)
         
         emailButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 self?.emailButton.isSelected.toggle()
             }.disposed(by: disposeBag)
         
         overFourteenYearButton.rx.tap
             .bind { [weak self] in
+                self?.view.endEditing(true)
                 self?.overFourteenYearButton.isSelected.toggle()
             }.disposed(by: disposeBag)
     }
@@ -247,8 +253,6 @@ class AuthenticationViewController: UIViewController {
     }
     
     func setTextFieldContentOffset() {
-        certificationNumberButton.isHidden = true
-        
         if nameTextField.isFirstResponder {
             if nameContainerView.frame.origin.y + nameContainerView.frame.height > nextAndCancelContainerView.frame.origin.y {
                 let y = nameContainerView.frame.origin.y + nameContainerView.frame.height + 50 - nextAndCancelContainerView.frame.origin.y
