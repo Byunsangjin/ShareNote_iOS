@@ -49,15 +49,7 @@ class FindPasswordViewController: UIViewController {
     }
     
     let phoneNumberTextField = SkyFloatingLabelTextField.createTextField(placeholder: "휴대폰번호(-없이 입력)").then {
-        $0.isSecureTextEntry = true
         $0.title = "휴대폰번호"
-    }
-    
-    let phoneNumberValidLabel = UILabel().then {
-        $0.text = "비밀번호가 올바르지 않습니다."
-        $0.font = UIFont.systemFont(ofSize: 11)
-        $0.textColor = .orange
-        $0.isHidden = true
     }
     
     // 이름 입력
@@ -65,9 +57,7 @@ class FindPasswordViewController: UIViewController {
         $0.isHidden = true
     }
     
-    let nameTextField = SkyFloatingLabelTextField.createTextField(placeholder: "비밀번호 입력").then {
-        $0.isSecureTextEntry = true
-    }
+    let nameTextField = SkyFloatingLabelTextField.createTextField(placeholder: "이름 입력")
     
     // 아이디
     let idContainerView = UIView().then {
@@ -76,14 +66,13 @@ class FindPasswordViewController: UIViewController {
     
     let idTextField = SkyFloatingLabelTextField.createTextField(placeholder: "아이디 입력")
     
-    let idValidLabel = UILabel().then {
-        $0.text = "이미 있는 아이디입니다."
-        $0.font = UIFont.systemFont(ofSize: 11)
-        $0.textColor = .orange
-        $0.isHidden = true
-    }
-    
     let receiveButton = BottomButtonView(title: "임시 비밀번호 받기")
+    
+    let moveButtonContainerView = MoveButtonContainerView().then {
+        $0.isHidden = true
+        $0.nextButton.addTarget(self, action: #selector(nextBtnTouched), for: .touchUpInside)
+        $0.cancelButton.addTarget(self, action: #selector(viewTouched), for: .touchUpInside)
+    }
     
     // MARK: Variables
     var phoneNumberContainerViewHeight: Constraint?
@@ -102,8 +91,12 @@ class FindPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
+        setKeyboardNotification()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTouched)))
+        
+        idTextField.delegate = self
+        nameTextField.delegate = self
+        phoneNumberTextField.delegate = self
     }
     
     func setUI() {
@@ -119,16 +112,15 @@ class FindPasswordViewController: UIViewController {
         
         scrollContentView.addSubview(phoneNumberTextFieldContainerView)
         phoneNumberTextFieldContainerView.addSubview(phoneNumberTextField)
-        phoneNumberTextFieldContainerView.addSubview(phoneNumberValidLabel)
         
         scrollContentView.addSubview(nameTextFieldContainerView)
         nameTextFieldContainerView.addSubview(nameTextField)
         
         scrollContentView.addSubview(idContainerView)
         idContainerView.addSubview(idTextField)
-        idContainerView.addSubview(idValidLabel)
         
         scrollContentView.addSubview(receiveButton)
+        scrollContentView.addSubview(moveButtonContainerView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -169,7 +161,7 @@ class FindPasswordViewController: UIViewController {
             make.left.right.equalTo(topLabel)
         }
         
-        // 비밀번호 확인
+        // 휴대폰 번호
         phoneNumberTextFieldContainerView.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(80)
             make.left.right.equalTo(topLabel)
@@ -180,11 +172,6 @@ class FindPasswordViewController: UIViewController {
             make.top.equalTo(phoneNumberTextFieldContainerView.snp.top)
             make.left.right.equalTo(phoneNumberTextFieldContainerView)
             make.height.equalTo(60)
-        }
-        
-        phoneNumberValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberTextField.snp.bottom).offset(5)
-            make.left.equalTo(phoneNumberTextFieldContainerView)
         }
         
         // 비밀번호
@@ -204,7 +191,7 @@ class FindPasswordViewController: UIViewController {
         idContainerView.snp.makeConstraints { make in
             make.top.equalTo(nameTextFieldContainerView.snp.bottom)
             make.left.right.equalTo(topLabel)
-            idContainerViewHeight = make.height.equalTo(140).constraint
+            idContainerViewHeight = make.height.equalTo(110).constraint
         }
         
         idTextField.snp.makeConstraints { make in
@@ -213,15 +200,16 @@ class FindPasswordViewController: UIViewController {
             make.height.equalTo(60)
         }
         
-        idValidLabel.snp.makeConstraints { make in
-            make.top.equalTo(idTextField.snp.bottom).offset(5)
-            make.left.equalTo(idContainerView)
-        }
-        
         receiveButton.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(view)
             let height = 59 + view.safeAreaInsets.bottom
             make.height.equalTo(height)
+        }
+        
+        moveButtonContainerView.snp.makeConstraints { make in
+            make.left.right.equalTo(view)
+            bottomContainerViewBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide).constraint
+            make.height.equalTo(45)
         }
         
         super.updateViewConstraints()
@@ -230,5 +218,68 @@ class FindPasswordViewController: UIViewController {
     @objc
     func viewTouched() {
         view.endEditing(true)
+    }
+    
+    @objc
+    func nextBtnTouched() {
+        if idTextField.isFirstResponder {
+            self.nameTextFieldContainerView.isHidden = false
+            self.passwordContainerViewHeight?.update(offset: 110)
+            nameTextField.becomeFirstResponder()
+        } else if nameTextField.isFirstResponder {
+            self.phoneNumberTextFieldContainerView.isHidden = false
+            self.phoneNumberContainerViewHeight?.update(offset: 110)
+            phoneNumberTextField.becomeFirstResponder()
+        } else if phoneNumberTextField.isFirstResponder {
+            view.endEditing(true)
+        }
+    }
+    
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        moveButtonContainerView.isHidden = false
+        
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let keyboardBottom = keyboardFrame.size.height - view.safeAreaInsets.bottom
+        self.bottomContainerViewBottomConstraint?.update(offset: -keyboardBottom)
+        
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        moveButtonContainerView.isHidden = true
+        
+        bottomContainerViewBottomConstraint?.update(offset: 0)
+        
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+    }
+}
+
+extension FindPasswordViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        DispatchQueue.main.async { [weak self] in
+            guard let containerView = textField.superview else { return }
+            let containerViewBottomY = containerView.frame.origin.y + containerView.frame.height
+            if containerViewBottomY > (self?.moveButtonContainerView.frame.origin.y)! {
+                let y = containerViewBottomY - (self?.moveButtonContainerView.frame.origin.y)!
+                self?.scrollView.setContentOffset(CGPoint(x: 0, y: y), animated: true)
+            }
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
 }

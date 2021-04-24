@@ -32,7 +32,7 @@ class MoveButtonContainerView: UIView {
     }
     
     func setUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .whiteTwo
         
         self.addSubview(cancelButton)
         self.addSubview(nextButton)
