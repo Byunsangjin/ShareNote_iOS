@@ -46,6 +46,7 @@
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		608B155D2629CE8900553FB7 /* WorkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B155C2629CE8900553FB7 /* WorkThroughViewController.swift */; };
 		608B15652629CFC100553FB7 /* WorkThroughImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B15642629CFC100553FB7 /* WorkThroughImageCell.swift */; };
+		608B156F263407CA00553FB7 /* BottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B156E263407CA00553FB7 /* BottomButtonView.swift */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
 		60966C6025B9BB7B00C8E487 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */; };
@@ -169,6 +170,7 @@
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		608B155C2629CE8900553FB7 /* WorkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkThroughViewController.swift; sourceTree = "<group>"; };
 		608B15642629CFC100553FB7 /* WorkThroughImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkThroughImageCell.swift; sourceTree = "<group>"; };
+		608B156E263407CA00553FB7 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		60966C5F25B9BB7B00C8E487 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				60EFBADA25EE7AA60027B0E2 /* KeypadView.swift */,
 				6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */,
 				60EFBB4625F4E21F0027B0E2 /* CustomAlertViewController.swift */,
+				608B156E263407CA00553FB7 /* BottomButtonView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 				609E13EC25FDC16200F80C1A /* AnalysisTableViewCell.swift in Sources */,
 				60EFBB5A25F658B90027B0E2 /* UIControl+Extension.swift in Sources */,
 				60966CA525B9BF1100C8E487 /* HomeMainViewController.swift in Sources */,
+				608B156F263407CA00553FB7 /* BottomButtonView.swift in Sources */,
 				601DDCF0257CEBEF00DCB968 /* AppKey.swift in Sources */,
 				60EFBAB025E2930A0027B0E2 /* SkyFloatingLabelTextField+Extension.swift in Sources */,
 				60EFBB0925F489CB0027B0E2 /* MoreMenuHeaderView.swift in Sources */,
