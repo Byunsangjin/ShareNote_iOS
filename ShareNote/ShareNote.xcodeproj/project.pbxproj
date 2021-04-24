@@ -46,6 +46,7 @@
 		6084E1A5257E6C1D0069E763 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */; };
 		608B155D2629CE8900553FB7 /* WorkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B155C2629CE8900553FB7 /* WorkThroughViewController.swift */; };
 		608B15652629CFC100553FB7 /* WorkThroughImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B15642629CFC100553FB7 /* WorkThroughImageCell.swift */; };
+		608B156A2633CE9400553FB7 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B15692633CE9300553FB7 /* FindPasswordViewController.swift */; };
 		608B156F263407CA00553FB7 /* BottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608B156E263407CA00553FB7 /* BottomButtonView.swift */; };
 		6094162F25A0156000D9DF42 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094162E25A0156000D9DF42 /* AppCoordinator.swift */; };
 		6094166825A0933D00D9DF42 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6094166725A0933D00D9DF42 /* RegisterViewController.swift */; };
@@ -170,6 +171,7 @@
 		6084E1A4257E6C1D0069E763 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		608B155C2629CE8900553FB7 /* WorkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkThroughViewController.swift; sourceTree = "<group>"; };
 		608B15642629CFC100553FB7 /* WorkThroughImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkThroughImageCell.swift; sourceTree = "<group>"; };
+		608B15692633CE9300553FB7 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		608B156E263407CA00553FB7 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
 		6094162E25A0156000D9DF42 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6094166725A0933D00D9DF42 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				60D37217259F514A00BBAB36 /* LoginViewController.swift */,
 				60CD8FFD25AADB4900C29F0E /* SimplePasswordViewController.swift */,
 				60CD906B25AB0DF200C29F0E /* PasswordKeypadView.swift */,
+				608B15692633CE9300553FB7 /* FindPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -954,6 +957,7 @@
 				60EFBB7325F8E3390027B0E2 /* TermsAndPersonalInfoProcessingViewController.swift in Sources */,
 				60D37218259F514A00BBAB36 /* LoginViewController.swift in Sources */,
 				60EFBB1325F491D90027B0E2 /* NavigationView.swift in Sources */,
+				608B156A2633CE9400553FB7 /* FindPasswordViewController.swift in Sources */,
 				60841090260247B3000FAE7B /* QuestionConfirmViewController.swift in Sources */,
 				60966C6025B9BB7B00C8E487 /* MainTabBarViewController.swift in Sources */,
 				60966CB225B9BFC400C8E487 /* TradingLogMainViewController.swift in Sources */,
