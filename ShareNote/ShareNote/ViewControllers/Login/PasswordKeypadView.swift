@@ -9,7 +9,6 @@ import UIKit
 
 protocol PasswordProtocol {
     func backwardAction()
-    func clearAction()
     func numberAction(sender: UIButton)
 }
 
@@ -50,21 +49,18 @@ class PasswordKeypadView: UIView {
         
         let stackView = UIStackView().makeStackView()
         
-        let clearButton = UIButton().makeButton(target: self, title: "Clear", selector: #selector(clearBtnTouched))
+        let clearButton = UIButton()
+        
         stackView.addArrangedSubview(clearButton)
         
         let numberButton = UIButton().makeButton(target: self, title: numberArray.popLast()!, selector: #selector(numberBtnTouched))
         stackView.addArrangedSubview(numberButton)
         
-        let backwardButton = UIButton().makeButton(target: self, title: "Backward", selector: #selector(backwardBtnTouched))
+        let backwardButton = UIButton().makeButton(target: self, title: "", selector: #selector(backwardBtnTouched))
+        backwardButton.setImage(UIImage(named: "iconBacks"), for: .normal)
         stackView.addArrangedSubview(backwardButton)
         
         keypadStackView.addArrangedSubview(stackView)
-    }
-    
-    @objc
-    func clearBtnTouched() {
-        delegate?.clearAction()
     }
 
     @objc
@@ -101,8 +97,7 @@ extension UIButton {
     func makeButton(target: Any?, title: String, selector: Selector) -> UIButton {
         self.setTitle(title, for: .normal)
         self.setTitleColor(.black, for: .normal)
-        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        self.backgroundColor = .lightGray
+        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         self.addTarget(target, action: selector, for: .touchUpInside)
         
         return self

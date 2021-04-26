@@ -70,7 +70,7 @@ class CustomAlertViewController: UIViewController {
     ///     - firstAction: 첫번째 Action Button의 동작 method
     ///     - secondActionTitle: 두번째 Action Button Title, 왼쪽에 위치
     ///     - secondAction: 두번째 Action Button의 동작 method
-    init(title: String, message: String?, firstActionTitle: String, firstAction: (() -> ())? = nil, secondActionTitle: String? = nil, secondAction:(()->())? = nil) {
+    init(title: String, message: String?, firstActionTitle: String, firstAction: (() -> ())?, secondActionTitle: String? = nil, secondAction:(()->())? = nil) {
         super.init(nibName: nil, bundle: nil)
         
         titleLabel.text = title
