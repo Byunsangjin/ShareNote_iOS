@@ -8,6 +8,15 @@
 import Then
 import UIKit
 
+enum SimplePasswordMode {
+    case SetPassword
+    case SetRepeatPassword
+    case Login
+    case ExistPassword
+    case ChangePassword
+    case ChangeRepeatPassword
+}
+
 class SimplePasswordViewController: UIViewController {
     
     // MARK: Constants
@@ -38,10 +47,8 @@ class SimplePasswordViewController: UIViewController {
     }
     
     let descriptionLabel = UILabel().then {
-        $0.text = "확인을 위해 한번 더 입력해 주세요"
         $0.textColor = .grey3
         $0.font = UIFont.spoqaHanSans(size: 13, style: .Regular)
-        $0.isHidden = true
     }
     
     // MARK: Variables
@@ -50,6 +57,12 @@ class SimplePasswordViewController: UIViewController {
     var inputPassword: String = ""
     
     var isInputingRepeatPassword = false
+    
+    var simplePasswordMode: SimplePasswordMode = .SetPassword {
+        didSet {
+            changeLabels()
+        }
+    }
     
     // MARK: Methods
     override func viewDidLoad() {
@@ -121,27 +134,66 @@ class SimplePasswordViewController: UIViewController {
     }
     
     func completeInputPassword() {
-        if isInputingRepeatPassword {
+        passwordStackView.arrangedSubviews.forEach { subView in
+            guard let button = subView as? UIButton else { return }
+            button.isSelected = false
+        }
+        
+        switch simplePasswordMode {
+        case .SetPassword:
+            simplePassword = inputPassword
+            inputPassword = ""
+            simplePasswordMode = .SetRepeatPassword
+        case .SetRepeatPassword:
+            var alertController: CustomAlertViewController
             if simplePassword == inputPassword {
-                let alertController = CustomAlertViewController(title: "간편비밀번호가 등록되었습니다.",
+                 alertController = CustomAlertViewController(title: "간편비밀번호가 등록되었습니다.",
                                                                 message: nil,
                                                                 firstActionTitle: "확인") {
                     self.dismiss(animated: true, completion: nil)
                 }
-                alertController.alertShow(parent: self)
             } else {
-                
-            }
-        } else {
-            passwordStackView.arrangedSubviews.forEach { subView in
-                guard let button = subView as? UIButton else { return }
-                button.isSelected = false
+                alertController = CustomAlertViewController(title: "입력하신 비밀번호와 일치하지 않습니다.",
+                                                                message: nil,
+                                                                firstActionTitle: "확인") {
+                    self.simplePasswordMode = .SetPassword
+                }
             }
             
-            descriptionLabel.isHidden = false
-            isInputingRepeatPassword = true
-            simplePassword = inputPassword
-            inputPassword = ""
+            alertController.alertShow(parent: self)
+        case .Login:
+            break
+        case .ExistPassword:
+            break
+        case .ChangePassword:
+            break
+        case .ChangeRepeatPassword:
+            break
+        }
+    }
+    
+    func changeLabels() {
+        switch simplePasswordMode {
+        case .SetPassword:
+            titleLabel.text = "간편비밀번호 설정"
+            subTitleLabel.text = "Sharenote 비밀번호를 설정합니다."
+            descriptionLabel.text = ""
+        case .SetRepeatPassword:
+            subTitleLabel.text = "비밀번호 재확인"
+            descriptionLabel.text = "확인을 위해 한번 더 입력해주세요"
+        case .Login:
+            titleLabel.text = "쉐어노트 로그인"
+            subTitleLabel.text = "비밀번호를 입력해주세요"
+            descriptionLabel.text = ""
+        case .ExistPassword:
+            titleLabel.text = "간편비밀번호 변경"
+            subTitleLabel.text = "기존 비밀번호를 입력하세요."
+            descriptionLabel.text = ""
+        case .ChangePassword:
+            subTitleLabel.text = "새 비밀번호를 입력하세요."
+        case .ChangeRepeatPassword:
+            subTitleLabel.text = "한번 더 입력하세요."
+            descriptionLabel.text = "확인을 위해 한번 더 입력해 주세요"
         }
     }
 }
