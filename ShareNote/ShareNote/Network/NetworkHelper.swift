@@ -119,6 +119,35 @@ class NetworkHelper {
             }
     }
     
+    func registSimplePassword(id: String, simplePassword: String, completion: ((Bool) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/member/simple_password"
+        let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
+        let params = ["mbrId" : id,
+                      "mbrSimplePwd" : simplePassword]
+        AF.request(url, method: .put, parameters: params, encoder: JSONParameterEncoder.default, headers: [header])
+            .responseJSON { response in
+                logger.verbose("response + \(response)")
+            }
+    }
+    
+    func loginSimplePassword(id: String, simplePassword: String, completion: ((Bool, Member) -> Void)?) {
+        let url = "http://52.79.246.196:8083/api/rest/member/simple_password"
+        let params: Parameters = ["mbrId" : id,
+                                  "mbrSimplePwd" : simplePassword]
+        AF.request(url, method: .get, parameters: params)
+            .responseJSON { response in
+                if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
+                    DispatchQueue.main.async {
+                        if let _ = json.message {
+                            completion?(false, json)
+                        } else {
+                            completion?(true, json)
+                        }
+                    }
+                }
+            }
+    }
+    
     // MARK: Category
     func getCategory(completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/category"

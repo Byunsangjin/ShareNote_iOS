@@ -58,7 +58,7 @@ class SimplePasswordViewController: UIViewController {
     
     var isInputingRepeatPassword = false
     
-    var simplePasswordMode: SimplePasswordMode = .SetPassword {
+    var simplePasswordMode: SimplePasswordMode = .Login {
         didSet {
             changeLabels()
         }
@@ -150,6 +150,13 @@ class SimplePasswordViewController: UIViewController {
                  alertController = CustomAlertViewController(title: "간편비밀번호가 등록되었습니다.",
                                                                 message: nil,
                                                                 firstActionTitle: "확인") {
+                    NetworkHelper.shared.registSimplePassword(id: "dave123", simplePassword: "123456") { b in
+                        if b {
+                            logger.verbose("Login Success")
+                        } else {
+                            logger.verbose("Login Fail")
+                        }
+                    }
                     self.dismiss(animated: true, completion: nil)
                 }
             } else {
@@ -162,7 +169,13 @@ class SimplePasswordViewController: UIViewController {
             
             alertController.alertShow(parent: self)
         case .Login:
-            break
+            NetworkHelper.shared.loginSimplePassword(id: "dave123", simplePassword: "123456") { (b, member) in
+                if b {
+                    logger.verbose("Login Success")
+                } else {
+                    logger.verbose("Login Fail")
+                }
+            }
         case .ExistPassword:
             break
         case .ChangePassword:
