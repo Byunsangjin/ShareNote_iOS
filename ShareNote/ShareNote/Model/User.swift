@@ -11,7 +11,8 @@ import Foundation
 
 // MARK: - MemberList
 struct Member: Codable {
-    var mbrID, mbrPwd, mbrName, mbrEmail: String?
+    var mbrID, mbrPwd, mbrSimplePwd, mbrName, mbrEmail: String?
+    var mbrLoginTryCount: Int?
     var mbrUUID: String?
     var mbrType: String? = "normal"
     var mbrPhoneNum: String?
@@ -37,7 +38,7 @@ struct Member: Codable {
     
     enum CodingKeys: String, CodingKey {
         case mbrID = "mbrId"
-        case mbrPwd, mbrName, mbrEmail
+        case mbrPwd, mbrSimplePwd, mbrLoginTryCount, mbrName, mbrEmail
         case mbrUUID = "mbrUuid"
         case mbrType, mbrPhoneNum, media, topic, bookmark, mbrPoint, grade, mbrGrade, mbrState, mbrUseYn, mbrUdtDate, mbrRegDate, message, status, errors, code
         case links = "_links"
