@@ -59,7 +59,7 @@ class SimplePasswordViewController: UIViewController {
     
     var isInputingRepeatPassword = false
     
-    var simplePasswordMode: SimplePasswordMode = .ExistPassword {
+    var simplePasswordMode: SimplePasswordMode = .SetPassword {
         didSet {
             changeLabels()
         }
@@ -147,33 +147,33 @@ class SimplePasswordViewController: UIViewController {
             inputPassword = ""
             simplePasswordMode = .SetRepeatPassword
         case .SetRepeatPassword:
-            var alertController: CustomAlertViewController
             if simplePassword == inputPassword {
-                 alertController = CustomAlertViewController(title: "간편비밀번호가 등록되었습니다.",
-                                                                message: nil,
-                                                                firstActionTitle: "확인") {
-                    NetworkHelper.shared.registSimplePassword(id: "dave123", simplePassword: "123456") { b in
-                        if b {
-                            logger.verbose("Login Success")
-                        } else {
-                            logger.verbose("Login Fail")
-                        }
-                    }
+                let alertController = CustomAlertViewController(title: "간편비밀번호가 등록되었습니다.",
+                                                            message: nil,
+                                                            firstActionTitle: "확인") {
                     self.dismiss(animated: true, completion: nil)
                 }
+                NetworkHelper.shared.registSimplePassword(simplePassword: simplePassword) { isSuccessed in
+                    if isSuccessed {
+                        alertController.alertShow(parent: self)
+                    }
+                }
+                
             } else {
-                alertController = CustomAlertViewController(title: "입력하신 비밀번호와 일치하지 않습니다.",
-                                                                message: nil,
-                                                                firstActionTitle: "확인") {
+                let alertController = CustomAlertViewController(title: "입력하신 비밀번호와 일치하지 않습니다.",
+                                                            message: nil,
+                                                            firstActionTitle: "확인") {
                     self.simplePasswordMode = .SetPassword
                 }
+                alertController.alertShow(parent: self)
             }
-            
-            alertController.alertShow(parent: self)
         case .Login:
-            NetworkHelper.shared.loginSimplePassword(id: "dave123", simplePassword: "123456") { (b, member) in
-                if b {
-                    logger.verbose("Login Success")
+            NetworkHelper.shared.loginSimplePassword(simplePassword: inputPassword) { isSuccessed in
+                if isSuccessed {
+                    let alertController = CustomAlertViewController(title: "로그인 성공, 임시 구현 Alert",
+                                                                message: nil,
+                                                                firstActionTitle: "확인", firstAction: nil)
+                    alertController.alertShow(parent: self)
                 } else {
                     self.descriptionLabel.text = "비밀번호가 틀렸습니다."
                     self.inputPassword = ""
@@ -182,47 +182,39 @@ class SimplePasswordViewController: UIViewController {
             }
         case .ExistPassword:
             self.inputPassword = ""
-            NetworkHelper.shared.loginSimplePassword(id: "dave123", simplePassword: "123456") { (b, member) in
-                if b {
-                    logger.verbose("Login Success")
-                    self.simplePasswordMode = .ChangePassword
-                } else {
-                    self.descriptionLabel.text = "비밀번호가 틀렸습니다."
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-                }
+            let member = NetworkHelper.shared.getUserInfo()
+            
+            if inputPassword == member?.mbrSimplePwd {
+                self.simplePasswordMode = .ChangePassword
+            } else {
+                self.descriptionLabel.text = "비밀번호가 틀렸습니다."
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
             }
-            break
         case .ChangePassword:
             simplePassword = inputPassword
             inputPassword = ""
             simplePasswordMode = .ChangeRepeatPassword
-            break
         case .ChangeRepeatPassword:
-            var alertController: CustomAlertViewController
             if simplePassword == inputPassword {
-                 alertController = CustomAlertViewController(title: "변경되었습니다.",
-                                                                message: nil,
-                                                                firstActionTitle: "확인") {
-                    NetworkHelper.shared.registSimplePassword(id: "dave123", simplePassword: "123456") { b in
-                        if b {
-                            logger.verbose("Login Success")
-                        } else {
-                            logger.verbose("Login Fail")
-                        }
-                    }
+                let alertController = CustomAlertViewController(title: "변경되었습니다",
+                                                            message: nil,
+                                                            firstActionTitle: "확인") {
                     self.dismiss(animated: true, completion: nil)
                 }
-            } else {
-                alertController = CustomAlertViewController(title: "입력하신 비밀번호와 일치하지 않습니다.",
-                                                                message: nil,
-                                                                firstActionTitle: "확인") {
-                    self.inputPassword = ""
-                    self.simplePasswordMode = .ChangePassword
+                NetworkHelper.shared.registSimplePassword(simplePassword: simplePassword) { isSuccessed in
+                    if isSuccessed {
+                        alertController.alertShow(parent: self)
+                    }
                 }
+                
+            } else {
+                let alertController = CustomAlertViewController(title: "입력하신 비밀번호와 일치하지 않습니다.",
+                                                            message: nil,
+                                                            firstActionTitle: "확인") {
+                    self.simplePasswordMode = .SetPassword
+                }
+                alertController.alertShow(parent: self)
             }
-            
-            alertController.alertShow(parent: self)
-            break
         }
     }
     
