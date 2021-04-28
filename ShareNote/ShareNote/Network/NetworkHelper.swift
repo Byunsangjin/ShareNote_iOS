@@ -11,7 +11,13 @@ import Foundation
 class NetworkHelper {
     static let shared = NetworkHelper()
     
+    private var member: Member?
+    
     private init() {}
+    
+    func getUserInfo() -> Member? {
+        return member
+    }
     
     // MARK: User
     func isExistID(userID: String, completion: ((Bool) -> Void)?) {
@@ -37,6 +43,7 @@ class NetworkHelper {
             .responseJSON { response in
                 if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
                     DispatchQueue.main.async {
+                        self.member = json
                         if let _ = json.message {
                             completion?(false, json)
                         } else {
@@ -119,29 +126,39 @@ class NetworkHelper {
             }
     }
     
-    func registSimplePassword(id: String, simplePassword: String, completion: ((Bool) -> Void)?) {
+    func registSimplePassword(simplePassword: String, completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/simple_password"
         let header = HTTPHeader(name: "Authorization", value: TEST_AUTHORIZATION)
-        let params = ["mbrId" : id,
+        let params = ["mbrId" : member?.mbrID,
                       "mbrSimplePwd" : simplePassword]
         AF.request(url, method: .put, parameters: params, encoder: JSONParameterEncoder.default, headers: [header])
             .responseJSON { response in
-                logger.verbose("response + \(response)")
+                if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
+                    self.member = json
+                    completion?(true)
+                    logger.verbose("\(#function) - success")
+                } else {
+                    completion?(false)
+                    logger.verbose("\(#function) - fail")
+                }
             }
     }
     
-    func loginSimplePassword(id: String, simplePassword: String, completion: ((Bool, Member) -> Void)?) {
+    func loginSimplePassword(simplePassword: String, completion: ((Bool) -> Void)?) {
         let url = "http://52.79.246.196:8083/api/rest/member/simple_password"
-        let params: Parameters = ["mbrId" : id,
+        let params: Parameters = ["mbrId" : member?.mbrID,
                                   "mbrSimplePwd" : simplePassword]
         AF.request(url, method: .get, parameters: params)
             .responseJSON { response in
                 if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
                     DispatchQueue.main.async {
-                        if let _ = json.message {
-                            completion?(false, json)
+                        if let data = response.data, let json = try? JSONDecoder().decode(Member.self, from: data) {
+                            self.member = json
+                            completion?(true)
+                            logger.verbose("\(#function) - success")
                         } else {
-                            completion?(true, json)
+                            completion?(false)
+                            logger.verbose("\(#function) - fail")
                         }
                     }
                 }
