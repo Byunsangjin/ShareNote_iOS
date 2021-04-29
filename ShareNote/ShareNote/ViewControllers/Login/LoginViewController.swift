@@ -248,9 +248,9 @@ class LoginViewController: UIViewController {
         
         registerButton.rx.tap
             .bind { [weak self] in
-                let registerViewController = RegisterViewController()
-                registerViewController.modalPresentationStyle = .fullScreen
-                self?.present(registerViewController, animated: true, completion: nil)
+                let authenticationViewController = AuthenticationViewController()
+                authenticationViewController.modalPresentationStyle = .fullScreen
+                self?.present(authenticationViewController, animated: true, completion: nil)
             }.disposed(by: disposeBag)
         
         findIdButton.rx.tap

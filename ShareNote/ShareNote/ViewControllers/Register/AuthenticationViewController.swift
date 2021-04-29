@@ -142,12 +142,7 @@ class AuthenticationViewController: UIViewController {
         $0.setTitleColor(.grey2, for: .normal)
     }
     
-    let certificationNumberButton = UIButton().then {
-        $0.setTitle("인증번호받기", for: .normal)
-        $0.setTitleColor(.black2, for: .normal)
-        $0.titleLabel?.font = UIFont.spoqaHanSans(size: 16)
-        $0.backgroundColor = UIColor.mainColor
-    }
+    let certificationNumberButton = BottomButtonView(title: "임시 비밀번호 받기")
     
     // MARK: Variables
     var termsAndConditionsContainerViewHeight: Constraint?
@@ -184,7 +179,7 @@ class AuthenticationViewController: UIViewController {
                 self?.view.endEditing(true)
             }.disposed(by: disposeBag)
         
-        certificationNumberButton.rx.tap
+        certificationNumberButton.button.rx.tap
             .bind { [weak self] in
                 self?.presentPanModal(CertificationNumberViewController())                
             }.disposed(by: disposeBag)
@@ -532,8 +527,9 @@ class AuthenticationViewController: UIViewController {
         }
         
         certificationNumberButton.snp.makeConstraints { make in
-            make.left.bottom.right.equalTo(scrollContentView)
-            make.height.equalTo(59)
+            make.left.bottom.right.equalTo(view)
+            let height = 59 + (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
+            make.height.equalTo(height)
         }
         
         super.updateViewConstraints()
