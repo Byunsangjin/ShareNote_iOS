@@ -92,7 +92,12 @@ class CertificationNumberViewController: UIViewController {
         // 임시 구현
         doneButton.rx.tap
             .bind { [weak self] in
-                self?.present(PopupViewController(), animated: true, completion: nil)
+                let customAlertViewController = CustomAlertViewController(title: "인증되었습니다.",
+                                                                          message: nil,
+                                                                          firstActionTitle: "확인") {
+                    self?.dismiss(animated: true, completion: nil)
+                }
+                customAlertViewController.alertShow(parent: self)
             }.disposed(by: disposeBag)
     }
     
