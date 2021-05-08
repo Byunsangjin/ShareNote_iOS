@@ -504,7 +504,9 @@ class LoginViewController: UIViewController {
             if isSuccessed {
                 self?.presentMainTabViewController()
             } else {
-                logger.verbose("로그인 실패")
+                let loginFailAlertVC = CustomAlertViewController(title: "로그인 실패",
+                                                                 message: "지속적인 비밀번호 오류시,\n로그인이 차단됩니다.", firstActionTitle: "확인", firstAction: nil)
+                loginFailAlertVC.alertShow(parent: self)
             }
         }
     }
