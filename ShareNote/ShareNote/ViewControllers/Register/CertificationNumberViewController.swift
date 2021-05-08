@@ -74,6 +74,8 @@ class CertificationNumberViewController: UIViewController {
     
     var disposeBag = DisposeBag()
     
+    var delegate: CertificationProtocol?
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,15 +91,11 @@ class CertificationNumberViewController: UIViewController {
                 self?.receiveTextFieldContainerView.endEditing(true)
             }.disposed(by: disposeBag)
         
-        // 임시 구현
         doneButton.rx.tap
             .bind { [weak self] in
-                let customAlertViewController = CustomAlertViewController(title: "인증되었습니다.",
-                                                                          message: nil,
-                                                                          firstActionTitle: "확인") {
-                    self?.dismiss(animated: true, completion: nil)
-                }
-                customAlertViewController.alertShow(parent: self)
+                self?.dismiss(animated: true, completion: {
+                    self?.delegate?.didDissmissAuthViewController(type: "success")
+                })
             }.disposed(by: disposeBag)
     }
     

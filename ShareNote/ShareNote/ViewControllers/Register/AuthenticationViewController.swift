@@ -142,7 +142,9 @@ class AuthenticationViewController: UIViewController {
         $0.setTitleColor(.grey2, for: .normal)
     }
     
-    let certificationNumberButton = BottomButtonView(title: "임시 비밀번호 받기")
+    let certificationNumberButton = BottomButtonView(title: "인증번호찾기").then {
+        $0.isHidden = true
+    }
     
     // MARK: Variables
     var termsAndConditionsContainerViewHeight: Constraint?
@@ -181,7 +183,9 @@ class AuthenticationViewController: UIViewController {
         
         certificationNumberButton.button.rx.tap
             .bind { [weak self] in
-                self?.presentPanModal(CertificationNumberViewController())                
+                let certificationNumberViewController = CertificationNumberViewController()
+                certificationNumberViewController.delegate = self
+                self?.presentPanModal(certificationNumberViewController)
             }.disposed(by: disposeBag)
         
         allAgreementButton.rx.tap
@@ -533,5 +537,19 @@ class AuthenticationViewController: UIViewController {
         }
         
         super.updateViewConstraints()
+    }
+}
+
+extension AuthenticationViewController: CertificationProtocol {
+    func didDissmissAuthViewController(type: String?) {
+        if (type?.elementsEqual("success") == true) {
+            let alertViewController = CustomAlertViewController(title: "인증되었습니다.", message: nil, firstActionTitle: "확인") {
+                let registerViewController = RegisterViewController()
+                registerViewController.modalPresentationStyle = .fullScreen
+                self.present(registerViewController, animated: true, completion: nil)
+            }
+            
+            alertViewController.alertShow(parent: self)
+        }
     }
 }
