@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeMainViewController: UIViewController {
     
@@ -63,12 +64,61 @@ class HomeMainViewController: UIViewController {
         $0.numberOfLines = 0
     }
     
+    let segmentControl = UISegmentedControl(items: ["종합카테고리", "테스트"]).then {
+        $0.selectedSegmentIndex = 0
+        $0.apportionsSegmentWidthsByContent = true
+    }
+    
+    // MARK: Variables
+    var disposeBag = DisposeBag()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
+        segmentControl.rx.selectedSegmentIndex
+            .bind { property in
+                self.segmentControl.changeUnderlinePosition()
+//                self.moveTopScrollButton.isHidden = true
+                
+                switch property {
+                case 0:
+//                    self.tradingShareCollectionView.isHidden = false
+//                    self.articleCollectionView.isHidden = true
+//                    self.memoTextView.isHidden = true
+                    break
+                case 1:
+//                    self.tradingShareCollectionView.isHidden = true
+//                    self.articleCollectionView.isHidden = false
+//                    self.memoTextView.isHidden = true
+                    break
+                case 2:
+//                    self.tradingShareCollectionView.isHidden = true
+//                    self.articleCollectionView.isHidden = true
+//                    self.memoTextView.isHidden = false
+//                    self.moveTopScrollButton.isHidden = false
+                    break
+                default:
+                    break
+                }
+                
+            }.disposed(by: disposeBag)
+
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        segmentControl.addUnderlineForSelectedSegment()
+        
+        let font = UIFont.spoqaHanSans(size: 14, style: .Bold)
+        
+        let normalAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.grey4]
+        segmentControl.setTitleTextAttributes(normalAttribute, for: .normal)
+        
+        let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black2]
+        segmentControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+    }
+    
     init() {
         super.init(nibName: nil, bundle: nil)
 
@@ -96,6 +146,9 @@ class HomeMainViewController: UIViewController {
         
         scrollContentView.addSubview(shareNotiPickTitleLabel)
         scrollContentView.addSubview(shareNotiPickDescriptionLabel)
+        
+        scrollContentView.addSubview(segmentControl)
+        segmentControl.removeBorder()
         
         view.setNeedsUpdateConstraints()
     }
@@ -163,6 +216,11 @@ class HomeMainViewController: UIViewController {
         shareNotiPickDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(shareNotiPickTitleLabel.snp.bottom).offset(8)
             make.left.right.equalTo(shareNotiPickTitleLabel)
+        }
+        
+        segmentControl.snp.makeConstraints { make in
+            make.top.equalTo(shareNotiPickDescriptionLabel.snp.bottom).offset(26)
+            make.left.equalTo(shareNotiPickTitleLabel)
         }
         
         super.updateViewConstraints()
