@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Magnetic
 
 class HomeMainViewController: UIViewController {
     
@@ -69,6 +70,8 @@ class HomeMainViewController: UIViewController {
         $0.apportionsSegmentWidthsByContent = true
     }
     
+    let bubbleView = MagneticView()
+    
     // MARK: Variables
     var disposeBag = DisposeBag()
     
@@ -104,9 +107,8 @@ class HomeMainViewController: UIViewController {
                 }
                 
             }.disposed(by: disposeBag)
-
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         segmentControl.addUnderlineForSelectedSegment()
         
@@ -117,6 +119,26 @@ class HomeMainViewController: UIViewController {
         
         let selectedAttribute: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: UIColor.black2]
         segmentControl.setTitleTextAttributes(selectedAttribute, for: .selected)
+        
+        let magnetic = bubbleView.magnetic
+        
+        let node1 = Node(text: "50대 그룹 총수\n식주식재산 1년\n10조이상", image: nil, color: .mainColor, radius: 50)
+        let node2 = Node(text: "50대 그룹 총수 식주식재산 1년 10조이상", image: nil, color: .tag, radius: 60)
+        let node3 = Node(text: "50대 그룹 총수 식주식재산 1년 10조이상", image: nil, color: .grey7, radius: 70)
+        
+        node1.fontSize = 16
+        node2.fontSize = 16
+        node3.fontSize = 16
+        node1.fontColor = .black2
+        node2.fontColor = .black2
+        node3.fontColor = .black2
+    
+        node1.label.separator = "\n"
+        node1.label.text = "50대 그룹 총수\n식주식재산 1년\n10조이상"
+        
+        magnetic.addChild(node1)
+        magnetic.addChild(node2)
+        magnetic.addChild(node3)
     }
     
     init() {
@@ -149,6 +171,8 @@ class HomeMainViewController: UIViewController {
         
         scrollContentView.addSubview(segmentControl)
         segmentControl.removeBorder()
+        
+        scrollContentView.addSubview(bubbleView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -221,6 +245,12 @@ class HomeMainViewController: UIViewController {
         segmentControl.snp.makeConstraints { make in
             make.top.equalTo(shareNotiPickDescriptionLabel.snp.bottom).offset(26)
             make.left.equalTo(shareNotiPickTitleLabel)
+        }
+        
+        bubbleView.snp.makeConstraints { make in
+            make.top.equalTo(segmentControl.snp.bottom)
+            make.left.right.equalTo(scrollContentView)
+            make.height.equalTo(400)
         }
         
         super.updateViewConstraints()
