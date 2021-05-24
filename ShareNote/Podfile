@@ -60,6 +60,9 @@ target 'ShareNote' do
   #ExpyTableView
   pod 'ExpyTableView'
 
+  #Magnetic
+  pod 'Magnetic'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing

@@ -92,6 +92,7 @@ PODS:
   - KakaoSDKUser (2.0.4):
     - KakaoSDKAuth (= 2.0.4)
     - KakaoSDKCommon (= 2.0.4)
+  - Magnetic (3.2.1)
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -143,6 +144,7 @@ DEPENDENCIES:
   - FSCalendar
   - FSPagerView
   - GoogleSignIn
+  - Magnetic
   - naveridlogin-sdk-ios
   - PanModal
   - Popover
@@ -179,6 +181,7 @@ SPEC REPOS:
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
+    - Magnetic
     - nanopb
     - naveridlogin-sdk-ios
     - PanModal
@@ -221,6 +224,7 @@ SPEC CHECKSUMS:
   KakaoSDKAuth: 3a88e4a110243f8c6b9948c5ec85670c7acaebf6
   KakaoSDKCommon: 070472d0638ea6b28684a23c195e47015349e51b
   KakaoSDKUser: 7951e09f9e6de3908ae2d7f8486290c8607c217a
+  Magnetic: 02b9d6686160421cc4285140387419ec9ccab033
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
@@ -242,6 +246,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 166668af1f01063bdb2998fe0ff76d98477f4283
+PODFILE CHECKSUM: 6ef3b50f20101788206c15b35e6df91a4330137f
 
 COCOAPODS: 1.8.4
