@@ -19,6 +19,7 @@
 		60308D8725D594370091ACC5 /* UIImaeg+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60308D8625D594370091ACC5 /* UIImaeg+Extension.swift */; };
 		6048004526467C8F00461A25 /* CertificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048004426467C8F00461A25 /* CertificationProtocol.swift */; };
 		605062DE2685A80700BB3245 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605062DD2685A80700BB3245 /* SearchViewController.swift */; };
+		605062E02685AF8A00BB3245 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605062DF2685AF8A00BB3245 /* SearchTableViewCell.swift */; };
 		6064CA8925BEF8FC00E75D59 /* YearMonthPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */; };
 		6064CA9425C1058000E75D59 /* TradingNoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA9325C1058000E75D59 /* TradingNoneTableViewCell.swift */; };
 		6064CA9C25C2F9F300E75D59 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */; };
@@ -147,6 +148,7 @@
 		60308D8625D594370091ACC5 /* UIImaeg+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImaeg+Extension.swift"; sourceTree = "<group>"; };
 		6048004426467C8F00461A25 /* CertificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationProtocol.swift; sourceTree = "<group>"; };
 		605062DD2685A80700BB3245 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ShareNote/ViewControllers/Home/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
+		605062DF2685AF8A00BB3245 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPickerView.swift; sourceTree = "<group>"; };
 		6064CA9325C1058000E75D59 /* TradingNoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingNoneTableViewCell.swift; sourceTree = "<group>"; };
 		6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				605062DD2685A80700BB3245 /* SearchViewController.swift */,
+				605062DF2685AF8A00BB3245 /* SearchTableViewCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				60966CB725B9BFD000C8E487 /* BookmarkMainViewController.swift in Sources */,
 				60EFBB5F25F65F060027B0E2 /* ChangeMyInfoViewController.swift in Sources */,
 				608410AE260A127E000FAE7B /* CompleteCompanyAnalysisTableViewCell.swift in Sources */,
+				605062E02685AF8A00BB3245 /* SearchTableViewCell.swift in Sources */,
 				6048004526467C8F00461A25 /* CertificationProtocol.swift in Sources */,
 				60ADF4F525792D37001A77C2 /* ViewController.swift in Sources */,
 				60ADF4F125792D37001A77C2 /* AppDelegate.swift in Sources */,
