@@ -18,6 +18,7 @@
 		60308D8225D594220091ACC5 /* UISegmentControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60308D8125D594220091ACC5 /* UISegmentControl+Extension.swift */; };
 		60308D8725D594370091ACC5 /* UIImaeg+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60308D8625D594370091ACC5 /* UIImaeg+Extension.swift */; };
 		6048004526467C8F00461A25 /* CertificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048004426467C8F00461A25 /* CertificationProtocol.swift */; };
+		605062DE2685A80700BB3245 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605062DD2685A80700BB3245 /* SearchViewController.swift */; };
 		6064CA8925BEF8FC00E75D59 /* YearMonthPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */; };
 		6064CA9425C1058000E75D59 /* TradingNoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA9325C1058000E75D59 /* TradingNoneTableViewCell.swift */; };
 		6064CA9C25C2F9F300E75D59 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */; };
@@ -145,6 +146,7 @@
 		60308D8125D594220091ACC5 /* UISegmentControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentControl+Extension.swift"; sourceTree = "<group>"; };
 		60308D8625D594370091ACC5 /* UIImaeg+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImaeg+Extension.swift"; sourceTree = "<group>"; };
 		6048004426467C8F00461A25 /* CertificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationProtocol.swift; sourceTree = "<group>"; };
+		605062DD2685A80700BB3245 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ShareNote/ViewControllers/Home/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		6064CA8825BEF8FC00E75D59 /* YearMonthPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPickerView.swift; sourceTree = "<group>"; };
 		6064CA9325C1058000E75D59 /* TradingNoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingNoneTableViewCell.swift; sourceTree = "<group>"; };
 		6064CA9B25C2F9F300E75D59 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
@@ -337,6 +339,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		605062DC2685A6F300BB3245 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				605062DD2685A80700BB3245 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		6064CA8725BEF8D800E75D59 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +423,7 @@
 		60966C9F25B9BDEB00C8E487 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				605062DC2685A6F300BB3245 /* Search */,
 				60966CA425B9BF1100C8E487 /* HomeMainViewController.swift */,
 			);
 			path = Home;
@@ -928,6 +939,7 @@
 				60308D8725D594370091ACC5 /* UIImaeg+Extension.swift in Sources */,
 				60CD8EA025A1E8E100C29F0E /* EmailTableViewCell.swift in Sources */,
 				60EFBA0D25D6CEBD0027B0E2 /* AuthenticationViewController.swift in Sources */,
+				605062DE2685A80700BB3245 /* SearchViewController.swift in Sources */,
 				609E13EC25FDC16200F80C1A /* AnalysisTableViewCell.swift in Sources */,
 				60EFBB5A25F658B90027B0E2 /* UIControl+Extension.swift in Sources */,
 				60966CA525B9BF1100C8E487 /* HomeMainViewController.swift in Sources */,
