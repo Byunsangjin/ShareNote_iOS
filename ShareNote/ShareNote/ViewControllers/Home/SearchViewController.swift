@@ -43,6 +43,8 @@ class SearchViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    let searchTableView = UITableView()
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,10 @@ class SearchViewController: UIViewController {
             }
             tagStackView.addArrangedSubview(button)
         }
+        
+        searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
     }
     
     func setUI() {
@@ -73,6 +79,8 @@ class SearchViewController: UIViewController {
         tagContainerView.addSubview(tagScrollView)
         tagScrollView.addSubview(scrollContentView)
         scrollContentView.addSubview(tagStackView)
+        
+        view.addSubview(searchTableView)
         
         view.setNeedsUpdateConstraints()
     }
@@ -117,6 +125,27 @@ class SearchViewController: UIViewController {
             make.top.left.right.bottom.equalTo(scrollContentView)
         }
         
+        searchTableView.snp.makeConstraints { make in
+            make.top.equalTo(tagContainerView.snp.bottom)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         super.updateViewConstraints()
+    }
+}
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as? SearchTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.searchTextLabel.text = "\(indexPath.row)"
+        
+        return cell
     }
 }
