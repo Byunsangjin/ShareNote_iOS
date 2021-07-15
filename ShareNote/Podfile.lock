@@ -99,6 +99,7 @@ PODS:
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - naveridlogin-sdk-ios (4.1.3)
+  - Pageboy (3.6.2)
   - PanModal (1.2.7)
   - Popover (1.3.0)
   - PromisesObjC (1.2.11)
@@ -132,6 +133,8 @@ PODS:
   - SnapKit (5.0.1)
   - SwiftLint (0.40.3)
   - SwiftyBeaver (1.9.3)
+  - Tabman (2.11.1):
+    - Pageboy (~> 3.6.0)
   - TextFieldEffects (1.6.0)
   - Then (2.7.0)
   - WeakMapTable (1.2.0)
@@ -156,6 +159,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.0.0)
   - SwiftLint
   - SwiftyBeaver
+  - Tabman (~> 2.11)
   - TextFieldEffects
   - Then
 
@@ -184,6 +188,7 @@ SPEC REPOS:
     - Magnetic
     - nanopb
     - naveridlogin-sdk-ios
+    - Pageboy
     - PanModal
     - Popover
     - PromisesObjC
@@ -199,6 +204,7 @@ SPEC REPOS:
     - SnapKit
     - SwiftLint
     - SwiftyBeaver
+    - Tabman
     - TextFieldEffects
     - Then
     - WeakMapTable
@@ -227,6 +233,7 @@ SPEC CHECKSUMS:
   Magnetic: 02b9d6686160421cc4285140387419ec9ccab033
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
+  Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
@@ -242,10 +249,11 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
+  Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 6ef3b50f20101788206c15b35e6df91a4330137f
+PODFILE CHECKSUM: 5b18625fe674a3aa93091cd660f2c94bf2dffc0b
 
 COCOAPODS: 1.8.4

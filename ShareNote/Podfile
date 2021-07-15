@@ -63,6 +63,9 @@ target 'ShareNote' do
   #Magnetic
   pod 'Magnetic'
 
+  #Tabman
+  pod 'Tabman', '~> 2.11'
+
   target 'ShareNoteTests' do
     inherit! :search_paths
     # Pods for testing
