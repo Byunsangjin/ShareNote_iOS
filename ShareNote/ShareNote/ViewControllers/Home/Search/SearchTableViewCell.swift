@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Tabman
 
 class SearchTableViewCell: UITableViewCell {
     
@@ -30,6 +31,8 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     func setUI() {
+        self.selectionStyle = .none
+        
         contentView.addSubview(iconImageView)
         
         contentView.addSubview(searchTextLabel)

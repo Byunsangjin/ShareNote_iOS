@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
     
     let searchTextField = UITextField().then {
         $0.placeholder = "주식명,뉴스명,태그 검색"
-        $0.backgroundColor = .yellow
+        $0.backgroundColor = .grey8
         
         $0.leftView = UIImageView(image: UIImage(named: "icSearch"))
         $0.leftViewMode = .always
@@ -43,7 +43,9 @@ class SearchViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let searchTableView = UITableView()
+    let searchTableView = UITableView().then {
+        $0.separatorStyle = .none
+    }
     
     // MARK: Methods
     override func viewDidLoad() {
